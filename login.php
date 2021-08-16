@@ -1,11 +1,11 @@
 <?php 
     session_start();
-    $con = mysqli_connect("localhost", , ,) or die("MySQL 접속 실패");
+    include 'connect.php';
 
     if (isset($_POST["userID"])){
         $userID = $_POST["userID"];
         $userPW = $_POST["userPW"];
-        // 아이디가 customer에 있는지 확인
+        // 아이디가 member table에 있는지 확인
         $sql = "select * from member where m_id='$userID'";
         $ret = mysqli_query($con, $sql);
 
@@ -20,12 +20,12 @@
 <?php
             }
             else{ //아이디가 있다면
-                $row = mysqli_fetch_array($ret);    //배열로 변환
-                if($row['m_pw']==$userPW){          //비밀번호가 맞다면
-                    $_SESSION['current_id']=$userID; //세선 변수 생성
+                $row = mysqli_fetch_array($ret);        //배열로 변환
+                if($row['m_pw']==$userPW){              //비밀번호가 맞다면
+                    $_SESSION['current_id']=$userID;    //세선 변수 생성
 ?>                  <script>
                         alert( '로그인 성공' );
-                        location.href = '/';
+                        location.href = '/mypage.php';
                     </script>
 <?php
                 }
