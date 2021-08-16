@@ -1,7 +1,6 @@
 <?php
-    header('Content-Type: text/html; charset=utf-8');
+    include 'connect.php';
     session_start();
-    $con = mysqli_connect("localhost", "icewater", "ice0814!", "icewater") or die("MySQL 접속 실패");
     
     $userId = $_SESSION['current_id']; //o_id
     // 아이디가 member 있는지 확인

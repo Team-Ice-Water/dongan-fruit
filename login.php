@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    $con = mysqli_connect("localhost", "icewater", "ice0814!", "icewater") or die("MySQL 접속 실패");
+    include 'connect.php';
 
     if (isset($_POST["userID"])){
         $userID = $_POST["userID"];

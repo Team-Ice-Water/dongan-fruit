@@ -1,7 +1,7 @@
 <?php
-    header('Content-Type: text/html; charset=utf-8');
+    
+    include 'connect.php';
     session_start();
-    $con = mysqli_connect("localhost", "icewater", "ice0814!", "icewater") or die("MySQL 접속 실패");
     
     $newID = $_POST["newID"];
     $newPW = $_POST["newPW"];
