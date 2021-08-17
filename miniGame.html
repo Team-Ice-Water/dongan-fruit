@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카드 뒤집기 게임</title>
+    <link rel="stylesheet" href="css/miniGame.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Memory Game</h1>
+            <h2>FallOut Edition</h2>
+        </header>
+
+        <section class="score-panel">
+            <h3>Score Panel</h3>
+
+            <ul id="star-rating" class="star-rating">
+                <li class="star"><i class="fa fa-star"></i></li>
+                <li class="star"><i class="fa fa-star"></i></li>
+                <li class="star"><i class="fa fa-star"></i></li>
+            </ul>
+
+            <span class="moves-counter">0</span> Moves
+            <div class="timer-container">
+                <span class="timer"><i class="fa fa-hourglass-start"></i> Timer: 00:00</span>
+            </div>
+
+            <div class="reset">
+                <button class="btn reset-btn">Reset<i class="fa fa-repeat"></i></button>
+            </div>
+        </section>
+
+        <!-- 모달 -->
+        <section class="win-game-modal">
+            <div id="modal" class="modal">
+                <!-- 모달 내용 -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2> 축하합니다! </h2>
+                    <p> 8쌍의 카드를 모두 찾아 게임에서 이겼습니다. </p>
+                    <img class="modal-img" src="img/Vault-Boy-Thumb-up.jpg" alt="Vault boy giving the thumbs up form the game fall out">
+                    <button class="btn play-again-btn"> Play Again?</button>
+                </div>
+            </div>
+        </section>
+
+        <ul class="deck"></ul>
+    </div>
+    <script src="js/miniGame.js"></script>
+</body>
+</html>
