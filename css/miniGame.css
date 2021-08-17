@@ -9,13 +9,28 @@
     box-sizing: inherit;
 }
 
+
+@font-face {
+    font-family: 'CookieRunOTF-Black';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Black00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html{
     box-sizing: border-box;
 }
 
 body {
-    background: url('../img/ignasi_pattern_s.png');
-    font-family: "Open Sans", sans-serif;
+    background: url('../img/stripes-light.png');
+    font-family: "GmarketSansMedium", sans-serif;
     font-size: 62.5%;
     letter-spacing: 1.5px;
     margin: 0;
@@ -47,9 +62,15 @@ ul > li {
     padding: 0.8em;
 }
 
+
+/*----------------------------------  
+Header
+------------------------------------*/
+
 h1{
     font-size: 3em;
-    font-weight: 400;
+    font-weight: 300;
+    font-family: 'CookieRunOTF-Black';
 }
 
 h2{
@@ -62,12 +83,17 @@ p{
 }
 
 h3{
-    font-weight: 400;
+    font-weight: 500;
 }
 
+
+/*----------------------------------  
+Section - 점수판
+------------------------------------*/
+
 .score-panel{
-    font-size: 1.4em;
-    padding: 1em 0 2em
+    font-size: 1.6em;
+    padding: 1em 0 2em;
 }
 
 .star-rating > li {
@@ -95,6 +121,10 @@ h3{
     font-size: 1em;
 }
 
+
+/*----------------------------------  
+Section - Modal
+------------------------------------*/
 .modal{
     display: none;      /*숨겨줌*/
     position: fixed;

@@ -87,7 +87,7 @@ function timer(){
             seconds = 0;
         }
         // html에 표시되는 시간 변경
-        timeCounter.innerHTML="<i class='fa fa-hourglass-start'></i>"+" Timer: "+minutes+" Mins "+ seconds+" Secs";
+        timeCounter.innerHTML="<i class='fa fa-hourglass-start'></i>"+" 타이머: "+minutes+" 분 "+ seconds+" 초";
     }, 1000);
 }
 
@@ -202,7 +202,7 @@ function AddStats() {
 
     p[0].innerHTML = "완료한 시간: "+ minutes + " 분 "+seconds+" 초";
     p[1].innerHTML = "움직인 횟수: "+ moves;
-    p[2].innerHTML = "당신의 별점은: 3개 중"+ starCount;
+    p[2].innerHTML = "당신의 별점은: 3개 중 "+ starCount;
 }
 
 function displayModal(){
