@@ -202,6 +202,7 @@ Deck of Cards
 .deck, 
 .card{
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    
 }
 
 .card{
@@ -209,15 +210,18 @@ Deck of Cards
     border-radius: 0.5em;
     height: 7em;
     width: 7em;
+    
 }
 
 img{
     user-select: none;      /* 사용자가 선택할 수 없음*/
     width: 6em;
+    
 }
 
 .deck img {
     visibility: hidden;
+    
 }
 
 .deck .card.flip{
@@ -226,11 +230,19 @@ img{
     transform: rotateY(180deg);
     transition: transform 0.3s linear;
     pointer-events: none;
+    line-height: 200px;
+    
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    
+    
 }
 
 .flip img{
     background: #fff;
     visibility: visible;
+    line-height: 200px;
+    
 }
 
 .deck .card.match{
@@ -238,10 +250,12 @@ img{
     visibility: visible;
     cursor: deafult;
     animation: pulse 1s;
+    
 }
 
 .match img{
     background: #39d;
+    
 }
 
 @keyframes pulse{
