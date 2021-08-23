@@ -1,7 +1,6 @@
 <?php
 
     include 'connect.php';
-    
     session_start();
     
     $userId = $_SESSION['current_id'];
@@ -26,7 +25,17 @@
         $soapnut = $row['soapnut'];
         $ginseng = $row['ginseng'];
 
-        $value = array('tumbler'=> $tumbler, 'flowerpot'=> $flowerpot); 
+        $value = array('tumbler'=> $tumbler,
+                        'flowerpot'=> $flowerpot,
+                        'mic'=> $mic,
+                        'basket'=> $basket,
+                        'book'=> $book,
+                        'vitamin'=> $vitamin,
+                        'bicycle'=> $bicycle,
+                        'bible'=> $bible,
+                        'soap'=> $soap,
+                        'soapnut'=> $soapnut,
+                        'ginseng'=> $ginseng); 
 
         echo json_encode($value); 
 

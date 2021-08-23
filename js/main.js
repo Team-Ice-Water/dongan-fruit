@@ -1,12 +1,33 @@
 /* 이미지 */
-
 const itemSection = document.querySelector(".item");
+
 const itemList = {
     tumbler: "0",
     flowerpot: "0",
-    mic: "0"
+    mic: "0",
+    basket: "0",
+    book: '0', 
+    vitamin: "0",
+    bicycle: "0", 
+    bible: "0", 
+    soap: "0", 
+    soapnut: "0", 
+    ginseng: "0"
 }
 
+const fileList = {
+    tumbler: 'tumbler.png',
+    flowerpot: 'flowerpot.png',
+    mic: 'mic.png',
+    basket: 'basket.png',
+    book: 'book.png', 
+    vitamin: 'vitamin.png',
+    bicycle: 'bicycle.png', 
+    bible: 'bible.png', 
+    soap: 'soap.png', 
+    soapnut: 'soapnut.png', 
+    ginseng: 'ginseng.png'
+}
 
 // 서버에 요청 후 값 받아오기
 function sendRequest() {
@@ -26,6 +47,8 @@ function sendRequest() {
                 }
             }
         }
+        console.log('itemList: ', itemList)
+        addImg(itemList);
     };
     xhr.send();
 }
@@ -34,10 +57,12 @@ function sendRequest() {
 function addImg(obj) {
     for (let key in obj) {
         const value = obj[key]
-        if(value){  // true이면
+        if(value == "1"){  // true이면
+            const file = fileList[key]
             const newImage = document.createElement("IMG");
-            newImage.setAttribute('src', '../img/' + key);
-            newImage.setAttribute('alt', 'image of ' + key);
+            newImage.setAttribute('src', 'img/' + file);
+            newImage.setAttribute('id', file);
+            newImage.setAttribute('alt', 'image of ' + file);
             itemSection.appendChild(newImage);
         }
     }  
@@ -45,17 +70,3 @@ function addImg(obj) {
 
 
 sendRequest();
-addImg(itemList);
-
-
-/*
-function addImg() {
-    const newImage = document.createElement("IMG");
-    // img src 경로 지정
-    newImage.setAttribute('src', 'img/' + item);
-    // 이미지에 alt 태그 추가
-    newImage.setAttribute('alt', 'image of' + item);
-    // itemSection에 새로운 <img> 추가
-    itemSection.appendChild(newImage);
-}
- */
