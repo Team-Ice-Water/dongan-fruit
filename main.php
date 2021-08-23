@@ -10,8 +10,6 @@
 
     if($ret){
         $row = mysqli_fetch_array($ret);
-        $name = $row['cname'];
-        $day = $row['day'];
 
         $tumbler = $row['tumbler'];
         $flowerpot = $row['flowerpot'];
