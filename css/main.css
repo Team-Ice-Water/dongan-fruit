@@ -3,9 +3,145 @@ body{
     background: url("../img/room.png") no-repeat center/cover;
 }
 
-.item {
+.desk {
+    position: absolute;
+    height: 77vh;
+    z-index: 1;
+    left: 112vh;
+    top: 15vh;
 }
 
-#tumbler {
-
+#window {
+    position: absolute;
+    height: 55vh;
+    z-index: 1;
+    left: 23vh;
+    top: 5vh;
 }
+
+.user-info {
+    position: absolute;
+    z-index: 5;
+    left: 5vh;
+    top: 75vh;
+}
+
+#soap{
+    position: absolute;
+    height: 9vh;
+    z-index: 2;
+    left: 150vh;
+    top: 18vh;
+}
+
+#soapnut {
+    position: absolute;
+    height: 10vh;
+    z-index: 2;
+    left: 163vh;
+    top: 37vh;
+}
+
+#tumbler{
+    position: absolute;
+    height: 10vh;
+    z-index: 2;
+    left: 125vh;
+    top: 43vh;
+}
+
+#vitamin{
+    position: absolute;
+    height: 9vh;
+    z-index: 2;
+    left: 162vh;
+    top: 18vh;
+}
+
+#basket{
+    position: absolute;
+    height: 22vh;
+    z-index: 2;
+    left: 155vh;
+    top: 70vh;
+}
+
+#bible {
+    position: absolute;
+    height: 10vh;
+    z-index: 2;
+    left: 139vh;
+    top: 47vh;
+}
+
+
+#bicycle{
+    position: absolute;
+    height: 38vh;
+    z-index: 2;
+    left: 5vh;
+    top: 42vh;
+}
+
+#book{
+    position: absolute;
+    height: 16vh;
+    z-index: 2;
+    left: 134vh;
+    top: 34vh;
+}
+
+#flowerpot{
+    position: absolute;
+    height: 14vh;
+    z-index: 2;
+    left: 142vh;
+    top: 13vh;
+}
+
+#ginseng{
+    position: absolute;
+    height: 27vh;
+    z-index: 3;
+    left: 10vh;
+    top: 61vh;
+}
+
+#mic{
+    position: absolute;
+    height: 10vh;
+    z-index: 2;
+    left: 163vh;
+    top: 47vh;
+}
+
+/* 스케쥴 진행 
+position: absolute;
+width: 21vh;
+height: 7vh;
+z-index: 3;
+
+background: url(스케쥴 진행.png);
+
+
+/* 오염수치바 
+
+
+position: absolute;
+width: 19vh;
+height: 10vh;
+z-index: 4;
+
+background: url(오염수치바.png);
+
+
+/* 날짜 표시 
+
+
+position: absolute;
+width: 12vh;
+height: 14vh;
+z-index: 2;
+
+background: url(날짜 표시.png);
+*/

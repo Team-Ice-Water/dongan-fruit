@@ -31,28 +31,15 @@ const itemFile = {
     ginseng: 'ginseng.png'
 }
 
-const ecoLevel= {
+const ecoLevel = {
     air: 0,
     soil: 0,
     water: 0
 }
 
-const winFile = {
-    tumbler: 'tumbler.png',
-    flowerpot: 'flowerpot.png',
-    mic: 'mic.png',
-    basket: 'basket.png',
-    book: 'book.png', 
-    vitamin: 'vitamin.png',
-    bicycle: 'bicycle.png', 
-    bible: 'bible.png', 
-    soap: 'soap.png', 
-    soapnut: 'soapnut.png', 
-    ginseng: 'ginseng.png'
-}
-
 // 받아온 값을 기반으로 아이템 이미지 생성
 function addItem(obj) {
+    console.log('additem 실행')
     for (let key in obj) {
         const value = obj[key]
         if(value == "1"){  // true이면
@@ -74,14 +61,52 @@ function setEcoState() {
                 const img = "aws70-.png"
                 addWindow(img)
             }
+            else if(ecoLevel['soil'] >= 70){
+                const img = "s70+aw70-.png"
+                addWindow(img)
+            }
+        }
+        else if (ecoLevel['water'] >= 70){
+            if(ecoLevel['soil'] < 70){
+                const img = "w70+as70-.png"
+                addWindow(img)
+            }
+            else if(ecoLevel['soil'] >= 70){
+                const img = "ws70+a70-.png"
+                addWindow(img)
+            }
+        }
+    }
+    if (ecoLevel['air'] >= 70){
+        if(ecoLevel['water'] < 70){
+            if(ecoLevel['soil'] < 70){
+                const img = "a70+ws70-.png"
+                addWindow(img)
+            }
+            else if(ecoLevel['soil'] >= 70){
+                const img = "as70+w70-.png"
+                addWindow(img)
+            }
+        }
+        else if (ecoLevel['water'] >= 70){
+            if(ecoLevel['soil'] < 70){
+                const img = "aw70+s70-.png"
+                addWindow(img)
+            }
+            else if(ecoLevel['soil'] >= 70){
+                const img = "aws70+.png"
+                addWindow(img)
+            }
         }
     }
 }
 
 // 창문 이미지 생성
 function addWindow(img) {
+    const text = 'window';
     const newImage = document.createElement("IMG");
     newImage.setAttribute('src', 'img/window/' + img);
+    newImage.setAttribute('id', text);
     newImage.setAttribute('alt', 'image of ' + img);
     windowSection.appendChild(newImage);   
 }
@@ -104,9 +129,9 @@ function itemRequest() {
                 }
             }
         }
+        addItem(itemList);
         console.log('itemList: ', itemList)
     };
-    addItem(itemList);
     xhr.send();
 }
 
