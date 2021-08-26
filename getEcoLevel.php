@@ -11,13 +11,13 @@
     if($ret){
         $row = mysqli_fetch_array($ret);
         
-        $health = $row['health'];
-        $day = $row['day'];
-        $character = $row['ctype'];
+        $air = $row['air'];
+        $soil = $row['soil'];
+        $water = $row['water'];
 
-        $value = array('day' => $day,
-                        'health' => $health,
-                        'ctype' => $character); 
+        $value = array('air'=> $air,
+                        'soil'=> $soil,
+                        'water'=> $water); 
 
         echo json_encode($value); 
 

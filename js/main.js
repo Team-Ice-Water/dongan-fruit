@@ -1,7 +1,20 @@
 /* 이미지 */
 const itemSection = document.querySelector(".item");
 const windowSection = document.querySelector(".window");
-const getInfo = false;
+const day = document.querySelector(".day");
+const toonSection = document.querySelector(".character");
+
+const soilLevel = document.getElementById("soil");
+const waterLevel = document.getElementById("water");
+const airLevel = document.getElementById("air");
+const healthLevel = document.getElementById("health");
+
+var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
 
 const itemList = {
     tumbler: "0",
@@ -37,79 +50,118 @@ const ecoLevel = {
     water: 0
 }
 
+const userInfo = {
+    day: 0,
+    health: 0,
+    ctype: 'man1'
+}
+
+const toonFile = {
+    man1: 'toon/man1.png',
+    man2: 'toon/man2.png',
+    man3: 'toon/man3.png',
+    man4: 'toon/man4.png',
+    man5: 'toon/man5.png',
+    man6: 'toon/man6.png',
+    woman1: 'toon/woman1.png',
+    woman2: 'toon/woman2.png',
+    woman3: 'toon/woman3.png',
+    woman4: 'toon/woman4.png',
+    woman5: 'toon/woman5.png',
+    woman6: 'toon/woman6.png',
+}
+
+function makeImg(section, file, type) {
+    const newImage = document.createElement("IMG");
+    newImage.setAttribute('src', 'img/' + file);
+    newImage.setAttribute('id', type);
+    newImage.setAttribute('alt', 'image of ' + file);
+    section.appendChild(newImage);
+}
+
 // 받아온 값을 기반으로 아이템 이미지 생성
 function addItem(obj) {
-    console.log('additem 실행')
     for (let key in obj) {
         const value = obj[key]
         if(value == "1"){  // true이면
             const file = itemFile[key]
-            const newImage = document.createElement("IMG");
-            newImage.setAttribute('src', 'img/' + file);
-            newImage.setAttribute('id', key);
-            newImage.setAttribute('alt', 'image of ' + file);
-            itemSection.appendChild(newImage);
+            makeImg(itemSection, file, key)
         }
     }  
 }
 
 // 창문 이미지 고르기
 function setEcoState() {
+    var img = 'window/aws70-.png';
+
     if (ecoLevel['air'] < 70){
         if(ecoLevel['water'] < 70){
             if(ecoLevel['soil'] < 70){
-                const img = "aws70-.png"
-                addWindow(img)
+                img = "window/aws70-.png";
             }
             else if(ecoLevel['soil'] >= 70){
-                const img = "s70+aw70-.png"
-                addWindow(img)
+                img = "window/s70+aw70-.png";
             }
-        }
-        else if (ecoLevel['water'] >= 70){
+        } else if (ecoLevel['water'] >= 70){
             if(ecoLevel['soil'] < 70){
-                const img = "w70+as70-.png"
-                addWindow(img)
+                img = "window/w70+as70-.png";
             }
             else if(ecoLevel['soil'] >= 70){
-                const img = "ws70+a70-.png"
-                addWindow(img)
+                img = "window/ws70+a70-.png";
             }
         }
     }
-    if (ecoLevel['air'] >= 70){
+    else if (ecoLevel['air'] >= 70){
         if(ecoLevel['water'] < 70){
             if(ecoLevel['soil'] < 70){
-                const img = "a70+ws70-.png"
-                addWindow(img)
+                img = "window/a70+ws70-.png";
             }
             else if(ecoLevel['soil'] >= 70){
-                const img = "as70+w70-.png"
-                addWindow(img)
+                img = "window/as70+w70-.png";
             }
-        }
-        else if (ecoLevel['water'] >= 70){
+        } else if (ecoLevel['water'] >= 70){
             if(ecoLevel['soil'] < 70){
-                const img = "aw70+s70-.png"
-                addWindow(img)
+                img = "window/aw70+s70-.png";
             }
             else if(ecoLevel['soil'] >= 70){
-                const img = "aws70+.png"
-                addWindow(img)
+                img = "window/aws70+.png";
             }
         }
+    }
+    console.log('window, img: ', img);
+    makeImg(windowSection, img, 'window');
+}
+
+
+function changeAttr(variable, list, type) {
+    variable.setAttribute('style', 'width: '+ list[type]+'%');
+    variable.setAttribute('aria-valuenow', list[type]);
+}
+
+// 상태바 생성
+function setEcoLevel() {
+    changeAttr(soilLevel, ecoLevel, 'soil');
+    changeAttr(waterLevel, ecoLevel, 'water');
+    changeAttr(airLevel, ecoLevel, 'air');
+}
+
+// 상태바의 건강, 날짜 생성
+function setUserInfo() {
+    changeAttr(healthLevel, userInfo, 'health');
+    day.innerHTML = userInfo['day']+'일';    
+}
+
+function setToon() {
+    for (let key in toonFile) {
+        if(key == userInfo['ctype']){
+            console.log('userInfo_ctype:', userInfo['ctype'])
+            const file = toonFile[key];
+            console.log('file: ', file)
+            makeImg(toonSection, file, 'character');
+        }        
     }
 }
 
-// 창문 이미지 생성
-function addWindow(img) {
-    const text = 'window';
-    const newImage = document.createElement("IMG");
-    newImage.setAttribute('src', 'img/window/' + img);
-    newImage.setAttribute('id', text);
-    newImage.setAttribute('alt', 'image of ' + img);
-    windowSection.appendChild(newImage);   
-}
 
 // 서버에 요청 후 값 받아오기
 function itemRequest() {
@@ -135,9 +187,9 @@ function itemRequest() {
     xhr.send();
 }
 
-function infoRequest() {
+function ecoRequest() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../getUserInfo.php');
+    xhr.open('GET', '../getEcoLevel.php');
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
@@ -153,12 +205,44 @@ function infoRequest() {
             }
         }
         console.log('ecoLevel: ', ecoLevel);
+        setEcoLevel();
+        setEcoState();
     };
     xhr.send();
     // 정보를 다 받아오면 실행
     // onreadystatechange의 콜백에서 실행하면 랜더링 시 마다 호출됨
-    setEcoState();
+}
+
+function infoRequest() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../getUserInfo.php');
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            let json = JSON.parse(xhr.responseText);
+
+            for (let key in json) {
+                const value = json[key]
+                switch (key) {
+                    case 'day':
+                        userInfo['day'] = parseInt(value);
+                        break;
+                    case 'health':
+                        userInfo['health'] = parseInt(value);
+                        break;
+                    case 'ctype':
+                        userInfo['ctype'] = value;
+                        setToon();
+                        break;                
+                    default:
+                        break;
+                }
+            }
+        }
+        setUserInfo();
+    };
+    xhr.send();
 }
 
 itemRequest();
+ecoRequest();
 infoRequest();
