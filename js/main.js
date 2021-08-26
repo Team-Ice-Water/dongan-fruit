@@ -9,12 +9,6 @@ const waterLevel = document.getElementById("water");
 const airLevel = document.getElementById("air");
 const healthLevel = document.getElementById("health");
 
-var myModal = document.getElementById('myModal')
-var myInput = document.getElementById('myInput')
-
-myModal.addEventListener('shown.bs.modal', function () {
-  myInput.focus()
-})
 
 const itemList = {
     tumbler: "0",

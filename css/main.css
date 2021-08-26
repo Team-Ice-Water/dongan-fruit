@@ -21,22 +21,22 @@ body{
     position: absolute;
     height: 77vh;
     z-index: 1;
-    left: 113vh;
-    top: 15vh;
+    left: 59vw;
+    top: 15.5vh;
 }
 
 #window {
     position: absolute;
     height: 55vh;
     z-index: 1;
-    left: 20vh;
+    left: 13vw;
     top: 5vh;
 }
 
 .user-info {
     position: absolute;
     z-index: 5;
-    left: 8vh;
+    left: 3vw;
     top: 87.5vh;
 }
 
@@ -54,7 +54,7 @@ body{
     position: absolute;
     width: 15vh;
     height: 12vh;
-    left: 3vh;
+    left: 3vw;
     top: 3vh;
     border-radius: 1px;
 
@@ -70,141 +70,110 @@ body{
 #character{
     position: absolute;
     height: 70vh;
-    left: 87vh;
+    left: 49vw;
     top: 25vh;
     z-index: 5;
 }
 
-.event {
+.schedule{
     position: absolute;
-    width: 20vh;
-    height: 6vh;
-    left: 173vh;
-    top: 91vh;
+    width: 13vw;
+    height: 7vh;
+    left: 84vw;
+    top: 90vh;
     z-index: 5;
 
-    font-size: 8vh;
+    font-size: 3vw;
     text-align: center;
-    line-height: 5vh;
+    line-height: 7vh;
     font-family: "GmarketSansMedium", sans-serif;
 }
 
-#soap{
+/*===== 아이템===== */
+#flowerpot{
     position: absolute;
-    height: 9vh;
+    height: 14vh;
     z-index: 2;
-    left: 151vh;
-    top: 18vh;
-}
-
-#soapnut {
-    position: absolute;
-    height: 10vh;
-    z-index: 2;
-    left: 164vh;
-    top: 37vh;
-}
-
-#tumbler{
-    position: absolute;
-    height: 10vh;
-    z-index: 2;
-    left: 126vh;
-    top: 43vh;
+    left: 71.5vw;
+    top: 13vh;
 }
 
 #vitamin{
     position: absolute;
     height: 9vh;
     z-index: 2;
-    left: 163vh;
+    left: 80.5vw;
     top: 18vh;
 }
 
-#basket{
+#soap{
     position: absolute;
-    height: 22vh;
+    height: 9vh;
     z-index: 2;
-    left: 156vh;
-    top: 70vh;
+    left: 74.5vw;
+    top: 18vh;
 }
 
-#bible {
+#tumbler{
     position: absolute;
     height: 10vh;
-    z-index: 2;
-    left: 140vh;
-    top: 47vh;
-}
-
-
-#bicycle{
-    position: absolute;
-    height: 38vh;
-    z-index: 2;
-    left: 5vh;
-    top: 42vh;
+    z-index: 3;
+    left: 66vw;
+    top: 44vh;
 }
 
 #book{
     position: absolute;
     height: 16vh;
     z-index: 2;
-    left: 135vh;
-    top: 34vh;
+    left: 69.7vw;
+    top: 33.5vh;
 }
 
-#flowerpot{
+#bible {
     position: absolute;
-    height: 14vh;
+    height: 10vh;
     z-index: 2;
-    left: 143vh;
-    top: 13vh;
+    left: 71vw;
+    top: 47vh;
 }
 
-#ginseng{
+#soapnut {
     position: absolute;
-    height: 27vh;
-    z-index: 3;
-    left: 10vh;
-    top: 61vh;
+    height: 10vh;
+    z-index: 2;
+    left: 83vw;
+    top: 37vh;
 }
 
 #mic{
     position: absolute;
     height: 10vh;
     z-index: 2;
-    left: 164vh;
+    left: 79vw;
     top: 47vh;
 }
 
-/* 스케쥴 진행 
-position: absolute;
-width: 21vh;
-height: 7vh;
-z-index: 3;
+#basket{
+    position: absolute;
+    height: 22vh;
+    z-index: 2;
+    left: 80vw;
+    top: 70vh;
+}
 
-background: url(스케쥴 진행.png);
+#bicycle{
+    position: absolute;
+    height: 38vh;
+    z-index: 2;
+    left: 5vw;
+    top: 42vh;
+}
 
-
-/* 오염수치바 
-
-
-position: absolute;
-width: 19vh;
-height: 10vh;
-z-index: 4;
-
-background: url(오염수치바.png);
-
-
-/* 날짜 표시 
-
-
-position: absolute;
-width: 12vh;
-height: 14vh;
-z-index: 2;
-
-background: url(날짜 표시.png);
-*/
+#ginseng{
+    position: absolute;
+    height: 27vh;
+    z-index: 3;
+    left: 7vw;
+    top: 61vh;
+}
