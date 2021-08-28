@@ -33,11 +33,11 @@
           text-align: center;
       }      
 
-
+      
       header{
           display:flex;
           justify-content: center;
-          font-size: 50px;
+          font-size: 30px;
       }
       form{
           padding:10px;
@@ -46,6 +46,11 @@
           position:relative;
           margin:10px 0;
       }
+      
+
+      /*----------------------------------  
+      input box line
+------------------------------------*/
       .input-box > input{
           background:transparent;
           border:none;
@@ -54,16 +59,25 @@
           font-size:14pt;
           width:20%;
       }
+      
+           /*----------------------------------  
+      inputbox클릭시 글씨 작아지는 효과
+------------------------------------*/
       input::placeholder{
-          color:transparent;
+          color:transparent;       
       }
+
+       /*----------------------------------  
+      id pw 글씨
+------------------------------------*/
       input:placeholder-shown + label{
           font-family: 'CookieRunOTF-Bold';
           color:#111;
           font-size:14pt;
           top:15px;
-
       }
+
+      
       input:focus + label, label{
           color:#111;
           font-size:10pt;
@@ -81,6 +95,10 @@
           border-bottom: solid 1px #FCC500;
           outline:none;
       }
+
+       /*----------------------------------  
+      login 버튼
+------------------------------------*/
       input[type=submit]{
           background-color: #fcc500;
           font-family: 'CookieRunOTF-Bold';

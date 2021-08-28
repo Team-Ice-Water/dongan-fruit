@@ -21,7 +21,7 @@ a:link {
       }
       
       a:visited {
-          color: #fcc500;
+             color: #fcc500;
           white-space: nowrap;
           -webkit-text-stroke: 1px white;
           text-decoration: none;

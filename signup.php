@@ -3,9 +3,9 @@
     include 'connect.php';
     session_start();
     
-    $newID = $_POST["newID"];
-    $newPW = $_POST["newPW"];
-    $newName = $_POST["newName"];
+    $newID = $_POST["userid"];
+    $newPW = $_POST["password"];
+    $newName = $_POST["username"];
 
     // 아이디가 member 있는지 확인
     $check_sql = "select * from member where m_id='$newID'";

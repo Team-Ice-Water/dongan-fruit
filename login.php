@@ -3,8 +3,8 @@
     include 'connect.php';
 
     if (isset($_POST["userID"])){
-        $userID = $_POST["userID"];
-        $userPW = $_POST["userPW"];
+        $userID = $_POST["username"];
+        $userPW = $_POST["password"];
         // 아이디가 member table에 있는지 확인
         $sql = "select * from member where m_id='$userID'";
         $ret = mysqli_query($con, $sql);
