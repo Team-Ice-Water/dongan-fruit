@@ -1,0 +1,4 @@
+body{
+    height: 100vh;  /*Viewport Height*/
+    background: url("../img/room.png") no-repeat center/cover;
+}
