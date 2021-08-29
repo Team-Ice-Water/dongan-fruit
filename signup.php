@@ -27,18 +27,22 @@
 
             echo "ID: ".$newID."로 회원가입이 완료되었습니다. 로그인 후 이용해주세요."."<br>";
             echo "<br> <a href='login.html'> 로그인 하기 </a>";
+            echo "<br> <a href='/'> 메인화면으로 돌아가기 </a>";
             exit();
         }
         else{ // 아이디가 이미 있다면
-            echo "이미 회원으로 가입된 아이디 입니다. 다른 아이디로 가입해주세요.";
-            echo "<br> <a href='main.php'> 메인화면으로 돌아가기 </a>";
-            exit();
+?>              <script>
+                    alert( '이미 회원으로 가입된 아이디 입니다. 다른 아이디로 가입해주세요.' );
+                    location.href = 'signup.html';
+                </script>
+<?php
+            
         }
     }
     else{
         echo "데이터 조회 실패"."<br>";
         echo "실패 원인: ".mysqli_error($con);
-        echo "<br> <a href='main.php'> 메인화면으로 돌아가기 </a>";
+        echo "<br> <a href='/'> 메인화면으로 돌아가기 </a>";
         exit();
     }
     
