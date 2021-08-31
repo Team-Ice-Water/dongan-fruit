@@ -1,0 +1,50 @@
+@font-face {
+          font-family: 'CookieRunOTF-Bold';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+      }
+
+body {
+          background:#85d6ff;
+          font-family: 'CookieRunOTF-Bold';
+          font-size: 100%;
+          letter-spacing: 1.5px;
+          margin: 0;
+          text-align:center;
+      }
+
+
+      /*----------------------------------  
+      버튼 디자인
+------------------------------------*/
+.button {
+	box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	background:linear-gradient(to bottom, #fcc500 5%, #fcc500 100%);
+	background-color:#63b8ee;
+	border-radius:6px;
+	border:1px solid #3866a3;
+	display:inline-block;
+	cursor:pointer;
+	color:#14396a;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:30px 70px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #7cacde;
+          font-family: 'CookieRunOTF-Bold';
+          
+}
+
+ /*----------------------------------  
+      마우서 포인터 위치시 효과
+------------------------------------*/
+.button:hover {
+	background:linear-gradient(to bottom, #FFAD85 5%, #FFAD85 100%);
+	background-color:#d5ff85;
+}
+.button:active {
+	position:relative;
+	top:1px;
+}

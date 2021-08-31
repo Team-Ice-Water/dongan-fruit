@@ -1,0 +1,45 @@
+body {
+          background: url('../img/back.png');
+          font-size: 70px;
+          font-weight : bolder;
+          background-repeat: no-repeat 
+          
+      }
+
+a:link {
+          color: #fcc500;
+          white-space: nowrap;
+          -webkit-text-stroke: 1px white;
+          text-decoration: none;
+          text-shadow: -3px 0 #000,
+0 1px #000,
+1px 0 #000,
+0 -1px #000;
+
+
+
+      }
+      
+      a:visited {
+             color: #fcc500;
+          white-space: nowrap;
+          -webkit-text-stroke: 1px white;
+          text-decoration: none;
+          text-shadow: -3px 0 #000,
+0 1px #000,
+1px 0 #000,
+0 -1px #000;
+      }
+      
+      a:hover {
+          text-decoration: none;
+          background-image: url(http://www.blueb.co.kr/SRC/javascript/image5/dot_ani.gif);
+          background-repeat: repeat-x;
+          background-position: 100% 100%;
+          padding-bottom: 3px;
+          color: #fcc500;
+      }
+      
+      a:active {
+          text-decoration: none;
+      }
