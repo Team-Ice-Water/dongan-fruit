@@ -1,4 +1,85 @@
 body{
     height: 100vh;  /*Viewport Height*/
     background: url("../img/room.png") no-repeat center/cover;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 3fr;
+    grid-template-rows: 8fr 1fr;
+
+}
+
+/*----------------------------------  
+day
+------------------------------------*/
+.day{
+    justify-self: center;
+    align-self: center;
+}
+
+.user-info{
+    justify-self: left;
+    align-self: center;
+}
+
+/*----------------------------------  
+character
+------------------------------------*/
+.character{
+    justify-self: center;
+    align-self: center;
+}
+
+/*----------------------------------  
+Today's schedule
+------------------------------------*/
+.plan{
+    justify-self: center;
+    align-self: center;
+}
+
+/*----------------------------------  
+schedule
+------------------------------------*/
+.schedule{
+    width: 35vw;
+    justify-self: center;
+    align-self: center;
+}
+
+.tab-pane{
+    height: 75vh;
+    max-height: 75em;
+    border-radius: 0 2em 2em 2em;
+}
+
+#movement-tab,
+#movement {
+    background: #D5FF85;
+}
+
+#moveBtn {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+
+.item {
+    width: 15vw;
+}
+
+#volunteer-tab,
+#volunteer {
+    background: #85D6FF;
+}
+
+#vacation-tab,
+#vacation {
+    background: #FFAD85;
+}
+
+#rest-tab,
+#rest {
+    background: #FF85D6;
 }
