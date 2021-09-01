@@ -47,8 +47,9 @@ schedule
 
 .tab-pane{
     height: 75vh;
-    max-height: 75em;
-    border-radius: 0 2em 2em 2em;
+    max-height: 76em;
+    border-radius: 0 1.5em 1.5em 1.5em;
+    padding: 1em;
 }
 
 #movement-tab,
@@ -56,14 +57,16 @@ schedule
     background: #D5FF85;
 }
 
-#moveBtn {
+#move-layout{
+    width: 100%;
+    height: 100%;
+
     display: grid;
     justify-items: center;
     align-items: center;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
 }
-
 
 .item {
     width: 15vw;
@@ -74,12 +77,55 @@ schedule
     background: #85D6FF;
 }
 
+#vol-layout{
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+#vol-layout .item:nth-child(n+3) {
+    grid-column: 1/3;
+    width: 30vw;
+}
+
 #vacation-tab,
 #vacation {
     background: #FFAD85;
 }
 
+#vac-layout{
+    width: 100%;
+    height: 80%;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr 1fr 1fr;
+}
+
+#vac-layout .item:nth-child(n+3) {
+    grid-column: 1/3;
+    width: 30vw;
+}
+
 #rest-tab,
 #rest {
     background: #FF85D6;
+}
+
+#rest-layout{
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
 }
