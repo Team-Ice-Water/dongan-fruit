@@ -6,6 +6,8 @@
     <title>슬기로운 청지기 생활</title>
     <link href="css/schedule.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body>
 
@@ -18,7 +20,24 @@
     </section>
 
     <section class="plan">
-        오늘의 스케쥴
+        <div class="title">오늘의 스케쥴</div>
+        <div class="time dawn">
+            <a id="dawn">새벽</a>
+            <span class="text"></span>
+            <button type="button" class="btn btn-light material-icons"  onclick="remove('.dawn')">clear</button>
+        </div>
+        <div class="time am">
+            <a id="am">오전</a>
+            <span class="text"></span>
+            <button type="button" class="btn btn-light material-icons"  onclick="remove('.am')">clear</button>
+        </div>
+        <div class="time pm">
+            <a id="pm">오후</a>
+            <span class="text"></span>
+            <button type="button" class="btn btn-light material-icons"  onclick="remove('.pm')">clear</button>
+        </div>
+        <img class="item" src="img/schedule/cancel.png" alt="취소" onclick="select(this.alt)">
+        <img class="item" src="img/schedule/decide.png" alt="결정" onclick="select(this.alt)">
     </section>
 
     <!-- Nav tabs -->
@@ -35,43 +54,43 @@
         <div class="tab-content">
             <div class="tab-pane fade show active" id="movement" role="tabpanel" aria-labelledby="movement-tab">
                 <section id="move-layout">
-                    <img class="item" src="img/schedule/bibleSchool.png" alt="성경학교 참석" onclick="myFunction()">
+                    <img class="item" src="img/schedule/bibleSchool.png" id="bible" alt="성경학교 참석" onclick="select(this.alt)">
                     <img class="item" src="img/schedule/earth.png" alt="지구사진" style="width: 5vw;">
-                    <img class="item" src="img/schedule/tumbler.png" alt="텀블러 전파" onclick="myFunction()">
-                    <img class="item" src="img/schedule/foodWaste.png" alt="음식물 쓰레기 정리" onclick="myFunction()">
-                    <img class="item" src="img/schedule/useBike.png" alt="자전거 이용" onclick="myFunction()">
-                    <img class="item" src="img/schedule/airconditioner.png" alt="에어컨 온도 지킴이" onclick="myFunction()">
-                    <img class="item" src="img/schedule/naturalSoap.png" alt="천연 비누 전도" onclick="myFunction()">
-                    <img class="item" src="img/schedule/saveWater.png" alt="물 잠그고 다니기" onclick="myFunction()">
+                    <img class="item" src="img/schedule/tumbler.png" id="tumbler" alt="텀블러 전파" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/foodWaste.png" id="foodwaste" alt="음식물 쓰레기 정리" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/useBike.png" id="bike" alt="자전거 이용" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/airconditioner.png" id="aircon" alt="에어컨 온도 지킴이" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/naturalSoap.png" id="soap" alt="천연 비누 전도" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/saveWater.png" id="savewater" alt="물 잠그고 다니기" onclick="select(this.alt)">
                 </section>
             </div>
             <div class="tab-pane fade" id="volunteer" role="tabpanel" aria-labelledby="volunteer-tab">
                 <section id="vol-layout">
-                    <img class="item" src="img/schedule/volunteer.png" alt="봉사활동" onclick="myFunction()">
+                    <img class="item" src="img/schedule/volunteer.png" alt="봉사활동">
                     <img class="item" src="img/schedule/earth.png" alt="지구사진" style="width: 5vw;">
 
-                    <img class="item" src="img/schedule/volWorm.png" alt="지렁이 봉사" onclick="myFunction()">
-                    <img class="item" src="img/schedule/volRecycle.png" alt="분리수거 봉사" onclick="myFunction()">
-                    <img class="item" src="img/schedule/volTree.png" alt="나무심기 봉사" onclick="myFunction()">
-                    <img class="item" src="img/schedule/volAirpoll.png" alt="대기오염 봉사" onclick="myFunction()">
-                    <img class="item" src="img/schedule/volSea.png" alt="바다 봉사" onclick="myFunction()">
-                    <img class="item" src="img/schedule/volRiver.png" alt="하천 봉사" onclick="myFunction()">
-                    <img class="item" src="img/schedule/volCampaign.png" alt="캠페인 봉사" onclick="myFunction()">
+                    <img class="item" src="img/schedule/volWorm.png" alt="지렁이 봉사" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/volRecycle.png" alt="분리수거 봉사" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/volTree.png" alt="나무심기 봉사" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/volAirpoll.png" alt="대기오염 봉사" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/volSea.png" alt="바다 봉사" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/volRiver.png" alt="하천 봉사" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/volCampaign.png" alt="캠페인 봉사" onclick="select(this.alt)">
                 </section>
             </div>
             <div class="tab-pane fade" id="vacation" role="tabpanel" aria-labelledby="vacation-tab">
                 <section id="vol-layout">
-                    <img class="item" src="img/schedule/vacation.png" alt="바캉스" onclick="myFunction()">
+                    <img class="item" src="img/schedule/vacation.png" alt="바캉스">
                     <img class="item" src="img/schedule/earth.png" alt="지구사진" style="width: 5vw;">
 
-                    <img class="item" src="img/schedule/vacCamp.png" alt="캠핑" onclick="myFunction()">
-                    <img class="item" src="img/schedule/vacPlane.png" alt="비행기" onclick="myFunction()">
-                    <img class="item" src="img/schedule/vacBeach.png" alt="해수욕장" onclick="myFunction()">
+                    <img class="item" src="img/schedule/vacCamp.png" alt="캠핑" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/vacPlane.png" alt="비행기" onclick="select(this.alt)">
+                    <img class="item" src="img/schedule/vacBeach.png" alt="해수욕장" onclick="select(this.alt)">
                 </section>
             </div>
             <div class="tab-pane fade" id="rest" role="tabpanel" aria-labelledby="rest-tab">
                 <section id="rest-layout">
-                    <img class="item" src="img/schedule/rest.png" alt="휴식" onclick="myFunction()">
+                    <img class="item" src="img/schedule/rest.png" alt="휴식" onclick="select(this.alt)">
                     <img class="item" src="img/schedule/earth.png" alt="지구사진" style="width: 5vw;">
                 </section>
             </div>

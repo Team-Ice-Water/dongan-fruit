@@ -13,8 +13,46 @@ triggerTabList.forEach(function (triggerEl) {
   })
 })
 
+const dawnText = document.querySelector(".dawn").querySelector(".text");
+const amText = document.querySelector(".am").querySelector(".text");
+const pmText = document.querySelector(".pm").querySelector(".text");
 
-function myFunction() {
-    console.log("클릭됨")
+var isDawnFill = false;
+var isAmFill = false;
+var isPmFill = false;
+
+function select(text) {
+    if(!isDawnFill){
+        dawnText.innerHTML= text;
+        isDawnFill = true;
+    }
+    else if(!isAmFill){
+        amText.innerHTML= text;
+        isAmFill = true;
+    }
+    else if(!isPmFill){
+        pmText.innerHTML= text;
+        isPmFill = true;
+    }
+    else{
+        alert("하루 스케쥴이 꽉 찼습니다.")
+    }
+}
+
+function remove(type){
+    document.querySelector(type).querySelector(".text").innerHTML= " ";
+    switch (type) {
+        case ".dawn":
+            isDawnFill = false;
+            break;
+        case ".am":
+            isAmFill = false;
+            break;
+        case ".pm":
+            isPmFill = false;
+            break;    
+        default:
+            break;
+    }
 }
 
