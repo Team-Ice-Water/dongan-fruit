@@ -17,21 +17,24 @@ const dawnText = document.querySelector(".dawn").querySelector(".text");
 const amText = document.querySelector(".am").querySelector(".text");
 const pmText = document.querySelector(".pm").querySelector(".text");
 
-var isDawnFill = false;
+var isDawnFill = false;     // 스케쥴이 차있으면 true
 var isAmFill = false;
 var isPmFill = false;
 
-function select(text) {
-    if(!isDawnFill){
-        dawnText.innerHTML= text;
+function select(tag) {
+    if(!isDawnFill){    // false일 때 = 비워져있을 때
+        dawnText.innerHTML= tag.alt;
+        dawnText.setAttribute('name', tag.id);
         isDawnFill = true;
     }
     else if(!isAmFill){
-        amText.innerHTML= text;
+        amText.innerHTML= tag.alt;
+        amText.setAttribute('name', tag.id);
         isAmFill = true;
     }
     else if(!isPmFill){
-        pmText.innerHTML= text;
+        pmText.innerHTML= tag.alt;
+        pmText.setAttribute('name', tag.id);
         isPmFill = true;
     }
     else{
@@ -39,8 +42,30 @@ function select(text) {
     }
 }
 
+function selectVac() {
+    if(!isDawnFill && !isAmFill){
+        if(!isPmFill){
+            random(vacation)
+            dawnText.setAttribute('name', tag.id);
+            isDawnFill = true;
+            amText.setAttribute('name', tag.id);
+            isAmFill = true;
+            pmText.setAttribute('name', tag.id);
+            isPmFill = true;
+        }
+    }
+}
+
 function remove(type){
-    document.querySelector(type).querySelector(".text").innerHTML= " ";
+    if(type == "all"){
+        dawnText.innerHTML= " ";
+        amText.innerHTML= " ";
+        pmText.innerHTML= " ";
+    }
+    else{
+        document.querySelector(type).querySelector(".text").innerHTML= " ";
+    }
+    
     switch (type) {
         case ".dawn":
             isDawnFill = false;
@@ -50,9 +75,18 @@ function remove(type){
             break;
         case ".pm":
             isPmFill = false;
-            break;    
+            break;  
+        case "all":
+            isDawnFill = false;
+            isAmFill = false;
+            isPmFill = false;
+            break;  
         default:
             break;
     }
 }
 
+function decide() {
+    console.log('결정')
+    /*getAttribute('name')*/
+}
