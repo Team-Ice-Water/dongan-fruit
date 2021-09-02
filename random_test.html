@@ -1,0 +1,48 @@
+<script type="text/javascript">
+
+    // ------------ 같은 확률로 random 선택 -------------
+    var event_list_1 = ['event_1', 'event_2', 'event_3', 'event_4', 'event_5', 'event_6']
+    var result_1 = randomItem(event_list_1)
+    document.write('같은 확률로 random 선택 결과 : ')
+    document.write(result_1 + '<br>')
+
+    // 주어진 배열에서 요소 1개를 랜덤하게 골라 반환하는 함수
+    function randomItem(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+
+
+
+    // ------------ 다른 확률로 random 선택 -------------
+    // event_1 : 30%
+    // event_2 : 5%
+    // event_3 : 55%
+    // event_4 : 10%
+    
+    const rand_0_99 = Math.floor(Math.random() * 100); // 0~99 사이에서 random으로 정수 선택
+    var event_list_2 = ['event_1', 'event_2', 'event_3', 'event_4']
+    var result_2
+
+    switch (true) {
+        case rand_0_99 < 30 :
+            result_2 = event_list_2[0]
+            break;
+        case rand_0_99 > 30 && rand_0_99 < 36:
+            result_2 = event_list_2[1]
+            break;
+        case rand_0_99 > 35 && rand_0_99 < 91:
+            result_2 = event_list_2[2]
+            break;
+        case rand_0_99 > 90:
+            result_2 = event_list_2[3]
+            break;
+    }
+
+
+    document.write('다른 확률로 random 선택 결과 : ' + '<br>')
+    document.write('선택된 random 정수 : ' + rand_0_99 + '<br>')
+    document.write(result_2)
+
+
+</script>
