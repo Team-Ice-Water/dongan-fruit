@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>MODAL TEST</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<!-- Button trigger modal  -->
+<!-- 일단은 버튼 누르면 modal창 실행되도록 했으나 실제로는 day +1 될때 modal창 자동으로 실행되도록 수정 -->
+<!-- 아래 button의 data-target & modal의 id가 matching 되어야 해당 modal 실행됨 ! 그래서 random 함수로 data-target를 지정할 예정-->
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#event_1">
+        Launch demo modal
+    </button>
+    
+    <!-- event_1_장보기-->
+    <!-- Modal -->
+    <div class="modal fade" id="event_1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">장보기 event</h5>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+                </div>
+                <div class="modal-body">
+                    <section>
+                    오늘은 장을 보러가는 날이다. 따라가서 과자랑 아이스크림도 사달라고 해야지! </br>
+                    장바구니 챙기라고 했는데 어디에 있더라...?
+                    </section>
+                    </br>
+                    </br>
+                    <section>
+                        <div class="list-group option">
+                            <button type="button" class="list-group-item list-group-item-action" name="yesBasket">선택지 1 (장바구니 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="noBasket">선택지 2 (장바구니 선택 안함)</button>
+                            <!-- <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button> -->
+                        </div>
+                    </section>
+                </div>
+
+                <div class="modal-footer">
+                    <form class="option-value" method="post" action="event.php">
+                        <input type="hidden" name="user_pick">
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+  <script type="text/javascript" src="js/randomtest.js"></script>
+</body>
+</html>
