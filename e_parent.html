@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 창 띄우는 main 화면(test용)</title>
+    <link href="css/e_parent.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="js/e_popup.js"></script>
+</head>
+
+<body>
+    <!-- 날짜 넘어갈때 자동으로 popup 뜨도록 수정해야함 (일단은 button으로 클릭) -->
+    <button onclick="openwindow('e_child.html')"> POPUP창 띄우기 </button>
+    전달할 값 : <input type="text" id="pInput"> <input type="button" value="전달" onclick="setChildText()">
+    POPUP 창에서 선택한 결과 : <input type="text" id="answer" size="20"/>
+    
+</body>
+</html>

@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'CookieRunOTF-Black';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Black00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: "GmarketSansMedium", sans-serif;
+    font-size: 62.5%;
+    letter-spacing: 1.5px;
+    margin: 0;
+    text-align: center;
+
+    height: 100vh;  /*Viewport Height*/
+    background: url("../img/report_page.png") no-repeat center/cover;
+}
+

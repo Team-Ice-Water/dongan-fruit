@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MODAL TEST</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- Button trigger modal  -->
+<!-- 일단은 버튼 누르면 modal창 실행되도록 했으나 실제로는 day +1 될때 modal창 자동으로 실행되도록 수정 -->
+<!-- 아래 button의 data-target & modal의 id가 matching 되어야 해당 modal 실행됨 ! 그래서 random 함수로 data-target를 지정할 예정-->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#event_1">
+    Launch demo modal
+  </button>
+  
+  <!-- Vertically centered scorallable modal -->
+
+  <!-- [event 목록]
+  -------------------- [랜덤 이벤트] --------------------
+  event_1 : 장보기
+  event_2 : 카페가기
+  event_3 : 샤워하기
+  event_4 : 분리수거
+  event_5 : 건강보조제
+  event_6 : 설거지
+  event_7 : 집근처 이동
+  event_8 : 환경 단체의 방문
+  event_9 : 친구의 방문
+  event_10 : 선생님의 심방
+  event_11 : 교회 전도대
+  event_12 : 성경책 판매원 방문
+  event_13 : 이웃집 방문
+  event_14 : 환경 운동가 방문
+  event_15 : 식목일
+  event_16 : 집안 대청소
+  event_17 : 전도사님 찬스
+  event_18 : 친구들 초대
+  event_19 : 자발적 청지기
+  -------------------- [자연 착취 이벤트] --------------------
+  event_20 : 자연 착취 이벤트 1 (체력 50이하 -> 20%의 확률로 등장)
+  event_21 : 자연 착취 이벤트 2 (체력 50이하 -> 20%의 확률로 등장)
+  event_22 : 자연 착취 이벤트 3 (체력 50이하 -> 20%의 확률로 등장)
+  -------------------- [성경책 이벤트] --------------------
+  event_23 : 성경책 1단계 (3-6일차에 60% 확률로 등장)
+  event_24 : 성경책 2단계 - 전도사님 (1단계 선택시 5일뒤 등장)
+  event_25 : 성경책 2단계 - 발표 (1단계 선택시 5일뒤 등장)
+  event_26 : 성경책 3단계 - 환경보호 동아리 (2단계 선택시 5일뒤 등장)
+  event_27 : 성경책 3단계 - 간식 (2단계 선택시 5일뒤 등장)
+  event_28 : 성경책 3단계 - 자전거 (2단계 선택시 5일뒤 등장)
+  event_29 : 성경책 4단계 - 동네 청소 (3단계 선택시 5일뒤 등장)
+  -------------------- [환경지침도서 이벤트] --------------------
+  event_30 : 환경지침도서 1단계 - 친구들과 환경지침도서 (4-7일차에 셋중 하나 등장)
+  event_31 : 환경지침도서 1단계 - 선생님과 환경지침도서 (4-7일차에 셋중 하나 등장)
+  event_32 : 환경지침도서 1단계 - 도서실에 환경지침도서 (4-7일차에 셋중 하나 등장)
+  event_33 : 환경지침도서 2단계 - 환경 물품 기부 (1단계 선택시 7일 뒤 등장)
+  event_34 : 환경지침도서 2단계 - 화장실 리모델링 (1단계 선택시 7일 뒤 등장)
+  -------------------- [부모님 이벤트] --------------------
+  event_35 : 부모님 설득 1단계 (랜덤으로 등장)
+  event_36 : 부모님 설득 2단계 - 변화하는 가정 (1단계 선택시 5일뒤 등장)
+  event_37 : 부모님 설득 3단계 - 주방 세제 (2단계 선택시 5일뒤 등장)
+  event_38 : 부모님 설득 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤 등장)
+  event_39 : 부모님 설득 5단계 - 청지기 가정 (4단계 선택 후 오염수치 180이하 5일 유지시 등장) -->
+  
+
+
+  <!-- event_1_장보기-->
+  <!-- <div class="modal fade" id="event_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+  <div class="modal fade modal-dialog modal-dialog-centered modal-dialog-scrollable" id="event_1" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"  aria-labelledby="staticBackdropLabel" aria-hidden="true">  
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">장보기 event</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <div class="modal-body">
+          오늘은 장을 보러가는 날이다. 따라가서 과자랑 아이스크림도 사달라고 해야지! 
+          장바구니 챙기라고 했는데 어디에 있더라...?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">선택지 1 (장바구니 선택)</button>
+          <button type="button" class="btn btn-primary"data-dismiss="modal">선택지 2(장바구니 선택 안함)</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- event_2_카페가기-->
+  <div class="modal fade modal-dialog modal-dialog-centered modal-dialog-scrollable" id="event_2" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">카페가기 event</h5>
+        </div>
+        <div class="modal-body">
+          오늘은 친구들이랑 약속이 있는데 빡다방에서 만나야겠다! 사라다 빵이랑 아이스 초코 한잔 해야지! 엄마! 저 나갔다올게요!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">선택지 1 (텀블러 선택)</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">선택지 2 (텀블러 선택 안함))</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- event_3_샤워하기-->
+  <div class="modal fade modal-dialog modal-dialog-centered modal-dialog-scrollable" id="event_3" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">샤워하기 event</h5>
+        </div>
+        <div class="modal-body">
+          하나 둘! 하나 둘! 나는 태권도 노랑띠다. 빨리 검은띠가 되고 싶은 맘에 오늘도 도장에서 땀으로 흠뻑 젖을 때까지 발차기를 하고 왔다. 이제 샤워를 해볼까??
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">선택지 1 (바디워시 샴푸 사용)</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">선택지 2 (천연비누 사용)</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">선택지 3 (물로만)</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- event_4_분리수거-->
+  <div class="modal fade modal-dialog modal-dialog-centered modal-dialog-scrollable" id="event_4" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">분리수거 event</h5>
+        </div>
+        <div class="modal-body">
+          오늘은 우리 집 분리수거 날이다. 이번주는 내가 분리수거 할 차례구나! 분리수거할 쓰레기가 가득하군! 빨리 갖다 버려야겠다!
+          그런데 이게 플라스틱이야 캔이야? 헷갈리네...?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">선택지 1 (환경지침도서 선택)</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">선택지 2 (환경지침도서 선택 안함)</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+</html>
