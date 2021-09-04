@@ -160,7 +160,7 @@ function setToon() {
 // 서버에 요청 후 값 받아오기
 function itemRequest() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../main.php');
+    xhr.open('GET', '../getItem.php');
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
