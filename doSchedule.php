@@ -6,36 +6,57 @@
 
     $reciveData = file_get_contents('php://input');
     $input = json_decode(stripcslashes($reciveData), true);
-    $health = $input['health'];
-    $water = $input['water'];
-    $soil = $input['soil'];
-    $air = $input['air'];
+    $health = intval($input['health']);
+    $water = intval($input['water']);
+    $soil = intval($input['soil']);
+    $air = intval($input['air']);
     
     // 체력 update
-    $sql = "
-    UPDATE character_info
-    SET health = '$health'
-    WHERE m_id='$userId'";
+    if($health){
+        $sql = "
+        UPDATE character_info
+        SET health= health +($health) 
+        WHERE m_id='$userId';";
+    };
 
-    // 수질 오염도 update
-    $sql .= "
-    UPDATE character_info
-    SET water = '$water' 
-    WHERE m_id='$userId'";
-
-    $sql .= "
-    UPDATE character_info
-    SET soil = '$soil' 
-    WHERE m_id='$userId'";
-    $sql .= "
-    UPDATE character_info
-    SET air = '$air' 
-    WHERE m_id='$userId'";
-
-    mysqli_multi_query($con, $sql);
-    $result = mysqli_store_result($con)
+    if($water){
+        // 수질 오염도 update
+        $sql .= "
+        UPDATE character_info
+        SET water=water+($water) 
+        WHERE m_id='$userId';";
+    };
     
-    echo
+    if($soil){
+        // 토양 오염도 update
+        $sql .= "
+        UPDATE character_info
+        SET soil=soil+($soil) 
+        WHERE m_id='$userId';";
+    };
 
+    if($air){
+        // 대기 오염도 update
+        $sql .= "
+        UPDATE character_info
+        SET air=air+($air)
+        WHERE m_id='$userId';";
+    };
+    
+
+    if (mysqli_multi_query($con, $sql)) {
+        do {
+              // store first result set
+              if ($result = mysqli_store_result($con)) {    
+                    // fetch one and one row
+                    while ($row = mysqli_fetch_row($result)) {
+                          echo $row[0];
+                    }
+                    // free result set
+                    mysqli_free_result($result);
+              }
+        } while (mysqli_more_results($con) && mysqli_next_result($con));
+    }
+    
     mysqli_close($con);
 ?>

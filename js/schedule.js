@@ -64,7 +64,6 @@ function itemRequest() {
                 }
             }
         }
-        console.log('itemList: ', item);
     };
     xhr.send();
 }

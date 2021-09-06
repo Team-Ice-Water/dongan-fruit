@@ -122,7 +122,6 @@ function setEcoState() {
             }
         }
     }
-    console.log('window, img: ', img);
     makeImg(windowSection, img, 'window');
 }
 
@@ -148,9 +147,7 @@ function setUserInfo() {
 function setToon() {
     for (let key in toonFile) {
         if(key == userInfo['ctype']){
-            console.log('userInfo_ctype:', userInfo['ctype'])
             const file = toonFile[key];
-            console.log('file: ', file)
             makeImg(toonSection, file, 'character');
         }        
     }
@@ -176,7 +173,6 @@ function itemRequest() {
             }
         }
         addItem(itemList);
-        console.log('itemList: ', itemList)
     };
     xhr.send();
 }
@@ -198,7 +194,6 @@ function ecoRequest() {
                 }
             }
         }
-        console.log('ecoLevel: ', ecoLevel);
         setEcoLevel();
         setEcoState();
     };
