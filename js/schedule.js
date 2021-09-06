@@ -50,6 +50,7 @@ const item = {
 function itemRequest() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../getItem.php');
+    xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
@@ -65,7 +66,6 @@ function itemRequest() {
             }
         }
     };
-    xhr.send();
 }
 
 itemRequest();
@@ -220,6 +220,8 @@ function scheduleRequest(data) {
         if(xhr.readyState === 4 && xhr.status === 200){
             console.log('응답: ', xhr.responseText);
             // 띄울 문구를 결과 창에 저장
+            // 모달창띄우기
+            location.href="main.html";
         }
     };
     xhr.open('POST', '../doSchedule.php');
@@ -229,7 +231,6 @@ function scheduleRequest(data) {
 
 
 function decide() {
-    console.log('결정')
     const dawn = dawnText.getAttribute('name');
     const am = amText.getAttribute('name');
     const pm = pmText.getAttribute('name');

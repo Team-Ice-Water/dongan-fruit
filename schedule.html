@@ -16,7 +16,8 @@
     </div>
 
     <section class="character">
-        캐릭터
+        <div class="item">
+        </div>
     </section>
 
     <section class="plan">
@@ -98,7 +99,20 @@
     </section>
 
     <section class="user-info">
-        상태바
+        <div class="user-info col-4">   <!-- 전체(max)가 12, col-6은 폭이 반을 차지하라는 의미-->
+            <div class="custom-progress">
+                <div id="soil" class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="custom-progress">
+                <div id="water" class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="custom-progress">
+                <div id="air" class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="custom-progress">
+                <div id="health" class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
     </section>
 
     <!--JS에서 php로부터 정보를 받아오기위해 jquery 사용-->

@@ -65,6 +65,8 @@ const toonFile = {
     woman6: 'toon/woman6.png',
 }
 
+
+// 창문, 캐릭터, 아이템 등을 띄울 이미지 태그를 만드는 함수
 function makeImg(section, file, type) {
     const newImage = document.createElement("IMG");
     newImage.setAttribute('src', 'img/' + file);
@@ -72,6 +74,7 @@ function makeImg(section, file, type) {
     newImage.setAttribute('alt', 'image of ' + file);
     section.appendChild(newImage);
 }
+
 
 // 받아온 값을 기반으로 아이템 이미지 생성
 function addItem(obj) {
@@ -83,6 +86,7 @@ function addItem(obj) {
         }
     }  
 }
+
 
 // 창문 이미지 고르기
 function setEcoState() {
@@ -126,17 +130,18 @@ function setEcoState() {
 }
 
 
+// 가져온 정보를 바탕으로 상태바 생성
 function changeAttr(variable, list, type) {
     variable.setAttribute('style', 'width: '+ list[type]+'%');
     variable.setAttribute('aria-valuenow', list[type]);
 }
 
-// 상태바 생성
 function setEcoLevel() {
     changeAttr(soilLevel, ecoLevel, 'soil');
     changeAttr(waterLevel, ecoLevel, 'water');
     changeAttr(airLevel, ecoLevel, 'air');
 }
+
 
 // 상태바의 건강, 날짜 생성
 function setUserInfo() {
@@ -144,6 +149,8 @@ function setUserInfo() {
     day.innerHTML = userInfo['day']+'일';    
 }
 
+
+// 가져온 정보를 바탕으로 캐릭터 띄움
 function setToon() {
     for (let key in toonFile) {
         if(key == userInfo['ctype']){
@@ -154,10 +161,11 @@ function setToon() {
 }
 
 
-// 서버에 요청 후 값 받아오기
+// 아이템 정보 요청, 가지고 있는 아이템은 사진 띄움
 function itemRequest() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../getItem.php');
+    xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
@@ -174,12 +182,19 @@ function itemRequest() {
         }
         addItem(itemList);
     };
-    xhr.send();
 }
 
+// 상태바에 수치(%) 표시
+function showLevel(id) {
+    var level = id.getAttribute('aria-valuenow');
+    id.innerHTML = level+"%";
+}
+
+// 상태바의 오염도 정보 요청
 function ecoRequest() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../getEcoLevel.php');
+    xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
@@ -196,15 +211,17 @@ function ecoRequest() {
         }
         setEcoLevel();
         setEcoState();
+        showLevel(soilLevel);
+        showLevel(waterLevel);
+        showLevel(airLevel);
     };
-    xhr.send();
-    // 정보를 다 받아오면 실행
-    // onreadystatechange의 콜백에서 실행하면 랜더링 시 마다 호출됨
 }
 
+// 상태바의 건강, 날짜, 캐릭터 정보 요청
 function infoRequest() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../getUserInfo.php');
+    xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
@@ -228,8 +245,8 @@ function infoRequest() {
             }
         }
         setUserInfo();
+        showLevel(healthLevel);
     };
-    xhr.send();
 }
 
 itemRequest();
