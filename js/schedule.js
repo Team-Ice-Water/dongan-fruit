@@ -46,6 +46,7 @@ const item = {
     soap: "0"
 }
 
+// 아이템이 있어야 선택 가능한 버튼 조건 구현
 function itemRequest() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../getItem.php');
@@ -188,30 +189,59 @@ function cancel() {
     location.href="main.html";
 }
 
-function decide() {
-    console.log('결정')
-    /*getAttribute('name')*/
-    dawnText.getAttribute('name');
-    amText.getAttribute('name');
-    pmText.getAttribute('name');
-}
-
 const changeValue = [
     {
-        id: 'bible',
+        id: "bible",
         water: -2,
         air: -2,
         soil: -2,
         health: -1
     },
     {
-        id: 'tumbler',
+        id: "tumbler",
         soil: -3,
         health: -1
     },
     {
-        id: 'foodwaste',
+        id: "foodwaste",
         soil: -2,
         health: -1
+    },
+    {
+        id: "bike",
+        water: -4,
+        health: -2
     }
 ]
+
+
+function scheduleRequest(data) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            console.log('응답: ', xhr.responseText);
+            // 띄울 문구를 결과 창에 저장
+        }
+    };
+    xhr.open('POST', '../doSchedule.php');
+    xhr.setRequestHeader('Content-Type', "application/json");
+    xhr.send(data);
+}
+
+
+function decide() {
+    console.log('결정')
+    const dawn = dawnText.getAttribute('name');
+    const am = amText.getAttribute('name');
+    const pm = pmText.getAttribute('name');
+    for(let value of changeValue){
+        if( value['id'] == dawn ){
+            // value를 php로 전송
+            scheduleRequest(JSON.stringify(value));
+        } else if(value['id'] == am){
+            scheduleRequest(JSON.stringify(value));
+        } else if(value['id'] == pm){
+            scheduleRequest(JSON.stringify(value));
+        }
+    }
+}
