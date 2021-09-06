@@ -20,7 +20,8 @@
                         'water'=> $water); 
 
         echo json_encode($value); 
-
     }
+
+    mysqli_close($con);
 
 ?>
