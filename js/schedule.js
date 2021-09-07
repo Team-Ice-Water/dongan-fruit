@@ -98,16 +98,18 @@ function needItem(tag) {
     }
 }
 
-const healthLevel = document.getElementById("health").getAttribute('aria-valuenow');
-
-function checkHealth(level) {
-    if(level <= 50){
+// 현재 건강 수치로 하루에 스케쥴 3개 할 수 있는지 검사
+function checkHealth() {
+    var health = parseInt(document.getElementById("health").getAttribute('aria-valuenow'));
+    if(health <= 50){
         if(isFill['count'] == 2){
-            alert("건강수치가 50 이하면 하루에 2개의 스케쥴밖에 선택할 수 없습니다.");
+            return false;
+        } 
+        else{
+            return true;
         }
-    } else{
-        return true;
-    }
+    } 
+    else{ return true; }
 }
 
 // 선택한 것에 대한 텍스트를 띄워준다
@@ -116,32 +118,35 @@ function setText(type, text) {
     Text.innerHTML= text.alt;
     Text.setAttribute('name', text.id);
     isFill[type] = true;
-    ifFill['count'] += 1;
+    isFill['count'] += 1;
 }
 
 // 선택한 것데 대한 텍스트를 새벽 ,오전, 오후 중에 띄워준다.
 function select(tag, deletable) {
-    
-    if(!isFill['dawn']){    // false일 때 = 비워져있을 때
-        setText("dawn", tag);
-        if( deletable === false){    // 삭제불가한 이벤트면 버튼 삭제 속성 제거
-            dawnRmv.setAttribute('onclick', 'nondeletable()');
+    if(checkHealth()){
+        if(!isFill['dawn']){    // false일 때 = 비워져있을 때
+            setText("dawn", tag);
+            if( deletable === false){    // 삭제불가한 이벤트면 버튼 삭제 속성 제거
+                dawnRmv.setAttribute('onclick', 'nondeletable()');
+            }
         }
-    }
-    else if(!isFill['am']){
-        setText("am", tag);
-        if( deletable === false){
-            amRmv.setAttribute('onclick', 'nondeletable()');
+        else if(!isFill['am']){
+            setText("am", tag);
+            if( deletable === false){
+                amRmv.setAttribute('onclick', 'nondeletable()');
+            }
         }
-    }
-    else if(!isFill['pm']){
-        setText("pm", tag);
-        if( deletable === false){
-            pmRmv.setAttribute('onclick', 'nondeletable()');
+        else if(!isFill['pm']){
+            setText("pm", tag);
+            if( deletable === false){
+                pmRmv.setAttribute('onclick', 'nondeletable()');
+            }
         }
-    }
-    else{
-        alert("하루 스케쥴이 꽉 찼습니다.");
+        else{
+            alert("하루 스케쥴이 꽉 찼습니다.");
+        }
+    } else{
+        alert("건강수치가 50 이하면 하루에 2개의 스케쥴 밖에 선택할 수 없습니다.");
     }
 }
 
@@ -150,41 +155,44 @@ function nondeletable(){
 }
 
 function selectVolunteer() {
-    var jbRandom = Math.random();
-    var index = Math.floor( jbRandom * 6 );
-    select(volunteer[index], false);
+    if(checkHealth()){
+        var jbRandom = Math.random();
+        var index = Math.floor( jbRandom * 6 );
+        select(volunteer[index], false);
+    } else{
+        alert("건강수치가 50 이하면 하루에 2개의 스케쥴 밖에 선택할 수 없습니다.");
+    }
 }
 
 function selectVacation() {
-    var jbRandom = Math.random();
-    var index = Math.floor( jbRandom * 3 );
-
-    if(!isFill['dawn'] && !isFill['am']){
-        if(!isFill['pm']){
-            setText("dawn", vacation[index]);
-            setText("am", vacation[index]);
-            setText("pm", vacation[index]);
-            
-            dawnRmv.setAttribute('onclick', 'nondeletable()');
-            amRmv.setAttribute('onclick', 'nondeletable()');
-            pmRmv.setAttribute('onclick', 'nondeletable()');
+    if(checkHealth()){
+        var jbRandom = Math.random();
+        var index = Math.floor( jbRandom * 3 );
+    
+        if(!isFill['dawn'] && !isFill['am']){
+            if(!isFill['pm']){
+                setText("dawn", vacation[index]);
+                setText("am", vacation[index]);
+                setText("pm", vacation[index]);
+                
+                dawnRmv.setAttribute('onclick', 'nondeletable()');
+                amRmv.setAttribute('onclick', 'nondeletable()');
+                pmRmv.setAttribute('onclick', 'nondeletable()');
+            }else{
+                alert("바캉스는 모든 스케쥴이 비어있어야만 선택할 수 있습니다.");
+            }
         }else{
-            alert("바캉스는 모든 스케쥴이 비어있어야만 선택할 수 있습니다.")
+            alert("바캉스는 모든 스케쥴이 비어있어야만 선택할 수 있습니다.");
         }
-    }else{
-        alert("바캉스는 모든 스케쥴이 비어있어야만 선택할 수 있습니다.")
+    } else{
+        alert("체력이 50 이하일 때는 바캉스를 선택할 수 없습니다.");
     }
+    
 }
 
 function remove(type){
-    if(type == "all"){
-        dawnText.innerHTML= " ";
-        amText.innerHTML= " ";
-        pmText.innerHTML= " ";
-    }
-    else{
-        document.querySelector(type).querySelector(".text").innerHTML= " ";
-    }
+    document.querySelector(type).querySelector(".text").innerHTML= " ";
+    isFill['count'] -= 1;
     
     switch (type) {
         case ".dawn":
@@ -205,95 +213,23 @@ function remove(type){
 // 결정 클릭 시, 선택된 선택지들의 id와 같은 changeValue 배열의 객체가 php에 전달됨
 // 전달받은 객체의 water, health 등의 정보에 따라 DB변경
 const changeValue = [
-    {
-        id: "bible",
-        water: -2,
-        air: -2,
-        soil: -2,
-        health: -1
-    },
-    {
-        id: "tumbler",
-        soil: -3,
-        health: -1
-    },
-    {
-        id: "foodwaste",
-        soil: -2,
-        health: -1
-    },
-    {
-        id: "bike",
-        water: -4,
-        health: -2
-    },
-    {
-        id: "aircon",
-        water: -2,
-        health: -1
-    },
-    {
-        id: "soap",
-        water: -3,
-        health: -1
-    },
-    {
-        id: "savewater",
-        water: -2,
-        health: -1
-    },
-    {
-        id: "worm",
-        soil: -15,
-        health: -10
-    },
-    {
-        id: "recycle",
-        soil: -10,
-        health: -10
-    },
-    {
-        id: "tree",
-        air: -15,
-        health: -10
-    },
-    {
-        id: "air",
-        air: -10,
-        health: -10
-    },
-    {
-        id: "sea",
-        water: -15,
-        health: -10
-    },
-    {
-        id: "river",
-        water: -10,
-        health: -10
-    },
-    {
-        id: "campaign",
-        water: -5,
-        air: -5,
-        soil: -5,
-        health: -10
-    },
-    {
-        id: "camp",
-        soil: 10,
-        health: +20
-    },
-    {
-        id: "plane",
-        air: 10,
-        health: 20
-    },
-    {
-        id: "beach",
-        water: 10,
-        health: 20
-    }
+    { id: "bible", water: -2, air: -2, soil: -2, health: -1 },
+    { id: "tumbler", soil: -3, health: -1 },
+    { id: "foodwaste", soil: -2, health: -1 },
+    { id: "bike", water: -4, health: -2 },
+    { id: "aircon", water: -2, health: -1 },
+    { id: "soap", water: -3, health: -1 },
+    { id: "savewater",water: -2, health: -1 },
+    { id: "worm", soil: -15, health: -10 },
+    { id: "recycle", soil: -10, health: -10 },
+    { id: "tree", air: -15, health: -10 },
+    { id: "air", air: -10, health: -10 },
+    { id: "sea", water: -15, health: -10 },
+    { id: "river", water: -10, health: -10 },
+    { id: "campaign", water: -5, air: -5, soil: -5, health: -10 },
+    { id: "camp", soil: 10, health: +20 },
+    { id: "plane", air: 10, health: 20 },
+    { id: "beach", water: 10, health: 20 }
 ]
 
 // php에 전송
@@ -303,7 +239,8 @@ function scheduleRequest(data) {
         if(xhr.readyState === 4 && xhr.status === 200){
             console.log('응답: ', xhr.responseText);
             // 띄울 문구를 결과 창에 저장
-            // 모달창띄우기
+            // 변동 브리핑 모달창 띄우기
+            // php에서 day+1 하기 !!
             location.href="main.html";
         }
     };
