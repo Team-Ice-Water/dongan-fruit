@@ -1,6 +1,7 @@
-/* 날짜, 캐릭터, 상태바 띄우는 JS */
+/* 날짜, 캐릭터, 상태바, 창문 띄우는 JS */
 const day = document.querySelector(".day");
 const toonSection = document.querySelector(".character");
+const windowSection = document.querySelector(".window");
 
 const soilLevel = document.getElementById("soil");
 const waterLevel = document.getElementById("water");
@@ -35,7 +36,7 @@ const toonFile = {
 }
 
 
-// 캐릭터 등을 띄울 이미지 태그를 만드는 함수
+// 캐릭터, 창문 등을 띄울 이미지 태그를 만드는 함수
 function makeImg(section, file, type) {
     const newImage = document.createElement("IMG");
     newImage.setAttribute('src', 'img/' + file);
@@ -57,11 +58,51 @@ function setEcoLevel() {
     changeAttr(airLevel, ecoLevel, 'air');
 }
 
-
 // 상태바의 건강, 날짜 생성
 function setUserInfo() {
     changeAttr(healthLevel, userInfo, 'health');
     day.innerHTML = userInfo['day']+'일';    
+}
+
+// 창문 이미지 고르기
+function setEcoState() {
+    var img = 'window/aws70-.png';
+
+    if (ecoLevel['air'] < 70){
+        if(ecoLevel['water'] < 70){
+            if(ecoLevel['soil'] < 70){
+                img = "window/aws70-.png";
+            }
+            else if(ecoLevel['soil'] >= 70){
+                img = "window/s70+aw70-.png";
+            }
+        } else if (ecoLevel['water'] >= 70){
+            if(ecoLevel['soil'] < 70){
+                img = "window/w70+as70-.png";
+            }
+            else if(ecoLevel['soil'] >= 70){
+                img = "window/ws70+a70-.png";
+            }
+        }
+    }
+    else if (ecoLevel['air'] >= 70){
+        if(ecoLevel['water'] < 70){
+            if(ecoLevel['soil'] < 70){
+                img = "window/a70+ws70-.png";
+            }
+            else if(ecoLevel['soil'] >= 70){
+                img = "window/as70+w70-.png";
+            }
+        } else if (ecoLevel['water'] >= 70){
+            if(ecoLevel['soil'] < 70){
+                img = "window/aw70+s70-.png";
+            }
+            else if(ecoLevel['soil'] >= 70){
+                img = "window/aws70+.png";
+            }
+        }
+    }
+    makeImg(windowSection, img, 'window');
 }
 
 
@@ -103,7 +144,9 @@ function ecoRequest() {
             }
         }
         setEcoLevel();
-        setEcoState();
+        if(windowSection){  //창문 태그가 있으면 (=메인 화면에서 호출되었으면)
+            setEcoState();
+        }
         showLevel(soilLevel);
         showLevel(waterLevel);
         showLevel(airLevel);

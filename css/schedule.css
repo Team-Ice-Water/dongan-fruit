@@ -5,33 +5,89 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'CookieRunOTF-Black';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Black00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body{
     height: 100vh;  /*Viewport Height*/
     background: url("../img/room.png") no-repeat center/cover;
     display: grid;
-    grid-template-columns: 1fr 2fr 2fr 3fr;
-    grid-template-rows: 8fr 1fr;
+    grid-template-columns: 3fr 10fr 20fr 20fr 30fr 3fr;
+    grid-template-rows:  3fr 80fr 10fr;
+}
+
+.white-space #top {
+    grid-row: 1/2;
+    grid-column: 1/7;   /*세로*/
+}
+.white-space #right {
+    grid-row: 1/4;
+    grid-column: 1/2;
+}
+
+.white-space #left {
+    grid-row: 1/4;
+    grid-column: 6/7;
 }
 
 /*----------------------------------  
 day
 ------------------------------------*/
 .day{
+    grid-row: 2/4;
+    grid-column: 2/3;
+
     justify-self: center;
-    align-self: center;
+
+    align-items: flex-start;
+
+    width: 15vh;
+    height: 12vh;
+    border-radius: 1px;
+
+    background: #FFFFFF;
+    box-shadow: -4px 5px 8px rgba(0, 0, 0, 0.35);
+
+    font-size: 5vh;
+    text-align: center;
+    line-height: 12vh;
+    font-family: "CookieRunOTF-Black", sans-serif;
 }
 
-.user-info{
-    justify-self: left;
-    align-self: center;
+.user-info {
+    position: absolute;
+    z-index: 5;
+    left: 3vw;
+    top: 87.5vh;
+}
+
+.custom-progress{ 
+    display: flex;
+    height: 2.5vh;
+    overflow: hidden;
+    font-size: .75rem;
+    background-color: rgba( 255, 255, 255, 0.5 );;
+    border-radius: .25rem;
 }
 
 /*----------------------------------  
 character
 ------------------------------------*/
 .character{
+    grid-row: 2/4;
+    grid-column: 3/4;
+
     justify-self: center;
     align-self: center;
+}
+
+.character img {
+    height: 70vh;
 }
 
 /*----------------------------------  
@@ -39,6 +95,9 @@ Today's schedule
 ------------------------------------*/
 .plan {
     /*페이지 내에서 선택창의 레이아웃 속성*/
+    grid-row: 2/3;
+    grid-column: 4/5;
+
     justify-self: center;
     align-self: center;
     
@@ -106,16 +165,17 @@ Today's schedule
 }
 
 
-
-
-
 /*----------------------------------  
 schedule
 ------------------------------------*/
 .schedule{
+    grid-column: 5/6;
+    grid-row: 1/4;
+
     width: 35vw;
     justify-self: center;
-    align-self: center;
+    align-self: center;    
+
     font-family: 'BMJUA';
     font-size: 1.2rem;
 }

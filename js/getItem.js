@@ -1,6 +1,5 @@
 /* 아이템, 창문 띄우는 JS */
 const itemSection = document.querySelector(".item");
-const windowSection = document.querySelector(".window");
 
 const itemList = {
     tumbler: "0",
@@ -49,48 +48,6 @@ function addItem(obj) {
             makeImg(itemSection, file, key)
         }
     }  
-}
-
-
-// 창문 이미지 고르기
-function setEcoState() {
-    var img = 'window/aws70-.png';
-
-    if (ecoLevel['air'] < 70){
-        if(ecoLevel['water'] < 70){
-            if(ecoLevel['soil'] < 70){
-                img = "window/aws70-.png";
-            }
-            else if(ecoLevel['soil'] >= 70){
-                img = "window/s70+aw70-.png";
-            }
-        } else if (ecoLevel['water'] >= 70){
-            if(ecoLevel['soil'] < 70){
-                img = "window/w70+as70-.png";
-            }
-            else if(ecoLevel['soil'] >= 70){
-                img = "window/ws70+a70-.png";
-            }
-        }
-    }
-    else if (ecoLevel['air'] >= 70){
-        if(ecoLevel['water'] < 70){
-            if(ecoLevel['soil'] < 70){
-                img = "window/a70+ws70-.png";
-            }
-            else if(ecoLevel['soil'] >= 70){
-                img = "window/as70+w70-.png";
-            }
-        } else if (ecoLevel['water'] >= 70){
-            if(ecoLevel['soil'] < 70){
-                img = "window/aw70+s70-.png";
-            }
-            else if(ecoLevel['soil'] >= 70){
-                img = "window/aws70+.png";
-            }
-        }
-    }
-    makeImg(windowSection, img, 'window');
 }
 
 // 아이템 정보 요청, 가지고 있는 아이템은 사진 띄움
