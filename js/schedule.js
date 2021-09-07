@@ -9,7 +9,8 @@ const pmRmv = document.querySelector(".pm").querySelector(".remove");
 const isFill = {
     dawn: false,
     am: false,
-    pm: false
+    pm: false,
+    count: 0
 }
 
 const volunteer = [
@@ -70,6 +71,7 @@ function itemRequest() {
 
 itemRequest();
 
+// 아이템이 있어야 선택할 수 있는 선택지 검사하는 함수
 function needItem(tag) {
     
     if(item[tag.id] === "1"){
@@ -96,15 +98,30 @@ function needItem(tag) {
     }
 }
 
+const healthLevel = document.getElementById("health").getAttribute('aria-valuenow');
 
+function checkHealth(level) {
+    if(level <= 50){
+        if(isFill['count'] == 2){
+            alert("건강수치가 50 이하면 하루에 2개의 스케쥴밖에 선택할 수 없습니다.");
+        }
+    } else{
+        return true;
+    }
+}
+
+// 선택한 것에 대한 텍스트를 띄워준다
 function setText(type, text) {
     const Text = document.querySelector("."+type).querySelector(".text");
     Text.innerHTML= text.alt;
     Text.setAttribute('name', text.id);
     isFill[type] = true;
+    ifFill['count'] += 1;
 }
 
+// 선택한 것데 대한 텍스트를 새벽 ,오전, 오후 중에 띄워준다.
 function select(tag, deletable) {
+    
     if(!isFill['dawn']){    // false일 때 = 비워져있을 때
         setText("dawn", tag);
         if( deletable === false){    // 삭제불가한 이벤트면 버튼 삭제 속성 제거
@@ -184,10 +201,9 @@ function remove(type){
     }
 }
 
-function cancel() {
-    location.href="main.html";
-}
 
+// 결정 클릭 시, 선택된 선택지들의 id와 같은 changeValue 배열의 객체가 php에 전달됨
+// 전달받은 객체의 water, health 등의 정보에 따라 DB변경
 const changeValue = [
     {
         id: "bible",
@@ -210,10 +226,77 @@ const changeValue = [
         id: "bike",
         water: -4,
         health: -2
+    },
+    {
+        id: "aircon",
+        water: -2,
+        health: -1
+    },
+    {
+        id: "soap",
+        water: -3,
+        health: -1
+    },
+    {
+        id: "savewater",
+        water: -2,
+        health: -1
+    },
+    {
+        id: "worm",
+        soil: -15,
+        health: -10
+    },
+    {
+        id: "recycle",
+        soil: -10,
+        health: -10
+    },
+    {
+        id: "tree",
+        air: -15,
+        health: -10
+    },
+    {
+        id: "air",
+        air: -10,
+        health: -10
+    },
+    {
+        id: "sea",
+        water: -15,
+        health: -10
+    },
+    {
+        id: "river",
+        water: -10,
+        health: -10
+    },
+    {
+        id: "campaign",
+        water: -5,
+        air: -5,
+        soil: -5,
+        health: -10
+    },
+    {
+        id: "camp",
+        soil: 10,
+        health: +20
+    },
+    {
+        id: "plane",
+        air: 10,
+        health: 20
+    },
+    {
+        id: "beach",
+        water: 10,
+        health: 20
     }
 ]
 
-
+// php에 전송
 function scheduleRequest(data) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
@@ -229,6 +312,9 @@ function scheduleRequest(data) {
     xhr.send(data);
 }
 
+function cancel() {
+    location.href="main.html";
+}
 
 function decide() {
     const dawn = dawnText.getAttribute('name');
