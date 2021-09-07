@@ -11,12 +11,17 @@
 </head>
 <body>
 
+    <section class="white-space" id="top">
+    </section>
+
+    <section class="white-space" id="right">
+    </section>
+
     <div class="day">
         1일
     </div>
 
     <section class="character">
-        캐릭터
     </section>
 
     <section class="plan">
@@ -24,19 +29,19 @@
         <div class="time dawn">
             <a id="dawn">새벽</a>
             <span class="text"></span>
-            <button type="button" class="btn btn-light material-icons" onclick="remove('.dawn')">clear</button>
+            <button type="button" class="remove btn btn-light material-icons" onclick="remove('.dawn')">clear</button>
         </div>
         <div class="time am">
             <a id="am">오전</a>
             <span class="text"></span>
-            <button type="button" class="btn btn-light material-icons" onclick="remove('.am')">clear</button>
+            <button type="button" class="remove btn btn-light material-icons" onclick="remove('.am')">clear</button>
         </div>
         <div class="time pm">
             <a id="pm">오후</a>
             <span class="text"></span>
-            <button type="button" class="btn btn-light material-icons" onclick="remove('.pm')">clear</button>
+            <button type="button" class="remove btn btn-light material-icons" onclick="remove('.pm')">clear</button>
         </div>
-        <img class="item" src="img/schedule/cancel.png" alt="취소" onclick="remove('all')">
+        <img class="item" src="img/schedule/cancel.png" alt="취소" onclick="cancel()">
         <img class="item" src="img/schedule/decide.png" alt="결정" onclick="decide()">
     </section>
 
@@ -54,38 +59,38 @@
         <div class="tab-content">
             <div class="tab-pane fade show active" id="movement" role="tabpanel" aria-labelledby="movement-tab">
                 <section id="move-layout">
-                    <img class="item" src="img/schedule/bibleSchool.png" id="bible" alt="성경학교 참석" onclick="select(this)">
+                    <img class="item" src="img/schedule/bibleSchool.png" id="bible" alt="성경학교 참석" onclick="needItem(this)">
                     <img class="item" src="img/schedule/earth.png" alt="지구사진" style="width: 5vw;">
-                    <img class="item" src="img/schedule/tumbler.png" id="tumbler" alt="텀블러 전파" onclick="select(this)">
-                    <img class="item" src="img/schedule/foodWaste.png" id="foodwaste" alt="음식물 쓰레기 정리" onclick="select(this)">
-                    <img class="item" src="img/schedule/useBike.png" id="bike" alt="자전거 이용" onclick="select(this)">
-                    <img class="item" src="img/schedule/airconditioner.png" id="aircon" alt="에어컨 온도 지킴이" onclick="select(this)">
-                    <img class="item" src="img/schedule/naturalSoap.png" id="soap" alt="천연 비누 전도" onclick="select(this)">
-                    <img class="item" src="img/schedule/saveWater.png" id="savewater" alt="물 잠그고 다니기" onclick="select(this)">
+                    <img class="item" src="img/schedule/tumbler.png" id="tumbler" alt="텀블러 전파" onclick="needItem(this)">
+                    <img class="item" src="img/schedule/foodWaste.png" id="foodwaste" alt="음식물 쓰레기 정리" onclick="select(this, true)">
+                    <img class="item" src="img/schedule/useBike.png" id="bicycle" alt="자전거 이용" onclick="needItem(this)">
+                    <img class="item" src="img/schedule/airconditioner.png" id="aircon" alt="에어컨 온도 지킴이" onclick="select(this, true)">
+                    <img class="item" src="img/schedule/naturalSoap.png" id="soap" alt="천연 비누 전도" onclick="needItem(this)">
+                    <img class="item" src="img/schedule/saveWater.png" id="savewater" alt="물 잠그고 다니기" onclick="select(this, true)">
                 </section>
             </div>
             <div class="tab-pane fade" id="volunteer" role="tabpanel" aria-labelledby="volunteer-tab">
                 <section id="vol-layout">
-                    <img class="item" src="img/schedule/volunteer.png" alt="봉사활동" id="volunteer" onclick="select(this)">
+                    <img class="item" src="img/schedule/volunteer.png" alt="봉사활동" id="volunteer" onclick="selectVolunteer()">
                     <img class="item" src="img/schedule/earth.png" alt="지구사진" style="width: 5vw;">
-
-                    <img class="item" src="img/schedule/volWorm.png" alt="지렁이 봉사" id="worm">
-                    <img class="item" src="img/schedule/volRecycle.png" alt="분리수거 봉사" id="recycle">
-                    <img class="item" src="img/schedule/volTree.png" alt="나무심기 봉사" id="tree">
-                    <img class="item" src="img/schedule/volAirpoll.png" alt="대기오염 봉사" id="air">
-                    <img class="item" src="img/schedule/volSea.png" alt="바다 봉사" id="sea" >
-                    <img class="item" src="img/schedule/volRiver.png" alt="하천 봉사" id="river">
-                    <img class="item" src="img/schedule/volCampaign.png" alt="캠페인 봉사" id="campaign">
+                    <!-- 봉사활동은 id 필요X (조건때문에 JS에서 처리) -->
+                    <img class="item" src="img/schedule/volWorm.png" alt="지렁이 봉사">
+                    <img class="item" src="img/schedule/volRecycle.png" alt="분리수거 봉사">
+                    <img class="item" src="img/schedule/volTree.png" alt="나무심기 봉사">
+                    <img class="item" src="img/schedule/volAirpoll.png" alt="대기오염 봉사">
+                    <img class="item" src="img/schedule/volSea.png" alt="바다 봉사">
+                    <img class="item" src="img/schedule/volRiver.png" alt="하천 봉사">
+                    <img class="item" src="img/schedule/volCampaign.png" alt="캠페인 봉사">
                 </section>
             </div>
             <div class="tab-pane fade" id="vacation" role="tabpanel" aria-labelledby="vacation-tab">
                 <section id="vol-layout">
-                    <img class="item" src="img/schedule/vacation.png" alt="바캉스" id="vacation" onclick="selectVac()">
+                    <img class="item" src="img/schedule/vacation.png" alt="바캉스" id="vacation" onclick="selectVacation()">
                     <img class="item" src="img/schedule/earth.png" alt="지구사진" style="width: 5vw;">
 
-                    <img class="item" src="img/schedule/vacCamp.png" alt="캠핑" id="camp">
-                    <img class="item" src="img/schedule/vacPlane.png" alt="비행기" id="plane">
-                    <img class="item" src="img/schedule/vacBeach.png" alt="해수욕장" id="beach">
+                    <img class="item" src="img/schedule/vacCamp.png" alt="캠핑">
+                    <img class="item" src="img/schedule/vacPlane.png" alt="비행기">
+                    <img class="item" src="img/schedule/vacBeach.png" alt="해수욕장">
                 </section>
             </div>
             <div class="tab-pane fade" id="rest" role="tabpanel" aria-labelledby="rest-tab">
@@ -97,14 +102,29 @@
         </div>
     </section>
 
-    <section class="user-info">
-        상태바
+    <section class="white-space" id="left">
     </section>
+
+    <div class="user-info col-4">
+        <div class="custom-progress">
+            <div id="soil" class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="custom-progress">
+            <div id="water" class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="custom-progress">
+            <div id="air" class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="custom-progress">
+            <div id="health" class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
 
     <!--JS에서 php로부터 정보를 받아오기위해 jquery 사용-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--bootstrap JS를 사용하기 위한 script 태그-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/schedule.js"></script>
+    <script type="text/javascript" src="js/getInfo.js"></script>
 </body>
 </html>

@@ -1,42 +1,12 @@
-/* 이미지 */
-const itemSection = document.querySelector(".item");
-const windowSection = document.querySelector(".window");
+/* 날짜, 캐릭터, 상태바, 창문 띄우는 JS */
 const day = document.querySelector(".day");
 const toonSection = document.querySelector(".character");
+const windowSection = document.querySelector(".window");
 
 const soilLevel = document.getElementById("soil");
 const waterLevel = document.getElementById("water");
 const airLevel = document.getElementById("air");
 const healthLevel = document.getElementById("health");
-
-
-const itemList = {
-    tumbler: "0",
-    flowerpot: "0",
-    mic: "0",
-    basket: "0",
-    book: '0', 
-    vitamin: "0",
-    bicycle: "0", 
-    bible: "0", 
-    soap: "0", 
-    soapnut: "0", 
-    ginseng: "0"
-}
-
-const itemFile = {
-    tumbler: 'tumbler.png',
-    flowerpot: 'flowerpot.png',
-    mic: 'mic.png',
-    basket: 'basket.png',
-    book: 'book.png', 
-    vitamin: 'vitamin.png',
-    bicycle: 'bicycle.png', 
-    bible: 'bible.png', 
-    soap: 'soap.png', 
-    soapnut: 'soapnut.png', 
-    ginseng: 'ginseng.png'
-}
 
 const ecoLevel = {
     air: 0,
@@ -65,6 +35,8 @@ const toonFile = {
     woman6: 'toon/woman6.png',
 }
 
+
+// 캐릭터, 창문 등을 띄울 이미지 태그를 만드는 함수
 function makeImg(section, file, type) {
     const newImage = document.createElement("IMG");
     newImage.setAttribute('src', 'img/' + file);
@@ -73,15 +45,23 @@ function makeImg(section, file, type) {
     section.appendChild(newImage);
 }
 
-// 받아온 값을 기반으로 아이템 이미지 생성
-function addItem(obj) {
-    for (let key in obj) {
-        const value = obj[key]
-        if(value == "1"){  // true이면
-            const file = itemFile[key]
-            makeImg(itemSection, file, key)
-        }
-    }  
+
+// 가져온 정보를 바탕으로 상태바 생성
+function changeAttr(variable, list, type) {
+    variable.setAttribute('style', 'width: '+ list[type]+'%');
+    variable.setAttribute('aria-valuenow', list[type]);
+}
+
+function setEcoLevel() {
+    changeAttr(soilLevel, ecoLevel, 'soil');
+    changeAttr(waterLevel, ecoLevel, 'water');
+    changeAttr(airLevel, ecoLevel, 'air');
+}
+
+// 상태바의 건강, 날짜 생성
+function setUserInfo() {
+    changeAttr(healthLevel, userInfo, 'health');
+    day.innerHTML = userInfo['day']+'일';    
 }
 
 // 창문 이미지 고르기
@@ -122,68 +102,49 @@ function setEcoState() {
             }
         }
     }
-    console.log('window, img: ', img);
     makeImg(windowSection, img, 'window');
 }
 
 
-function changeAttr(variable, list, type) {
-    variable.setAttribute('style', 'width: '+ list[type]+'%');
-    variable.setAttribute('aria-valuenow', list[type]);
-}
-
-// 상태바 생성
-function setEcoLevel() {
-    changeAttr(soilLevel, ecoLevel, 'soil');
-    changeAttr(waterLevel, ecoLevel, 'water');
-    changeAttr(airLevel, ecoLevel, 'air');
-}
-
-// 상태바의 건강, 날짜 생성
-function setUserInfo() {
-    changeAttr(healthLevel, userInfo, 'health');
-    day.innerHTML = userInfo['day']+'일';    
-}
-
+// 가져온 정보를 바탕으로 캐릭터 띄움
 function setToon() {
     for (let key in toonFile) {
         if(key == userInfo['ctype']){
-            console.log('userInfo_ctype:', userInfo['ctype'])
             const file = toonFile[key];
-            console.log('file: ', file)
             makeImg(toonSection, file, 'character');
         }        
     }
 }
 
 
-// 서버에 요청 후 값 받아오기
-function itemRequest() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../main.php');
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState === 4 && xhr.status === 200){
-            let json = JSON.parse(xhr.responseText);
-
-            for (let jkey in json) {
-                for (let ikey in itemList) {
-                    if(jkey == ikey){
-                        const jvalue = json[jkey]
-                        itemList[ikey] = jvalue
-                        break
-                    } 
-                }
-            }
-        }
-        addItem(itemList);
-        console.log('itemList: ', itemList)
-    };
-    xhr.send();
+// 상태바에 수치(%) 표시
+function showLevel(id) {
+    var level = id.getAttribute('aria-valuenow');
+    switch (id) {
+        case soilLevel:
+            id.innerHTML = "토양오염 "+level+"%";
+            break;
+        case waterLevel:
+            id.innerHTML = "수질오염 "+level+"%";
+            break;
+        case airLevel:
+            id.innerHTML = "대기오염 "+level+"%";
+            break;
+        case healthLevel:
+            id.innerHTML = "건강 "+level+"%";
+            break;
+        default:
+            break;
+    }
+    
 }
 
+
+// 상태바의 오염도 정보 요청
 function ecoRequest() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../getEcoLevel.php');
+    xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
@@ -198,18 +159,21 @@ function ecoRequest() {
                 }
             }
         }
-        console.log('ecoLevel: ', ecoLevel);
         setEcoLevel();
-        setEcoState();
+        if(windowSection){  //창문 태그가 있으면 (=메인 화면에서 호출되었으면)
+            setEcoState();
+        }
+        showLevel(soilLevel);
+        showLevel(waterLevel);
+        showLevel(airLevel);
     };
-    xhr.send();
-    // 정보를 다 받아오면 실행
-    // onreadystatechange의 콜백에서 실행하면 랜더링 시 마다 호출됨
 }
 
+// 상태바의 건강, 날짜 등 캐릭터 정보 요청
 function infoRequest() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../getUserInfo.php');
+    xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
@@ -233,10 +197,9 @@ function infoRequest() {
             }
         }
         setUserInfo();
+        showLevel(healthLevel);
     };
-    xhr.send();
 }
 
-itemRequest();
 ecoRequest();
 infoRequest();
