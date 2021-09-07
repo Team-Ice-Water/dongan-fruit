@@ -13,7 +13,7 @@ var endingInfo = [  // DB로부터 가져와서 초기값을 그거에 맞게 �
     {ending: "청지기", stage: 0, day: 0},
 ]
 
-function probability(원하는 확률) {
+function probability(원하는 확률) { // 원하는 확률에 따라 true 반환하는 함수
     if(확률 계산){
         return true
     } else {
@@ -62,13 +62,14 @@ function home() {
     ...
 }
 
+
 function selectone(list) {
     ...
     return list 중에 하나의 원소 
 }
 
 
-
+/* 실행시키는 부분 */
 if( 체력50이하 ){
     natural();  // 자연착취엔딩
 }
@@ -76,9 +77,10 @@ culture();      // 문화엔딩
 school();       // 환경지킴이 학교 엔딩
 home();         // 청지기 가정 엔딩
 
-selectOne(eventList);
+selectOne(eventList);   // 최종 리스트 중에 하나 선택
 
 
+/* 하나 선택된 이후의 과정 */
 function sendInfo(list) {
     // php에 정보를 보냄 (=DB 변경)
 }
