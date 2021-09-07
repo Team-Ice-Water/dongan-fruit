@@ -27,5 +27,7 @@
         echo "<br> <a href='index.html'> 메인화면으로 돌아가기 </a>";
         exit();
     }
+
+    mysqli_close($con);
     
 ?>
