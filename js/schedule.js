@@ -13,6 +13,8 @@ const isFill = {
     count: 0
 }
 
+var isVacation = false;
+
 const volunteer = [
     {id: "worm", alt: "지렁이 봉사"},
     {id: "recycle", alt: "분리수거 봉사"},
@@ -102,14 +104,16 @@ function needItem(tag) {
 function checkHealth() {
     var health = parseInt(document.getElementById("health").getAttribute('aria-valuenow'));
     if(health <= 50){
-        if(isFill['count'] == 2){
+        if(isFill['count'] == 2){   // 체력 50 이하. 2개 채워짐
             return false;
         } 
-        else{
-            return true;
+        else{ // 체력 50 이하. 2개 이하 채워짐
+            return 1;
         }
     } 
-    else{ return true; }
+    else{   // 체력 50 초과
+        return true;
+    }
 }
 
 // 선택한 것에 대한 텍스트를 띄워준다
@@ -165,29 +169,27 @@ function selectVolunteer() {
 }
 
 function selectVacation() {
-    if(checkHealth()){
-        var jbRandom = Math.random();
-        var index = Math.floor( jbRandom * 3 );
-    
-        if(!isFill['dawn'] && !isFill['am']){
-            if(!isFill['pm']){
-                setText("dawn", vacation[index]);
-                setText("am", vacation[index]);
-                setText("pm", vacation[index]);
-                
-                dawnRmv.setAttribute('onclick', 'nondeletable()');
-                amRmv.setAttribute('onclick', 'nondeletable()');
-                pmRmv.setAttribute('onclick', 'nondeletable()');
-            }else{
-                alert("바캉스는 모든 스케쥴이 비어있어야만 선택할 수 있습니다.");
-            }
-        }else{
-            alert("바캉스는 모든 스케쥴이 비어있어야만 선택할 수 있습니다.");
+
+    var jbRandom = Math.random();
+    var index = Math.floor( jbRandom * 3 );
+
+    if(isFill['count'] == 0){   // 다 비어있으면
+        if(checkHealth() === true){    // 체력이 50 초과면, 3개 다 채움
+            setText("pm", vacation[index]);
+            pmRmv.setAttribute('onclick', 'nondeletable()');
         }
-    } else{
-        alert("체력이 50 이하일 때는 바캉스를 선택할 수 없습니다.");
+        // 체력 상관없이 새벽-오전 스케쥴을 같은 바캉스로 채운다.
+        setText("dawn", vacation[index]);
+        setText("am", vacation[index]);
+        
+        dawnRmv.setAttribute('onclick', 'nondeletable()');
+        amRmv.setAttribute('onclick', 'nondeletable()');
+
+        isVacation = true;
+    }else{
+        alert("바캉스는 모든 스케쥴이 비어있어야만 선택할 수 있습니다.");
     }
-    
+
 }
 
 function remove(type){
@@ -249,22 +251,48 @@ function scheduleRequest(data) {
     xhr.send(data);
 }
 
+function vacationRequest(data) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            console.log('응답: ', xhr.responseText);
+            // 띄울 문구를 결과 창에 저장
+            // 변동 브리핑 모달창 띄우기
+            // php에서 day+1 하기 !!
+            location.href="main.html";
+        }
+    };
+    xhr.open('POST', '../doSchedule.php');
+    xhr.setRequestHeader('Content-Type', "application/json");
+    xhr.send(data);
+}
+
 function cancel() {
     location.href="main.html";
 }
 
 function decide() {
-    const dawn = dawnText.getAttribute('name');
-    const am = amText.getAttribute('name');
-    const pm = pmText.getAttribute('name');
-    for(let value of changeValue){
-        if( value['id'] == dawn ){
-            // value를 php로 전송
-            scheduleRequest(JSON.stringify(value));
-        } else if(value['id'] == am){
-            scheduleRequest(JSON.stringify(value));
-        } else if(value['id'] == pm){
-            scheduleRequest(JSON.stringify(value));
+    if(isVacation){ // 바캉스면 하나만 전송
+        const dawn = dawnText.getAttribute('name');
+        for(let value of changeValue){
+            if( value['id'] == dawn ){
+                scheduleRequest(JSON.stringify(value));
+            }
+        }
+    } else {
+        const dawn = dawnText.getAttribute('name');
+        const am = amText.getAttribute('name');
+        const pm = pmText.getAttribute('name');
+    
+        for(let value of changeValue){
+            if( value['id'] == dawn ){
+                // value를 php로 전송
+                scheduleRequest(JSON.stringify(value));
+            } else if(value['id'] == am){
+                scheduleRequest(JSON.stringify(value));
+            } else if(value['id'] == pm){
+                scheduleRequest(JSON.stringify(value));
+            }
         }
     }
 }

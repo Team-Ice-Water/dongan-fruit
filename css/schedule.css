@@ -141,14 +141,14 @@ Today's schedule
     width: 100%;
 
     display: grid;
-    grid-template-columns: 2fr 4fr 1fr;
+    grid-template-columns: 4fr 8fr 1fr;
     justify-items: center;
     align-items: center;
 
     font: 1.3rem 'BMJUA';
 }
 
-.time:first-child{
+.time:first-child{  /*새벽(오전/오후) 글*/
     width: 50%;
 }
 

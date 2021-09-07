@@ -120,7 +120,23 @@ function setToon() {
 // 상태바에 수치(%) 표시
 function showLevel(id) {
     var level = id.getAttribute('aria-valuenow');
-    id.innerHTML = level+"%";
+    switch (id) {
+        case soilLevel:
+            id.innerHTML = "토양오염 "+level+"%";
+            break;
+        case waterLevel:
+            id.innerHTML = "수질오염 "+level+"%";
+            break;
+        case airLevel:
+            id.innerHTML = "대기오염 "+level+"%";
+            break;
+        case healthLevel:
+            id.innerHTML = "건강 "+level+"%";
+            break;
+        default:
+            break;
+    }
+    
 }
 
 
