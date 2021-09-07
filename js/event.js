@@ -1,4 +1,4 @@
-/* 기본 14개의 이벤트를 저장하는 초기 리스트 */
+/* 조건이 없는 기본 14개의 이벤트를 저장하는 초기 리스트 */
 var eventList = [
     { id: "장보러간다", select1: "장바구니 선택", select2: "장바구니 선택안함"},
     /*{ id: "market", select1: "yesBasket", select2: "noBasket"}, */
@@ -69,7 +69,8 @@ function selectone(list) {
 }
 
 
-/* 실행시키는 부분 */
+
+/* JS로딩 시 실행시키는 부분 */
 if( 체력50이하 ){
     natural();  // 자연착취엔딩
 }
@@ -78,6 +79,7 @@ school();       // 환경지킴이 학교 엔딩
 home();         // 청지기 가정 엔딩
 
 selectOne(eventList);   // 최종 리스트 중에 하나 선택
+
 
 
 /* 하나 선택된 이후의 과정 */
