@@ -40,7 +40,7 @@ function culture() {
     if( 성경책stage == 0){
         if( 현재 날짜 3일 이상 ){
             if(probability(60)){
-                eventList.push({ id: "성경책"ending: "문화"});
+                eventList.push({ id: "성경책", ending: "문화"});
             }
         }
     }
@@ -65,7 +65,7 @@ function home() {
 }
 
 
-function selectone(list) {
+function selectOne(list) {
     ...
     return list 중에 하나의 원소 
 }
