@@ -1,10 +1,12 @@
 /* 조건이 없는 기본 14개의 이벤트를 저장하는 초기 리스트 */
 var eventList = [
-    { id: "장보러간다", select1: "장바구니 선택", select2: "장바구니 선택안함"},
-    /*{ id: "market", select1: "yesBasket", select2: "noBasket"}, */
-    { id: "카페를 간다", select1: "텀블러 선택", select2: "텀블러 선택안함"},
-    { id: "땀이 많이 났다", select1: "바디워시 사용", select2: "천연비누 사용", select3: "물로만"},
+    // 객체(Object) 형식으로 안해도 되지만, 엔딩과 연결되는 다른 이벤트는 객체 형식이어야 하기때문에 통일
+    // 다른 정보가 필요하면 각 원소에 추가해도 됨
+    { id: "장보러간다"},    // { id: "evnet_1"}
+    { id: "카페를 간다"},   // { id: "evnet_2"}
+    { id: "땀이 많이 났다"},
     ...
+    
 ]
 
 var endingInfo = [  // DB로부터 가져와서 초기값을 그거에 맞게 바꿔줄거임
@@ -23,13 +25,13 @@ function probability(원하는 확률) { // 원하는 확률에 따라 true 반�
 
 function natural() { // 자연착취 이벤트
     if(probability(20)){
-        eventList.push({ id: "자연착취1", select1: "O", select2: "X"});
+        eventList.push({ id: "자연착취1"});
     }
     if(probability(20)){
-        eventList.push({ id: "자연착취2", select1: "O", select2: "X"});
+        eventList.push({ id: "자연착취2"});
     }
     if(probability(20)){
-        eventList.push({ id: "자연착취3", select1: "O", select2: "X"});
+        eventList.push({ id: "자연착취3"});
     }
 }
 
@@ -38,15 +40,15 @@ function culture() {
     if( 성경책stage == 0){
         if( 현재 날짜 3일 이상 ){
             if(probability(60)){
-                eventList.push({ id: "성경책", select1: "성경책 선택", select2: "성경책 선택X", ending: "문화"});
+                eventList.push({ id: "성경책"ending: "문화"});
             }
         }
     }
     else if(성경책stage == 1){
         if(오늘날짜 == (성경책day +5)){
-            eventList.push({ id: "전도사님", select1: "성경책 선택", select2: "성경책 선택X", ending: "문화"}); 
+            eventList.push({ id: "전도사님", ending: "문화"}); 
             또는
-            eventList.push({ id: "발표", select1: "마이크 선택", select2: "마이크 선택X", ending: "문화"});
+            eventList.push({ id: "발표", ending: "문화"});
         }
     }
     ...
