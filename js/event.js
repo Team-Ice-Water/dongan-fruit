@@ -24,24 +24,16 @@ function probability(원하는 확률) { // 원하는 확률에 따라 true 반�
 }
 
 function natural() { // 자연착취 이벤트
-    if(probability(20)){
-        eventList.push({ id: "자연착취1"});
-    }
-    if(probability(20)){
-        eventList.push({ id: "자연착취2"});
-    }
-    if(probability(20)){
-        eventList.push({ id: "자연착취3"});
-    }
+    eventList.push({ id: "자연착취1", condition: 20});
+    eventList.push({ id: "자연착취2", condition: 20});
+    eventList.push({ id: "자연착취3", condition: 20});
 }
 
 /* 문화를 바꿔가는 그리스도인 엔딩 */
 function culture() {
     if( 성경책stage == 0){
         if( 현재 날짜 3일 이상 ){
-            if(probability(60)){
-                eventList.push({ id: "성경책", ending: "문화"});
-            }
+            eventList.push({ id: "성경책", ending: "문화", condition: 60});
         }
     }
     else if(성경책stage == 1){
@@ -65,9 +57,16 @@ function home() {
 }
 
 
-function selectOne(list) {
-    ...
-    return list 중에 하나의 원소 
+function sendInfo(list) {
+    for (let i = 0; i < list.length; i++) {    // 배열 원소 순회
+        for (let key in obj) {              // 각 배열의 원소인 객체 순회
+            if( key == "condition"){        // 원소가 조건이라는 데이터를 가지면,
+                const probability = obj[key];   // probability는 그 이벤트가 얼마의 등장 확률을 가지는지를 저장
+                // 확률 처리 (이것만 주어진 확률 만큼 등장하게)
+            }
+    }
+    ....
+    return list 중에 하나의 원소
 }
 
 
