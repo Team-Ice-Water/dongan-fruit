@@ -218,8 +218,8 @@ const changeValue = [
     { id: "bible", water: -2, air: -2, soil: -2, health: -1 },
     { id: "tumbler", soil: -3, health: -1 },
     { id: "foodwaste", soil: -2, health: -1 },
-    { id: "bike", water: -4, health: -2 },
-    { id: "aircon", water: -2, health: -1 },
+    { id: "bike", air: -4, health: -2 },
+    { id: "aircon", air: -2, health: -1 },
     { id: "soap", water: -3, health: -1 },
     { id: "savewater",water: -2, health: -1 },
     { id: "worm", soil: -15, health: -10 },
@@ -242,8 +242,8 @@ function scheduleRequest(data) {
             console.log('응답: ', xhr.responseText);
             // 띄울 문구를 결과 창에 저장
             // 변동 브리핑 모달창 띄우기
-            // php에서 day+1 하기 !!
-            location.href="main.html";
+            // php에서 day+1 하기!!
+            location.href="briefing.html";
         }
     };
     xhr.open('POST', '../doSchedule.php');
@@ -251,15 +251,16 @@ function scheduleRequest(data) {
     xhr.send(data);
 }
 
+
 function vacationRequest(data) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             console.log('응답: ', xhr.responseText);
             // 띄울 문구를 결과 창에 저장
-            // 변동 브리핑 모달창 띄우기
-            // php에서 day+1 하기 !!
-            location.href="main.html";
+            // 휴가 변동 브리핑 모달창 띄우기
+            // php에서 day+1
+            location.href="briefing.html";
         }
     };
     xhr.open('POST', '../doSchedule.php');

@@ -1,0 +1,14 @@
+body{
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity .65s .15s;
+}
+
+body.reveal{
+    opacity: 1;
+    overflow-y: auto;
+}
+
+body.hidden {
+    opacity: 0;
+}
