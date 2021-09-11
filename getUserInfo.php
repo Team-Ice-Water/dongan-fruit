@@ -4,7 +4,7 @@
     session_start();
     
     $userId = $_SESSION['current_id'];
-    // 아이디가 member 있는지 확인
+    // 해당 id의 정보 선택
     $sql = "select * from character_info where m_id='$userId'";
     $ret = mysqli_query($con, $sql);
 
@@ -20,7 +20,6 @@
                         'ctype' => $character); 
 
         echo json_encode($value); 
-
     }
 
     mysqli_close($con);
