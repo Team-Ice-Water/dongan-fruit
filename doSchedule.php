@@ -50,7 +50,7 @@
               if ($result = mysqli_store_result($con)) {    
                     // fetch one and one row
                     while ($row = mysqli_fetch_row($result)) {
-                          echo $row[0];
+                        echo $row[0];
                     }
                     // free result set
                     mysqli_free_result($result);
