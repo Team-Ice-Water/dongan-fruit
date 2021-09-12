@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    flex-direction:column;
+    align-content: center;
+}
+
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IM_Hyemin-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+#text {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.content,
+.total {
+    font-family: 'DungGeunMo', 'PFStardust',  'IM_Hyemin-Regular';
+}
+
+.content{
+    font-size: 1.2rem;
+}
+
+.total {
+    font-size: 1.4rem;
+}
