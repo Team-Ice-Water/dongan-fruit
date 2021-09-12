@@ -221,7 +221,7 @@ const changeValue = [
     { id: "bicycle", air: -4, health: -2 },
     { id: "aircon", air: -2, health: -1 },
     { id: "soap", water: -3, health: -1 },
-    { id: "savewater",water: -2, health: -1 },
+    { id: "savewater", water: -2, health: -1 },
     { id: "worm", soil: -15, health: -10 },
     { id: "recycle", soil: -10, health: -10 },
     { id: "tree", air: -15, health: -10 },
