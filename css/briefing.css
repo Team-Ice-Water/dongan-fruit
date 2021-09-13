@@ -1,9 +1,3 @@
-body {
-    display: flex;
-    flex-direction:column;
-    align-content: center;
-}
-
 @font-face {
     font-family: 'DungGeunMo';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
@@ -26,6 +20,10 @@ body {
 }
 
 body{
+    display: flex;
+    flex-direction:column;
+    align-content: center;
+    
     height: 100vh;  /*Viewport Height*/
     background: url("../img/night.png") no-repeat center/cover;
     color: white !important;

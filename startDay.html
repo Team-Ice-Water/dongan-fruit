@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/pageCurtain.css" rel="stylesheet">
+    <link href="css/typing.css" rel="stylesheet">
+    <link href="css/startDay.css" rel="stylesheet">
+    <link href="css/briefing.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <title>아침 브리핑</title>
+</head>
+<body>
+    <div id="loader">   <!-- 화면 전환 효과를 위한 태그 (pageCurtain)-->
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <section id="text">
+        <p class="title"> </p>
+        </br>
+        <section class="content">
+            <div class="typing-txt"> <!-- 타이핑될 전체 내용이 (미리) 적힐 부분-->
+                <ul>
+                </ul>
+            </div> 
+
+            <div class="typing"> <!-- 실제로 타이핑되어 보여지는 부분(애니메이션 적용되는 부분으로 한 글자씩 쪼개져있다.)-->
+                <ul>
+                </ul>
+            </div>
+        </section>
+        </br>
+        <div class="total">
+        </div>
+        </br>
+        </br>
+        <section class="goBtn"></section>
+
+    </section>
+    <script type="text/javascript" src="js/startDay.js"></script>
+    <script type="text/javascript" src="js/pageCurtain.js"></script>
+</body>
+</html>

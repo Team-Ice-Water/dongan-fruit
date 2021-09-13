@@ -1,0 +1,6 @@
+#loader > div {
+    background: white !important;
+}
+body{
+    background: url("../img/morning.JPG") no-repeat center/cover !important;
+}
