@@ -49,6 +49,8 @@ const item = {
     soap: "0"
 }
 
+var today = 0;
+
 // 아이템이 있어야 선택 가능한 버튼 조건 구현
 function itemRequest() {
     var xhr = new XMLHttpRequest();
@@ -241,8 +243,6 @@ function scheduleRequest(data) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
-            // 띄울 문구를 결과 창에 저장
-            // 변동 브리핑 모달창 띄우기
             // php에서 day+1 하기 !!
         }
     };
@@ -250,6 +250,23 @@ function scheduleRequest(data) {
     xhr.setRequestHeader('Content-Type', "application/json");
     xhr.send(data);
 }
+
+// php에 전송
+function doneRequest(send) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../addDay.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            const yesterday = parseInt(JSON.parse(xhr.responseText));
+            console.log('받아온 정보: ', JSON.parse(xhr.responseText));
+            today = yesterday - 1;
+            console.log("today: ", today);
+            location.href="briefing.html?"+today+':'+send;
+        }
+    };
+}
+
 
 function cancel() {
     location.href="main.html";
@@ -289,6 +306,5 @@ function decide() {
         }
         
     }
-
-    location.href="briefing.html?"+send;
+    doneRequest(send);
 }
