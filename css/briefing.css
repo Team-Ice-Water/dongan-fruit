@@ -25,22 +25,41 @@ body {
     font-style: normal;
 }
 
+body{
+    height: 100vh;  /*Viewport Height*/
+    background: url("../img/Spaced Out Pixel Art.gif") no-repeat center/cover;
+    color: white !important;
+}
 
 #text {
+    margin-top: 15vh;
     display: grid;
     justify-items: center;
     align-items: center;
+
+    font-family: 'DungGeunMo', 'PFStardust',  'IM_Hyemin-Regular';   
 }
 
-.content,
-.total {
-    font-family: 'DungGeunMo', 'PFStardust',  'IM_Hyemin-Regular';
+.title{
+    font-size: 1.5rem;
 }
 
 .content{
+    font-size: 1.5rem;
+    line-height: 1.7rem;
+    text-align: center;
+}
+.typing {
+    display:table;
+}
+.info {
+    height: 2rem; 
+    /*line-height: 1.3rem; */
     font-size: 1.2rem;
+    margin-top: 1.2rem;
+    margin-bottom: 2rem;
 }
 
 .total {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
 }

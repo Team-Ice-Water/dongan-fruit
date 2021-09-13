@@ -1,9 +1,13 @@
-.typing-txt{display: none;}
+.typing-txt{
+  display: none;
+}
 
-ul{list-style:none;}
+ul{
+  list-style-type : none;
+}
 
 .typing ul li{
-  display:block;
+  display: block;
 }
 
 .typing ul li.on {  
