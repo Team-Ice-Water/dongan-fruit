@@ -207,11 +207,9 @@ function home() {
 }
 
 var prob_100_list = []
-var prob_100_num = 0
 
 var prob_other_list = []
 var probability_list = []
-var prob_other_num = 0
 
 var prob_no_list = []
 
@@ -227,9 +225,9 @@ function selectOne(list) {
                     // 객체의 id를 list에 저장하면서 list의 원소 개수 update
     
                     if(probability == 100){  // probability가 100일때
-                        prob_100_num = prob_100_list.push(list[i]["id"])  
-                    }else if((probability < 100) && (probability > 0)){  // 100 아닌 probability
-                        prob_other_num = prob_other_list.push(list[i]["id"])
+                        prob_100_list.push(list[i]["id"])  
+                    }else if(0 < probability < 100){  // 100 아닌 probability
+                        prob_other_list.push(list[i]["id"])
                         probability_list.push(probability)
                     }
                 }
@@ -240,7 +238,7 @@ function selectOne(list) {
     }
 
     /* 확률 처리 */
-    if(prob_other_num == 1){  // 다른 확률 가지는 원소 한개 (20% 또는 60%)
+    if(prob_other_list.length == 1){  // 다른 확률 가지는 원소 한개 (20% 또는 60%)
 
         const rand_0_99 = Math.floor(Math.random() * 100);
         switch (true) {
@@ -251,7 +249,7 @@ function selectOne(list) {
                 selected_id = prob_no_list[Math.floor(Math.random() * prob_no_list.length)]
                 break;
         }
-    }else if(prob_other_num == 2){  // 다른 확률 가지는 원소 두개 (20%, 60%)
+    }else if(prob_other_list.length == 2){  // 다른 확률 가지는 원소 두개 (20%, 60%)
 
         const rand_0_99 = Math.floor(Math.random() * 100);
         switch (true) {
@@ -268,13 +266,13 @@ function selectOne(list) {
     }
 
 
-    if (prob_100_num > 1){             // 100% 확률 가지는 원소가 여러개
-        return prob_100_list[Math.floor(Math.random() * selected_num)];    // 100% 확률 가지는 원소 중 랜덤 선택해서 반환
-    }else if(prob_100_num == 1){       // 100% 확률 가지는 원소가 한개
+    if (prob_100_list.length > 1){             // 100% 확률 가지는 원소가 여러개
+        return prob_100_list[Math.floor(Math.random() * prob_100_list.length)];    // 100% 확률 가지는 원소 중 랜덤 선택해서 반환
+    }else if(prob_100_list.length == 1){       // 100% 확률 가지는 원소가 한개
         return prob_100_list[0];
-    }else if((prob_100_num == 0) && (prob_other_num != 0)){   // 100% 확률 가지는 원소가 없음 & 다른 확률 가지는 원소 존재
+    }else if((prob_100_list.length == 0) && (prob_other_list.length != 0)){   // 100% 확률 가지는 원소가 없음 & 다른 확률 가지는 원소 존재
         return selected_id;
-    }else if((prob_100_num == 0) && (prob_other_num == 0)){   // 100% 확률 가지는 원소가 없음 & 다른 확률 가지는 원소 없음
+    }else if((prob_100_list.length == 0) && (prob_other_list.length == 0)){   // 100% 확률 가지는 원소가 없음 & 다른 확률 가지는 원소 없음
         return list[Math.floor(Math.random() * list.length)];    // 초기 list에서 랜덤 선택해서 반환
     }
 }
