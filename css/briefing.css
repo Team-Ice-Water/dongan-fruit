@@ -27,7 +27,7 @@ body {
 
 body{
     height: 100vh;  /*Viewport Height*/
-    background: url("../img/Spaced Out Pixel Art.gif") no-repeat center/cover;
+    background: url("../img/night.png") no-repeat center/cover;
     color: white !important;
 }
 

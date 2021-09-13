@@ -24,7 +24,7 @@
     </div>
     
     <section id="text">
-        <p class="title"> 모든 스케쥴을 끝냈다. 오늘 하루도 수고했다! </p>
+        <p class="title"> </p>
         </br>
         <section class="content">
             <div class="typing-txt"> 
@@ -212,6 +212,8 @@
                     } else if(liIndex==liLength-1){
                         //마지막 문장까지 써지면 반복 종료
                         clearInterval(tyInt);
+                        // 커서 깜빡이는거 종료
+                        $(".typing ul li").removeClass("on");
                         // 총 변화를 보여주는 텍스트 띄우기
                         showTotal();
                         $('.nextBtn').html('<a href="main.html" role="button" class="btn btn-light"> 내일로 넘어가기 </a>');
@@ -227,7 +229,7 @@
             if(totalHealth < 0){
                 text += "체력 "+ Math.abs(totalHealth) + " 감소";
             } else{
-                text += "체력" + totalHealth + " 증가";
+                text += "체력 " + totalHealth + " 증가";
             }
             
             if(totalSoil != 0){
@@ -261,14 +263,16 @@
         /* 받은 정보를 구분하여 변수에 저장한다 */
         const temp = location.href.split("?"); 
         const data= temp[1].split(":"); 
-        const dawn = data[0];        
-        const am = data[1];
+        const today = data[0]; 
+        const dawn = data[1];        
+        const am = data[2];
             
         console.log(data);
+        $('.title').text(today+' 일차의 모든 스케쥴을 끝냈다. 오늘 하루도 수고했다!');
         
         /* 정보(id)에 따라 화면에 띄워야 할 텍스트(멘트, 변동사항)를 지정한다. */
-        if(data.length == 3){
-            const pm = data[2];
+        if(data.length == 4){
+            const pm = data[3];
             setText(pm, pmTxt);      
         } 
         setText(dawn, dawnTxt);
