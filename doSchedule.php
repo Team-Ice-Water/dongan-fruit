@@ -70,7 +70,7 @@
         }
 
         // 대기 오염도 update
-        if($soil){
+        if($air){
             if(100 < ($oldWater + $water)){   // 100을 초과할 수 없음
                 $sql .= "
                 UPDATE character_info

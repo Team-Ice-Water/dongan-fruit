@@ -77,7 +77,6 @@ itemRequest();
 
 // 아이템이 있어야 선택할 수 있는 선택지 검사하는 함수
 function needItem(tag) {
-    
     if(item[tag.id] === "1"){
         select(tag, true);
     } else{
@@ -118,6 +117,29 @@ function checkHealth() {
     }
 }
 
+// 생활 속 환경운동은 같은 것을 3개 선택할 수 없음.
+function checkSame(txt) {
+    if(isFill['count'] == 2){
+        if($(".dawn .text").text() == $(".am .text").text()){
+            if($(".dawn .text").text() == txt){
+                return false;
+            } 
+        }
+        else if($(".dawn .text").text() == $(".pm .text").text()){
+            if($(".dawn .text").text() == txt){
+                return false;
+            }            
+        }
+        else if($(".am .text").text() == $(".pm .text").text()){
+            if($(".am .text").text() == txt){
+                return false;
+            }
+        }
+    }
+
+    return true;    
+}
+
 // 선택한 것에 대한 텍스트를 띄워준다
 function setText(type, text) {
     const Text = document.querySelector("."+type).querySelector(".text");
@@ -127,7 +149,7 @@ function setText(type, text) {
     isFill['count'] += 1;
 }
 
-// 선택한 것데 대한 텍스트를 새벽 ,오전, 오후 중에 띄워준다.
+// 선택한 것에 대한 텍스트를 새벽 ,오전, 오후 중에 띄워준다.
 function select(tag, deletable) {
     if(checkHealth()){
         if(!isFill['dawn']){    // false일 때 = 비워져있을 때
@@ -194,8 +216,29 @@ function selectVacation() {
 
 }
 
+function selectMovement(tag) {
+    if(checkSame(tag.alt)){
+        switch (tag.id) {
+            case 'bible':
+            case 'tumbler':
+            case 'bicycle':
+            case 'soap':
+                needItem(tag);
+                break;
+            default:
+                select(tag, true);
+                break;
+        }
+    } else {
+        alert('생활 속 환경운동은 같은 스케쥴을 2개 초과하여 선택할 수 없습니다.');
+    }
+}
+
 function remove(type){
     document.querySelector(type).querySelector(".text").innerHTML= " ";
+    $(type+" .text").removeAttr("name");
+    $(type+" .text").removeAttr("onclick");
+    
     isFill['count'] -= 1;
     
     switch (type) {
@@ -295,14 +338,36 @@ function decide() {
                 send = dawn;
             }
         }
-    } else {
-        sendValue(dawn);
-        sendValue(am);
-        send = dawn+":"+am;
-        if(checkHealth() === true){ // 건강 50 이상이면
-            sendValue(pm);
-            //send.concat(':', pm);
-            send = dawn+":"+am+":"+pm;
+    } else { // 삭제버튼으로 인해 채워짐이 불규칙적이라, 모든 경우를 나열해줌
+        if(dawn){  
+            sendValue(dawn);
+            if(am){
+                sendValue(am);
+                if(pm){
+                    sendValue(pm);
+                    send = dawn+":"+am+":"+pm; // 새벽O 아침O 저녁O
+                } else{
+                    send = dawn+":"+am;         // 새벽O 아침O 저녁X
+                }       
+                
+            } else{
+                if(pm){ // 새벽O 아침X 저녁O
+                    sendValue(pm);
+                    send = dawn+":"+pm;
+                } else{ // 새벽O 아침X 저녁X
+                    send = dawn;
+                } 
+            }
+        } else{ 
+            if(am){
+                sendValue(am);
+                if(pm){
+                    sendValue(pm);
+                    send = am+":"+pm;  // 새벽X 아침O 저녁O
+                } else{
+                    send = am;     // 새벽X 아침O 저녁X
+                }
+            } 
         }
         
     }
