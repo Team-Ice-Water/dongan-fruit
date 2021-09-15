@@ -49,8 +49,7 @@ ul > li {
     list-style: none;
 }
 
-.card,
-.reset-btn {
+.card{
     cursor: pointer;
 }
 
@@ -94,19 +93,6 @@ Section - 점수판
 .score-panel{
     font-size: 1.6em;
     padding: 1em 0 2em;
-}
-
-.star-rating > li {
-    display: inline-block;
-    padding: 0.5em;
-}
-
-.moves-counter{
-    padding: 0.5em;
-}
-
-.reset-btn{
-    background: #000;
 }
 
 .timer-container{
@@ -284,9 +270,6 @@ Desktops
     /*.deck-img{
         width: 13em;
     }*/
-    .reset-btn{
-        font-size: 0.8em;
-    }
     .footer{
         font-size: 1.2em;
     }

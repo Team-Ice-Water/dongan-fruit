@@ -83,7 +83,7 @@ function timer(){
             seconds = 0;
         }
         // html에 표시되는 시간 변경
-        timeCounter.innerHTML="<i class='fa fa-hourglass-start'></i>"+" 타이머: "+minutes+" 분 "+ seconds+" 초";
+        timeCounter.innerHTML="<i class='fa fa-hourglass-start'></i>"+" 타이머: "+ seconds+" 초";
     }, 1000);
 }
 
