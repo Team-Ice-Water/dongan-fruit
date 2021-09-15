@@ -130,7 +130,7 @@ function natural() { // 자연착취 이벤트
 
 /* 문화를 바꿔가는 그리스도인 엔딩 */
 function culture() {
-    if(day>= 3 && day<=6){  // 3~6일차
+    if(userInfo['day']>= 3 && userInfo['day']<=6){  // 3~6일차
         if(ending['culDay'] == 0){  // 문화 1단계 발생한적 X
             eventList.push({ id: "event_23", ending: "문화", condition: 60});  // event_23 : 문화 1단계
 
@@ -141,7 +141,7 @@ function culture() {
                 pass
             }
         }
-    }else if(day>=7){  // 7일차 ~
+    }else if(userInfo['day']>=7){  // 7일차 ~
         if(ending['culDay'] == 0){  // 한번도 1단계 발생한적 X
             pass  //(문화 엔딩 소멸)
         }else if(ending['culDay'] != 0){  // 한번이라도 1단계 발생한적 O
@@ -150,9 +150,9 @@ function culture() {
                 eventList.push({ id: "event_23", ending: "문화"});  // event_23 : 문화 1단계
 
             }else if(ending['culStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
-                if(day < (ending['culDay']+5)){ // 선택 후 1~4일째
+                if(userInfo['day'] < (ending['culDay']+5)){ // 선택 후 1~4일째
                     pass
-                }else if(day == (ending['culDay']+5)){  // 선택 후 5일째
+                }else if(userInfo['day'] == (ending['culDay']+5)){  // 선택 후 5일째
                     var order = Math.floor(Math.random() * 2);
 
                     if(order == 0){
@@ -163,9 +163,9 @@ function culture() {
                 }
 
             }else if(ending['culStage'] == 2){  // (2단계 선택 O) 상태 and (3단계 선택 X) 상태
-                if(day < (ending['culDay']+5)){ // 선택 후 1~4일째
+                if(userInfo['day'] < (ending['culDay']+5)){ // 선택 후 1~4일째
                     pass
-                }else if(day == (ending['culDay']+5)){  // 선택 후 5일째
+                }else if(userInfo['day'] == (ending['culDay']+5)){  // 선택 후 5일째
 
                     var order = Math.floor(Math.random() * 3);
 
@@ -179,9 +179,9 @@ function culture() {
                 }
 
             }else if(ending['culStage'] == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
-                if(day < (ending['culDay']+5)){ // 선택 후 1~4일째
+                if(userInfo['day'] < (ending['culDay']+5)){ // 선택 후 1~4일째
                     pass
-                }else if(day == (ending['culDay']+5)){  // 선택 후 5일째
+                }else if(userInfo['day'] == (ending['culDay']+5)){  // 선택 후 5일째
                     eventList.push({ id: "event_29", ending: "문화", condition: 100});  // event_29 : 문화 4단계 - 동네청소
                 }
             }
@@ -191,7 +191,7 @@ function culture() {
 
 /* 우리 학교는 환경지킴이 엔딩 */
 function school() {
-    if(day>= 4 && day<=7){  // 4~7일차
+    if(userInfo['day']>= 4 && userInfo['day']<=7){  // 4~7일차
         if(ending['envDay'] == 0){  // 환경지킴이 1단계 발생한적 X
 
             var order = Math.floor(Math.random() * 3);
@@ -207,15 +207,15 @@ function school() {
         }else if(ending['envDay'] != 0){  // 한번이라도 환경지킴이 1단계 발생한적 O
             pass
         }
-    }else if(day>=8){  // 8일차 ~
+    }else if(userInfo['day']>=8){  // 8일차 ~
         if(ending['envDay'] == 0){  // 한번도 1단계 발생한적 X
             pass  //(환경지킴이 엔딩 소멸)
         }else if(ending['envDay'] != 0){  // 한번이라도 1단계 발생한적 O
 
             if(ending['envStage'] == 0){  // 1단계 선택 X 상태
-                if(day < (ending['envDay']+7)){ // 선택 후 1~6일째
+                if(userInfo['day'] < (ending['envDay']+7)){ // 선택 후 1~6일째
                     pass
-                }else if(day == (ending['envDay']+7)){  // 선택 후 7일째
+                }else if(userInfo['day'] == (ending['envDay']+7)){  // 선택 후 7일째
 
                     var order = Math.floor(Math.random() * 3);
 
@@ -229,9 +229,9 @@ function school() {
                 }            
 
             }else if(ending['envStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
-                if(day < (ending['envDay']+7)){ // 선택 후 1~6일째
+                if(userInfo['day'] < (ending['envDay']+7)){ // 선택 후 1~6일째
                     pass
-                }else if(day == (ending['envDay']+7)){  // 선택 후 7일째
+                }else if(userInfo['day'] == (ending['envDay']+7)){  // 선택 후 7일째
 
                     var order = Math.floor(Math.random() * 2);
 
@@ -253,30 +253,30 @@ function home() {
     }else if(ending['homeDay'] != 0){  // 한번이라도 1단계 발생한적 O
 
         if(ending['homeStage'] == 0){  // (1단계 선택 X) 상태
-            if(day < (ending['homeDay']+5)){ // 선택 후 1~4일째
+            if(userInfo['day'] < (ending['homeDay']+5)){ // 선택 후 1~4일째
                 pass
-            }else if(day == (ending['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] == (ending['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_35", ending: "청지기", condition: 100});  // event_35 : 청지기 1단계
             }
 
         }else if(ending['homeStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
-            if(day < (ending['homeDay']+5)){ // 선택 후 1~4일째
+            if(userInfo['day'] < (ending['homeDay']+5)){ // 선택 후 1~4일째
                 pass
-            }else if(day == (ending['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] == (ending['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_36", ending: "청지기", condition: 100});  // event_36 : 청지기 2단계 - 변화하는 가정
             }
 
         }else if(ending['homeStage'] == 2){  // (2단계 선택 O) and (3단계 선택 X) 상태
-            if(day < (ending['homeDay']+5)){ // 선택 후 1~4일째
+            if(userInfo['day'] < (ending['homeDay']+5)){ // 선택 후 1~4일째
                 pass
-            }else if(day == (ending['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] == (ending['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_37", ending: "청지기", condition: 100});  // event_37 : 청지기 3단계 - 주방 세제
             }
 
         }else if(ending['homeStage'] == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
-            if(day < (ending['homeDay']+5)){ // 선택 후 1~4일째
+            if(userInfo['day'] < (ending['homeDay']+5)){ // 선택 후 1~4일째
                 pass
-            }else if(day == (ending['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] == (ending['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_38", ending: "청지기", condition: 100});  // event_38 : 청지기 4단계 - 앞장서는 부모님
             }
         }
@@ -356,7 +356,7 @@ function selectOne(list) {
 
 
 /* JS로딩 시 실행시키는 부분 */
-if(health <= 50){
+if(userInfo['health'] <= 50){
     natural();  // 자연착취엔딩
 }
 culture();      // 문화엔딩
