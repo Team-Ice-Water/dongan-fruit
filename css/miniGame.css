@@ -37,7 +37,7 @@ body {
     text-align: center;
 }
 
-.container {
+#container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -125,7 +125,7 @@ Section - 점수판
 /*----------------------------------  
 Section - Modal
 ------------------------------------*/
-.modal{
+.finish-modal{
     display: none;      /*숨겨줌*/
     position: fixed;
     z-index: 99;
@@ -215,8 +215,8 @@ Deck of Cards
 
 img{
     user-select: none;      /* 사용자가 선택할 수 없음*/
-    width: 6em;
-    
+    /*width: 6em;*/
+    height: 100%;
 }
 
 .deck img {
@@ -227,7 +227,7 @@ img{
 .deck .card.flip{
     background: #fff;
     cursor: deafult;
-    transform: rotateY(180deg);
+    transform: rotateY(360deg);
     transition: transform 0.3s linear;
     pointer-events: none;
     line-height: 200px;
@@ -290,7 +290,7 @@ img{
         font-size: 4em;
     }
 
-    .play-again-btn{
+    .modal-content a{
         font-size: 1.8em;
     }
 }
@@ -330,7 +330,7 @@ Desktops
     .modal-img{
         width: 30em;
     }
-    .play-again-btn{
+    .modal-content a{
         font-size: 2em;
     }
 }
