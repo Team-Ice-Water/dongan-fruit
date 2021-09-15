@@ -2,5 +2,16 @@
     background: white !important;
 }
 body{
-    background: url("../img/morning.JPG") no-repeat center/cover !important;
+    background: url("../img/morning.png") no-repeat center/cover !important;
+}
+
+
+.total{
+    padding: 1rem 3rem;
+    border-radius: 2rem;
+}
+
+.info {
+    margin-top: 0.6rem !important;
+    margin-bottom: 1rem !important;
 }

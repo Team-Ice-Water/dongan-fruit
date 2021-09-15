@@ -12,16 +12,20 @@ const state = [
 var total = 0;
 var totalHealth = 0;
 
-const ecoLevel = {
+var ecoLevel = {
     air: 0,
     soil: 0,
     water: 0
 }
 
-const userInfo = {
+var userInfo = {
     day: 0,
     health: 0
 }
+
+var getEcoLevel = false;
+var getInfo = false;
+var isSend = false;
 
 // 전날 오염도 정보 요청
 function ecoRequest() {
@@ -32,14 +36,28 @@ function ecoRequest() {
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
 
-            for (let jkey in json) {
-                for (let ekey in ecoLevel) {
-                    if(jkey == ekey){
-                        const jvalue = json[jkey];
-                        ecoLevel[ekey] = parseInt(jvalue);
-                        break
-                    } 
+            for (let key in json) {
+                const value = json[key];
+                switch (key) {
+                    case 'air':
+                        ecoLevel['air'] = parseInt(value);
+                        break;
+                    case 'soil':
+                        ecoLevel['soil'] = parseInt(value);
+                        break;
+                    case 'water':
+                        ecoLevel['water'] = parseInt(value);
+                        break;                
+                    default:
+                        break;
                 }
+            }
+
+            getEcoLevel = true;
+            // 오염도, 체력을 다 받아왔으면 실행
+            // 중복 실행 방지를 위해 sendValue()를 실행하면 true가 되는 변수 isSend 활용
+            if(getEcoLevel && getInfo && !isSend){
+                sendValue();
             }
         }
     };
@@ -68,6 +86,11 @@ function infoRequest() {
                         break;
                 }
             }
+
+            getInfo = true;
+            if(getEcoLevel && getInfo && !isSend){
+                sendValue();
+            }
         }
     };
 }
@@ -92,21 +115,24 @@ function findItem(id) {
 }
 
 function sendValue() {
-    // 매일 오염도 +5
-    changeRequest(findItem('basic_nature'));
-    findItem('basic_nature').filtered = true;
-    // 자고 일어나면 체력 +5
-    changeRequest(findItem('basic_health'));
+
+    // 자고 일어나면 
+    changeRequest(findItem('basic_health'));    // 체력 +5
     findItem('basic_health').filtered = true;
 
     const totalLevel = ecoLevel['air']+ ecoLevel['water'] + ecoLevel['soil'];
-    
+    console.log('대기오염도: ', ecoLevel['air']);
+    console.log('수질오염도: ', ecoLevel['water']);
+    console.log('토양오염도: ', ecoLevel['soil']);
+    console.log('오염도 총합: ', totalLevel);
+    console.log('체력: ', userInfo['health']);
+
     /* 오염도 변동 */
     if(totalLevel < 50){
         if(totalLevel < 30){
             changeRequest(findItem('good_pollution')); // 체력+1
             findItem('good_pollution').filtered = true;
-        }
+        }        
         changeRequest(findItem('good_nature'));    // 오염도+3
         findItem('good_nature').filtered = true;
     }
@@ -114,25 +140,29 @@ function sendValue() {
         changeRequest(findItem('bad_nature'));     // 오염도+7
         findItem('bad_nature').filtered = true;
     }
+    else{
+        changeRequest(findItem('basic_nature'));    //오염도 +5
+        findItem('basic_nature').filtered = true;
+    }
+    
 
     /* 체력 변동 */
-    if(userInfo['health'] <= 40){
-        if((70 < ecoLevel['air']) || (70 < ecoLevel['water']) || (70 < ecoLevel['soil'])){
-            changeRequest(findItem('bad_pollution'));  // 체력-1
-            findItem('bad_pollution').filtered = true;
-        } else if(200 < totalLevel){
-            changeRequest(findItem('bad_pollution'));  // 체력-1
-            findItem('bad_pollution').filtered = true;
-        } else{
-            changeRequest(findItem('bad_health'));  // 체력-2
-            findItem('bad_health').filtered = true;
-        }        
+    if((70 < ecoLevel['air']) || (70 < ecoLevel['water']) || (70 < ecoLevel['soil']) || (200 < totalLevel)){
+        changeRequest(findItem('bad_pollution'));  // 체력-1
+        findItem('bad_pollution').filtered = true;
     }
 
-    console.log('state 리스트: ', state);
-    /* 적용된 object에 대해 태그 생성 후 내용 작성 */
-    makeLI();  
+    if(userInfo['health'] <= 40){
+        changeRequest(findItem('bad_health'));  // 체력-2
+        findItem('bad_health').filtered = true;      
+    }
 
+
+    console.log('state 리스트: ', state);
+
+    isSend = true;      // 정보를 다 받아온 뒤 실행하기 위한 장치
+    /* 적용된 object에 대해 태그 생성 후 내용 작성 */
+    makeLI();
 }
 
 const typingTxt = document.querySelector(".typing-txt").querySelector("ul");
@@ -144,7 +174,6 @@ function makeLI() {
 
     state.forEach( function(value){
         if('filtered' in value){
-            console.log("forEach에서 걸린 value: ", value);
             filteredIdx.push(num);
         }
         num++;
@@ -158,6 +187,7 @@ function makeLI() {
         const infoTag = document.createElement('LI');
         infoTag.classList.add('info');
 
+        //$('.typing') 에는 내용이 적히면 안된다.
         //setText(state[filteredIdx[i]], liTag, infoTag);
 
         typing.appendChild(liTag);
@@ -183,7 +213,7 @@ function setText(obj, tag, nexttag) {
             text = "체력 "+ Math.abs(obj['health']) + " 감소";
             totalHealth += obj['health'];
         } else{
-            text = "체력" + obj['health'] + " 증가";
+            text = "체력 " + obj['health'] + " 증가";
             totalHealth += obj['health'];
         }
     }
@@ -243,7 +273,6 @@ function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
                 typingIdx=0;
                 typingBool = false; 
                 typingTxt = $(".typing-txt>ul>li").eq(liIndex).text();
-                console.log(">> typingTxt: ", typingTxt); 
             
                 //다음문장 타이핑전 1초 쉰다
                 clearInterval(tyInt);
@@ -284,19 +313,20 @@ function showTotal() {
         }
     }
 
-    $(".total").text(text);    
+    $(".total").text(text);
+    $('.total').css("background-color", "rgba( 255, 255, 255, 0.6 )");
 }
 
-function main() {
-    /* 비교를 위한 값 요청*/
-    ecoRequest();
-    infoRequest();
-    /* 비교 후 해당되는 정보 전송*/
-    sendValue();
-}
 
-main();
-/* 화면 전환 효과가 끝나고 텍스트의 타이핑 효과가 시작된다.*/
+
+/* 비교를 위한 값 요청*/
+ecoRequest();
+infoRequest();
+/* 비교 후 해당되는 정보 전송
+sendValue();    // 정보 받아온 뒤 실행해야 해서, ajax 결과에 따라 실행 
+*/
+
+// 화면 전환 효과가 끝나고 텍스트의 타이핑 효과가 시작
 setTimeout(() => {
     startTyping();
 }, 3000);

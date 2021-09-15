@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <title>브리핑</title>
 </head>
-<body>
+<body style="color: white !important;">
     <div id="loader">   <!-- 화면 전환 효과를 위한 태그 (pageCurtain)-->
         <div></div>
         <div></div>
@@ -93,12 +93,6 @@
         function setText(findThis, tag) {
             for(let value of valueText){
                 if(value['id'] == findThis){
-                    /* 멘트를 띄운다. 
-                    if("text2" in value){
-                        tag.innerHTML = value['text'] + '</br>' + value['text2'];
-                    } else{
-                        tag.innerText = value['text'];
-                    }*/
                     tag.innerText = value['text'];
 
                     /* 수치 변동 사항 멘트를 지정한다. */
@@ -106,39 +100,31 @@
                     
                     if(value['health'] < 0){
                         text = "체력 "+ Math.abs(value['health']) + " 감소";
-                        totalHealth += value['health'];
                     } else{
                         text = "체력" + value['health'] + " 증가";
-                        totalHealth += value['health'];
                     }
 
                     if('water' in value){
                         if(value['water'] < 0){
                             text += ", 수질 오염도 "+ Math.abs(value['water']) + " 감소";
-                            totalWater += value['water'];
                         } else{
                             text += ", 수질 오염도 " + value['water'] + " 증가";
-                            totalWater += value['water'];
                         }
                     }
 
                     if('air' in value){
                         if(value['air'] < 0){
                             text += ", 대기 오염도 "+ Math.abs(value['air']) + " 감소";
-                            totalAir += value['air'];
                         } else{
                             text += ", 대기 오염도 " + value['air'] + " 증가";
-                            totalAir += value['air'];
                         }
                     }
 
                     if('soil' in value){
                         if(value['soil'] < 0){
                             text += ", 토양 오염도 "+ Math.abs(value['soil']) + " 감소";
-                            totalSoil += value['soil'];
                         } else{
                             text += ", 토양 오염도 " + value['soil'] + " 증가";
-                            totalSoil += value['soil'];
                         }
                     }
                     
@@ -163,6 +149,30 @@
             }
         }
 
+        function addTotal(findThis) {
+            console.log("addTotal 실행");
+            for(let value of valueText){
+                if(value['id'] == findThis){
+                    
+                    totalHealth += value['health'];
+
+                    if('water' in value){
+                        totalWater += value['water'];
+                    }
+
+                    if('air' in value){
+                        totalAir += value['air'];
+                    }
+
+                    if('soil' in value){
+                        totalSoil += value['soil'];
+                    }
+                              
+                    break;
+                }
+            }
+        }
+
         function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
             var typingBool = false; 
             var typingIdx = 0; 
@@ -180,17 +190,20 @@
                 
             function typing(){ 
                 console.log("liIndex: " ,liIndex);
-                $(".typing ul li").removeClass("on");
-                $(".typing ul li").eq(liIndex).addClass("on");
+                if(typingTxt.length > 2){   // 텍스트가 없으면 커서 깜빡임 없이 넘어가기 위해!
+                    $(".typing ul li").removeClass("on");
+                    $(".typing ul li").eq(liIndex).addClass("on");
+                }
+
                 if(typingIdx<typingTxt.length){ // 타이핑될 텍스트 길이만큼 반복
                     //console.log($(".typing ul li").text());
                     if(typingTxt[typingIdx] === '/'){
                         $(".typing ul li").eq(liIndex).append('</br>');
                     } else {
                         $(".typing ul li").eq(liIndex).append(typingTxt[typingIdx]); // 한글자씩 이어준다. 
-                    }
-                    
+                    }                    
                     typingIdx++;
+
                 } else{ 
                     if(liIndex<liLength-1){
                         //다음문장으로  가기위해 인덱스를 1증가
@@ -224,6 +237,7 @@
 
         /* 총 변동사항을 적는 함수*/
         function showTotal() {
+
             var text = "총 \n";
 
             if(totalHealth < 0){
@@ -263,20 +277,41 @@
         /* 받은 정보를 구분하여 변수에 저장한다 */
         const temp = location.href.split("?"); 
         const data= temp[1].split(":"); 
-        const today = data[0]; 
-        const dawn = data[1];        
-        const am = data[2];
-            
         console.log(data);
+
+        const today = data[0]; 
         $('.title').text(today+' 일차의 모든 스케쥴을 끝냈다. 오늘 하루도 수고했다!');
+        const data1 = data[1];
+        addTotal(data1);     
+        const data2 = data[2];
+        addTotal(data2);
+        var data3 = "";
         
         /* 정보(id)에 따라 화면에 띄워야 할 텍스트(멘트, 변동사항)를 지정한다. */
         if(data.length == 4){
-            const pm = data[3];
-            setText(pm, pmTxt);      
-        } 
-        setText(dawn, dawnTxt);
-        setText(am, amTxt);
+            data3 = data[3];
+            addTotal(data3);
+        }
+
+        // 같은 스케쥴이 두번이면 텍스트는 한번만 띄운다.
+        if((data1 == data2)){
+            // 새벽 = 아침
+            if(data3 !== ""){
+                // 새벽 = 아침 != 저녁
+                setText(data3, pmTxt);
+            }
+        } else if((data1 == data3) || ((data2 == data3))){
+            // 새벽 = 저녁 or 아침 = 저녁 
+            setText(data2, amTxt);
+        } else{ // 새벽 != 아침 != 저녁
+            if(data3 !== ""){
+                setText(data3, pmTxt);
+            }
+            setText(data2, amTxt);
+        }
+        // 기본적으로 새벽은 띄운다. (겹칠 때도 가장 우선)
+        setText(data1, dawnTxt);   
+        
 
         /* 화면 전환 효과가 끝나고 텍스트의 타이핑 효과가 시작된다. */
         setTimeout(() => {

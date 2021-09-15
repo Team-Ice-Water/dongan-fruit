@@ -23,10 +23,9 @@ body{
     display: flex;
     flex-direction:column;
     align-content: center;
-    
+
     height: 100vh;  /*Viewport Height*/
     background: url("../img/night.png") no-repeat center/cover;
-    color: white !important;
 }
 
 #text {
