@@ -189,27 +189,19 @@ function showResult() {
 //var modal = new bootstrap.Modal(document.getElementById('finish-modal'))
 
 function displayModal(){
-    var myModal = new bootstrap.Modal(document.getElementById('Backdrop'), {
+    var myModal = new bootstrap.Modal(document.getElementById('finishModal'), {
         keyboard: false
     });
     myModal.show();   
 
 }
 
-function winGame(){
-    if(matched.length === 16){
-        stopTime();
-        AddStats();
-        displayModal();
-    }
-}
-
 function finishGame() {
-    console.log("finishGame 실행 초:", seconds);
     if(seconds >= 30){
         stopTime();
         showResult();
         displayModal();
+        clearInterval(check);
     }
 }
 
@@ -239,15 +231,4 @@ deck.addEventListener("click", function(evt){
     }
 });
 
-/*
-const reset = document.querySelector(".reset-btn");
-const playAgain = document.querySelector(".play-again-btn");
-
-reset.addEventListener('click', resetEverything);
-
-
-playAgain.addEventListener('click', function () {
-    modal.style.display = "none";
-    resetEverything();
-});
-*/
+var check = setInterval(finishGame , 2000); // 가만히 있어도 시간이 지나면 게임은 종료되어야 함
