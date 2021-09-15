@@ -23,6 +23,19 @@ let minutes = 0;
 let seconds = 0;
 let timeStart = false;
 
+var item = {
+    tumbler: "0",
+    mic: "0",
+    basket: "0",
+    book: '0', 
+    vitamin: "0",
+    bicycle: "0", 
+    bible: "0", 
+    soap: "0", 
+    soapnut: "0", 
+    ginseng: "0"
+}
+
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -146,33 +159,43 @@ function showResult() {
         switch (matched[k].alt) {
             case "basket.png":
                 itemList += " 장바구니 ";
+                item['basket'] = 1;
                 break;
             case "bible.png":
                 itemList += " 성경 ";
+                item['bible'] = 1;
                 break;
             case "bicycle.png":
                 itemList += " 자전거 ";
+                item['bicycle'] = 1;
                 break;
             case "book.png":
                 itemList += " 책 ";
+                item['book'] = 1;
                 break;
             case "ginseng.png":
                 itemList += " 산삼 ";
+                item['ginseng'] = 1;
                 break;
             case "mic.png":
                 itemList += " 마이크 ";
+                item['mic'] = 1;
                 break;
             case "soap.png":
                 itemList += " 비누 ";
+                item['soap'] = 1;
                 break;
             case "soapnut.png":
                 itemList += " 소프넛 ";
+                item['soapnut'] = 1;
                 break;
             case "tumbler.png":
                 itemList += " 텀블러 ";
+                item['tumbler'] = 1;
                 break;
             case "vitamin.png":
                 itemList += " 비타민 ";
+                item['vitamin'] = 1;
                 break;
             default:
                 break;
@@ -201,10 +224,30 @@ function finishGame() {
         stopTime();
         showResult();
         displayModal();
+        
         clearInterval(check);
+
+        itemRequest(JSON.stringify(item));
     }
 }
 
+
+// php에 전송
+function itemRequest(data) {
+    console.log("전송");
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            $('.Btn').html('<a class="btn btn-primary" href="main.html" role="button">청지기 1일차 시작하기</a>');             
+        }
+    };
+    xhr.open('POST', '../finishGame.php');
+    xhr.setRequestHeader('Content-Type', "application/json");
+    xhr.send(data);
+}
+
+
+/////////////////
 
 startGame();
 
