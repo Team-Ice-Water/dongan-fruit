@@ -17,7 +17,7 @@ body{
     height: 100vh;  /*Viewport Height*/
     background: url("../img/room.png") no-repeat center/cover;
     display: grid;
-    grid-template-columns: 3fr 10fr 20fr 20fr 30fr 3fr;
+    grid-template-columns: 3fr 10fr 15fr 32fr 33fr 3fr;
     grid-template-rows:  3fr 80fr 10fr;
 }
 
@@ -34,6 +34,7 @@ body{
     grid-row: 1/4;
     grid-column: 6/7;
 }
+
 
 /*----------------------------------  
 day
@@ -87,7 +88,8 @@ character
 }
 
 .character img {
-    height: 70vh;
+    height: 70%;
+    max-height: 65vh;
 }
 
 /*----------------------------------  
@@ -101,8 +103,10 @@ Today's schedule
     justify-self: center;
     align-self: center;
     
-    width: 20vw;
-    height: 40vh;
+    width: 70%;
+    max-width: 28vw;
+    height: 80%;
+    max-height: 46vh;
 
     background: white;
     border: black thin;
@@ -111,7 +115,7 @@ Today's schedule
     /*선택창 내에서 요소들의 레이아웃 속성*/
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1.3fr 1fr 1fr 1fr 1.2fr;
+    grid-template-rows: 8fr 7fr 7fr 7fr 11fr;
     justify-items: center;
     align-items: center;
     padding: 1em;
@@ -129,10 +133,12 @@ Today's schedule
     background: pink;
     border: black thin;
     border-radius: 1em;
+    /*height: 50%;*/
     height: 5vh;
-    width: 12vw;
+    width: 70%;
+    max-width: 12vw;
     
-    font: 500 1.5rem 'BMJUA';
+    font: 500 1.2rem 'BMJUA';
     text-align: center;
     line-height: 5vh;
 }
@@ -145,11 +151,19 @@ Today's schedule
     justify-items: center;
     align-items: center;
 
-    font: 1.3rem 'BMJUA';
+    font: 1rem 'BMJUA';
 }
 
 .time:first-child{  /*새벽(오전/오후) 글*/
     width: 50%;
+}
+
+#dawn,
+#am,
+#pm {
+    width: 60%;
+    padding: 4%;
+    text-align: center;
 }
 
 #dawn {

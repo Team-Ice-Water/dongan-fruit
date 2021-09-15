@@ -29,7 +29,7 @@ const itemFile = {
     ginseng: 'ginseng.png'
 }
 
-// 창문, 아이템 등을 띄울 이미지 태그를 만드는 함수
+// 아이템 등을 띄울 이미지 태그를 만드는 함수
 function makeImg(section, file, type) {
     const newImage = document.createElement("IMG");
     newImage.setAttribute('src', 'img/' + file);

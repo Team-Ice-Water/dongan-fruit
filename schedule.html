@@ -29,17 +29,17 @@
         <div class="time dawn">
             <a id="dawn">새벽</a>
             <span class="text"></span>
-            <button type="button" class="remove btn btn-light material-icons" onclick="remove('.dawn')">clear</button>
+            <button type="button" class="remove btn btn-light btn-sm material-icons" onclick="remove('.dawn')">clear</button>
         </div>
         <div class="time am">
             <a id="am">오전</a>
             <span class="text"></span>
-            <button type="button" class="remove btn btn-light material-icons" onclick="remove('.am')">clear</button>
+            <button type="button" class="remove btn btn-light btn-sm material-icons" onclick="remove('.am')">clear</button>
         </div>
         <div class="time pm">
             <a id="pm">오후</a>
             <span class="text"></span>
-            <button type="button" class="remove btn btn-light material-icons" onclick="remove('.pm')">clear</button>
+            <button type="button" class="remove btn btn-light btn-sm material-icons" onclick="remove('.pm')">clear</button>
         </div>
         <img class="item" src="img/schedule/cancel.png" alt="취소" onclick="cancel()">
         <img class="item" src="img/schedule/decide.png" alt="결정" onclick="decide()">
@@ -59,14 +59,14 @@
         <div class="tab-content">
             <div class="tab-pane fade show active" id="movement" role="tabpanel" aria-labelledby="movement-tab">
                 <section id="move-layout">
-                    <img class="item" src="img/schedule/bibleSchool.png" id="bible" alt="성경학교 참석" onclick="needItem(this)">
+                    <img class="item" src="img/schedule/bibleSchool.png" id="bible" alt="성경학교 참석" onclick="selectMovement(this)">
                     <img class="item" src="img/schedule/earth.png" alt="지구사진" style="width: 5vw;">
-                    <img class="item" src="img/schedule/tumbler.png" id="tumbler" alt="텀블러 전파" onclick="needItem(this)">
-                    <img class="item" src="img/schedule/foodWaste.png" id="foodwaste" alt="음식물 쓰레기 정리" onclick="select(this, true)">
-                    <img class="item" src="img/schedule/useBike.png" id="bicycle" alt="자전거 이용" onclick="needItem(this)">
-                    <img class="item" src="img/schedule/airconditioner.png" id="aircon" alt="에어컨 온도 지킴이" onclick="select(this, true)">
-                    <img class="item" src="img/schedule/naturalSoap.png" id="soap" alt="천연 비누 전도" onclick="needItem(this)">
-                    <img class="item" src="img/schedule/saveWater.png" id="savewater" alt="물 잠그고 다니기" onclick="select(this, true)">
+                    <img class="item" src="img/schedule/tumbler.png" id="tumbler" alt="텀블러 전파" onclick="selectMovement(this)">
+                    <img class="item" src="img/schedule/foodWaste.png" id="foodwaste" alt="음식물 쓰레기 정리" onclick="selectMovement(this)">
+                    <img class="item" src="img/schedule/useBike.png" id="bicycle" alt="자전거 이용" onclick="selectMovement(this)">
+                    <img class="item" src="img/schedule/airconditioner.png" id="aircon" alt="에어컨 온도 지킴이" onclick="selectMovement(this)">
+                    <img class="item" src="img/schedule/naturalSoap.png" id="soap" alt="천연 비누 전도" onclick="selectMovement(this)">
+                    <img class="item" src="img/schedule/saveWater.png" id="savewater" alt="물 잠그고 다니기" onclick="selectMovement(this)">
                 </section>
             </div>
             <div class="tab-pane fade" id="volunteer" role="tabpanel" aria-labelledby="volunteer-tab">
