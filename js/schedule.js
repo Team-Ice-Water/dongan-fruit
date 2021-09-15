@@ -49,6 +49,8 @@ const item = {
     soap: "0"
 }
 
+var today = 0;
+
 // 아이템이 있어야 선택 가능한 버튼 조건 구현
 function itemRequest() {
     var xhr = new XMLHttpRequest();
@@ -75,7 +77,6 @@ itemRequest();
 
 // 아이템이 있어야 선택할 수 있는 선택지 검사하는 함수
 function needItem(tag) {
-    
     if(item[tag.id] === "1"){
         select(tag, true);
     } else{
@@ -116,6 +117,29 @@ function checkHealth() {
     }
 }
 
+// 생활 속 환경운동은 같은 것을 3개 선택할 수 없음.
+function checkSame(txt) {
+    if(isFill['count'] == 2){
+        if($(".dawn .text").text() == $(".am .text").text()){
+            if($(".dawn .text").text() == txt){
+                return false;
+            } 
+        }
+        else if($(".dawn .text").text() == $(".pm .text").text()){
+            if($(".dawn .text").text() == txt){
+                return false;
+            }            
+        }
+        else if($(".am .text").text() == $(".pm .text").text()){
+            if($(".am .text").text() == txt){
+                return false;
+            }
+        }
+    }
+
+    return true;    
+}
+
 // 선택한 것에 대한 텍스트를 띄워준다
 function setText(type, text) {
     const Text = document.querySelector("."+type).querySelector(".text");
@@ -125,7 +149,7 @@ function setText(type, text) {
     isFill['count'] += 1;
 }
 
-// 선택한 것데 대한 텍스트를 새벽 ,오전, 오후 중에 띄워준다.
+// 선택한 것에 대한 텍스트를 새벽 ,오전, 오후 중에 띄워준다.
 function select(tag, deletable) {
     if(checkHealth()){
         if(!isFill['dawn']){    // false일 때 = 비워져있을 때
@@ -192,8 +216,29 @@ function selectVacation() {
 
 }
 
+function selectMovement(tag) {
+    if(checkSame(tag.alt)){
+        switch (tag.id) {
+            case 'bible':
+            case 'tumbler':
+            case 'bicycle':
+            case 'soap':
+                needItem(tag);
+                break;
+            default:
+                select(tag, true);
+                break;
+        }
+    } else {
+        alert('생활 속 환경운동은 같은 스케쥴을 2개 초과하여 선택할 수 없습니다.');
+    }
+}
+
 function remove(type){
     document.querySelector(type).querySelector(".text").innerHTML= " ";
+    $(type+" .text").removeAttr("name");
+    $(type+" .text").removeAttr("onclick");
+    
     isFill['count'] -= 1;
     
     switch (type) {
@@ -218,10 +263,10 @@ const changeValue = [
     { id: "bible", water: -2, air: -2, soil: -2, health: -1 },
     { id: "tumbler", soil: -3, health: -1 },
     { id: "foodwaste", soil: -2, health: -1 },
-    { id: "bike", water: -4, health: -2 },
-    { id: "aircon", water: -2, health: -1 },
+    { id: "bicycle", air: -4, health: -2 },
+    { id: "aircon", air: -2, health: -1 },
     { id: "soap", water: -3, health: -1 },
-    { id: "savewater",water: -2, health: -1 },
+    { id: "savewater", water: -2, health: -1 },
     { id: "worm", soil: -15, health: -10 },
     { id: "recycle", soil: -10, health: -10 },
     { id: "tree", air: -15, health: -10 },
@@ -229,21 +274,19 @@ const changeValue = [
     { id: "sea", water: -15, health: -10 },
     { id: "river", water: -10, health: -10 },
     { id: "campaign", water: -5, air: -5, soil: -5, health: -10 },
-    { id: "camp", soil: 10, health: +20 },
+    { id: "camp", soil: 10, health: 20 },
     { id: "plane", air: 10, health: 20 },
-    { id: "beach", water: 10, health: 20 }
+    { id: "beach", water: 10, health: 20 },
+    { id: "rest", water: 2, air: 2, soil: 2, health: 5 }
 ]
 
 // php에 전송
 function scheduleRequest(data) {
+    console.log("전송");
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
-            console.log('응답: ', xhr.responseText);
-            // 띄울 문구를 결과 창에 저장
-            // 변동 브리핑 모달창 띄우기
             // php에서 day+1 하기 !!
-            location.href="main.html";
         }
     };
     xhr.open('POST', '../doSchedule.php');
@@ -251,48 +294,82 @@ function scheduleRequest(data) {
     xhr.send(data);
 }
 
-function vacationRequest(data) {
+// php에 전송
+function doneRequest(send) {
     var xhr = new XMLHttpRequest();
-    xhr.onload = function(){
+    xhr.open('GET', '../addDay.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
-            console.log('응답: ', xhr.responseText);
-            // 띄울 문구를 결과 창에 저장
-            // 변동 브리핑 모달창 띄우기
-            // php에서 day+1 하기 !!
-            location.href="main.html";
+            const yesterday = parseInt(JSON.parse(xhr.responseText));
+            console.log('받아온 정보: ', JSON.parse(xhr.responseText));
+            today = yesterday - 1;
+            console.log("today: ", today);
+            location.href="briefing.html?"+today+':'+send;
         }
     };
-    xhr.open('POST', '../doSchedule.php');
-    xhr.setRequestHeader('Content-Type', "application/json");
-    xhr.send(data);
 }
+
 
 function cancel() {
     location.href="main.html";
 }
 
-function decide() {
-    if(isVacation){ // 바캉스면 하나만 전송
-        const dawn = dawnText.getAttribute('name');
-        for(let value of changeValue){
-            if( value['id'] == dawn ){
-                scheduleRequest(JSON.stringify(value));
-            }
-        }
-    } else {
-        const dawn = dawnText.getAttribute('name');
-        const am = amText.getAttribute('name');
-        const pm = pmText.getAttribute('name');
-    
-        for(let value of changeValue){
-            if( value['id'] == dawn ){
-                // value를 php로 전송
-                scheduleRequest(JSON.stringify(value));
-            } else if(value['id'] == am){
-                scheduleRequest(JSON.stringify(value));
-            } else if(value['id'] == pm){
-                scheduleRequest(JSON.stringify(value));
-            }
+
+function sendValue(findThis) {
+    for(let value of changeValue){
+        if(value['id'] == findThis){    // findThis는 선택된 것의 name 속성 (물잠그기->'savewater')
+            scheduleRequest(JSON.stringify(value));
+            break;
         }
     }
+}
+
+function decide() {
+    const dawn = dawnText.getAttribute('name');
+    const am = amText.getAttribute('name');
+    const pm = pmText.getAttribute('name');
+    var send;
+
+    if(isVacation){ // 바캉스면 하나만 전송
+        for(let value of changeValue){
+            if( value['id'] == dawn ){
+                sendValue(dawn);
+                send = dawn;
+            }
+        }
+    } else { // 삭제버튼으로 인해 채워짐이 불규칙적이라, 모든 경우를 나열해줌
+        if(dawn){  
+            sendValue(dawn);
+            if(am){
+                sendValue(am);
+                if(pm){
+                    sendValue(pm);
+                    send = dawn+":"+am+":"+pm; // 새벽O 아침O 저녁O
+                } else{
+                    send = dawn+":"+am;         // 새벽O 아침O 저녁X
+                }       
+                
+            } else{
+                if(pm){ // 새벽O 아침X 저녁O
+                    sendValue(pm);
+                    send = dawn+":"+pm;
+                } else{ // 새벽O 아침X 저녁X
+                    send = dawn;
+                } 
+            }
+        } else{ 
+            if(am){
+                sendValue(am);
+                if(pm){
+                    sendValue(pm);
+                    send = am+":"+pm;  // 새벽X 아침O 저녁O
+                } else{
+                    send = am;     // 새벽X 아침O 저녁X
+                }
+            } 
+        }
+        
+    }
+    doneRequest(send);
 }

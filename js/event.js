@@ -23,11 +23,22 @@ var eventList = [
     { id: "event_19"},   // { id: "자발적 청지기"}
 ]
 
-var endingInfo = [  // DB로부터 가져와서 초기값을 그거에 맞게 바꿔줄거임
-    {ending: "문화", stage: 0, day: 0},
-    {ending: "환경지킴이", stage: 0, day: 0},
-    {ending: "청지기", stage: 0, day: 0},
-]
+var endingInfo = {
+    // 문화를 바꿔가는 그리스도인 엔딩
+    culDay: 0,
+    culStage: 0,
+    // 우리 학교는 환경지킴이 엔딩
+    envDay: 0,
+    envStage: 0,
+    // 청지기 가정 엔딩
+    homeDay: 0,
+    homeStage: 0
+}
+
+var userInfo = {
+    day: 0,
+    health: 0
+}
 
 // function choose_by_probability(prob) { // 원하는 확률에 따라 true 반환하는 함수
 //     const rand_0_99 = Math.floor(Math.random() * 100);
@@ -37,6 +48,72 @@ var endingInfo = [  // DB로부터 가져와서 초기값을 그거에 맞게 �
 //         return false
 //     }
 // }
+
+
+// 건강, 날짜 등 캐릭터 정보 요청
+function infoRequest() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../getUserInfo.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            let json = JSON.parse(xhr.responseText);
+
+            for (let key in json) {
+                const value = json[key];
+                switch (key) {
+                    case 'day':
+                        userInfo['day'] = parseInt(value);
+                        break;
+                    case 'health':
+                        userInfo['health'] = parseInt(value);
+                        break;             
+                    default:
+                        break;
+                }
+            }
+        }
+    };
+}
+
+// 엔딩 정보 요청
+function endingRequest() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../getEndingInfo.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            let json = JSON.parse(xhr.responseText);
+
+            for (let key in json) {
+                const value = json[key];
+                switch (key) {
+                    case 'culDay':
+                        ending['culDay'] = parseInt(value);
+                        break;
+                    case 'culStage':
+                        ending['culStage'] = parseInt(value);
+                        break; 
+                    case 'envDay':
+                        ending['envDay'] = parseInt(value);
+                        break;
+                    case 'envStage':
+                        ending['envStage'] = parseInt(value);
+                        break; 
+                    case 'homeDay':
+                        ending['homeDay'] = parseInt(value);
+                        break;
+                    case 'homeStage':
+                        ending['homeStage'] = parseInt(value);
+                        break;             
+                    default:
+                        break;
+                }
+            }
+        }
+    };
+}
+
 
 function natural() { // 자연착취 이벤트
 
@@ -54,28 +131,28 @@ function natural() { // 자연착취 이벤트
 /* 문화를 바꿔가는 그리스도인 엔딩 */
 function culture() {
     if(day>= 3 && day<=6){  // 3~6일차
-        if(culDay == 0){  // 문화 1단계 발생한적 X
+        if(ending['culDay'] == 0){  // 문화 1단계 발생한적 X
             eventList.push({ id: "event_23", ending: "문화", condition: 60});  // event_23 : 문화 1단계
 
-        }else if(culDay != 0){  // 한번이라도 문화 1단계 발생한적 O
-            if(culStage == 0){  // 문화 1단계 선택 X
+        }else if(ending['culDay'] != 0){  // 한번이라도 문화 1단계 발생한적 O
+            if(ending['culStage'] == 0){  // 문화 1단계 선택 X
                 eventList.push({ id: "event_23", ending: "문화"});
-            }else if(culStage == 1){  // 문화 1단계 선택 O (아직 5일 안지난 상태)
+            }else if(ending['culStage'] == 1){  // 문화 1단계 선택 O (아직 5일 안지난 상태)
                 pass
             }
         }
     }else if(day>=7){  // 7일차 ~
-        if(culDay == 0){  // 한번도 1단계 발생한적 X
+        if(ending['culDay'] == 0){  // 한번도 1단계 발생한적 X
             pass  //(문화 엔딩 소멸)
-        }else if(culDay != 0){  // 한번이라도 1단계 발생한적 O
+        }else if(ending['culDay'] != 0){  // 한번이라도 1단계 발생한적 O
 
-            if(culStage == 0){  // 1단계 선택 X 상태
+            if(ending['culStage'] == 0){  // 1단계 선택 X 상태
                 eventList.push({ id: "event_23", ending: "문화"});  // event_23 : 문화 1단계
 
-            }else if(culStage == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
-                if(day < (culDay+5)){ // 선택 후 1~4일째
+            }else if(ending['culStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
+                if(day < (ending['culDay']+5)){ // 선택 후 1~4일째
                     pass
-                }else if(day == (culDay+5)){  // 선택 후 5일째
+                }else if(day == (ending['culDay']+5)){  // 선택 후 5일째
                     var order = Math.floor(Math.random() * 2);
 
                     if(order == 0){
@@ -85,10 +162,10 @@ function culture() {
                     }
                 }
 
-            }else if(culStage == 2){  // (2단계 선택 O) 상태 and (3단계 선택 X) 상태
-                if(day < (culDay+5)){ // 선택 후 1~4일째
+            }else if(ending['culStage'] == 2){  // (2단계 선택 O) 상태 and (3단계 선택 X) 상태
+                if(day < (ending['culDay']+5)){ // 선택 후 1~4일째
                     pass
-                }else if(day == (culDay+5)){  // 선택 후 5일째
+                }else if(day == (ending['culDay']+5)){  // 선택 후 5일째
 
                     var order = Math.floor(Math.random() * 3);
 
@@ -101,10 +178,10 @@ function culture() {
                     }
                 }
 
-            }else if(culStage == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
-                if(day < (culDay+5)){ // 선택 후 1~4일째
+            }else if(ending['culStage'] == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
+                if(day < (ending['culDay']+5)){ // 선택 후 1~4일째
                     pass
-                }else if(day == (culDay+5)){  // 선택 후 5일째
+                }else if(day == (ending['culDay']+5)){  // 선택 후 5일째
                     eventList.push({ id: "event_29", ending: "문화", condition: 100});  // event_29 : 문화 4단계 - 동네청소
                 }
             }
@@ -115,7 +192,7 @@ function culture() {
 /* 우리 학교는 환경지킴이 엔딩 */
 function school() {
     if(day>= 4 && day<=7){  // 4~7일차
-        if(envDay == 0){  // 환경지킴이 1단계 발생한적 X
+        if(ending['envDay'] == 0){  // 환경지킴이 1단계 발생한적 X
 
             var order = Math.floor(Math.random() * 3);
 
@@ -127,18 +204,18 @@ function school() {
                 eventList.push({ id: "event_32", ending: "환경지킴이"});  // event_32 : 환경지킴이 1단계 - 도서실에
             }
 
-        }else if(envDay != 0){  // 한번이라도 환경지킴이 1단계 발생한적 O
+        }else if(ending['envDay'] != 0){  // 한번이라도 환경지킴이 1단계 발생한적 O
             pass
         }
     }else if(day>=8){  // 8일차 ~
-        if(envDay == 0){  // 한번도 1단계 발생한적 X
+        if(ending['envDay'] == 0){  // 한번도 1단계 발생한적 X
             pass  //(환경지킴이 엔딩 소멸)
-        }else if(envDay != 0){  // 한번이라도 1단계 발생한적 O
+        }else if(ending['envDay'] != 0){  // 한번이라도 1단계 발생한적 O
 
-            if(envStage == 0){  // 1단계 선택 X 상태
-                if(day < (envDay+7)){ // 선택 후 1~6일째
+            if(ending['envStage'] == 0){  // 1단계 선택 X 상태
+                if(day < (ending['envDay']+7)){ // 선택 후 1~6일째
                     pass
-                }else if(day == (envDay+7)){  // 선택 후 7일째
+                }else if(day == (ending['envDay']+7)){  // 선택 후 7일째
 
                     var order = Math.floor(Math.random() * 3);
 
@@ -151,10 +228,10 @@ function school() {
                     }
                 }            
 
-            }else if(envStage == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
-                if(day < (envDay+7)){ // 선택 후 1~6일째
+            }else if(ending['envStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
+                if(day < (ending['envDay']+7)){ // 선택 후 1~6일째
                     pass
-                }else if(day == (envDay+7)){  // 선택 후 7일째
+                }else if(day == (ending['envDay']+7)){  // 선택 후 7일째
 
                     var order = Math.floor(Math.random() * 2);
 
@@ -171,35 +248,35 @@ function school() {
 
 /* 청지기 가정 엔딩 */
 function home() {
-    if(homeDay == 0){  // 한번도 1단계 발생한적 X
+    if(ending['homeDay'] == 0){  // 한번도 1단계 발생한적 X
         eventList.push({ id: "event_35", ending: "청지기"});  // event_35 : 청지기 1단계
-    }else if(homeDay != 0){  // 한번이라도 1단계 발생한적 O
+    }else if(ending['homeDay'] != 0){  // 한번이라도 1단계 발생한적 O
 
-        if(homeStage == 0){  // (1단계 선택 X) 상태
-            if(day < (homeDay+5)){ // 선택 후 1~4일째
+        if(ending['homeStage'] == 0){  // (1단계 선택 X) 상태
+            if(day < (ending['homeDay']+5)){ // 선택 후 1~4일째
                 pass
-            }else if(day == (homeDay+5)){  // 선택 후 5일째
+            }else if(day == (ending['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_35", ending: "청지기", condition: 100});  // event_35 : 청지기 1단계
             }
 
-        }else if(homeStage == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
-            if(day < (homeDay+5)){ // 선택 후 1~4일째
+        }else if(ending['homeStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
+            if(day < (ending['homeDay']+5)){ // 선택 후 1~4일째
                 pass
-            }else if(day == (homeDay+5)){  // 선택 후 5일째
+            }else if(day == (ending['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_36", ending: "청지기", condition: 100});  // event_36 : 청지기 2단계 - 변화하는 가정
             }
 
-        }else if(homeStage == 2){  // (2단계 선택 O) and (3단계 선택 X) 상태
-            if(day < (homeDay+5)){ // 선택 후 1~4일째
+        }else if(ending['homeStage'] == 2){  // (2단계 선택 O) and (3단계 선택 X) 상태
+            if(day < (ending['homeDay']+5)){ // 선택 후 1~4일째
                 pass
-            }else if(day == (homeDay+5)){  // 선택 후 5일째
+            }else if(day == (ending['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_37", ending: "청지기", condition: 100});  // event_37 : 청지기 3단계 - 주방 세제
             }
 
-        }else if(homeStage == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
-            if(day < (homeDay+5)){ // 선택 후 1~4일째
+        }else if(ending['homeStage'] == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
+            if(day < (ending['homeDay']+5)){ // 선택 후 1~4일째
                 pass
-            }else if(day == (homeDay+5)){  // 선택 후 5일째
+            }else if(day == (ending['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_38", ending: "청지기", condition: 100});  // event_38 : 청지기 4단계 - 앞장서는 부모님
             }
         }
@@ -286,23 +363,56 @@ culture();      // 문화엔딩
 school();       // 환경지킴이 학교 엔딩
 home();         // 청지기 가정 엔딩
 
-selectOne(eventList);   // 최종 리스트 중에 하나 선택
+const select = selectOne(eventList);   // 최종 리스트 중에 하나 선택
 
 // modal 버튼의 속성값 변경
 const modalBtn= document.querySelector(".modal");
-modalBtn.setAttribute('data-bs-target', "#"+selectOne());  // selectOne()의 return 값이 객체의 id
+modalBtn.setAttribute('data-bs-target', "#"+select);  // selectOne()의 값을 저장하는 변수임
 
 /* 하나 선택된 이후의 과정 */
-function sendEndingInfo(list) {
+function sendending(obj) {
     // php에 정보를 보냄 (=DB 변경)
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){ 
+        }
+    };
+    xhr.open('POST', '../doEvent.php');
+    xhr.setRequestHeader('Content-Type', "application/json");
+    xhr.send(JSON.stringify(obj));
 }
 
-// 만약 선택된 이벤트가 문화면.. 
-// 선택 여부에 따라 stage는 달라지니, 정보를 보내서 다른 JS 파일에서 처리해도 됨
-if( endingInfo['ending'] == '문화'){
-    endingInfo['day'] = 오늘day;
-    if( 선택했으면 ){
-        endingInfo['stage'] += 1;
+// 모달창에 뜬 하나의 이벤트에 관한 후처리
+ending.forEach(function (value) {
+    if((value['id'] == select) && ("ending" in value)){ // 뜬 이벤트가 엔딩 이벤트였으면 
+        switch (value['ending']) {
+            case '문화':
+                ending['culDay'] = userInfo['day'];
+                if( 선택했으면 ){
+                    ending['culStage'] += 1;
+                }
+                break;
+    
+            case '환경지킴이':
+                ending['envDay'] = userInfo['day'];
+                if( 선택했으면 ){
+                    ending['envStage'] += 1;
+                }
+                break;
+    
+            case '청지기':
+                ending['homeDay'] = userInfo['day'];
+                if( 선택했으면 ){
+                    ending['homeStage'] += 1;
+                }
+                break;
+        
+            default:
+                break;
+        }
+
+        sendending(ending);
+        break;
     }
-    sendEndingInfo(endingInfo);
-}
+    
+})

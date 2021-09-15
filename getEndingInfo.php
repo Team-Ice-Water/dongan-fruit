@@ -1,15 +1,3 @@
-const endingInfo = {
-    // 문화를 바꿔가는 그리스도인 엔딩
-    culDay: 0,
-    culStage: 0,
-    // 우리 학교는 환경지킴이 엔딩
-    envDay: 0,
-    envStage: 0,
-    // 청지기 가정 엔딩
-    homeDay: 0,
-    homeStage: 0
-}
-
 <?php
 
     include 'connect.php';
