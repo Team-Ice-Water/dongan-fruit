@@ -23,6 +23,19 @@ let minutes = 0;
 let seconds = 0;
 let timeStart = false;
 
+var item = {
+    tumbler: "0",
+    mic: "0",
+    basket: "0",
+    book: '0', 
+    vitamin: "0",
+    bicycle: "0", 
+    bible: "0", 
+    soap: "0", 
+    soapnut: "0", 
+    ginseng: "0"
+}
+
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -70,7 +83,7 @@ function timer(){
             seconds = 0;
         }
         // html에 표시되는 시간 변경
-        timeCounter.innerHTML="<i class='fa fa-hourglass-start'></i>"+" 타이머: "+minutes+" 분 "+ seconds+" 초";
+        timeCounter.innerHTML="<i class='fa fa-hourglass-start'></i>"+" 타이머: "+ seconds+" 초";
     }, 1000);
 }
 
@@ -146,33 +159,43 @@ function showResult() {
         switch (matched[k].alt) {
             case "basket.png":
                 itemList += " 장바구니 ";
+                item['basket'] = 1;
                 break;
             case "bible.png":
                 itemList += " 성경 ";
+                item['bible'] = 1;
                 break;
             case "bicycle.png":
                 itemList += " 자전거 ";
+                item['bicycle'] = 1;
                 break;
             case "book.png":
                 itemList += " 책 ";
+                item['book'] = 1;
                 break;
             case "ginseng.png":
                 itemList += " 산삼 ";
+                item['ginseng'] = 1;
                 break;
             case "mic.png":
                 itemList += " 마이크 ";
+                item['mic'] = 1;
                 break;
             case "soap.png":
                 itemList += " 비누 ";
+                item['soap'] = 1;
                 break;
             case "soapnut.png":
                 itemList += " 소프넛 ";
+                item['soapnut'] = 1;
                 break;
             case "tumbler.png":
                 itemList += " 텀블러 ";
+                item['tumbler'] = 1;
                 break;
             case "vitamin.png":
                 itemList += " 비타민 ";
+                item['vitamin'] = 1;
                 break;
             default:
                 break;
@@ -189,30 +212,42 @@ function showResult() {
 //var modal = new bootstrap.Modal(document.getElementById('finish-modal'))
 
 function displayModal(){
-    var myModal = new bootstrap.Modal(document.getElementById('Backdrop'), {
+    var myModal = new bootstrap.Modal(document.getElementById('finishModal'), {
         keyboard: false
     });
     myModal.show();   
 
 }
 
-function winGame(){
-    if(matched.length === 16){
-        stopTime();
-        AddStats();
-        displayModal();
-    }
-}
-
 function finishGame() {
-    console.log("finishGame 실행 초:", seconds);
     if(seconds >= 30){
         stopTime();
         showResult();
         displayModal();
+        
+        clearInterval(check);
+
+        itemRequest(JSON.stringify(item));
     }
 }
 
+
+// php에 전송
+function itemRequest(data) {
+    console.log("전송");
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            $('.Btn').html('<a class="btn btn-primary" href="main.html" role="button">청지기 1일차 시작하기</a>');             
+        }
+    };
+    xhr.open('POST', '../finishGame.php');
+    xhr.setRequestHeader('Content-Type', "application/json");
+    xhr.send(data);
+}
+
+
+/////////////////
 
 startGame();
 
@@ -239,15 +274,4 @@ deck.addEventListener("click", function(evt){
     }
 });
 
-/*
-const reset = document.querySelector(".reset-btn");
-const playAgain = document.querySelector(".play-again-btn");
-
-reset.addEventListener('click', resetEverything);
-
-
-playAgain.addEventListener('click', function () {
-    modal.style.display = "none";
-    resetEverything();
-});
-*/
+var check = setInterval(finishGame , 2000); // 가만히 있어도 시간이 지나면 게임은 종료되어야 함
