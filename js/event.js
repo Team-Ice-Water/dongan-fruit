@@ -40,14 +40,19 @@ var userInfo = {
     health: 0
 }
 
-// function choose_by_probability(prob) { // 원하는 확률에 따라 true 반환하는 함수
-//     const rand_0_99 = Math.floor(Math.random() * 100);
-//     if(rand_0_99 < prob){
-//         return true
-//     } else {
-//         return false
-//     }
-// }
+var itemInfo = {
+    tumbler: 0,
+    flowerpot: 0,
+    mic: 0,
+    basket: 0,
+    book: 0, 
+    vitamin: 0,
+    bicycle: 0, 
+    bible: 0, 
+    soap: 0, 
+    soapnut: 0, 
+    ginseng: 0
+}
 
 
 // 건강, 날짜 등 캐릭터 정보 요청
@@ -114,6 +119,58 @@ function endingRequest() {
     };
 }
 
+// 아이템 정보 요청
+function infoRequest() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../getItem.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            let json = JSON.parse(xhr.responseText);
+
+            for (let key in json) {
+                const value = json[key];
+                switch (key) {
+                    case 'tumbler':
+                        itemInfo['tumbler'] = parseInt(value);
+                        break;
+                    case 'flowerpot':
+                        itemInfo['flowerpot'] = parseInt(value);
+                        break;    
+                    case 'mic':
+                        itemInfo['mic'] = parseInt(value);
+                        break;
+                    case 'basket':
+                        itemInfo['basket'] = parseInt(value);
+                        break;     
+                    case 'book':
+                        itemInfo['book'] = parseInt(value);
+                        break;
+                    case 'vitamin':
+                        itemInfo['vitamin'] = parseInt(value);
+                        break; 
+                    case 'bicycle':
+                        itemInfo['bicycle'] = parseInt(value);
+                        break;
+                    case 'bible':
+                        itemInfo['bible'] = parseInt(value);
+                        break; 
+                    case 'soap':
+                        itemInfo['soap'] = parseInt(value);
+                        break;
+                    case 'soapnut':
+                        itemInfo['soapnut'] = parseInt(value);
+                        break; 
+                    case 'ginseng':
+                        itemInfo['ginseng'] = parseInt(value);
+                        break; 
+                    default:
+                        break;
+                }
+            }
+        }
+    };
+}
 
 function natural() { // 자연착취 이벤트
 
@@ -284,10 +341,8 @@ function home() {
 }
 
 var prob_100_list = []
-
 var prob_other_list = []
 var probability_list = []
-
 var prob_no_list = []
 
 function selectOne(list) {
@@ -354,7 +409,6 @@ function selectOne(list) {
     }
 }
 
-
 /* JS로딩 시 실행시키는 부분 */
 if(userInfo['health'] <= 50){
     natural();  // 자연착취엔딩
@@ -382,37 +436,49 @@ function sendending(obj) {
     xhr.send(JSON.stringify(obj));
 }
 
-// 모달창에 뜬 하나의 이벤트에 관한 후처리
-ending.forEach(function (value) {
-    if((value['id'] == select) && ("ending" in value)){ // 뜬 이벤트가 엔딩 이벤트였으면 
-        switch (value['ending']) {
-            case '문화':
-                ending['culDay'] = userInfo['day'];
-                if( 선택했으면 ){
-                    ending['culStage'] += 1;
-                }
-                break;
-    
-            case '환경지킴이':
-                ending['envDay'] = userInfo['day'];
-                if( 선택했으면 ){
-                    ending['envStage'] += 1;
-                }
-                break;
-    
-            case '청지기':
-                ending['homeDay'] = userInfo['day'];
-                if( 선택했으면 ){
-                    ending['homeStage'] += 1;
-                }
-                break;
-        
-            default:
-                break;
-        }
 
-        sendending(ending);
-        break;
-    }
+// // 원하는 확률에 따라 true 반환하는 함수
+// function choose_by_probability(prob) { 
+//     const rand_0_99 = Math.floor(Math.random() * 100);
+//     if(rand_0_99 < prob){
+//         return true
+//     } else {
+//         return false
+//     }
+// }
+
+
+// // 모달창에 뜬 하나의 이벤트에 관한 후처리
+// ending.forEach(function (value) {
+//     if((value['id'] == select) && ("ending" in value)){ // 뜬 이벤트가 엔딩 이벤트였으면 
+//         switch (value['ending']) {
+//             case '문화':
+//                 ending['culDay'] = userInfo['day'];
+//                 if( 선택했으면 ){
+//                     ending['culStage'] += 1;
+//                 }
+//                 break;
     
-})
+//             case '환경지킴이':
+//                 ending['envDay'] = userInfo['day'];
+//                 if( 선택했으면 ){
+//                     ending['envStage'] += 1;
+//                 }
+//                 break;
+    
+//             case '청지기':
+//                 ending['homeDay'] = userInfo['day'];
+//                 if( 선택했으면 ){
+//                     ending['homeStage'] += 1;
+//                 }
+//                 break;
+        
+//             default:
+//                 break;
+//         }
+
+//         sendending(ending);
+//         break;
+//     }
+    
+// })

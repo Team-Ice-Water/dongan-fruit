@@ -15,6 +15,20 @@ const endingInfo = {
     homeStage: 0
 }
 
+const itemInfo = {
+    tumbler: 0,
+    flowerpot: 0,
+    mic: 0,
+    basket: 0,
+    book: 0, 
+    vitamin: 0,
+    bicycle: 0, 
+    bible: 0, 
+    soap: 0, 
+    soapnut: 0, 
+    ginseng: 0
+}
+
 // 상태바의 건강, 날짜 등 캐릭터 정보 요청
 function infoRequest() {
     var xhr = new XMLHttpRequest();
@@ -71,6 +85,59 @@ function endingRequest() {
                     case 'homeStage':
                         endingInfo['homeStage'] = parseInt(value);
                         break;             
+                    default:
+                        break;
+                }
+            }
+        }
+    };
+}
+
+// 아이템 정보 요청
+function infoRequest() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../getItem.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            let json = JSON.parse(xhr.responseText);
+
+            for (let key in json) {
+                const value = json[key];
+                switch (key) {
+                    case 'tumbler':
+                        itemInfo['tumbler'] = parseInt(value);
+                        break;
+                    case 'flowerpot':
+                        itemInfo['flowerpot'] = parseInt(value);
+                        break;    
+                    case 'mic':
+                        itemInfo['mic'] = parseInt(value);
+                        break;
+                    case 'basket':
+                        itemInfo['basket'] = parseInt(value);
+                        break;     
+                    case 'book':
+                        itemInfo['book'] = parseInt(value);
+                        break;
+                    case 'vitamin':
+                        itemInfo['vitamin'] = parseInt(value);
+                        break; 
+                    case 'bicycle':
+                        itemInfo['bicycle'] = parseInt(value);
+                        break;
+                    case 'bible':
+                        itemInfo['bible'] = parseInt(value);
+                        break; 
+                    case 'soap':
+                        itemInfo['soap'] = parseInt(value);
+                        break;
+                    case 'soapnut':
+                        itemInfo['soapnut'] = parseInt(value);
+                        break; 
+                    case 'ginseng':
+                        itemInfo['ginseng'] = parseInt(value);
+                        break; 
                     default:
                         break;
                 }
