@@ -1,0 +1,41 @@
+.user-info {
+    position: absolute;
+    z-index: 5;
+    left: 3vw;
+    top: 87.5vh;
+}
+
+.custom-progress{   /*개발자 도구를 통해 부트스트랩의 progress 클래스의 css를 복사해와서 원하는 대로 수정함*/
+    display: flex;
+    height: 2.5vh;
+    overflow: hidden;
+    font-size: .75rem;
+    background-color: rgba( 255, 255, 255, 0.5 );;
+    border-radius: .25rem;
+}
+
+
+.day{   /*날짜 표시*/
+    position: absolute;
+    width: 15vh;
+    height: 12vh;
+    left: 3vw;
+    top: 3vh;
+    border-radius: 1px;
+
+    background: #FFFFFF;
+    box-shadow: -4px 5px 8px rgba(0, 0, 0, 0.35);
+
+    font-size: 5vh;
+    text-align: center;
+    line-height: 12vh;
+    font-family: "CookieRunOTF-Black", sans-serif;
+}
+
+#character{
+    position: absolute;
+    height: 70vh;
+    left: 49vw;
+    top: 25vh;
+    z-index: 5;
+}

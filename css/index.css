@@ -1,18 +1,18 @@
 @font-face {
-          font-family: 'CookieRunOTF-Bold';
-          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff');
-          font-weight: normal;
-          font-style: normal;
-      }
+    font-family: 'CookieRunOTF-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 body {
-          background:#85d6ff;
-          font-family: 'CookieRunOTF-Bold';
-          font-size: 100%;
-          letter-spacing: 1.5px;
-          margin: 0;
-          text-align:center;
-      }
+    background:#85d6ff;
+    font-family: 'CookieRunOTF-Bold';
+    font-size: 100%;
+    letter-spacing: 1.5px;
+    margin: 0;
+    text-align:center;
+}
 
 
       /*----------------------------------  

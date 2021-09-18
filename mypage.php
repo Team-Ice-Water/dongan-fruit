@@ -2,7 +2,7 @@
     include 'connect.php';
     session_start();
     
-    $userId = $_SESSION['current_id']; //o_id
+    $userId = $_SESSION['current_id']; //m_id
     // 아이디가 member 있는지 확인
     $sql = "select * from character_info where m_id='$userId'";
     $ret = mysqli_query($con, $sql);
@@ -19,13 +19,15 @@
         echo "<br>Day-".$row['day'];
         echo "<br>-----아이템-----";
         echo "<br>텀블러: ".$row['tumbler'];
-
+        echo "<br> <a href='main.html'> 메인화면으로 돌아가기 </a>";
     }
     else{
         echo "데이터 조회 실패"."<br>";
         echo "실패 원인: ".mysqli_error($con);
-        echo "<br> <a href='main.php'> 메인화면으로 돌아가기 </a>";
+        echo "<br> <a href='index.html'> 메인화면으로 돌아가기 </a>";
         exit();
     }
+
+    mysqli_close($con);
     
 ?>
