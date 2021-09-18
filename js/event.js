@@ -1,3 +1,13 @@
+// Todo & Question
+
+// infoRequest(); endingRequest(); itemRequest(); ecoRequest(); 내용 검토 및 함수 호출 해야하는지?
+// event_choice.js 내용 여기에 합치기 or 따로 분리? (하나의 event.html에 둘다 연결해야함)
+// event_getInfo.js 지워도 되는지? 
+// event.html에서 선택지 부분 div id 수정해도 되는지?
+// event.js과 event.html 연결 확인 (html에 script 태그로 추가해서 실행하면 바뀌는데, js로 실행하면 안되는 것 해결)
+// event_choice에서 event_14, event_16 조건 부분 수정하기 
+
+
 /* 조건이 없는 기본 19개의 이벤트를 저장하는 초기 리스트 */
 var eventList = [
     // 객체(Object) 형식으로 안해도 되지만, 엔딩과 연결되는 다른 이벤트는 객체 형식이어야 하기때문에 통일
@@ -54,9 +64,15 @@ var itemInfo = {
     ginseng: 0
 }
 
+var ecoLevelInfo = {
+    air: 0,
+    soil: 0,
+    water: 0
+}
+
 
 // 건강, 날짜 등 캐릭터 정보 요청
-function infoRequest() {
+function userRequest() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../getUserInfo.php');
     xhr.send();
@@ -120,7 +136,7 @@ function endingRequest() {
 }
 
 // 아이템 정보 요청
-function infoRequest() {
+function itemRequest() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../getItem.php');
     xhr.send();
@@ -164,6 +180,35 @@ function infoRequest() {
                     case 'ginseng':
                         itemInfo['ginseng'] = parseInt(value);
                         break; 
+                    default:
+                        break;
+                }
+            }
+        }
+    };
+}
+
+// 오염도 정보 요청
+function ecoRequest() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../getEcoLevel.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            let json = JSON.parse(xhr.responseText);
+
+            for (let key in json) {
+                const value = json[key];
+                switch (key) {
+                    case 'air':
+                        ecoLevelInfo['air'] = parseInt(value);
+                        break;
+                    case 'soil':
+                        ecoLevelInfo['soil'] = parseInt(value);
+                        break;  
+                    case 'water':
+                        ecoLevelInfo['water'] = parseInt(value);
+                        break;            
                     default:
                         break;
                 }
@@ -422,6 +467,7 @@ const select = selectOne(eventList);   // 최종 리스트 중에 하나 선택
 // modal 버튼의 속성값 변경
 const modalBtn= document.querySelector(".modal");
 modalBtn.setAttribute('data-bs-target', "#"+select);  // selectOne()의 값을 저장하는 변수임
+
 
 /* 하나 선택된 이후의 과정 */
 function sendending(obj) {
