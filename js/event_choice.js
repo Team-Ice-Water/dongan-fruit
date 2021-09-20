@@ -75,9 +75,9 @@ if(itemInfo["soap"] != 0){
 }      
 
 // event_14 - 검토하기
-if(오염수치 < 130){
+if((ecoLevelInfo['air'] + ecoLevelInfo['soil'] + ecoLevelInfo['water']) < 130){
     document.querySelector('.option_14').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="pollution_below130">선택지 1 (오염수치 총합이 130미만 일 때) </button>';
-}else if(오염수치 >= 130){
+}else if((ecoLevelInfo['air'] + ecoLevelInfo['soil'] + ecoLevelInfo['water']) >= 130){
     document.querySelector('.option_14').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="pollution_above130">선택지 1 (오염수치 총합이 130이상 일 때) </button>';
 }
 
@@ -86,6 +86,14 @@ if(itemInfo["flowerpot"] != 0){
     document.querySelector('.option_15').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesFlowerpot">선택지 1 (화분 선택하기) </button>';
 }else if(itemInfo["flowerpot"] == 0){
     document.querySelector('.option_15').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noFlowerpot">선택지 1 (화분 선택하지 않음) </button>';
+}
+
+var item_count = 0;
+
+for (let key in itemInfo){
+    if(itemInfo[key] != 0){       
+        item_count = item_count + 1;  
+    }
 }
 
 // event_16
