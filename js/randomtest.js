@@ -8,7 +8,7 @@ var openModal;
 var check = setInterval( () => {    // 모달이 열리기 전까지 반복 실행
     if(document.querySelector(".show")){    
         openModal = document.querySelector(".show");    // 열린 모달을 저장
-        const optionBtn = openModal.querySelector(".option").querySelectorAll('button');
+        const optionBtn = openModal.querySelector(".list-group").querySelectorAll('button');
     
         for ( var i = 0; i < optionBtn.length; i++ ) {
             optionBtn[i].addEventListener('click', sendUserPick);
