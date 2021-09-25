@@ -26,6 +26,8 @@ function sendUserPick(){
 
 
 function resultModal(choice) {
+    console.log("resultModal()");
+    //const pick = $(".show input[name=user_pick]");
     var text = "";
     var result = "";
     switch (choice) {
@@ -43,6 +45,13 @@ function resultModal(choice) {
 
     $("#text").text(text);
     $("#result").text(result);
+/*
+    var result_modal = new bootstrap.Modal(document.getElementById('result-modal'), {
+        keyboard: false // ESC 눌러도 창 안닫히게
+    })
+    result_modal.show(); 
+    $("#result-modal").modal('show');
+    $(".modal-backdrop").remove();*/
 }
 
 function closeModal() {
@@ -53,7 +62,7 @@ function closeModal() {
 
 function sendValue(value) {
     console.log("sendValue()");
-    // php에 정보를 보냄 (= 선택결과에 따른 DB 변경)
+    // php에 정보를 보냄 (=DB 변경)
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
@@ -66,10 +75,12 @@ function sendValue(value) {
 
 
 function doEvent() {
+    console.log("doEvent()");
+    // 1. input hidden의 value를 php로 전달
     
     const user_pick = $(".option-value input[name=user_pick]").attr('value');
-    // 1. input hidden의 value를 결과를 토대로 모달창 내용 생성
+    // 2. 결과 모달창 내용 생성
     resultModal(user_pick);
-    // 2. php로 전달
     sendValue(user_pick);
 }
+
