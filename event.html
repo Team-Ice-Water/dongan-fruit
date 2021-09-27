@@ -4,6 +4,7 @@
   <title>MODAL TEST</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -62,16 +63,34 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#event_1">
         Launch demo modal
     </button>
+
+    <!--결과 브리핑 Modal-->
+
+    <div class="modal fade" id="result-modal" tabindex="-1" aria-hidden="true" aria-labelledby="result-modal-label">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="result-modal-label">이벤트 결과</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="text"></p>
+                <p id="result"></p>
+            </div>
+            </div>
+        </div>
+    </div>
     
-    <!-- Modal -->
+
+    <!-- 이벤트 Modal -->
     
     <!-- event_1_장보기-->
-    <div class="modal fade" id="event_1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_1" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">장을 보러간다.</h5>
+                    <h5 class="modal-title">장을 보러간다.</h5>
                 </div>
 
                 <div class="modal-body">
@@ -90,10 +109,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -101,12 +120,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_2_카페가기-->
-    <div class="modal fade" id="event_2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_2" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">카페를 간다.</h5>
+                    <h5 class="modal-title">카페를 간다.</h5>
                 </div>
 
                 <div class="modal-body">
@@ -126,10 +145,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -137,12 +156,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_3_샤워하기-->
-    <div class="modal fade" id="event_3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_3" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">땀이 많이 났다.</h5>
+                    <h5 class="modal-title">땀이 많이 났다.</h5>
                 </div>
 
                 <div class="modal-body">
@@ -163,10 +182,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -174,12 +193,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
     
     <!-- event_4_분리수거-->
-    <div class="modal fade" id="event_4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_4" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">분리수거 날이다.</h5>
+                    <h5 class="modal-title">분리수거 날이다.</h5>
                 </div>
 
                 <div class="modal-body">
@@ -199,10 +218,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -210,12 +229,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_5_건강보조제-->
-    <div class="modal fade" id="event_5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_5" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">건강보조제</h5>
+                    <h5 class="modal-title">건강보조제</h5>
                 </div>
 
                 <div class="modal-body">
@@ -235,10 +254,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -246,12 +265,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_6_설거지-->
-    <div class="modal fade" id="event_6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_6" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">설거지</h5>
+                    <h5 class="modal-title">설거지</h5>
                 </div>
 
                 <div class="modal-body">
@@ -272,10 +291,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -283,12 +302,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_7_집 근처 이동-->
-    <div class="modal fade" id="event_7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_7" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">집 근처 이동</h5>
+                    <h5 class="modal-title">집 근처 이동</h5>
                 </div>
 
                 <div class="modal-body">
@@ -307,10 +326,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -318,12 +337,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_8_환경 단체 방문-->
-    <div class="modal fade" id="event_8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_8" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">환경 단체 방문</h5>
+                    <h5 class="modal-title">환경 단체 방문</h5>
                 </div>
 
                 <div class="modal-body">
@@ -343,10 +362,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -354,12 +373,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_9_친구 방문-->
-    <div class="modal fade" id="event_9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_9" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">친구 방문</h5>
+                    <h5 class="modal-title">친구 방문</h5>
                 </div>
 
                 <div class="modal-body">
@@ -378,10 +397,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -389,12 +408,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_10_선생님의 심방-->
-    <div class="modal fade" id="event_10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_10" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">선생님의 심방</h5>
+                    <h5 class="modal-title">선생님의 심방</h5>
                 </div>
 
                 <div class="modal-body">
@@ -413,10 +432,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -424,12 +443,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_11_교회 전도대-->
-    <div class="modal fade" id="event_11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_11" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">교회 전도대</h5>
+                    <h5 class="modal-title">교회 전도대</h5>
                 </div>
 
                 <div class="modal-body">
@@ -448,10 +467,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -459,12 +478,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_12_성경책 판매-->
-    <div class="modal fade" id="event_12" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_12" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">성경책 판매</h5>
+                    <h5 class="modal-title">성경책 판매</h5>
                 </div>
 
                 <div class="modal-body">
@@ -484,10 +503,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -495,12 +514,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_13_이웃집 방문.-->
-    <div class="modal fade" id="event_13" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_13" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">이웃집 방문</h5>
+                    <h5 class="modal-title">이웃집 방문</h5>
                 </div>
 
                 <div class="modal-body">
@@ -520,10 +539,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -531,12 +550,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_14_환경운동가 방문.-->
-    <div class="modal fade" id="event_14" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_14" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">환경운동가 방문</h5>
+                    <h5 class="modal-title">환경운동가 방문</h5>
                 </div>
 
                 <div class="modal-body">
@@ -556,10 +575,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -567,12 +586,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_15_식목일 이벤트-->
-    <div class="modal fade" id="event_15" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_15" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">식목일 이벤트</h5>
+                    <h5 class="modal-title">식목일 이벤트</h5>
                 </div>
 
                 <div class="modal-body">
@@ -591,10 +610,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -602,12 +621,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_16_집안 대청소-->
-    <div class="modal fade" id="event_16" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_16" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">집안 대청소</h5>
+                    <h5 class="modal-title">집안 대청소</h5>
                 </div>
 
                 <div class="modal-body">
@@ -626,10 +645,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -637,12 +656,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_17_전도사님 찬스-->
-    <div class="modal fade" id="event_17" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_17" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">전도사님 찬스</h5>
+                    <h5 class="modal-title">전도사님 찬스</h5>
                 </div>
 
                 <div class="modal-body">
@@ -654,16 +673,16 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_17">
-                            <button type="button" class="list-group-item list-group-item-action" name="evangelist_chance">선택지 1 (O 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="evangelist_chance">선택지 1 (전도사님께 전화한다)</button>
                         </div>
                     </section>
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -671,12 +690,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_18_친구들 초대-->
-    <div class="modal fade" id="event_18" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_18" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">친구들 초대</h5>
+                    <h5 class="modal-title">친구들 초대</h5>
                 </div>
 
                 <div class="modal-body">
@@ -696,10 +715,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -707,12 +726,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_19_자발적 청지기-->
-    <div class="modal fade" id="event_19" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_19" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">자발적 청지기</h5>
+                    <h5 class="modal-title">자발적 청지기</h5>
                 </div>
 
                 <div class="modal-body">
@@ -732,10 +751,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -743,12 +762,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_20_자연 착취 이벤트 1-->
-    <div class="modal fade" id="event_20" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_20" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">자연 착취 이벤트 1</h5>
+                    <h5 class="modal-title">자연 착취 이벤트 1</h5>
                 </div>
 
                 <div class="modal-body">
@@ -766,10 +785,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -777,12 +796,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_21_자연 착취 이벤트 2-->
-    <div class="modal fade" id="event_21" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_21" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">자연 착취 이벤트 2</h5>
+                    <h5 class="modal-title">자연 착취 이벤트 2</h5>
                 </div>
 
                 <div class="modal-body">
@@ -801,10 +820,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -812,12 +831,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_22_자연 착취 이벤트 3-->
-    <div class="modal fade" id="event_22" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_22" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">자연 착취 이벤트 3</h5>
+                    <h5 class="modal-title">자연 착취 이벤트 3</h5>
                 </div>
 
                 <div class="modal-body">
@@ -836,10 +855,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -847,12 +866,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_23_문화 1단계-->
-    <div class="modal fade" id="event_23" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_23" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">성경책 이벤트</h5>
+                    <h5 class="modal-title">성경책 이벤트</h5>
                 </div>
 
                 <div class="modal-body">
@@ -870,10 +889,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -881,12 +900,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_24_문화 2단계 - 전도사님 -->
-    <div class="modal fade" id="event_24" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_24" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">전도사님 이벤트</h5>
+                    <h5 class="modal-title">전도사님 이벤트</h5>
                 </div>
 
                 <div class="modal-body">
@@ -904,10 +923,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -915,12 +934,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_25_문화 2단계 - 발표 -->
-    <div class="modal fade" id="event_25" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_25" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">발표 이벤트</h5>
+                    <h5 class="modal-title">발표 이벤트</h5>
                 </div>
 
                 <div class="modal-body">
@@ -938,10 +957,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -949,12 +968,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_26_문화 3단계 - 환경보호 동아리-->
-    <div class="modal fade" id="event_26" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_26" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">환경보호 동아리</h5>
+                    <h5 class="modal-title">환경보호 동아리</h5>
                 </div>
 
                 <div class="modal-body">
@@ -972,10 +991,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -983,12 +1002,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_27_문화 3단계 - 간식-->
-    <div class="modal fade" id="event_27" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_27" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">간식</h5>
+                    <h5 class="modal-title">간식</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1006,10 +1025,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1017,12 +1036,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_28_문화 3단계 - 자전거-->
-    <div class="modal fade" id="event_28" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_28" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">자전거</h5>
+                    <h5 class="modal-title">자전거</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1040,10 +1059,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1051,12 +1070,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_29_문화 3단계 - 동네청소-->
-    <div class="modal fade" id="event_29" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_29" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">동네청소</h5>
+                    <h5 class="modal-title">동네청소</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1075,10 +1094,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1086,12 +1105,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_30_환경지킴이 1단계 - 친구들과 환경지침도서-->
-    <div class="modal fade" id="event_30" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_30" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">친구들과 환경지침도서</h5>
+                    <h5 class="modal-title">친구들과 환경지침도서</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1109,10 +1128,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1120,12 +1139,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_31_환경지킴이 1단계 - 선생님과 환경지침도서-->
-    <div class="modal fade" id="event_31" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_31" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">선생님과 환경지침도서</h5>
+                    <h5 class="modal-title">선생님과 환경지침도서</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1143,10 +1162,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1154,12 +1173,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_32_환경지킴이 1단계 - 도서실에 환경지침도서-->
-    <div class="modal fade" id="event_32" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_32" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">도서실에 환경지침도서</h5>
+                    <h5 class="modal-title">도서실에 환경지침도서</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1177,10 +1196,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1188,12 +1207,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
     
     <!-- event_33_환경지킴이 2단계 - 환경 물품 기부-->
-    <div class="modal fade" id="event_33" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_33" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">환경 물품 기부</h5>
+                    <h5 class="modal-title">환경 물품 기부</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1213,10 +1232,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1224,12 +1243,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_34_환경지킴이 2단계 - 화장실 리모델링-->
-    <div class="modal fade" id="event_34" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_34" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">화장실 리모델링</h5>
+                    <h5 class="modal-title">화장실 리모델링</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1249,10 +1268,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1260,12 +1279,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_35_청지기 1단계 - 부모님 설득-->
-    <div class="modal fade" id="event_35" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_35" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">부모님 설득</h5>
+                    <h5 class="modal-title">부모님 설득</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1285,10 +1304,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1296,12 +1315,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_36_청지기 2단계 - 변화하는 가정-->
-    <div class="modal fade" id="event_36" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_36" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">변화하는 가정</h5>
+                    <h5 class="modal-title">변화하는 가정</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1319,10 +1338,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1330,12 +1349,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_37_청지기 3단계 - 주방세제-->
-    <div class="modal fade" id="event_37" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_37" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">주방세제</h5>
+                    <h5 class="modal-title">주방세제</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1353,10 +1372,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1364,12 +1383,12 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
     </div>
 
     <!-- event_38_청지기 4단계 - 앞장서는 부모님-->
-    <div class="modal fade" id="event_38" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="event_38" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">앞장서는 부모님</h5>
+                    <h5 class="modal-title">앞장서는 부모님</h5>
                 </div>
 
                 <div class="modal-body">
@@ -1389,10 +1408,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 </div>
 
                 <div class="modal-footer">
-                    <form class="option-value" method="post" action="event.php">
+                    <section class="option-value">
                         <input type="hidden" name="user_pick">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal">결정하기</button>
-                    </form>
+                        <button class="btn btn-primary" data-bs-target="#result-modal" data-bs-toggle="modal" data-bs-dismiss="modal" onclick="doEvent();">결정하기</button>
+                    </section>
                 </div>
                 
             </div>
@@ -1415,8 +1434,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
 
     </script> -->
 
-    <script type="text/javascript" src="js/randomtest.js"></script>
     <script type="text/javascript" src="js/event.js"></script>
     <script type="text/javascript" src="js/event_choice.js"></script>
+    <script type="text/javascript" src="js/randomtest.js"></script>
 </body>
 </html>

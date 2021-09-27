@@ -32,18 +32,71 @@ function resultModal(choice) {
     var result = "";
     switch (choice) {
         case 'yesBasket':
-            text = "장바구니가 여기있네! 가져가야겠다.";
+            text = "장바구니가 여기있네!<br> 가져가야겠다.";
             result = "대기오염 3 감소, 체력 1감소";
             break;
         case 'noBasket':
-            text = "장바구니가 어디 갔는지 모르겠네.";
-            result = "대기오염 5 증가, 체력 1감소";
+            var giveItem;           
+            var haveItems = [];         // 가지고 있는 아이템들의 이름을 저장하는 배열
+            console.log("test.js에서 itemInfo: ", itemInfo);
+            for (let key in itemInfo) {
+                if(itemInfo[key] == 1){
+                    haveItems.push(key);
+                }
+            }
+            console.log("가진 아이템: ", haveItems);
+
+            var jbRandom = Math.random();
+            const random = Math.floor( jbRandom * haveItems.length );
+            console.log("random숫자: ", random);
+            // 그 배열 중에 랜덤으로 하나 선택하여 giveItem 변수를 바꿔줌
+            switch (haveItems[random]) {
+                case 'tumbler':
+                    giveItem = "텀블러";
+                    break;
+                case 'flowerpot':
+                    giveItem = "화분";
+                    break;
+                case 'mic':
+                    giveItem = "마이크";
+                    break;
+                case 'basket':
+                    giveItem = "장바구니";
+                    break;
+                case 'book':
+                    giveItem = "환경 지침 도서";
+                    break;
+                case 'vitamin':
+                    giveItem = "비타민";
+                    break;
+                case 'bicycle':
+                    giveItem = "자전거";
+                    break;
+                case 'soap':
+                    giveItem = "천연비누";
+                    break;
+                case 'soapnut':
+                    giveItem = "소프넛";
+                    break;
+                case 'ginseng':
+                    giveItem = "최고급 인삼";
+                    break;
+            
+                default:
+                    break;
+            }
+
+
+            text = " 나: 저.. 성경책이 없는데, 혹시 제가 가지고 있는 "+giveItem+"(이)랑 성경책을 바꿔 주실 수 있으세요? <br> 판매원: 성경을 사랑하는 멋진 친구구나! 그래, 네가 가진 물건이랑 성경책이랑 바꾸자! ";
+            result = " 성경책 획득, "+giveItem+" 소모";
             break;
+        
         default:
             break;
     }
 
-    $("#text").text(text);
+    //text.replace(/\n/g, '<br/>');
+    $("#text").html(text);
     $("#result").text(result);
 /*
     var result_modal = new bootstrap.Modal(document.getElementById('result-modal'), {
