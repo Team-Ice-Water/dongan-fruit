@@ -1,7 +1,7 @@
 // Todo & Question
 // event_choice에서 event_14, event_16 조건 부분 수정하기 
 
-
+console.log("event_test 열림");
 /* 조건이 없는 기본 19개의 이벤트를 저장하는 초기 리스트 */
 var eventList = [
     // 객체(Object) 형식으로 안해도 되지만, 엔딩과 연결되는 다른 이벤트는 객체 형식이어야 하기때문에 통일
@@ -219,9 +219,21 @@ function ecoRequest() {
 /* JS로딩 시 실행시키는 부분 */
 // DB로부터 정보 불러옴
 userRequest(); endingRequest(); itemRequest(); ecoRequest();
-console.log("itemInfo: ", itemInfo);
-
 
 // modal 버튼의 속성값 변경
-const modalBtn= document.querySelector(".btn");
-modalBtn.setAttribute('data-bs-target', "#event_1");  // selectOne()의 값을 저장하는 변수
+var select="";
+
+function setTarget(tag) {
+    
+    console.log(tag);  
+    select = tag.value;
+
+    $(".event-modal").text(tag.text);
+    const modalBtn = document.querySelector(".event-modal");
+    modalBtn.setAttribute('data-bs-target', "#"+select);  // selectOne()의 값을 저장하는 변수
+
+    console.log(tag.text);
+    console.log(select);
+
+    setting(select);
+}

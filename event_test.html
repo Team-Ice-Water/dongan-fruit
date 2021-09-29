@@ -5,63 +5,47 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+    <h3>띄울 이벤트 클릭 -> 이벤트 모달 띄우기 버튼 클릭</h3>
 
-<!-- [event 목록]
--------------------- [랜덤 이벤트] --------------------
-event_1 : 장보기
-event_2 : 카페가기
-event_3 : 샤워하기
-event_4 : 분리수거
-event_5 : 건강보조제
-event_6 : 설거지
-event_7 : 집근처 이동
-event_8 : 환경 단체의 방문
-event_9 : 친구의 방문
-event_10 : 선생님의 심방
-event_11 : 교회 전도대
-event_12 : 성경책 판매원 방문
-event_13 : 이웃집 방문
-event_14 : 환경 운동가 방문
-event_15 : 식목일
-event_16 : 집안 대청소
-event_17 : 전도사님 찬스
-event_18 : 친구들 초대
-event_19 : 자발적 청지기
--------------------- [자연 착취 이벤트] --------------------
-event_20 : 자연 착취 이벤트 1 (체력 50이하 -> 20%의 확률로 등장)
-event_21 : 자연 착취 이벤트 2 (체력 50이하 -> 20%의 확률로 등장)
-event_22 : 자연 착취 이벤트 3 (체력 50이하 -> 20%의 확률로 등장)
--------------------- [성경책 이벤트] --------------------
-event_23 : 문화 1단계 (3-6일차에 60% 확률로 등장)
-event_24 : 문화 2단계 - 전도사님 (1단계 선택시 5일뒤 등장)
-event_25 : 문화 2단계 - 발표 (1단계 선택시 5일뒤 등장)
-event_26 : 문화 3단계 - 환경보호 동아리 (2단계 선택시 5일뒤 등장)
-event_27 : 문화 3단계 - 간식 (2단계 선택시 5일뒤 등장)
-event_28 : 문화 3단계 - 자전거 (2단계 선택시 5일뒤 등장)
-event_29 : 문화 4단계 - 동네 청소 (3단계 선택시 5일뒤 등장)
--------------------- [환경지침도서 이벤트] --------------------
-event_30 : 환경지킴이 1단계 - 친구들과 환경지침도서 (4-7일차에 랜덤 이벤트에 추가)
-event_31 : 환경지킴이 1단계 - 선생님과 환경지침도서 (4-7일차에 랜덤 이벤트에 추가)
-event_32 : 환경지킴이 1단계 - 도서실에 환경지침도서 (4-7일차에 랜덤 이벤트에 추가)
-event_33 : 환경지킴이 2단계 - 환경 물품 기부 (1단계 선택시 7일 뒤 등장)
-event_34 : 환경지킴이 2단계 - 화장실 리모델링 (1단계 선택시 7일 뒤 등장)
--------------------- [부모님 이벤트] --------------------
-event_35 : 청지기 1단계 (랜덤으로 등장)
-event_36 : 청지기 2단계 - 변화하는 가정 (1단계 선택시 5일뒤 등장)
-event_37 : 청지기 3단계 - 주방 세제 (2단계 선택시 5일뒤 등장)
-event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤 등장) -->
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            띄울 이벤트 선택
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><button class="dropdown-item" type="button" value="event_1" onclick="setTarget(this)">1) 장을 보러간다.</button></li>
+            <li><button class="dropdown-item" type="button" value="event_2" onclick="setTarget(this)">2) 카페를 간다.</button></li>
+            <li><button class="dropdown-item" type="button" value="event_3" onclick="setTarget(this)">3) 땀이 많이 났다.</button></li>
+            <li><button class="dropdown-item" type="button" value="event_4" onclick="setTarget(this)">4) 분리수거</button></li>
+            <li><button class="dropdown-item" type="button" value="event_5" onclick="setTarget(this)">5) 건강보조제</button></li>
+            <li><button class="dropdown-item" type="button" value="event_6" onclick="setTarget(this)">6) 설거지</button></li>
+            <li><button class="dropdown-item" type="button" value="event_7" onclick="setTarget(this)">7) 집근처 이동</button></li>
+            <li><button class="dropdown-item" type="button" value="event_8" onclick="setTarget(this)">8) 환경 단체의 방문</button></li>
+            <li><button class="dropdown-item" type="button" value="event_9" onclick="setTarget(this)">9) 친구의 방문</button></li>
+            <li><button class="dropdown-item" type="button" value="event_10" onclick="setTarget(this)">10) 선생님의 심방</button></li>
+            <li><button class="dropdown-item" type="button" value="event_11" onclick="setTarget(this)">11) 교회 전도대</button></li>
+            <li><button class="dropdown-item" type="button" value="event_12" onclick="setTarget(this)">12) 성경책 판매원 방문</button></li>
+            
+            <li><button class="dropdown-item" type="button" value="event_14" onclick="setTarget(this)">14) 환경 운동가 방문</button></li>
+            <li><button class="dropdown-item" type="button" value="event_18" onclick="setTarget(this)">18) 친구들 초대</button></li>
 
-<!-- Button trigger modal  -->
-<!-- 일단은 버튼 누르면 modal창 실행되도록 했으나 실제로는 day +1 될때 modal창 자동으로 실행되도록 수정 -->
-<!-- 아래 button의 data-target & modal의 id가 matching 되어야 해당 modal 실행됨 ! 그래서 random 함수로 data-target를 지정할 예정-->
+            
+            <li><button class="dropdown-item" type="button" value="event_20" onclick="setTarget(this)">20) 자연 착취 이벤트 1</button></li>
+            <li><button class="dropdown-item" type="button" value="event_21" onclick="setTarget(this)">21) 자연 착취 이벤트 2</button></li>
+            <li><button class="dropdown-item" type="button" value="event_22" onclick="setTarget(this)">22) 자연 착취 이벤트 3</button></li>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#event_1">
-        Launch demo modal
+            <li><button class="dropdown-item" type="button" value="event_23" onclick="setTarget(this)">23) 문화 1단계</button></li>
+
+            
+            <li><button class="dropdown-item" type="button" value="event_29" onclick="setTarget(this)">29) 문화 4단계 - 동네 청소</button></li>
+        </ul>
+    </div>
+
+    <button type="button" class="event-modal btn btn-primary" data-bs-toggle="modal" data-bs-target="#event_1">
+        이벤트 모달 띄우기
     </button>
 
     <!--결과 브리핑 Modal-->
@@ -74,8 +58,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p id="text"></p>
-                <p id="result"></p>
+                <p id="text"></button>
+                <p id="result"></button>
             </div>
             </div>
         </div>
@@ -102,8 +86,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_1">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesBasket" onclick="sendUserPick(this.name)">선택지 1 (장바구니 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="noBasket" onclick="sendUserPick(this.name)">선택지 2 (장바구니 선택 안함)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesBasket">선택지 1 (장바구니 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="noBasket">선택지 2 (장바구니 선택 안함)</button> -->
                         </div>
                     </section>
                 </div>
@@ -135,8 +119,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_2">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesTumbler" onclick="sendUserPick(this.name)">선택지 1 (텀블러 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="noTumbler" onclick="sendUserPick(this.name)">선택지 2 (텀블러 선택 안함)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesTumbler">선택지 1 (텀블러 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="noTumbler">선택지 2 (텀블러 선택 안함)</button> -->
                         </div>
                     </section>
                 </div>
@@ -168,9 +152,9 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_3">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="bodywashShampoo" onclick="sendUserPick(this.name)">선택지 1 (바디워시, 샴푸 사용하기)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="soap" onclick="sendUserPick(this.name)">선택지 2 (천연비누 사용하기)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="onlywater" onclick="sendUserPick(this.name)">선택지 3 (물로만 샤워하기)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="bodywashShampoo">선택지 1 (바디워시, 샴푸 사용하기)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="soap">선택지 2 (천연비누 사용하기)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="onlywater">선택지 3 (물로만 샤워하기)</button> -->
                         </div>
                     </section>
                 </div>
@@ -202,8 +186,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_4">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesBook" onclick="sendUserPick(this.name)">선택지 1 (환경지침도서 선택하기)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="noBook" onclick="sendUserPick(this.name)">선택지 2 (환경지침도서 선택안함)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesBook">선택지 1 (환경지침도서 선택하기)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="noBook">선택지 2 (환경지침도서 선택안함)</button> -->
                         </div>
                     </section>
                 </div>
@@ -234,9 +218,9 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_5">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesGinseng" onclick="sendUserPick(this.name)">선택지 1 (최고급 산삼을 먹는다.)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="yesVitamin" onclick="sendUserPick(this.name)">선택지 2 (비타민을 먹는다.)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="noGinsengNoVitamin" onclick="sendUserPick(this.name)">선택지 3 (둘 다 선택 안함.)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesGinseng">선택지 1 (최고급 산삼을 먹는다.)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="yesVitamin">선택지 2 (비타민을 먹는다.)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="noGinsengNoVitamin">선택지 3 (둘 다 선택 안함.)</button> -->
                         </div>
                     </section>
                 </div>
@@ -269,8 +253,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_6">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesSoapnut" onclick="sendUserPick(this.name)">선택지 1 (소프넛 선택.)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="noSoapnut" onclick="sendUserPick(this.name)">선택지 2 (소프넛 선택 안함.)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesSoapnut">선택지 1 (소프넛 선택.)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="noSoapnut">선택지 2 (소프넛 선택 안함.)</button> -->
                         </div>
                     </section>
                 </div>
@@ -301,8 +285,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_7">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesBicycle" onclick="sendUserPick(this.name)">선택지 1 (자전거를 선택.)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="noBicycle" onclick="sendUserPick(this.name)">선택지 2 (자전거 선택 안함)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesBicycle">선택지 1 (자전거를 선택.)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="noBicycle">선택지 2 (자전거 선택 안함)</button> -->
                         </div>
                     </section>
                 </div>
@@ -334,8 +318,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_8">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesBible" onclick="sendUserPick(this.name)">선택지 1 (성경책 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="noBible" onclick="sendUserPick(this.name)">선택지 2 (성경책 선택 안함)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesBible">선택지 1 (성경책 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="noBible">선택지 2 (성경책 선택 안함)</button> -->
                         </div>
                     </section>
                 </div>
@@ -367,7 +351,7 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_9">
-                            <button type="button" class="list-group-item list-group-item-action" name="yesChildren" onclick="sendUserPick(this.name)">선택지 1 (선물을 받는다)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="yesChildren" onclick="sendUserPick(this.name);">선택지 1 (선물을 받는다)</button>
                         </div>
                     </section>
                 </div>
@@ -399,7 +383,7 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_10">
-                            <button type="button" class="list-group-item list-group-item-action" name="yesTeacher" onclick="sendUserPick(this.name)">선택지 1 (선물을 받는다)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="yesTeacher" onclick="sendUserPick(this.name);">선택지 1 (선물을 받는다)</button>
                         </div>
                     </section>
                 </div>
@@ -431,7 +415,7 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_11">
-                            <button type="button" class="list-group-item list-group-item-action" name="yesChurch" onclick="sendUserPick(this.name)">선택지 1 (선물을 받는다)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="yesChurch" onclick="sendUserPick(this.name);">선택지 1 (선물을 받는다)</button>
                         </div>
                     </section>
                 </div>
@@ -463,8 +447,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_12">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesBuyBible" onclick="sendUserPick(this.name)">선택지 1 (성경책 구입)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="noBuyBible" onclick="sendUserPick(this.name)">선택지 2 (성경책 구입 안함)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesBuyBible">선택지 1 (성경책 구입)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="noBuyBible">선택지 2 (성경책 구입 안함)</button> -->
                         </div>
                     </section>
                 </div>
@@ -496,8 +480,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_13">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesGiveSoap" onclick="sendUserPick(this.name)">선택지 1 (천연비누를 줌)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="noGiveSoap" onclick="sendUserPick(this.name)">선택지 2 (천연비누를 주지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesGiveSoap">선택지 1 (천연비누를 줌)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="noGiveSoap">선택지 2 (천연비누를 주지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -529,8 +513,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_14">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="pollution_below130" onclick="sendUserPick(this.name)">선택지 1 (오염수치 총합이 130미만 일 때)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="pollution_above130" onclick="sendUserPick(this.name)">선택지 2 (오염수치 총합이 130이상 일 때)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="pollution_below130">선택지 1 (오염수치 총합이 130미만 일 때)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="pollution_above130">선택지 2 (오염수치 총합이 130이상 일 때)</button> -->
                         </div>
                     </section>
                 </div>
@@ -561,8 +545,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_15">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesPot" onclick="sendUserPick(this.name)">선택지 1 (화분 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="noPot" onclick="sendUserPick(this.name)">선택지 2 (화분 선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yesPot">선택지 1 (화분 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="noPot">선택지 2 (화분 선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -593,8 +577,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_16">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="upper_6_item" onclick="sendUserPick(this.name)">선택지 1 (갖고 있는 아이템이 6개 이상일 경우)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="under_6_item" onclick="sendUserPick(this.name)">선택지 2 (갖고 있는 아이템이 6개 미만일 경우)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="upper_6_item">선택지 1 (갖고 있는 아이템이 6개 이상일 경우)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="under_6_item">선택지 2 (갖고 있는 아이템이 6개 미만일 경우)</button> -->
                         </div>
                     </section>
                 </div>
@@ -625,7 +609,7 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_17">
-                            <button type="button" class="list-group-item list-group-item-action" name="evangelist_chance" onclick="sendUserPick(this.name)">선택지 1 (전도사님께 전화한다)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="evangelist_chance" onclick="sendUserPick(this.name);">선택지 1 (전도사님께 전화한다)</button>
                         </div>
                     </section>
                 </div>
@@ -656,9 +640,9 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_18">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="bothBicycleBasket" onclick="sendUserPick(this.name)">선택지 1 (자전거와 장바구니 둘다 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="eitherBicycleBasket" onclick="sendUserPick(this.name)">선택지 2 (자전거 또는 장바구니 하나 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="neitherBicycleBasket" onclick="sendUserPick(this.name)">선택지 3 (둘다 선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="bothBicycleBasket">선택지 1 (자전거와 장바구니 둘다 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="eitherBicycleBasket">선택지 2 (자전거 또는 장바구니 하나 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="neitherBicycleBasket">선택지 3 (둘다 선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -689,9 +673,9 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_19">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="bothBibleBook" onclick="sendUserPick(this.name)">선택지 1 (성경책과 환경지침도서 둘 다 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="eitherBibleBook" onclick="sendUserPick(this.name)">선택지 2 (성경책 또는 환경지침 도서 하나 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="neitherBibleBook" onclick="sendUserPick(this.name)">선택지 3 (둘다 선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="bothBibleBook">선택지 1 (성경책과 환경지침도서 둘 다 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="eitherBibleBook">선택지 2 (성경책 또는 환경지침 도서 하나 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="neitherBibleBook">선택지 3 (둘다 선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -721,8 +705,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_20">
-                            <button type="button" class="list-group-item list-group-item-action" name="yes_nature_1" onclick="sendUserPick(this.name)">선택지 1 (에어컨을 튼다.)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_nature_1" onclick="sendUserPick(this.name)">선택지 2 (에어컨을 틀지 않는다.)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="yes_nature_1" onclick="sendUserPick(this.name);">선택지 1 (에어컨을 튼다.)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_nature_1" onclick="sendUserPick(this.name);">선택지 2 (에어컨을 틀지 않는다.)</button>
                         </div>
                     </section>
                 </div>
@@ -753,8 +737,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_21">
-                            <button type="button" class="list-group-item list-group-item-action" name="yes_nature_2" onclick="sendUserPick(this.name)">선택지 1 (샤워 하기)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_nature_2" onclick="sendUserPick(this.name)">선택지 2 (샤워 안하기)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="yes_nature_2" onclick="sendUserPick(this.name);">선택지 1 (샤워 하기)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_nature_2" onclick="sendUserPick(this.name);">선택지 2 (샤워 안하기)</button>
                         </div>
                     </section>
                 </div>
@@ -785,8 +769,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_22">
-                            <button type="button" class="list-group-item list-group-item-action" name="yes_nature_3" onclick="sendUserPick(this.name)">선택지 1 (음식을 충분히 많이 담는다.)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_nature_3" onclick="sendUserPick(this.name)">선택지 2 (음식을 적당히 담는다.)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="yes_nature_3" onclick="sendUserPick(this.name);">선택지 1 (음식을 충분히 많이 담는다.)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_nature_3" onclick="sendUserPick(this.name);">선택지 2 (음식을 적당히 담는다.)</button>
                         </div>
                     </section>
                 </div>
@@ -816,8 +800,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_23">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_1" onclick="sendUserPick(this.name)">선택지 1 (성경책 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_1" onclick="sendUserPick(this.name)">선택지 2 (성경책 선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_1">선택지 1 (성경책 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_1">선택지 2 (성경책 선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -847,8 +831,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_24">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_2_bible" onclick="sendUserPick(this.name)">선택지 1 (성경책 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_2_bible" onclick="sendUserPick(this.name)">선택지 2 (성경책 선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_2_bible">선택지 1 (성경책 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_2_bible">선택지 2 (성경책 선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -878,8 +862,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_25">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_2_mic" onclick="sendUserPick(this.name)">선택지 1 (마이크 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_2_mic" onclick="sendUserPick(this.name)">선택지 2 (마이크 선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_2_mic">선택지 1 (마이크 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_2_mic">선택지 2 (마이크 선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -909,8 +893,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_26">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_3_envbook" onclick="sendUserPick(this.name)">선택지 1 (환경지침도서 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_3_envbook" onclick="sendUserPick(this.name)">선택지 2 (환경지침도서 선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_3_envbook">선택지 1 (환경지침도서 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_3_envbook">선택지 2 (환경지침도서 선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -940,8 +924,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_27">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_3_tumbler" onclick="sendUserPick(this.name)">선택지 1 (텀블러 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_3_tumbler" onclick="sendUserPick(this.name)">선택지 2 (텀블러 선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_3_tumbler">선택지 1 (텀블러 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_3_tumbler">선택지 2 (텀블러 선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -971,8 +955,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_28">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_3_bicycle" onclick="sendUserPick(this.name)">선택지 1 (자전거 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_3_bicycle" onclick="sendUserPick(this.name)">선택지 2 (자전거 선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_3_bicycle">선택지 1 (자전거 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_3_bicycle">선택지 2 (자전거 선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -1003,8 +987,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_29">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_4" onclick="sendUserPick(this.name)">선택지 1 (체력이 70 이상일 때)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_4" onclick="sendUserPick(this.name)">선택지 2 (체력이 70 미만일 때)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_culture_4">선택지 1 (체력이 70 이상일 때)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_culture_4">선택지 2 (체력이 70 미만일 때)</button> -->
                         </div>
                     </section>
                 </div>
@@ -1034,8 +1018,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_30">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_env_1_children" onclick="sendUserPick(this.name)">선택지 1 (환경지침도서 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_env_1_children" onclick="sendUserPick(this.name)">선택지 2 (환경지침도서 선택 안함)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_env_1_children">선택지 1 (환경지침도서 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_env_1_children">선택지 2 (환경지침도서 선택 안함)</button> -->
                         </div>
                     </section>
                 </div>
@@ -1065,8 +1049,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_31">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_env_1_teacher" onclick="sendUserPick(this.name)">선택지 1 (환경지침도서 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_env_1_teacher" onclick="sendUserPick(this.name)">선택지 2 (환경지침도서 선택 안함)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_env_1_teacher">선택지 1 (환경지침도서 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_env_1_teacher">선택지 2 (환경지침도서 선택 안함)</button> -->
                         </div>
                     </section>
                 </div>
@@ -1096,8 +1080,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_32">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_env_1_library" onclick="sendUserPick(this.name)">선택지 1 (환경지침도서 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="no_env_1_library" onclick="sendUserPick(this.name)">선택지 2 (환경지침도서 선택 안함)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="yes_env_1_library">선택지 1 (환경지침도서 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="no_env_1_library">선택지 2 (환경지침도서 선택 안함)</button> -->
                         </div>
                     </section>
                 </div>
@@ -1127,10 +1111,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_33">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="env_2_tumbler" onclick="sendUserPick(this.name)">선택지 1 (텀블러 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="env_2_bicycle" onclick="sendUserPick(this.name)">선택지 2 (자전거 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="env_2_naturalsoap" onclick="sendUserPick(this.name)">선택지 3 (천연비누 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="env_2_nothing" onclick="sendUserPick(this.name)">선택지 4 (선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="env_2_tumbler">선택지 1 (텀블러 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="env_2_bicycle">선택지 2 (자전거 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="env_2_naturalsoap">선택지 3 (천연비누 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="env_2_nothing">선택지 4 (선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -1160,10 +1144,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_34">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="env_2_2_soapnut" onclick="sendUserPick(this.name)">선택지 1 (소프넛 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="env_2_2_naturalsoap" onclick="sendUserPick(this.name)">선택지 2 (천연비누 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="env_2_2_basket" onclick="sendUserPick(this.name)">선택지 3 (장바구니 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="env_2_2_nothing" onclick="sendUserPick(this.name)">선택지 4 (선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="env_2_2_soapnut">선택지 1 (소프넛 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="env_2_2_naturalsoap">선택지 2 (천연비누 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="env_2_2_basket">선택지 3 (장바구니 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="env_2_2_nothing">선택지 4 (선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -1194,9 +1178,9 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_35">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="keeper_1_bible" onclick="sendUserPick(this.name)">선택지 1 (성경책 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="keeper_1_envbook" onclick="sendUserPick(this.name)">선택지 2 (환경지침도서 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="keeper_1_nothing" onclick="sendUserPick(this.name)">선택지 3 (선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="keeper_1_bible">선택지 1 (성경책 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="keeper_1_envbook">선택지 2 (환경지침도서 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="keeper_1_nothing">선택지 3 (선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -1226,8 +1210,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_36">
-                            <button type="button" class="list-group-item list-group-item-action" name="keeper_2_yesTalk" onclick="sendUserPick(this.name)">선택지 1 (부모님과 대화한다.)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="keeper_2_noTalk" onclick="sendUserPick(this.name)">선택지 2 (부모님과 대화하지 않는다.)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="keeper_2_yesTalk" onclick="sendUserPick(this.name);">선택지 1 (부모님과 대화한다.)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="keeper_2_noTalk" onclick="sendUserPick(this.name);">선택지 2 (부모님과 대화하지 않는다.)</button>
                         </div>
                     </section>
                 </div>
@@ -1257,8 +1241,8 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_37">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="keeper_3_yesSoapnut" onclick="sendUserPick(this.name)">선택지 1 (소프넛 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="keeper_3_noSoapnut" onclick="sendUserPick(this.name)">선택지 2 (소프넛 선택하지 않음)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="keeper_3_yesSoapnut">선택지 1 (소프넛 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="keeper_3_noSoapnut">선택지 2 (소프넛 선택하지 않음)</button> -->
                         </div>
                     </section>
                 </div>
@@ -1288,10 +1272,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
                     </br>
                     <section>
                         <div class="list-group option_38">
-                            <!-- <button type="button" class="list-group-item list-group-item-action" name="keeper_4_bicycle" onclick="sendUserPick(this.name)">선택지 1 (자전거 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="keeper_4_tumbler" onclick="sendUserPick(this.name)">선택지 2 (텀블러 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="keeper_4_envbook" onclick="sendUserPick(this.name)">선택지 3 (환경지침도서 선택)</button>
-                            <button type="button" class="list-group-item list-group-item-action" name="keeper_4_nothing" onclick="sendUserPick(this.name)">선택지 4 (선택하지 않음.)</button> -->
+                            <!-- <button type="button" class="list-group-item list-group-item-action" name="keeper_4_bicycle">선택지 1 (자전거 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="keeper_4_tumbler">선택지 2 (텀블러 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="keeper_4_envbook">선택지 3 (환경지침도서 선택)</button>
+                            <button type="button" class="list-group-item list-group-item-action" name="keeper_4_nothing">선택지 4 (선택하지 않음.)</button> -->
                         </div>
                     </section>
                 </div>
@@ -1303,25 +1287,10 @@ event_38 : 청지기 4단계 - 앞장서는 부모님 (3단계 선택시 5일뒤
             </div>
         </div>
     </div>
-
-    <!-- 테스트 코드 -->
-    <!-- <script>
-
-        var itemInfo = {
-            basket: 0,  // 텀블러
-        }
-
-        // event_1
-        if(itemInfo["basket"] != 0){
-            document.querySelector('.option_1').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBasket" onclick="sendUserPick(this.name)">선택지 1 (장바구니 선택하기) </button>';
-        }else if(itemInfo["basket"] == 0){
-            document.querySelector('.option_1').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noBasket" onclick="sendUserPick(this.name)">선택지 1 (장바구니 선택 안함) </button>';
-        }
-
-    </script> -->
-
-    <script type="text/javascript" src="js/event.js"></script>
-    <script type="text/javascript" src="js/event_choice.js"></script>
-    <script type="text/javascript" src="js/randomtest.js"></script>
+    
+    <script type="text/javascript" src="js/event_test.js"></script> <!-- event.js대신 -->
+    <script type="text/javascript" src="js/choice_test.js"></script> <!-- event_choice.js 대신 -->
+    <script type="text/javascript" src="js/test.js"></script>   <!-- randomtest.js대신 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>
 </html>

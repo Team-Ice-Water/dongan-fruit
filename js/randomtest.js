@@ -3,30 +3,20 @@
 // 모달창마다 클래스명이 다 같기 때문에 show된 모달에 대해서 적용해야 한다. 
 // (클래스명이 같으면 최상위 요소에만 적용되기 때문)
 
-var openModal;
-
-var check = setInterval( () => {    // 모달이 열리기 전까지 반복 실행
-    if(document.querySelector(".show")){    
-        openModal = document.querySelector(".show");    // 열린 모달을 저장
-        const optionBtn = openModal.querySelector(".list-group").querySelectorAll('button');
-    
-        for ( var i = 0; i < optionBtn.length; i++ ) {
-            optionBtn[i].addEventListener('click', sendUserPick);
-        }
-        clearInterval(check);   // 모달은 자동으로 띄움을 가정하기 때문에, 한 번 띄워지면 함수 반복 중단
-    }
-},1000); 
-
+var userSelect;
 
 function sendUserPick(){
-    const sendValue = openModal.querySelector(".option-value").querySelector('input');
-    sendValue.setAttribute('value', this.name);
+    userSelect = tagname;
+    console.log("this.name: ", tagname);
+    
+    $(".modal.show .modal-footer > .btn").removeAttr('disabled');
 }
 
 
-var maxEco;
+var maxEco;     // 가장 수치가 높은 오염도의 종류
 var giveItem;
 var getItem;
+var damageItem;
 
 function chooseItem(haveItems) {
     var jbRandom = Math.random();
@@ -35,38 +25,27 @@ function chooseItem(haveItems) {
     // haveItems 배열 중에 랜덤으로 하나 선택하여 giveItem 변수를 바꿔줌
     switch (haveItems[random]) {
         case 'tumbler':
-            giveItem = "텀블러";
-            break;
+            return "텀블러";
         case 'flowerpot':
-            giveItem = "화분";
-            break;
+            return "화분";
         case 'mic':
-            giveItem = "마이크";
-            break;
+            return "마이크";
         case 'bible':
-            giveItem = "성경책";
-            break;
+            return "성경책";
         case 'basket':
-            giveItem = "장바구니";
-            break;
+            return "장바구니";
         case 'book':
-            giveItem = "환경 지침 도서";
-            break;
+            return "환경 지침 도서";
         case 'vitamin':
-            giveItem = "비타민";
-            break;
+            return "비타민";
         case 'bicycle':
-            giveItem = "자전거";
-            break;
+            return "자전거";
         case 'soap':
-            giveItem = "천연비누";
-            break;
+            return "천연비누";
         case 'soapnut':
-            giveItem = "소프넛";
-            break;
+            return "소프넛";
         case 'ginseng':
-            giveItem = "최고급 인삼";
-            break;
+            return "최고급 인삼";
         default:
             break;
     }
@@ -81,6 +60,33 @@ function findMaxEco() {
         }
     }
     console.log("오염수치가 젤 높은 것: ", maxEco);
+}
+
+function matchEcoTxt(max) {
+    switch (max) {
+        case 'air':
+            var type = "대기오염";
+            break;
+        case 'air':
+            var type = "토양오염";
+            break;
+        case 'air':
+            var type = "수질오염";
+            break;            
+        default:
+            break;
+    }
+
+    return type;
+}
+
+function random(percent) {
+    const probability = (percent / 100);
+    if(Math.random() < probability){
+        return true;
+    } else{
+        return false;
+    }
 }
 
 function resultModal(choice) {
@@ -112,11 +118,15 @@ function resultModal(choice) {
             text = "깨끗하게 빨리 씻고 싶으니까 바디워시랑 샴푸를 사용해야지";
             result = "수질오염 5 증가, 체력 2 증가";
             break;
-        case 'waterwash':
+        case 'soapwash':
             text = "조금 불편해도 환경을 생각해서 천연비누를 사용하자.";
             result = "수질오염 2 감소";
+            if(random(10)){
+                damageItem = 'soap';
+                result += ", 천연비누 손상";
+            }
             break;
-        case 'soapwash':
+        case 'waterwash':
             text = "에이 다 귀찮아. 그냥 물로만 씻어야지.";
             result = "체력 2 감소";
             break;
@@ -138,7 +148,8 @@ function resultModal(choice) {
             break;
         case 'yesVitamin':
             text = "힘들 땐 비타민을 챙겨먹어야지.";
-            result = "체력 3 증가";
+            result = "체력 3 증가, 비타민 손상";
+            damageItem = 'vitamin';
             break;
         case 'noGinsengNoVitamin':
             text = "힘들어도 그냥 참자!";
@@ -149,6 +160,10 @@ function resultModal(choice) {
         case 'yesSoapnut':
             text = "그래, 환경을 생각해서 소프넛을 써야지.";
             result = "수질오염 3 감소";
+            if(random(50)){
+                damageItem = 'soapnut';
+                result += ", 소프넛 손상";
+            }
             break;
         case 'noSoapnut':
             text = "친구들이 기다리고 있는데 주방세제를 써서 후딱 하자.";
@@ -176,33 +191,24 @@ function resultModal(choice) {
             break;
 
         // event_9 친구의 방문
-        case 'yesBible':
-            text = " ";
-            result = " ";
-            break;
-        case 'noBible':
-            text = " ";
-            result = " ";
+        case 'yesChildren':
+            text = "선물을 열어보니 우와 텀블러다!";
+            result = "텀블러 획득";
+            getItem = 'tumbler';
             break;
 
         // event_10 심방
-        case 'yesBible':
-            text = " ";
-            result = " ";
-            break;
-        case 'noBible':
-            text = " ";
-            result = " ";
+        case 'yesTeacher':
+            text = "우와 선생님께서 성경책과 환경지침 도서를 주셨다!!";
+            result = "성경책, 환경지침 도서 획득";
+            getItem = ['bible', 'book'];
             break;
 
         // event_11 전도대
-        case 'yesBible':
-            text = " ";
-            result = " ";
-            break;
-        case 'noBible':
-            text = " ";
-            result = " ";
+        case 'yesChurch':
+            text = "전도대에서 성경책을 주고 가셨어.";
+            result = "성경책 획득";
+            getItem = 'bible';
             break;
 
         // event_12 판매원
@@ -214,7 +220,7 @@ function resultModal(choice) {
                 }
             }
             console.log("가진 아이템: ", haveItems);          
-            chooseItem(haveItems);
+            giveItem = chooseItem(haveItems);
             text = " 나: 저.. 성경책이 없는데, 혹시 제가 가지고 있는 "+giveItem+"(이)랑 성경책을 바꿔 주실 수 있으세요? <br> 판매원: 성경을 사랑하는 멋진 친구구나! 그래, 네가 가진 물건이랑 성경책이랑 바꾸자! ";
             result = " 성경책 획득, "+giveItem+" 소모";
             getItem = 'bible';
@@ -249,8 +255,8 @@ function resultModal(choice) {
                     }
                 }                
             }
-            console.log("(noGiveSoap) 가진 아이템: ", haveItems);          
-            chooseItem(haveItems);
+            console.log("(pollution_above130) 가진 아이템: ", haveItems);          
+            giveItem = chooseItem(haveItems);
             text = "환경 운동가: 혹시 환경을 위해서 물건을 좀 기부해주지 않을래? <br> 나: 그럼 저는 "+giveItem+"을(를) 기부할래요!";
             result = giveItem+" 소모";
             break;
@@ -275,9 +281,11 @@ function resultModal(choice) {
                 }                
             }
             console.log("(above_6_item) 가진 아이템: ", haveItems);          
-            chooseItem(haveItems);
+            giveItem = chooseItem(haveItems);
             text = "흠 쓰지 않는 물건들이 너무 많네."+giveItem+ "을(를) 버려야겠다.";
             result = giveItem+" 소모";
+            break;
+
         case 'below_6_item':
             var noItems = [];      // 없는 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
@@ -286,7 +294,7 @@ function resultModal(choice) {
                 }               
             }
             console.log("(below_6_item) 없는 아이템: ", noItems);          
-            chooseItem(noItems);
+            getItem = chooseItem(noItems);
             text = "오 청소하다가 잃어버렸던 "+getItem+"을 찾았다! 오예";
             result = getItem+" 획득";
             break;
@@ -313,37 +321,15 @@ function resultModal(choice) {
         //event_19 자발적
         case 'eitherBibleBook': // 둘 중 하나만 선택
             findMaxEco();
-            switch (maxEco) {
-                case 'air':
-                    var eco = "대기오염"
-                    break;
-                case 'air':
-                    var eco = "토양오염"
-                    break;
-                case 'air':
-                    var eco = "수질오염"
-                    break;            
-                default:
-                    break;
-            }
+            var eco = matchEcoTxt(maxEco);
+
             text = "찾아보긴 했는데 뭔가 더 알아야할 것 같은데.";
             result = eco+" 15 감소";
             break;        
         case 'bothBibleBook':   // 둘 다 선택
             findMaxEco();
-            switch (maxEco) {
-                case 'air':
-                    var eco = "대기오염"
-                    break;
-                case 'air':
-                    var eco = "토양오염"
-                    break;
-                case 'air':
-                    var eco = "수질오염"
-                    break;            
-                default:
-                    break;
-            }
+            var eco = matchEcoTxt(maxEco);
+
             text = "성경책이랑 환경지침도서를 보면 잘 나와있어!";
             result = eco+" 5 감소";
             break;
@@ -352,13 +338,30 @@ function resultModal(choice) {
             break;
 
         // event_20 자연착취1
-        case 'eitherBicycleBasket':
-            text = " ";
-            result = " ";
+        case 'yes_nature_1':
+            text = "지구를 보호하는 것보다는 내 체력이 먼저지.";
+            result = "대기오염 10 증가, 체력 5 증가";
             break;
-        case 'bothBicycleBasket':  
-            text = " ";
-            result = " ";
+        case 'no_nature_1':  
+            text = "그래도 환경을 생각해야지. 선풍기만 틀자.";
+            break;
+
+        // event_21 자연착취2
+        case 'yes_nature_2':
+            text = "와 시원해! 이제 좀 살 것 같네.";
+            result = "수질오염 10 증가, 체력 5 증가";
+            break;
+        case 'no_nature_2':  
+            text = "조금 더워도 참자.";
+            break;
+
+        // event_22 자연착취3
+        case 'yes_nature_2':
+            text = "와 맛있어. 남을 것 같지만 일단 많이 담자.";
+            result = "토양오염 10 증가, 체력 5 증가";
+            break;
+        case 'no_nature_2':  
+            text = "아무리 배고파도 먹을 수 있을 정도만 담아서 음식물 쓰레기를 만들지 말자.";
             break;
 
         // event_23 문화 1단계
@@ -457,16 +460,102 @@ function resultModal(choice) {
             break;
 
         // event_33 환경 2단계
-        case 'yes_culture_4':
-            text = "우와, 그런 좋은 일에 제가 빠질 수 없죠! 저도 같이 가요 전도사님! 우리 동네를 깨끗이 청소해요.";
-            result = "대기오염 10 감소, 수질오염 10 감소, 토양오염 10 감소, 체력 5 감소";
+        case 'env_2_tumbler':
+            text = "플라스틱 컵, 종이컵을 줄이는 가장 좋은 방법은 모두가 자기 텀블러를 사용하는 거지! 텀블러를 기부해야겠다.";
+            result = "대기오염 2 감소, 수질오염 2 감소, 토양오염 2 감소";
             break;
-        case 'no_culture_4':
-            text = "아 전도사님.. 제가 오늘은 좀 피곤해서.. 다음에 또 할 때는 꼭 같이 갈게요!";
-            result = "대기오염 3 증가, 수질오염 3 증가, 토양오염 3 증가";
+        case 'env_2_bicycle':
+            text = "많은 친구들이 자전거를 타고 다니면 그만큼 대기오염이 줄어들 거야. 친구들아, 같이 자전거 타고 다니자!";
+            result = "대기오염 2 감소, 수질오염 2 감소, 토양오염 2 감소";
+            break;
+        case 'env_2_soap':
+            text = "요즘은 손 씻기가 정말 중요하지! 손을 씻을 때 천연비누를 사용하면 손도 깨끗해지고, 수질오염도 막을 수 있을 거야. <br> 나는 천연 비누를 기부해야지.";
+            result = "대기오염 2 감소, 수질오염 2 감소, 토양오염 2 감소";
+            break;
+        case 'env_2_nothing':
+            text = "난 아직 뭘 기부해야할지 모르겠는데, 좀 더 생각해볼까?";
+            result = "대기오염 2 증가, 수질오염 2 증가, 토양오염 2 증가";
             break;
 
-        
+        // event_34 환경 2단계
+        case 'env_2_2_soapnut':
+            text = "소프넛으로 화장실을 청소하면, 더 깨끗하게 청소하면서 환경도 지킬 수 있을 거야. <br> 그러려면 소프넛이 많아야겠지? 내가 가진 것도 기부해야겠다.";
+            result = "대기오염 2 감소, 수질오염 2 감소, 토양오염 2 감소, 소프넛 소모";
+            giveItem = 'soapnut';
+            break;
+        case 'env_2_2_soap':
+            text = "화장실에 있는 비누들을 천연비누로 바꾸면 더 좋을 것 같아! <br> 다들 천연비누에 곧 익숙해지겠지?";
+            result = "대기오염 2 감소, 수질오염 2 감소, 토양오염 2 감소, 천연비누 소모";
+            giveItem = 'soap';
+            break;
+        case 'env_2_2_basket':
+            text = "화장실에 필요한 도구들을 많이 사야 할 것 같아. <br> 많은 물건을 살 때는 역시 장바구니가 필수지! 일회용 봉투 말고 장바구니를 사용해보자고!";
+            result = "대기오염 2 감소, 수질오염 2 감소, 토양오염 2 감소";
+            break;
+        case 'env_2_2_nothing':
+            text = "난 아직 뭘 기부해야할지 모르겠는데, 좀 더 생각해볼까?";
+            result = "대기오염 2 증가, 수질오염 2 증가, 토양오염 2 증가";
+            break;
+
+        // event_35 청지기 1단계
+        case 'keeper_1_bible':
+            findMaxEco();
+            var eco = matchEcoTxt(maxEco);
+
+            text = "엄마, 아빠! 저도 가정예배를 드리고 싶어요. 우리 같이 예배해요.";
+            result = eco+" 5 감소";
+            // result = "청지기 가정 엔딩 시작"
+            break;
+        case 'keeper_1_book':
+            findMaxEco();
+            var eco = matchEcoTxt(maxEco);
+
+            text = "엄마, 아빠! 이 책 좀 봐보세요. 우리가 살아가는 세상을 이제 우리가 지켜야 해요.";
+            result = eco+" 5 감소";            
+            break;
+
+        // event_36 청지기 2단계
+        case 'keeper_2_yesTalk':
+            text = "부모님께서 조금은 불편해도 환경을 지키는 모범적인 가정이 되어보자고 하신다. <br> 혼자서는 힘들어도 가족과 함께하면 할 수 있을 거야!";
+            result = "대기오염 2 감소, 수질오염 2 감소, 토양오염 2 감소";
+            break;
+        case 'keeper_2_noTalk':
+            text = "왠지 잔소리를 들을 것만 같아서 숙제가 많다고 다음에 대화하자고 했다.";
+            break;
+
+        // event_37 청지기 3단계
+        case 'keeper_3_yesSoapnut':
+            text = "부모님께 소프넛에 대해서 알려드리고 소프넛을 드렸다.";
+            result = "수질오염 5 감소";
+            if(random(50)){
+                giveItem = 'soapnut';
+                result += ", 소프넛 소모";
+            }
+            break;
+        case 'keeper_3_noSoapnut':
+            text = "나도 잘 몰라서 생각해 본다고 했다.";
+            result = "수질오염 3 증가";
+            break;
+
+        // event_38 청지기 4단계
+        case 'keeper_4_bicycle':
+            text = "항상 차를 타고 다니는 이웃에게 자전거를 선물해주면서 가까운 거리는 자전거로도 다닐 수 있음을 알려줬다.";
+            result = "대기오염 5 감소, 수질오염 5 감소, 토양오염 5 감소, 자전거 소모";
+            giveItem = 'bicycle';
+            break;
+        case 'keeper_4_tumbler':
+            text = "엄마가 옆집 아주머니랑 카페를 가신다길래 텀블러를 꼭 가져가라고 말씀드렸다. 카페에 텀블러는 기본이지!";
+            result = "대기오염 5 감소, 수질오염 5 감소, 토양오염 5 감소, 텀블러 소모";
+            giveItem = 'tumbler';
+            break;
+        case 'keeper_4_envbook':
+            text = "아빠가 도서 모임에 환경지침 도서를 가져가신다고 하셨다. <br> 내가 아끼는 책이었지만 더 많은 사람들이 환경에 관심을 가질 수 있는 기회인 것 같아서 기쁜 마음으로 드렸다.";
+            result = "대기오염 5 감소, 수질오염 5 감소, 토양오염 5 감소, 환경지침 도서 소모";
+            giveItem = 'book';
+            break;
+        case 'keeper_4_nothing':
+            text = "아직 도울 수 있는 게 없는 것 같아...";
+            break;
 
         default:
             break;
@@ -474,12 +563,6 @@ function resultModal(choice) {
 
     $("#text").html(text);
     $("#result").html(result);
-}
-
-function closeModal() {
-    console.log("closeModal()");
-    $(".show").removeClass('fade').modal('hide');
-    $("#event_1").modal("dispose");
 }
 
 function sendValue(value) {
@@ -498,9 +581,9 @@ function sendValue(value) {
 
 function doEvent() {
     
-    const user_pick = $(".option-value input[name=user_pick]").attr('value');
+    console.log('전송하는 user_pick: ', userSelect)
     // 1. input hidden의 value를 결과를 토대로 모달창 내용 생성
-    resultModal(user_pick);
+    resultModal(userSelect);
     // 2. php로 전달
-    sendValue(user_pick);   // giveItem 소모는 어떻게 반영 !?
+   // sendValue(user_pick);   // giveItem 소모는 어떻게 반영 !?
 }
