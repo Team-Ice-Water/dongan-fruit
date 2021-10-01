@@ -327,8 +327,8 @@ function resultModal(choice) {
                 
             } else{
                 console.log("(evangelist_chance) 손상된 아이템: ", damages);          
-                damageItem = chooseItem(damages);
-                result = "손상되었던 "+damageItem+" 회복";
+                getItem = chooseItem(damages);
+                result = "손상되었던 "+getItem+" 회복";
             }
 
             text = "전도사님이 청지기로 살아가는데 도움이 될 물건을 주셨어.";
@@ -640,7 +640,7 @@ function doEvent() {
         sendValue(value);
     }
 
-    if(getItem != ""){
+    if(getItem != ""){  // 얻은 아이템이 있으면
         const value = {item: getItem, type: 'add'};
         changeItem(value);
     }
@@ -648,7 +648,7 @@ function doEvent() {
         const value = {item: giveItem, type: 'remove'};
         changeItem(value);
     }
-    if(damageItem != ""){
+    if(damageItem != ""){   // 손상된 아이템이 있으면
         const value = {item: damageItem, type: 'damage'};
         changeItem(value);
     }
