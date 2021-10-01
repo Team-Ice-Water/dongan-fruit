@@ -13,10 +13,13 @@ function sendUserPick(){
 }
 
 
-var maxEco;     // 가장 수치가 높은 오염도의 종류
-var giveItem;
-var getItem;
-var damageItem;
+var changeEco = {
+    eco: "", 
+    value : 0
+};     // 가장 수치가 높은 오염도의 {종류, 변동수치}
+var giveItem ="";
+var getItem ="";
+var damageItem ="";
 
 function chooseItem(haveItems) {
     var jbRandom = Math.random();
@@ -53,6 +56,7 @@ function chooseItem(haveItems) {
 
 function findMaxEco() {
     var max = 0;
+    var maxEco = 0;
     for(let key in ecoLevelInfo){
         if(ecoLevelInfo[key] >= max){
             max = ecoLevelInfo[key];
@@ -60,6 +64,8 @@ function findMaxEco() {
         }
     }
     console.log("오염수치가 젤 높은 것: ", maxEco);
+
+    return maxEco;
 }
 
 function matchEcoTxt(max) {
@@ -299,10 +305,34 @@ function resultModal(choice) {
             result = getItem+" 획득";
             break;
 
-        // event_17 전도사님 찬스 - 검토
+        // event_17 전도사님 찬스
         case 'evangelist_chance':
+            var damages = [];      // 손상된 아이템들의 이름을 저장하는 배열
+            for (let key in itemInfo) {
+                if(itemInfo[key] == 2){
+                    damages.push(key);
+                }               
+            }
+
+            if(damages.length == 0){
+                var noItems = [];      // 없는 아이템들의 이름을 저장하는 배열
+                for (let key in itemInfo) {
+                    if(itemInfo[key] == 0){
+                        noItems.push(key);
+                    }               
+                }
+                console.log("(evangelist_chance) 없는 아이템: ", noItems);          
+                getItem = chooseItem(noItems);
+                result = "새로운 아이템, "+getItem+" 획득";
+                
+            } else{
+                console.log("(evangelist_chance) 손상된 아이템: ", damages);          
+                damageItem = chooseItem(damages);
+                result = "손상되었던 "+damageItem+" 회복";
+            }
+
             text = "전도사님이 청지기로 살아가는데 도움이 될 물건을 주셨어.";
-            result = "손상되었던 회복";
+            
             break;
 
         // event_18 친구들 초대
@@ -320,15 +350,17 @@ function resultModal(choice) {
 
         //event_19 자발적
         case 'eitherBibleBook': // 둘 중 하나만 선택
-            findMaxEco();
+            var maxEco = findMaxEco();
             var eco = matchEcoTxt(maxEco);
+            changeEco = {eco: maxEco, value: -15};
 
             text = "찾아보긴 했는데 뭔가 더 알아야할 것 같은데.";
             result = eco+" 15 감소";
             break;        
         case 'bothBibleBook':   // 둘 다 선택
-            findMaxEco();
+            var maxEco = findMaxEco();
             var eco = matchEcoTxt(maxEco);
+            changeEco = {eco: maxEco, value: -5};
 
             text = "성경책이랑 환경지침도서를 보면 잘 나와있어!";
             result = eco+" 5 감소";
@@ -356,18 +388,17 @@ function resultModal(choice) {
             break;
 
         // event_22 자연착취3
-        case 'yes_nature_2':
+        case 'yes_nature_3':
             text = "와 맛있어. 남을 것 같지만 일단 많이 담자.";
             result = "토양오염 10 증가, 체력 5 증가";
             break;
-        case 'no_nature_2':  
+        case 'no_nature_3':  
             text = "아무리 배고파도 먹을 수 있을 정도만 담아서 음식물 쓰레기를 만들지 말자.";
             break;
 
         // event_23 문화 1단계
         case 'yes_culture_1':
             text = "앗 성경책이 이런 곳에 있었네. 어쩐지 안보이더라, 이제 잘 보이는 곳에 보관해야지!";
-            //result = "ending_info['culture'] = 오늘날짜로/satge도 1로 up"
             break;
         case 'no_culture_1':
             text = "정리를 해도 해도 끝이 없는 거 같아. 다음에 더 해야겠다.";
@@ -435,7 +466,6 @@ function resultModal(choice) {
         // event_30 환경 1단계
         case 'yes_env_1_children':
             text = "애들아, 이 책 알아? 생각보다 엄청 재미있고 유익한 책이더라고. 너희들도 꼭 읽어봤으면 좋겠어. 내꺼 빌려줄게!";
-            //result = "ending_info['env'] = 오늘 날짜로/satge도 1로 up"
             break;
         case 'no_env_1_children':
             text = "내가 환경지침 도서를 먼저 찾아서 읽어봐야겠어.";
@@ -444,7 +474,6 @@ function resultModal(choice) {
         // event_31 환경 1단계
         case 'yes_env_1_teacher':
             text = "선생님! 제가 요즘 환경지킴 책을 읽고 있는데요, 조금 어려운 부분도 있어서요. <br> 이 부분에 대해서 선생님이 알려주시면 좋겠어요.";
-            //result = "ending_info['env'] = 오늘 날짜로/satge도 1로 up"
             break;
         case 'no_env_1_teacher':
             text = "내가 환경지침 도서를 먼저 찾아서 읽어봐야겠어.";
@@ -453,7 +482,6 @@ function resultModal(choice) {
         // event_32 환경 1단계
         case 'yes_env_1_library':
             text = "저희 학교에는 환경지킴 도서가 없는 것 같아요. <br> 이런 책이 많이 있어야 다른 친구들도 환경의 중요성을 알게 되지 않을까요? 학교 도서관에 꼭 비치해주세요!";
-            //result = "ending_info['env'] = 오늘 날짜로/satge도 1로 up"
             break;
         case 'no_env_1_library':
             text = "내가 환경지침 도서를 먼저 찾아서 읽어봐야겠어.";
@@ -499,19 +527,23 @@ function resultModal(choice) {
 
         // event_35 청지기 1단계
         case 'keeper_1_bible':
-            findMaxEco();
+            var maxEco = findMaxEco();
             var eco = matchEcoTxt(maxEco);
+            changeEco = {eco: maxEco, value: -5};
 
             text = "엄마, 아빠! 저도 가정예배를 드리고 싶어요. 우리 같이 예배해요.";
             result = eco+" 5 감소";
-            // result = "청지기 가정 엔딩 시작"
             break;
         case 'keeper_1_book':
-            findMaxEco();
+            var maxEco = findMaxEco();
             var eco = matchEcoTxt(maxEco);
+            changeEco = {eco: maxEco, value: -5};
 
             text = "엄마, 아빠! 이 책 좀 봐보세요. 우리가 살아가는 세상을 이제 우리가 지켜야 해요.";
             result = eco+" 5 감소";            
+            break;
+        case 'keeper_1_nothing':
+            text = "아직 부모님을 설득하기엔 부족한걸.";
             break;
 
         // event_36 청지기 2단계
@@ -569,11 +601,21 @@ function sendValue(value) {
     console.log("sendValue()");
     // php에 정보를 보냄 (= 선택결과에 따른 DB 변경)
     var xhr = new XMLHttpRequest();
-    xhr.onload = function(){
-        if(xhr.readyState === 4 && xhr.status === 200){
-        }
-    };
     xhr.open('POST', '../event.php');
+    xhr.setRequestHeader('Content-Type', "application/json");
+    xhr.send(JSON.stringify(value));
+}
+
+function updateEco(value) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../event.php');
+    xhr.setRequestHeader('Content-Type', "application/json");
+    xhr.send(JSON.stringify(value));
+}
+
+function changeItem(value) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../changeItem.php');
     xhr.setRequestHeader('Content-Type', "application/json");
     xhr.send(JSON.stringify(value));
 }
@@ -585,5 +627,30 @@ function doEvent() {
     // 1. input hidden의 value를 결과를 토대로 모달창 내용 생성
     resultModal(userSelect);
     // 2. php로 전달
-   // sendValue(user_pick);   // giveItem 소모는 어떻게 반영 !?
+    sendValue(userSelect);   
+    
+    // giveItem 소모는 어떻게 반영 !?
+    if(changeEco['vaule'] != 0){
+        const value = {id:'userSelect'};
+        Object.assign(value, changeEco);
+        console.log("DB에 보내는 value: ", value);
+        sendValue(value);
+    } else{
+        const value = {id:'userSelect'};
+        sendValue(value);
+    }
+
+    if(getItem != ""){
+        const value = {item: getItem, type: 'add'};
+        changeItem(value);
+    }
+    if(giveItem != ""){
+        const value = {item: giveItem, type: 'remove'};
+        changeItem(value);
+    }
+    if(damageItem != ""){
+        const value = {item: damageItem, type: 'damage'};
+        changeItem(value);
+    }
+    
 }
