@@ -211,7 +211,7 @@
         case 'no_culture_2_bible':
             $sql = "UPDATE character_info
             SET soil = soil+2, water = water=2, air = air+2, health = health -1
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
 
         // event_25 문화 2단계
@@ -227,7 +227,7 @@
         case 'no_culture_2_mic':
             $sql = "UPDATE character_info
             SET soil = soil+2, water = water=2, air = air+2, health = health -1
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
 
         // event_26 문화 3단계
@@ -249,12 +249,12 @@
             WHERE m_id='$userId';
             UPDATE ending_info
             SET cultureDay = $today, cultureStage = 3;
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
         case 'no_culture_3_tumbler':
             $sql = "UPDATE character_info
             SET soil = soil+2
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
 
         // event_28 문화 3단계
@@ -264,12 +264,12 @@
             WHERE m_id='$userId';
             UPDATE ending_info
             SET cultureDay = $today, cultureStage = 3;
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
         case 'no_culture_3_tumbler':
             $sql = "UPDATE character_info
             SET air = air+2
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
 
         // event_29 문화 4단계
@@ -279,12 +279,12 @@
             WHERE m_id='$userId';
             UPDATE ending_info
             SET cultureDay = $today, cultureStage = 4;
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
         case 'no_culture_4':
             $sql = "UPDATE character_info
             SET soil = soil+3, water = water+3, air = air+3
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
 
         // event_30, 31, 32 환경 1단계
@@ -293,7 +293,7 @@
         case 'yes_env_1_library':
             $sql = "UPDATE ending_info
             SET envDay = $today, envStage = 1;
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
         case 'no_env_1_children':
         case 'no_env_1_teacher':
@@ -312,13 +312,13 @@
             WHERE m_id='$userId';
             UPDATE ending_info
             SET envDay = $today, envStage = 2;
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
         case 'env_2_nothing':
         case 'env_2_2_nothing':
             $sql = "UPDATE character_info
             SET soil = soil+2, water = water+2, air = air+2
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
 
         // event_35 청지기 1단계
@@ -341,7 +341,7 @@
             WHERE m_id='$userId';
             UPDATE ending_info
             SET homeDay = $today, homeStage = 2;
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
         case 'keeper_2_noTalk':
             break;
@@ -353,12 +353,12 @@
             WHERE m_id='$userId';
             UPDATE ending_info
             SET homeDay = $today, homeStage = 3;
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
         case 'keeper_3_noSoapnut':
             $sql = "UPDATE character_info
             SET water = water+3
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;
 
         // event_38 청지기 4단계
@@ -379,8 +379,11 @@
           break;
     }
 
+    if($sql){
+        mysqli_query($con, $sql);
+    }
     
-    $ret = mysqli_query($con, $sql);
+    echo $userPick;
     mysqli_close($con);
 ?>
 

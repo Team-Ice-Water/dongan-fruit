@@ -13,19 +13,25 @@
         
         $culDay = $row['cultureDay'];
         $culStage = $row['cultureStage'];
+        $culEnd = $row['cultureEnd'];
         
         $envDay = $row['envDay'];
         $envStage = $row['envStage'];
+        $envEnd = $row['envEnd'];
 
         $homeDay = $row['homeDay'];
         $homeStage = $row['homeStage'];
+        $homeEnd = $row['homeEnd'];
 
         $value = array('culDay' => $culDay,
                         'culStage' => $culStage,
+                        'culEnd' => $culEnd,
                         'envDay' => $envDay,
                         'envStage' => $envStage,
+                        'envEnd' => $envEnd,
                         'homeDay' => $homeDay,
-                        'homeStage' => $homeStage); 
+                        'homeStage' => $homeStage,
+                        'homeEnd' => $homeEnd); 
 
         echo json_encode($value); 
     }

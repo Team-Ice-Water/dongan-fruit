@@ -573,12 +573,26 @@ function closeModal() {
     $("#event_1").modal("dispose");
 }
 
-function sendValue(value) {
+function SENDValue(value) {
     console.log("sendValue()");
     // php에 정보를 보냄 (= 선택결과에 따른 DB 변경)
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
+        }
+    };
+    xhr.open('POST', '../event.php');
+    xhr.setRequestHeader('Content-Type', "application/json");
+    xhr.send(JSON.stringify(value));
+}
+
+function sendValue(value) {
+    console.log("sendValue() ", value);
+    // php에 정보를 보냄 (= 선택결과에 따른 DB 변경)
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            console.log("응답:", xhr.responseText);
         }
     };
     xhr.open('POST', '../event.php');
@@ -592,6 +606,8 @@ function doEvent() {
     console.log('user_pick', userSelect);
     // 1. input hidden의 value를 결과를 토대로 모달창 내용 생성
     resultModal(userSelect);
+
+    sendValue({id: userSelect}); 
    /* if(damageItem){
         console.log("손상된 아이템: ", damgeItem);
     }

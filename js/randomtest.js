@@ -5,7 +5,7 @@
 
 var userSelect;
 
-function sendUserPick(){
+function sendUserPick(tagname){
     userSelect = tagname;
     console.log("this.name: ", tagname);
     
@@ -15,7 +15,7 @@ function sendUserPick(){
 
 var changeEco = {
     eco: "", 
-    value : 0
+    value: 0
 };     // 가장 수치가 높은 오염도의 {종류, 변동수치}
 var giveItem ="";
 var getItem ="";
@@ -25,8 +25,12 @@ function chooseItem(haveItems) {
     var jbRandom = Math.random();
     const random = Math.floor( jbRandom * haveItems.length );
     console.log("random숫자: ", random);
-    // haveItems 배열 중에 랜덤으로 하나 선택하여 giveItem 변수를 바꿔줌
-    switch (haveItems[random]) {
+    // haveItems 배열 중에 랜덤으로 하나 선택
+    return haveItems[random];
+}
+
+function matchItemTxt(item) {
+    switch (item) {
         case 'tumbler':
             return "텀블러";
         case 'flowerpot':
@@ -227,8 +231,8 @@ function resultModal(choice) {
             }
             console.log("가진 아이템: ", haveItems);          
             giveItem = chooseItem(haveItems);
-            text = " 나: 저.. 성경책이 없는데, 혹시 제가 가지고 있는 "+giveItem+"(이)랑 성경책을 바꿔 주실 수 있으세요? <br> 판매원: 성경을 사랑하는 멋진 친구구나! 그래, 네가 가진 물건이랑 성경책이랑 바꾸자! ";
-            result = " 성경책 획득, "+giveItem+" 소모";
+            text = " 나: 저.. 성경책이 없는데, 혹시 제가 가지고 있는 "+matchItemTxt(giveItem)+"(이)랑 성경책을 바꿔 주실 수 있으세요? <br> 판매원: 성경을 사랑하는 멋진 친구구나! 그래, 네가 가진 물건이랑 성경책이랑 바꾸자! ";
+            result = " 성경책 획득, "+matchItemTxt(giveItem)+" 소모";
             getItem = 'bible';
             break;
         case 'yesBuyBible':
@@ -263,8 +267,8 @@ function resultModal(choice) {
             }
             console.log("(pollution_above130) 가진 아이템: ", haveItems);          
             giveItem = chooseItem(haveItems);
-            text = "환경 운동가: 혹시 환경을 위해서 물건을 좀 기부해주지 않을래? <br> 나: 그럼 저는 "+giveItem+"을(를) 기부할래요!";
-            result = giveItem+" 소모";
+            text = "환경 운동가: 혹시 환경을 위해서 물건을 좀 기부해주지 않을래? <br> 나: 그럼 저는 "+matchItemTxt(giveItem)+"을(를) 기부할래요!";
+            result = matchItemTxt(giveItem)+" 소모";
             break;
 
         // event_15 식목일
@@ -288,7 +292,7 @@ function resultModal(choice) {
             }
             console.log("(above_6_item) 가진 아이템: ", haveItems);          
             giveItem = chooseItem(haveItems);
-            text = "흠 쓰지 않는 물건들이 너무 많네."+giveItem+ "을(를) 버려야겠다.";
+            text = "흠 쓰지 않는 물건들이 너무 많네."+matchItemTxt(giveItem)+ "을(를) 버려야겠다.";
             result = giveItem+" 소모";
             break;
 
@@ -301,8 +305,8 @@ function resultModal(choice) {
             }
             console.log("(below_6_item) 없는 아이템: ", noItems);          
             getItem = chooseItem(noItems);
-            text = "오 청소하다가 잃어버렸던 "+getItem+"을 찾았다! 오예";
-            result = getItem+" 획득";
+            text = "오 청소하다가 잃어버렸던 "+matchItemTxt(getItem)+"을 찾았다! 오예";
+            result = matchItemTxt(getItem)+" 획득";
             break;
 
         // event_17 전도사님 찬스
@@ -323,12 +327,12 @@ function resultModal(choice) {
                 }
                 console.log("(evangelist_chance) 없는 아이템: ", noItems);          
                 getItem = chooseItem(noItems);
-                result = "새로운 아이템, "+getItem+" 획득";
+                result = "새로운 아이템, "+matchItemTxt(getItem)+" 획득";
                 
             } else{
-                console.log("(evangelist_chance) 손상된 아이템: ", damages);          
+                console.log("(evangelist_chance) 손상되었던 아이템: ", damages);          
                 getItem = chooseItem(damages);
-                result = "손상되었던 "+getItem+" 회복";
+                result = "손상되었던 "+matchItemTxt(getItem)+" 회복";
             }
 
             text = "전도사님이 청지기로 살아가는데 도움이 될 물건을 주셨어.";
@@ -598,24 +602,41 @@ function resultModal(choice) {
 }
 
 function sendValue(value) {
-    console.log("sendValue()");
+    console.log("sendValue(): ", value);
     // php에 정보를 보냄 (= 선택결과에 따른 DB 변경)
     var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            console.log("sendValue응답:", xhr.responseText);
+        }
+    };
     xhr.open('POST', '../event.php');
     xhr.setRequestHeader('Content-Type', "application/json");
     xhr.send(JSON.stringify(value));
 }
 
 function updateEco(value) {
+    console.log("updateEco(): ", value);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '../changeMaxEco.php');
+    xhr.onload = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            console.log("changeMaxEco응답:", xhr.responseText);
+        }
+    };
     xhr.setRequestHeader('Content-Type', "application/json");
     xhr.send(JSON.stringify(value));
 }
 
 function changeItem(value) {
+    console.log("changeItem(): ", value);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '../changeItem.php');
+    xhr.onload = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            console.log("changeItem응답:", xhr.responseText);
+        }
+    };
     xhr.setRequestHeader('Content-Type', "application/json");
     xhr.send(JSON.stringify(value));
 }
@@ -623,14 +644,14 @@ function changeItem(value) {
 
 function doEvent() {
     
-    console.log('전송하는 user_pick: ', userSelect)
+    console.log('전송하는 user_pick: ', userSelect);
     // 1. input hidden의 value를 결과를 토대로 모달창 내용 생성
     resultModal(userSelect);
     // 2. php로 전달
     sendValue({id: userSelect});          // 기본적인 오염도, 체력 수정
     
-    
-    if(changeEco['vaule'] != 0){    // 최대 오염도를 수정해야 하면
+
+    if(changeEco['value'] != 0){    // 최대 오염도를 수정해야 하면
         updateEco(changeEco);
     }
     if(getItem != ""){  // 얻은 아이템이 있으면

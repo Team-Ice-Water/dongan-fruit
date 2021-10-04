@@ -44,21 +44,6 @@ var userInfo = {
     health: 0
 }
 
-var itemInfo = {
-    tumbler: 0,
-    flowerpot: 0,
-    mic: 0,
-    basket: 0,
-    book: 0, 
-    vitamin: 0,
-    bicycle: 0, 
-    bible: 0, 
-    soap: 0, 
-    soapnut: 0, 
-    ginseng: 0,
-    item_count: 0
-}
-
 var ecoLevelInfo = {
     air: 0,
     soil: 0,
@@ -130,63 +115,7 @@ function endingRequest() {
     };
 }
 
-// 아이템 정보 요청
-function itemRequest() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../getItemInfo.php');
-    xhr.send();
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState === 4 && xhr.status === 200){
-            let json = JSON.parse(xhr.responseText);
-            for (let key in json) {
-                const value = json[key];
-                switch (key) {
-                    case 'tumbler':
-                        itemInfo['tumbler'] = parseInt(value);
-                        break;
-                    case 'flowerpot':
-                        itemInfo['flowerpot'] = parseInt(value);
-                        break;    
-                    case 'mic':
-                        itemInfo['mic'] = parseInt(value);
-                        break;
-                    case 'basket':
-                        itemInfo['basket'] = parseInt(value);
-                        break;     
-                    case 'book':
-                        itemInfo['book'] = parseInt(value);
-                        break;
-                    case 'vitamin':
-                        itemInfo['vitamin'] = parseInt(value);
-                        break; 
-                    case 'bicycle':
-                        itemInfo['bicycle'] = parseInt(value);
-                        break;
-                    case 'bible':
-                        itemInfo['bible'] = parseInt(value);
-                        break; 
-                    case 'soap':
-                        itemInfo['soap'] = parseInt(value);
-                        break;
-                    case 'soapnut':
-                        itemInfo['soapnut'] = parseInt(value);
-                        break; 
-                    case 'ginseng':
-                        itemInfo['ginseng'] = parseInt(value);
-                        break; 
-                    default:
-                        break;
-                }
-            }
 
-            for (let key in itemInfo){
-                if(itemInfo[key] != 0){ 
-                    itemInfo['item_count']++;  
-                }
-            }
-        }
-    };
-}
 
 // 오염도 정보 요청
 function ecoRequest() {
@@ -456,7 +385,7 @@ function selectOne(list) {
 
 /* JS로딩 시 실행시키는 부분 */
 // DB로부터 정보 불러옴
-userRequest(); endingRequest(); itemRequest(); ecoRequest();
+userRequest(); endingRequest(); ecoRequest();
 
 
 if(userInfo['health'] <= 50){

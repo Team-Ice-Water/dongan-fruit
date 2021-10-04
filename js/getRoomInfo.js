@@ -1,4 +1,5 @@
 /* 날짜, 캐릭터, 상태바, 창문 띄우는 JS */
+// 메인, 스케쥴 페이지에서 사용
 const day = document.querySelector(".day");
 const toonSection = document.querySelector(".character");
 const windowSection = document.querySelector(".window");
@@ -8,13 +9,13 @@ const waterLevel = document.getElementById("water");
 const airLevel = document.getElementById("air");
 const healthLevel = document.getElementById("health");
 
-const ecoLevel = {
+var ecoLevel = {
     air: 0,
     soil: 0,
     water: 0
 }
 
-const userInfo = {
+var userInfo = {
     day: 0,
     health: 0,
     ctype: 'man1'
