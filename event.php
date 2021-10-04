@@ -6,9 +6,7 @@
 
     $reciveData = file_get_contents('php://input');
     $value = json_decode(stripcslashes($reciveData), true);
-    $userPick = intval($value['id']);
-    $eco = intval($input['eco']);
-    $changeValue = intval($input['value']);
+    $userPick = $value['id'];
 
     $day_sql = "select day from character_info where m_id='$userId'";
     $day_ret = mysqli_query($con, $day_sql);

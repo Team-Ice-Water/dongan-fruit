@@ -1,5 +1,5 @@
 <?php
-
+    // 이벤트 결과에 따른 아이템 상태 변경
     include 'connect.php';
     session_start();
     
@@ -8,8 +8,8 @@
     $reciveData = file_get_contents('php://input');
     $input = json_decode(stripcslashes($reciveData), true);
     
-    $item = intval($input['item']);
-    $type = intval($input['type']);
+    $item = $input['item'];
+    $type = $input['type'];
     
     switch ($type) {
         case 'add':
