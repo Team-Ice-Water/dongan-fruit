@@ -133,7 +133,7 @@ function endingRequest() {
 // 아이템 정보 요청
 function itemRequest() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../getItem.php');
+    xhr.open('GET', '../getItemInfo.php');
     xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){

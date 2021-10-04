@@ -54,7 +54,7 @@ var today = 0;
 // 아이템이 있어야 선택 가능한 버튼 조건 구현
 function itemRequest() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../getItem.php');
+    xhr.open('GET', '../getItemInfo.php');
     xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){

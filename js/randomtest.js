@@ -629,15 +629,15 @@ function doEvent() {
     // 2. php로 전달
     sendValue(userSelect);   
     
-    // giveItem 소모는 어떻게 반영 !?
+    
     if(changeEco['vaule'] != 0){
         const value = {id:'userSelect'};
         Object.assign(value, changeEco);
         console.log("DB에 보내는 value: ", value);
-        sendValue(value);
+        updateEco(value);
     } else{
         const value = {id:'userSelect'};
-        sendValue(value);
+        updateEco(value);
     }
 
     if(getItem != ""){  // 얻은 아이템이 있으면

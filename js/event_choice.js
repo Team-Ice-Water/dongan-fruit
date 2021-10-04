@@ -3,6 +3,9 @@ console.log(itemInfo);
 
 console.log("가진 item 갯수: ", itemInfo['item_count']);
 console.log("event_choice 열림: ", select);
+// itemInfo["basket"] == 0 // 없음
+// itemInfo["basket"] == 1 // 있음
+// itemInfo["basket"] == 2 // 손상된 상태
 
 switch (select) {
     case 'event_1':

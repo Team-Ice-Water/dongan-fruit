@@ -4,12 +4,12 @@
     
     $userId = $_SESSION['current_id'];
 
-    //$userPick = $_POST["user_pick"];
     $reciveData = file_get_contents('php://input');
     $value = json_decode(stripcslashes($reciveData), true);
-    $userPick = intval($value['user_pick']);
+    $userPick = intval($value['id']);
+    $eco = intval($input['eco']);
+    $changeValue = intval($input['value']);
 
-    //echo "선택한 것은 다음과 같습니다:  ".$userPick;
     $day_sql = "select day from character_info where m_id='$userId'";
     $day_ret = mysqli_query($con, $day_sql);
 
@@ -162,6 +162,11 @@
         //event_19 자발적
         case 'eitherBibleBook':
         case 'bothBibleBook':
+            $sql = "UPDATE character_info
+            SET $eco = $eco + $changeValue
+            WHERE m_id='$userId';";
+            break;
+
         case 'neitherBibleBook':
             break;
 
@@ -321,9 +326,12 @@
         // event_35 청지기 1단계
         case 'keeper_1_bible':
         case 'keeper_1_book':
-            $sql = "UPDATE ending_info
+            $sql = "UPDATE character_info
+            SET $eco = $eco + $changeValue
+            WHERE m_id='$userId';
+            UPDATE ending_info
             SET homeDay = $today, homeStage = 1;
-            WHERE m_id='$userId';"
+            WHERE m_id='$userId';";
             break;        
         case 'keeper_1_nothing':
             break;
@@ -375,6 +383,7 @@
 
     
     $ret = mysqli_query($con, $sql);
+    mysqli_close($con);
 ?>
 
 
