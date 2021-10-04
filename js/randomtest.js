@@ -608,7 +608,7 @@ function sendValue(value) {
 
 function updateEco(value) {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../event.php');
+    xhr.open('POST', '../changeMaxEco.php');
     xhr.setRequestHeader('Content-Type', "application/json");
     xhr.send(JSON.stringify(value));
 }
@@ -627,19 +627,12 @@ function doEvent() {
     // 1. input hidden의 value를 결과를 토대로 모달창 내용 생성
     resultModal(userSelect);
     // 2. php로 전달
-    sendValue(userSelect);   
+    sendValue({id: userSelect});          // 기본적인 오염도, 체력 수정
     
     
-    if(changeEco['vaule'] != 0){
-        const value = {id:'userSelect'};
-        Object.assign(value, changeEco);
-        console.log("DB에 보내는 value: ", value);
-        updateEco(value);
-    } else{
-        const value = {id:'userSelect'};
-        updateEco(value);
+    if(changeEco['vaule'] != 0){    // 최대 오염도를 수정해야 하면
+        updateEco(changeEco);
     }
-
     if(getItem != ""){  // 얻은 아이템이 있으면
         const value = {item: getItem, type: 'add'};
         changeItem(value);
