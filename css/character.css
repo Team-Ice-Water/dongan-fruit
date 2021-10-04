@@ -1,0 +1,76 @@
+@font-face {
+          font-family: 'CookieRunOTF-Bold';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+      }
+
+body {
+          text-align: center;
+          background-color:#85d6ff ;
+          font-family: 'CookieRunOTF-Bold', sans-serif;
+          font-size: 200.5%;
+          letter-spacing: 1.5px;
+          margin: 0;
+
+      }
+
+      /라디오버튼 디자인/
+
+      input[type='radio'] {
+        appearance: 10%; 
+        background-color: #2f2f2f;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        opacity: 50%;
+        margin: 10px;
+        border: 100px;
+      
+          &:checked {
+            opacity: 1;
+          }
+        }
+
+
+      .container {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+
+	grid-template-rows: 20% 20% 20%;
+	
+    }
+   
+      .insertCardImg{
+          float: left;
+         
+      }
+      
+      
+      input[type=submit]{
+          background-color: #fcc500;
+          font-family: 'CookieRunOTF-Bold';
+          border:none;
+          color:111;
+          border-radius: 100px;
+          width:70%;
+          height:50%;
+          font-size: 14pt;
+          margin-top:10%;
+          margin-left:20%
+      } //제출버튼
+
+      .btn>label{
+          padding: 5px 10px; border:1px solid #ccc; border-radius:3px}
+
+
+      
+
+     
+
+
+
+
+
+      
+      
