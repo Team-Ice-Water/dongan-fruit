@@ -29,8 +29,8 @@
         $oldculDay = $row['culture_day'];
         $oldculStage = $row['culture_stage'];
 
-        $oldenvDay = $row['keeper_day'];
-        $oldenvStage = $row['keeper_stage'];
+        $oldenvDay = $row['school_day'];
+        $oldenvStage = $row['school_stage'];
 
         $oldhomeDay = $row['home_day'];
         $oldhomeDay = $row['home_stage'];
@@ -57,14 +57,14 @@
             if($envDay > 0){
                 $sql .="
                     UPDATE ending_info
-                    SET keeper_day = $envDay 
+                    SET school_day = $envDay 
                     WHERE m_id='$userId';";
             }
     
             if($envStage > 0){
                 $sql .="
                     UPDATE ending_info
-                    SET keeper_stage = $envStage 
+                    SET school_stage = $envStage 
                     WHERE m_id='$userId';";
             }
         }

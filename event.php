@@ -292,7 +292,7 @@
         case 'yes_env_1_teacher':
         case 'yes_env_1_library':
             $sql = "UPDATE ending_info
-            SET keeper_day = $today, keeper_stage = 1
+            SET school = $today, school_stage = 1
             WHERE m_id='$userId';";
             break;
         case 'no_env_1_children':
@@ -311,7 +311,7 @@
             SET soil = soil-2, water = water-2, air = air-2
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET keeper_day = $today, keeper_stage = 2
+            SET school_day = $today, school_stage = 2
             WHERE m_id='$userId';";
             break;
         case 'env_2_nothing':

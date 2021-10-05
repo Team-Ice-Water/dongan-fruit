@@ -15,9 +15,9 @@
         $culStage = $row['culture_stage'];
         $culEnd = $row['culture_end_count'];
         
-        $envDay = $row['keeper_day'];
-        $envStage = $row['keeper_stage'];
-        $envEnd = $row['keeper_end_count'];
+        $envDay = $row['school_day'];
+        $envStage = $row['school_stage'];
+        $envEnd = $row['school_end_count'];
 
         $homeDay = $row['home_day'];
         $homeStage = $row['home_stage'];
