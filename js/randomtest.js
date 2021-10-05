@@ -223,6 +223,9 @@ function resultModal(choice) {
 
         // event_12 판매원
         case 'noBuyBible':
+            text = " 나: 저는 성경책이 이미 있어요! 안녕히가세요!! ";
+            break;
+        case 'yesBuyBible':
             var haveItems = [];      // 가지고 있는 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
                 if(itemInfo[key] == 1){
@@ -234,9 +237,6 @@ function resultModal(choice) {
             text = " 나: 저.. 성경책이 없는데, 혹시 제가 가지고 있는 "+matchItemTxt(giveItem)+"(이)랑 성경책을 바꿔 주실 수 있으세요? <br> 판매원: 성경을 사랑하는 멋진 친구구나! 그래, 네가 가진 물건이랑 성경책이랑 바꾸자! ";
             result = " 성경책 획득, "+matchItemTxt(giveItem)+" 소모";
             getItem = 'bible';
-            break;
-        case 'yesBuyBible':
-            text = " 나: 저는 성경책이 이미 있어요! 안녕히가세요!! ";
             break;
 
         // event_13 이웃집

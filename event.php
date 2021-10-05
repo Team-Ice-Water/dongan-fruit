@@ -192,7 +192,7 @@
         // event_23 문화 1단계
         case 'yes_culture_1':
             $sql = "UPDATE ending_info
-            SET cultureDay = $today, cultureStage = 1;
+            SET cultureDay = $today, cultureStage = 1
             WHERE m_id='$userId';";
             break;
         case 'no_culture_1':
@@ -204,7 +204,7 @@
             SET soil = soil-2, water = water-2, air = air-2, health = health -1
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET cultureDay = $today, cultureStage = 2;
+            SET cultureDay = $today, cultureStage = 2
             WHERE m_id='$userId';";
             break;
 
@@ -220,7 +220,7 @@
             SET soil = soil-2, water = water-2, air = air-2, health = health -1
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET cultureDay = $today, cultureStage = 2;
+            SET cultureDay = $today, cultureStage = 2
             WHERE m_id='$userId';";
             break;
 
@@ -236,7 +236,7 @@
             SET soil = soil-2, water = water-2, air = air-2, health = health -1
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET cultureDay = $today, cultureStage = 3;
+            SET cultureDay = $today, cultureStage = 3
             WHERE m_id='$userId';";
             break;
         case 'no_culture_3_book':
@@ -248,7 +248,7 @@
             SET soil = soil-3
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET cultureDay = $today, cultureStage = 3;
+            SET cultureDay = $today, cultureStage = 3
             WHERE m_id='$userId';";
             break;
         case 'no_culture_3_tumbler':
@@ -263,7 +263,7 @@
             SET air = air-3
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET cultureDay = $today, cultureStage = 3;
+            SET cultureDay = $today, cultureStage = 3
             WHERE m_id='$userId';";
             break;
         case 'no_culture_3_tumbler':
@@ -278,7 +278,7 @@
             SET soil = soil-10, water = water-10, air = air-10, health = health -5
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET cultureDay = $today, cultureStage = 4;
+            SET cultureDay = $today, cultureStage = 4
             WHERE m_id='$userId';";
             break;
         case 'no_culture_4':
@@ -292,7 +292,7 @@
         case 'yes_env_1_teacher':
         case 'yes_env_1_library':
             $sql = "UPDATE ending_info
-            SET envDay = $today, envStage = 1;
+            SET envDay = $today, envStage = 1
             WHERE m_id='$userId';";
             break;
         case 'no_env_1_children':
@@ -311,7 +311,7 @@
             SET soil = soil-2, water = water-2, air = air-2
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET envDay = $today, envStage = 2;
+            SET envDay = $today, envStage = 2
             WHERE m_id='$userId';";
             break;
         case 'env_2_nothing':
@@ -328,7 +328,7 @@
             SET $eco = $eco + $changeValue
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET homeDay = $today, homeStage = 1;
+            SET homeDay = $today, homeStage = 1
             WHERE m_id='$userId';";
             break;        
         case 'keeper_1_nothing':
@@ -340,7 +340,7 @@
             SET soil = soil-2, water = water-2, air = air-2
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET homeDay = $today, homeStage = 2;
+            SET homeDay = $today, homeStage = 2
             WHERE m_id='$userId';";
             break;
         case 'keeper_2_noTalk':
@@ -352,7 +352,7 @@
             SET water = water-5
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET homeDay = $today, homeStage = 3;
+            SET homeDay = $today, homeStage = 3
             WHERE m_id='$userId';";
             break;
         case 'keeper_3_noSoapnut':
@@ -369,7 +369,7 @@
             SET soil = soil-5, water = water-5, air = air-5
             WHERE m_id='$userId';
             UPDATE ending_info
-            SET homeDay = $today, homeStage = 4;
+            SET homeDay = $today, homeStage = 4
             WHERE m_id='$userId';";
             break;
         case 'keeper_4_nothing':
@@ -381,6 +381,7 @@
 
     if($sql){
         mysqli_query($con, $sql);
+        echo $sql;
     }
     
     echo $userPick;
