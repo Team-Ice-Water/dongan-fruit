@@ -31,6 +31,7 @@
                 UPDATE character_info
                 SET $item = 2
                 WHERE m_id='$userId';";
+                break;
         
         default:
             break;

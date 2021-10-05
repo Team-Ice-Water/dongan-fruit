@@ -431,6 +431,7 @@ function setOption(choice) {
             }
     
             document.querySelector('.option_38').innerHTML = btnTxt;
+            break;
     
     
         default:
