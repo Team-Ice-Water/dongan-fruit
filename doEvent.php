@@ -26,28 +26,28 @@
     if($getRet){
         $row = mysqli_fetch_array($getRet);
 
-        $oldculDay = $row['cultureDay'];
-        $oldculStage = $row['cultureStage'];
+        $oldculDay = $row['culture_day'];
+        $oldculStage = $row['culture_stage'];
 
-        $oldenvDay = $row['envDay'];
-        $oldenvStage = $row['envStage'];
+        $oldenvDay = $row['keeper_day'];
+        $oldenvStage = $row['keeper_stage'];
 
-        $oldhomeDay = $row['homeDay'];
-        $oldhomeDay = $row['homeStage'];
+        $oldhomeDay = $row['home_day'];
+        $oldhomeDay = $row['home_stage'];
         
         // 문화 엔딩 update
         if($oldculDay != $culDay){
             if($culDay > 0){
                 $sql .="
                     UPDATE ending_info
-                    SET cultureDay = $culDay 
+                    SET culture_day = $culDay 
                     WHERE m_id='$userId';";
             }
     
             if($culStage > 0){
                 $sql .="
                     UPDATE ending_info
-                    SET cultureStage = $culStage 
+                    SET culture_stage = $culStage 
                     WHERE m_id='$userId';";
             }
         }
@@ -57,14 +57,14 @@
             if($envDay > 0){
                 $sql .="
                     UPDATE ending_info
-                    SET envDay = $envDay 
+                    SET keeper_day = $envDay 
                     WHERE m_id='$userId';";
             }
     
             if($envStage > 0){
                 $sql .="
                     UPDATE ending_info
-                    SET envStage = $envStage 
+                    SET keeper_stage = $envStage 
                     WHERE m_id='$userId';";
             }
         }
@@ -75,14 +75,14 @@
             iif($homeDay > 0){
                 $sql .="
                     UPDATE ending_info
-                    SET homeDay = $homeDay 
+                    SET home_day = $homeDay 
                     WHERE m_id='$userId';";
             }
     
             if($homeStage > 0){
                 $sql .="
                     UPDATE ending_info
-                    SET homeStage = $homeStage 
+                    SET home_stage = $homeStage 
                     WHERE m_id='$userId';";
             }
         }

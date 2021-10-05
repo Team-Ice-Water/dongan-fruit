@@ -11,17 +11,17 @@
     if($ret){
         $row = mysqli_fetch_array($ret);
         
-        $culDay = $row['cultureDay'];
-        $culStage = $row['cultureStage'];
-        $culEnd = $row['cultureEnd'];
+        $culDay = $row['culture_day'];
+        $culStage = $row['culture_stage'];
+        $culEnd = $row['culture_end_count'];
         
-        $envDay = $row['envDay'];
-        $envStage = $row['envStage'];
-        $envEnd = $row['envEnd'];
+        $envDay = $row['keeper_day'];
+        $envStage = $row['keeper_stage'];
+        $envEnd = $row['keeper_end_count'];
 
-        $homeDay = $row['homeDay'];
-        $homeStage = $row['homeStage'];
-        $homeEnd = $row['homeEnd'];
+        $homeDay = $row['home_day'];
+        $homeStage = $row['home_stage'];
+        $homeEnd = $row['home_end_count'];
 
         $value = array('culDay' => $culDay,
                         'culStage' => $culStage,
