@@ -6,6 +6,7 @@
 
     $reciveData = file_get_contents('php://input');
     $input = json_decode(stripcslashes($reciveData), true);
+    // { id: "bible", water: -2, air: -2, soil: -2, health: -1 }
     $health = intval($input['health']);
     $water = intval($input['water']);
     $soil = intval($input['soil']);

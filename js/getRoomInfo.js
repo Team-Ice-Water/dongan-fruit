@@ -1,4 +1,5 @@
 /* 날짜, 캐릭터, 상태바, 창문 띄우는 JS */
+// 메인, 스케쥴 페이지에서 사용
 const day = document.querySelector(".day");
 const toonSection = document.querySelector(".character");
 const windowSection = document.querySelector(".window");
@@ -8,13 +9,13 @@ const waterLevel = document.getElementById("water");
 const airLevel = document.getElementById("air");
 const healthLevel = document.getElementById("health");
 
-const ecoLevel = {
+var ecoLevel = {
     air: 0,
     soil: 0,
     water: 0
 }
 
-const userInfo = {
+var userInfo = {
     day: 0,
     health: 0,
     ctype: 'man1'
@@ -61,7 +62,23 @@ function setEcoLevel() {
 // 상태바의 건강, 날짜 생성
 function setUserInfo() {
     changeAttr(healthLevel, userInfo, 'health');
-    day.innerHTML = userInfo['day']+'일';    
+    day.innerHTML = userInfo['day']+'일';       
+}
+var getInfo = false;
+var getItem = false;
+
+function setDetailModal() {
+    if(getInfo && getItem){   // 서버에서 정보를 여러번 받아오기를 시도하기 때문에, setUserInfo()도 여러번 호출된다. bootstrap 객체를 사용하려면 다운받아올 시간을 주어야 하는데, 결국 서버에서 값을 다 받아오면 객체도 사용할 준비가 완료되므로 클릭하면 모달창을 띄울 수 있는 이벤트를 지정할 때, 조건을 준다.
+        var myModal = new bootstrap.Modal(document.getElementById('detail-info'), {
+            keyboard: false
+        })
+        
+        $(".user-info").click(function(){
+            myModal.show();
+        });
+
+        clearInterval(makeModal);
+    }
 }
 
 // 창문 이미지 고르기
@@ -120,6 +137,7 @@ function setToon() {
 // 상태바에 수치(%) 표시
 function showLevel(id) {
     var level = id.getAttribute('aria-valuenow');
+    
     switch (id) {
         case soilLevel:
             id.innerHTML = "토양오염 "+level+"%";
@@ -131,14 +149,13 @@ function showLevel(id) {
             id.innerHTML = "대기오염 "+level+"%";
             break;
         case healthLevel:
-            id.innerHTML = "건강 "+level+"%";
+            id.innerHTML = "체력 "+level+"%";
             break;
         default:
             break;
     }
     
 }
-
 
 // 상태바의 오염도 정보 요청
 function ecoRequest() {
@@ -166,6 +183,13 @@ function ecoRequest() {
         showLevel(soilLevel);
         showLevel(waterLevel);
         showLevel(airLevel);
+
+        // 상태바 모달창을 위한 정보 세팅
+        $("#detail-info .soil").html(ecoLevel['soil']);
+        $("#detail-info .air").html(ecoLevel['air']);
+        $("#detail-info .water").html(ecoLevel['water']);
+
+        getItem = true;
     };
 }
 
@@ -197,9 +221,14 @@ function infoRequest() {
             }
         }
         setUserInfo();
+        
+        $("#detail-info .health").html(userInfo['health']);
         showLevel(healthLevel);
+        getInfo = true;
     };
 }
 
 ecoRequest();
 infoRequest();
+
+var makeModal = setInterval(setDetailModal, 1000);

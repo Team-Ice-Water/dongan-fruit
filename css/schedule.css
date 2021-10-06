@@ -12,6 +12,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 body{
     height: 100vh;  /*Viewport Height*/
@@ -74,6 +81,16 @@ day
     font-size: .75rem;
     background-color: rgba( 255, 255, 255, 0.5 );;
     border-radius: .25rem;
+}
+
+/* 상세정보 모달창*/
+#detail-info{
+    font-family: 'GmarketSansMedium';
+}
+
+.modal-body ul{
+    font-family: 'GmarketSansMedium';
+    list-style: none;
 }
 
 /*----------------------------------  

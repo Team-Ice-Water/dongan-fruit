@@ -1,91 +1,15 @@
+var item_count = 0;
+console.log(itemInfo);
+
+console.log("가진 item 갯수: ", itemInfo['item_count']);
 console.log("event_choice 열림: ", select);
-// itemInfo["basket"] == 0 // 없음
-// itemInfo["basket"] == 1 // 있음
-// itemInfo["basket"] == 2 // 손상된 상태
-var itemInfo = {
-    tumbler: 0,
-    flowerpot: 0,
-    mic: 0,
-    basket: 0,
-    book: 0, 
-    vitamin: 0,
-    bicycle: 0, 
-    bible: 0, 
-    soap: 0, 
-    soapnut: 0, 
-    ginseng: 0,
-    item_count: 0
-}
 
-// 아이템 정보 요청
-function itemRequest() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../getItemInfo.php');
-    xhr.send();
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState === 4 && xhr.status === 200){
-            let json = JSON.parse(xhr.responseText);
-            for (let key in json) {
-                const value = json[key];
-                switch (key) {
-                    case 'tumbler':
-                        itemInfo['tumbler'] = parseInt(value);
-                        break;
-                    case 'flowerpot':
-                        itemInfo['flowerpot'] = parseInt(value);
-                        break;    
-                    case 'mic':
-                        itemInfo['mic'] = parseInt(value);
-                        break;
-                    case 'basket':
-                        itemInfo['basket'] = parseInt(value);
-                        break;     
-                    case 'book':
-                        itemInfo['book'] = parseInt(value);
-                        break;
-                    case 'vitamin':
-                        itemInfo['vitamin'] = parseInt(value);
-                        break; 
-                    case 'bicycle':
-                        itemInfo['bicycle'] = parseInt(value);
-                        break;
-                    case 'bible':
-                        itemInfo['bible'] = parseInt(value);
-                        break; 
-                    case 'soap':
-                        itemInfo['soap'] = parseInt(value);
-                        break;
-                    case 'soapnut':
-                        itemInfo['soapnut'] = parseInt(value);
-                        break; 
-                    case 'ginseng':
-                        itemInfo['ginseng'] = parseInt(value);
-                        break; 
-                    default:
-                        break;
-                }
-            }
-
-            for (let key in itemInfo){
-                if((key != 'item_count') && (itemInfo[key] != 0)){ 
-                    itemInfo['item_count']++;  
-                }
-            }
-
-            setOption(select);
-        }
-    };
-}
-
-itemRequest();
-
-function setOption(choice) {
-    console.log("setoption 실행");
-    switch (choice) {
+function setting(select) {
+    switch (select) {
         case 'event_1':
             // event_1
             if(itemInfo["basket"] != 0){
-                document.querySelector('.option_1').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBasket" onclick="sendUserPick(this.name)">선택지 1 (장바구니 선택하기) </button>';
+                document.querySelector('.option_1').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBasket" onclick="sendUserPick(this.name);">선택지 1 (장바구니 선택하기) </button>';
             }else if(itemInfo["basket"] == 0){
                 document.querySelector('.option_1').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noBasket" onclick="sendUserPick(this.name)">선택지 1 (장바구니가 없다. 그냥 나간다.) </button>';
             }
@@ -94,50 +18,50 @@ function setOption(choice) {
         case 'event_2':
             // event_2
             if(itemInfo["tumbler"] != 0){
-                document.querySelector('.option_2').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesTumbler" onclick="sendUserPick(this.name);">선택지 1 (텀블러 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="yesTumbler" onclick="sendUserPick(this.name);">선택지 2 (텀블러 두고가기) </button>';
+                document.querySelector('.option_2').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesTumbler" onclick="sendUserPick(this.name);"">선택지 1 (텀블러 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noTumbler" onclick="sendUserPick(this.name);">선택지 2 (텀블러 두고가기) </button>';
             }else if(itemInfo["tumbler"] == 0){
-                document.querySelector('.option_2').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noTumbler" onclick="sendUserPick(this.name);">선택지 1 (가져갈 텀블러가 없다. 그냥 나간다.) </button>';
+                document.querySelector('.option_2').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noTumbler" onclick="sendUserPick(this.name)">선택지 1 (가져갈 텀블러가 없다. 그냥 나간다.) </button>';
             }
             break;
     
         case 'event_3':
             // event_3 -- 선택지 검토
             if(itemInfo["soap"] == 0){  // 비누 없을때 샴푸바디워시 & 물로만
-                document.querySelector('.option_3').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="Shampoowash" onclick="sendUserPick(this.name);">선택지 1 (바디워시, 샴푸 사용하기) </button> <button type="button" class="list-group-item list-group-item-action" name="waterwash" onclick="sendUserPick(this.name);">선택지 2 (물로만 샤워하기) </button>';
+                document.querySelector('.option_3').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="Shampoowash" onclick="sendUserPick(this.name)">선택지 1 (바디워시, 샴푸 사용하기) </button> <button type="button" class="list-group-item list-group-item-action" name="waterwash" onclick="sendUserPick(this.name)">선택지 2 (물로만 샤워하기) </button>';
             }else if(itemInfo["soap"] != 0){  // 비누 있을때 비누
-                document.querySelector('.option_3').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="Shampoowash" onclick="sendUserPick(this.name);">선택지 1 (바디워시, 샴푸 사용하기) </button> <button type="button" class="list-group-item list-group-item-action" name="soapwash" onclick="sendUserPick(this.name);">선택지 2 (천연비누 사용하기) </button> <button type="button" class="list-group-item list-group-item-action" name="waterwash" onclick="sendUserPick(this.name);">선택지 3 (물로만 샤워하기) </button>';
+                document.querySelector('.option_3').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="Shampoowash" onclick="sendUserPick(this.name)">선택지 1 (바디워시, 샴푸 사용하기) </button> <button type="button" class="list-group-item list-group-item-action" name="soapwash" onclick="sendUserPick(this.name)">선택지 2 (천연비누 사용하기) </button> <button type="button" class="list-group-item list-group-item-action" name="waterwash" onclick="sendUserPick(this.name)">선택지 3 (물로만 샤워하기) </button>';
             }
             break;
     
         case 'event_4':
             // event_4
             if(itemInfo["book"] != 0){
-                document.querySelector('.option_4').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBook" onclick="sendUserPick(this.name);">선택지 1 (환경지침 도서 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noBook" onclick="sendUserPick(this.name);">선택지 2 (환경지침 도서 선택 안함) </button>';
+                document.querySelector('.option_4').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBook" onclick="sendUserPick(this.name)">선택지 1 (환경지침 도서 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noBook" onclick="sendUserPick(this.name)">선택지 2 (환경지침 도서 선택 안함) </button>';
             }else if(itemInfo["book"] == 0){
-                document.querySelector('.option_4').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noBook" onclick="sendUserPick(this.name);">선택지 1 (환경지침 도서가 없다. 그냥 버린다.) </button>';
+                document.querySelector('.option_4').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noBook" onclick="sendUserPick(this.name)">선택지 1 (환경지침 도서가 없다. 그냥 버린다.) </button>';
             }
             break;
     
         case 'event_5':
             // event_5
             if(itemInfo["ginseng"] != 0 && itemInfo["vitamin"] != 0){  // 산삼O, 비타민O
-                document.querySelector('.option_5').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesGinseng" onclick="sendUserPick(this.name);">선택지 1 (최고급 산삼을 먹는다.) </button>';
-                document.querySelector('.option_5').insertAdjacentHTML('beforeend','<button type="button" class="list-group-item list-group-item-action" name="yesVitamin" onclick="sendUserPick(this.name);">선택지 2 (비타민을 먹는다.) </button>');
+                document.querySelector('.option_5').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesGinseng" onclick="sendUserPick(this.name)">선택지 1 (최고급 산삼을 먹는다.) </button>';
+                document.querySelector('.option_5').insertAdjacentHTML('beforeend','<button type="button" class="list-group-item list-group-item-action" name="yesVitamin" onclick="sendUserPick(this.name)">선택지 2 (비타민을 먹는다.) </button>');
             }else if(itemInfo["ginseng"] == 0 && itemInfo["vitamin"] != 0){  // 산삼X, 비타민O
-                document.querySelector('.option_5').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesVitamin" onclick="sendUserPick(this.name);">선택지 1 (비타민을 먹는다.)</button>';
+                document.querySelector('.option_5').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesVitamin" onclick="sendUserPick(this.name)">선택지 1 (비타민을 먹는다.)</button>';
             }else if(itemInfo["ginseng"] != 0 && itemInfo["vitamin"] == 0){  // 산삼O, 비타민X
-                document.querySelector('.option_5').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesGinseng" onclick="sendUserPick(this.name);">선택지 1 (최고급 산삼을 먹는다.)</button>';
+                document.querySelector('.option_5').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesGinseng" onclick="sendUserPick(this.name)">선택지 1 (최고급 산삼을 먹는다.)</button>';
             }else if(itemInfo["ginseng"] == 0 && itemInfo["vitamin"] == 0){  // 산삼X, 비타민X
-                document.querySelector('.option_5').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noGinsengNoVitamin" onclick="sendUserPick(this.name);">선택지 1 (건강보조제가 없다. 그냥 참는다.)</button>';
+                document.querySelector('.option_5').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noGinsengNoVitamin" onclick="sendUserPick(this.name)">선택지 1 (건강보조제가 없다. 그냥 참는다.)</button>';
             }
             break;
             
         case 'event_6':
             // event_6
             if(itemInfo["soapnut"] != 0){
-                document.querySelector('.option_6').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesSoapnut" onclick="sendUserPick(this.name);">선택지 1 (소프넛 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noSoapnut" onclick="sendUserPick(this.name);">선택지 2 (소프넛 선택 안함) </button>';
+                document.querySelector('.option_6').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesSoapnut" onclick="sendUserPick(this.name)">선택지 1 (소프넛 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noSoapnut" onclick="sendUserPick(this.name)">선택지 2 (소프넛 선택 안함) </button>';
             }else if(itemInfo["soapnut"] == 0){
-                document.querySelector('.option_6').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noSoapnut" onclick="sendUserPick(this.name);">선택지 1 (사용할 수 있는 소프넛이 없다. 세제를 사용한다.) </button>';
+                document.querySelector('.option_6').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noSoapnut" onclick="sendUserPick(this.name)">선택지 1 (사용할 수 있는 소프넛이 없다. 세제를 사용한다.) </button>';
             }
             break;
     
@@ -145,36 +69,35 @@ function setOption(choice) {
             // event_7
             var num = 1;
             if(itemInfo["bicycle"] != 0){   // 자전거 있으면
-                document.querySelector('.option_7').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBicycle" onclick="sendUserPick(this.name);">선택지 1 (자전거 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noBicycle" onclick="sendUserPick(this.name);">선택지 2 (자전거 선택 안함) </button>';                 
+                document.querySelector('.option_7').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBicycle" onclick="sendUserPick(this.name)">선택지 1 (자전거 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noBicycle" onclick="sendUserPick(this.name)">선택지 2 (자전거 선택 안함) </button>';                 
             }else if(itemInfo["bicycle"] == 0){
-                document.querySelector('.option_7').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noBicycle" onclick="sendUserPick(this.name);">선택지 1 (타고 갈 자전거가 없다. 어쩔 수 없이 차를 탄다.) </button>';
+                document.querySelector('.option_7').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noBicycle" onclick="sendUserPick(this.name)">선택지 1 (타고 갈 자전거가 없다. 어쩔 수 없이 차를 탄다.) </button>';
             }    
             break;
     
         case 'event_8':
             // event_8
             if(itemInfo["bible"] != 0){
-                document.querySelector('.option_8').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBible" onclick="sendUserPick(this.name);">선택지 1 (성경책 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noBible" onclick="sendUserPick(this.name);">선택지 2 (성경책 선택 안함) </button>';
+                document.querySelector('.option_8').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBible" onclick="sendUserPick(this.name)">선택지 1 (성경책 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noBible" onclick="sendUserPick(this.name)">선택지 2 (성경책 선택 안함) </button>';
             }else if(itemInfo["bible"] == 0){
-                document.querySelector('.option_8').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noBible" onclick="sendUserPick(this.name);">선택지 1 (성경책이 없다. 그냥 나간다.) </button>';
+                document.querySelector('.option_8').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noBible" onclick="sendUserPick(this.name)">선택지 1 (성경책이 없다. 그냥 나간다.) </button>';
             } 
             break;
     
         case 'event_12':
             // event_12
             if(itemInfo["bible"] != 0){  // 성경책 있으면 구매 X
-                document.querySelector('.option_12').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noBuyBible" onclick="sendUserPick(this.name);">선택지 1 (성경책 구입 안함) </button>';
+                document.querySelector('.option_12').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noBuyBible" onclick="sendUserPick(this.name)">선택지 1 (성경책 구입 안함) </button>';
             }else if(itemInfo["bible"] == 0){  // 성경책 없으면 구매 O
-                document.querySelector('.option_12').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBuyBible" onclick="sendUserPick(this.name);">선택지 1 (성경책 구입하기) </button>';
+                document.querySelector('.option_12').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBuyBible" onclick="sendUserPick(this.name)">선택지 1 (성경책 구입하기) </button>';
             }  
             break;
     
         case 'event_13':
             if(itemInfo["soap"] != 0){
-                document.querySelector('.option_13').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesGiveSoap" onclick="sendUserPick(this.name);">선택지 1 (천연비누를 주기) </button> <button type="button" class="list-group-item list-group-item-action" name="noGiveSoap" onclick="sendUserPick(this.name);">선택지 2 (천연비누를 주지 않음) </button>';
+                document.querySelector('.option_13').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesGiveSoap" onclick="sendUserPick(this.name)">선택지 1 (천연비누를 주기) </button> <button type="button" class="list-group-item list-group-item-action" name="noGiveSoap" onclick="sendUserPick(this.name)">선택지 2 (천연비누를 주지 않음) </button>';
             }else if(itemInfo["soap"] == 0){
-                console.log('비누 없음/ ', itemInfo);
-                document.querySelector('.option_13').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noGiveSoap" onclick="sendUserPick(this.name);">선택지 1 (천연비누가 없다. 아주머니께 천연비누가 없다고 얘기한다.) </button>';
+                document.querySelector('.option_13').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noGiveSoap" onclick="sendUserPick(this.name)">선택지 1 (천연비누가 없다. 아주머니께 천연비누가 없다고 얘기한다.) </button>';
             }
             break;
     
@@ -182,18 +105,18 @@ function setOption(choice) {
             // event_14 - 검토하기
             if((ecoLevelInfo['air'] + ecoLevelInfo['soil'] + ecoLevelInfo['water']) < 130){
                 // 오염수치 총합이 130미만 일 때, pollution_below130
-                document.querySelector('.option_14').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="pollution_below130" onclick="sendUserPick(this.name);">선택지 1 (환경운동가의 이야기를 들어본다) </button>';
+                document.querySelector('.option_14').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="pollution_below130" onclick="sendUserPick(this.name)">선택지 1 (환경운동가의 이야기를 들어본다) </button>';
             }else if((ecoLevelInfo['air'] + ecoLevelInfo['soil'] + ecoLevelInfo['water']) >= 130){
                 // 오염수치 총합이 130이상 일 때, pollution_above130
-                document.querySelector('.option_14').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="pollution_above130" onclick="sendUserPick(this.name);">선택지 1 (환경운동가의 이야기를 들어본다) </button>';
+                document.querySelector('.option_14').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="pollution_above130" onclick="sendUserPick(this.name)">선택지 1 (환경운동가의 이야기를 들어본다) </button>';
             }
             break;
     
         case 'event_15':
             if(itemInfo["flowerpot"] != 0){
-                document.querySelector('.option_15').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesFlowerpot" onclick="sendUserPick(this.name);">선택지 1 (화분 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noFlowerpot" onclick="sendUserPick(this.name);">선택지 2 (화분 선택하지 않음) </button>';
+                document.querySelector('.option_15').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesFlowerpot" onclick="sendUserPick(this.name)">선택지 1 (화분 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noFlowerpot" onclick="sendUserPick(this.name)">선택지 2 (화분 선택하지 않음) </button>';
             }else if(itemInfo["flowerpot"] == 0){
-                document.querySelector('.option_15').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noFlowerpot" onclick="sendUserPick(this.name);">선택지 1 (가지고 있는 화분이 없다) </button>';
+                document.querySelector('.option_15').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noFlowerpot" onclick="sendUserPick(this.name)">선택지 1 (가지고 있는 화분이 없다) </button>';
             }
             break;
     
@@ -201,10 +124,10 @@ function setOption(choice) {
             // event_16
             if(itemInfo['item_count'] >= 6){
                 // 갖고 있는 아이템이 6개 이상이다.
-                document.querySelector('.option_16').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="above_6_item" onclick="sendUserPick(this.name);">선택지 1 (방 청소를 시작한다) </button>';
+                document.querySelector('.option_16').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="above_6_item" onclick="sendUserPick(this.name)">선택지 1 (방 청소를 시작한다) </button>';
             }else if(itemInfo['item_count'] < 6){
                 // 6개 미만, below_6_item
-                document.querySelector('.option_16').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="below_6_item" onclick="sendUserPick(this.name);">선택지 1 (방 청소를 시작한다) </button>';
+                document.querySelector('.option_16').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="below_6_item" onclick="sendUserPick(this.name)">선택지 1 (방 청소를 시작한다) </button>';
             }
             break;
     
@@ -212,16 +135,16 @@ function setOption(choice) {
             // event_18 - 검토
             if(itemInfo["basket"] != 0 && itemInfo["bicycle"] != 0){    
                 // 장바구니O 자전거O
-                document.querySelector('.option_18').innerHTML = ' <button type="button" class="list-group-item list-group-item-action" name="eitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 1 (자전거만 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="eitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 2 (장바구니만 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="bothBicycleBasket" onclick="sendUserPick(this.name);">선택지 3 (자전거와 장바구니 둘 다 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="neitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 4 (자전거와 장바구니를 모두 가져가지 않는다.) </button>';
+                document.querySelector('.option_18').innerHTML = ' <button type="button" class="list-group-item list-group-item-action" name="eitherBicycleBasket" onclick="sendUserPick(this.name)">선택지 1 (자전거만 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="eitherBicycleBasket" onclick="sendUserPick(this.name)">선택지 2 (장바구니만 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="bothBicycleBasket" onclick="sendUserPick(this.name)">선택지 3 (자전거와 장바구니 둘 다 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="neitherBicycleBasket" onclick="sendUserPick(this.name)">선택지 4 (자전거와 장바구니를 모두 가져가지 않는다.) </button>';
             }else if(itemInfo["basket"] == 0 && itemInfo["bicycle"] != 0){ 
                 // 장바구니X 자전거O
-                document.querySelector('.option_18').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="eitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 1 (자전거를 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="neitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 2 (자전거를 가져가지 않는다.) </button>';
+                document.querySelector('.option_18').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="eitherBicycleBasket" onclick="sendUserPick(this.name)">선택지 1 (자전거를 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="neitherBicycleBasket" onclick="sendUserPick(this.name)">선택지 2 (자전거를 가져가지 않는다.) </button>';
             }else if(itemInfo["basket"] != 0 && itemInfo["bicycle"] == 0){
                 // 장바구니O 자전거X
-                document.querySelector('.option_18').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="eitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 1 (장바구니를 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="neitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 2 (장바구니를 가져가지 않는다.) </button>';
+                document.querySelector('.option_18').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="eitherBicycleBasket" onclick="sendUserPick(this.name)">선택지 1 (장바구니를 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="neitherBicycleBasket" onclick="sendUserPick(this.name)">선택지 2 (장바구니를 가져가지 않는다.) </button>';
             }else if(itemInfo["basket"] == 0 && itemInfo["bicycle"] == 0){
                 // 장바구니X 자전거X
-                document.querySelector('.option_18').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="neitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 1 (가져갈 수 있는 장바구니와 자전거가 없다. 빈손으로 차를 타고간다.) </button>';
+                document.querySelector('.option_18').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="neitherBicycleBasket" onclick="sendUserPick(this.name)">선택지 1 (가져갈 수 있는 장바구니와 자전거가 없다. 빈손으로 차를 타고간다.) </button>';
             }
             break;
     
@@ -229,13 +152,13 @@ function setOption(choice) {
             // event_19 - 검토
             if(itemInfo["bible"] != 0 && itemInfo["book"] != 0){
                 // 성경O 책O
-                document.querySelector('.option_19').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="eitherBibleBook" onclick="sendUserPick(this.name);">선택지 1 (환경지침 도서만 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="eitherBibleBook" onclick="sendUserPick(this.name);">선택지 2 (성경책만 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="bothBibleBook" onclick="sendUserPick(this.name);">선택지 1 (성경책과 환경지침 도서 둘 다 선택하기) </button>';
+                document.querySelector('.option_19').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="eitherBibleBook" onclick="sendUserPick(this.name)">선택지 1 (환경지침 도서만 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="eitherBibleBook" onclick="sendUserPick(this.name)">선택지 2 (성경책만 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="bothBibleBook" onclick="sendUserPick(this.name)">선택지 1 (성경책과 환경지침 도서 둘 다 선택하기) </button>';
             }else if(itemInfo["bible"] == 0 && itemInfo["book"] != 0){
                 // 성경X 책O
-                document.querySelector('.option_19').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="eitherBibleBook" onclick="sendUserPick(this.name);" >선택지 1 (환경지침 도서 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="neitherBibleBook" onclick="sendUserPick(this.name);" >선택지 2 (환경지침 도서 선택하지 않음) </button>';
+                document.querySelector('.option_19').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="eitherBibleBook" onclick="sendUserPick(this.name)" >선택지 1 (환경지침 도서 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="neitherBibleBook" onclick="sendUserPick(this.name)" >선택지 2 (환경지침 도서 선택하지 않음) </button>';
             }else if(itemInfo["bible"] != 0 && itemInfo["book"] == 0){
                 // 성경O 책X
-                document.querySelector('.option_19').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="eitherBibleBook" onclick="sendUserPick(this.name);" >선택지 1 (성경책 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="neitherBibleBook" onclick="sendUserPick(this.name);" >선택지 2 (성경책 선택하지 않음) </button>';
+                document.querySelector('.option_19').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="eitherBibleBook" onclick="sendUserPick(this.name)" >선택지 1 (성경책 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="neitherBibleBook" onclick="sendUserPick(this.name);" >선택지 2 (성경책 선택하지 않음) </button>';
             }else if(itemInfo["bible"] == 0 && itemInfo["book"] == 0){
                 // 성경X 책X
                 document.querySelector('.option_19').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="neitherBibleBook" onclick="sendUserPick(this.name);" >선택지 1 (찾아볼 수 있는 성경책과 환경지침 도서가 없다.) </button>';
@@ -304,7 +227,7 @@ function setOption(choice) {
             if(itemInfo["book"] != 0){
                 document.querySelector('.option_30').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yes_env_1_children" onclick="sendUserPick(this.name);" >선택지 1 (환경지침 도서를 가지러 간다.)</button> <button type="button" class="list-group-item list-group-item-action" name="no_env_1_children" onclick="sendUserPick(this.name);" >선택지 2 (환경지침 도서를 가지러 가지 않는다.)</button>';
             }else if(itemInfo["book"] == 0){
-                document.querySelector('.option_30').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="no_env_1_children" onclick="sendUserPick(this.name);" >선택지 1 (보여줄 수 있는 환경지침 도서가 없다)</button>';
+                document.querySelector('.option_30').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="no_env_1_children" sendUserPick(this.name) >선택지 1 (보여줄 수 있는 환경지침 도서가 없다)</button>';
             }
             break;
     
