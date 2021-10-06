@@ -8,31 +8,30 @@
     $reciveData = file_get_contents('php://input');
     $input = json_decode(stripcslashes($reciveData), true);
     
-    $item = $input['item'];
-    $type = $input['type'];
+    $type = $input['id'];
     
     switch ($type) {
-        case 'add':
+        case 'culture':
             $sql ="
                 UPDATE character_info
-                SET $item = 1 
+                SET culture_end_count = culture_end_count +1 
                 WHERE m_id='$userId';";
             break;
 
-        case 'remove':
+        case 'school':
             $sql ="
                 UPDATE character_info
-                SET $item = 0 
+                SET school_end_count = school_end_count +1 
                 WHERE m_id='$userId';";
             break;
 
-        case 'damage':
+        case 'home':
             $sql ="
                 UPDATE character_info
-                SET $item = 2
+                SET home_end_count = home_end_count +1
                 WHERE m_id='$userId';";
             break;
-        
+              
         default:
             break;
     }

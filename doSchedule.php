@@ -1,4 +1,6 @@
 <?php
+    // 스케쥴, 하루 시작 브리핑 페이지에서 변하는 오염도와 체력을 업데이트함
+
     include 'connect.php';
     session_start();
     
@@ -23,8 +25,7 @@
         $oldWater = $row['water'];
         $oldSoil = $row['soil'];
         $oldAir = $row['air'];
-
-
+        
         // 체력 update
         if($health){
             if(100 < ($oldHealth + $health)){   // 100을 초과할 수 없음
@@ -42,12 +43,19 @@
 
         // 수질 오염도 update
         if($water){
-            if(100 < ($oldWater + $water)){   // 100을 초과할 수 없음
+            if(100 < ($oldWater + $water)){
                 $sql .= "
                 UPDATE character_info
                 SET water=100 
                 WHERE m_id='$userId';";
-            } else{
+            }
+            else if(($oldWater + $water) <= 0){
+                $sql .= "
+                UPDATE character_info
+                SET water = 0 
+                WHERE m_id='$userId';";
+            }
+            else{
                 $sql .= "
                 UPDATE character_info
                 SET water=water+($water) 
@@ -57,12 +65,19 @@
 
         // 토양 오염도 update
         if($soil){
-            if(100 < ($oldWater + $water)){   // 100을 초과할 수 없음
+            if(100 < ($oldSoil + $soil)){
                 $sql .= "
                 UPDATE character_info
                 SET soil=100 
                 WHERE m_id='$userId';";
-            } else{
+            }
+            else if(($oldSoil + $soil) <= 0){
+                $sql .= "
+                UPDATE character_info
+                SET soil = 0 
+                WHERE m_id='$userId';";
+            }
+            else{
                 $sql .= "
                 UPDATE character_info
                 SET soil=soil+($soil) 
@@ -72,35 +87,54 @@
 
         // 대기 오염도 update
         if($air){
-            if(100 < ($oldWater + $water)){   // 100을 초과할 수 없음
+            if(100 < ($oldAir + $air)){   // 100을 초과할 수 없음
                 $sql .= "
                 UPDATE character_info
                 SET air=100
                 WHERE m_id='$userId';";
-            } else{
+            }
+            else if(($oldAir + $air) <= 0){
+                $sql .= "
+                UPDATE character_info
+                SET air = 0 
+                WHERE m_id='$userId';";
+            }
+            else{
                 $sql .= "
                 UPDATE character_info
                 SET air=air+($air)
                 WHERE m_id='$userId';";
             }
         }
-        
 
-    }
 
-    if (mysqli_multi_query($con, $sql)) {
-        do {
-              // store first result set
-              if ($result = mysqli_store_result($con)) {    
-                    // fetch one and one row
-                    while ($row = mysqli_fetch_row($result)) {
-                        echo $row[0];
-                    }
-                    // free result set
-                    mysqli_free_result($result);
-              }
-        } while (mysqli_more_results($con) && mysqli_next_result($con));
-    }
+        if (mysqli_multi_query($con, $sql)) {
+            do {
+                // store first result set
+                if ($result = mysqli_store_result($con)) {    
+                        // fetch one and one row
+                        while ($row = mysqli_fetch_row($result)) {
+                            echo $row[0];
+                        }
+                        // free result set
+                        mysqli_free_result($result);
+                }
+            } while (mysqli_more_results($con) && mysqli_next_result($con));
+        } 
+
+        if(($oldHealth + $health) <= 0){
+            echo 'health_ending';
+        } else if(80 < ($oldWater + $water)){
+            echo 'water_ending';
+        } else if(80 < ($oldSoil + $soil)){
+            echo 'soil_ending';
+        } else if(80 < ($oldAir + $air)){
+            echo 'air_ending';
+        } else if(220 < ($oldWater + $water + $oldSoil + $soil + $oldAir + $air)){
+            echo 'earth_ending';
+        }
+
+    }    
     
     mysqli_close($con);
 ?>

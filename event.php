@@ -381,10 +381,16 @@
 
     if($sql){
         mysqli_query($con, $sql);
-        echo $sql;
+        echo $sql ;
     }
+
+    $update_sql = "
+        UPDATE character_info
+        SET done_event = true
+        WHERE m_id='$userId';";
+    mysqli_query($con, $update_sql);
     
-    echo $userPick;
+    echo  $userPick;
     mysqli_close($con);
 ?>
 

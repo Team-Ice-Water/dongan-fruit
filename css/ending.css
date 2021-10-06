@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.content{
+    margin: 3rem;
+    padding: 1rem;
+
+    font-family: 'DungGeunMo', 'PFStardust';  
+    font-size: 1.5rem;
+    /*text-align: center;*/
+
+    border: 0.8rem double #263D48;
+    background-color: white;
+    width: 80vw;
+    height: 20vh;
+}
+
+
+/* 깜빡이는 커서 */
+.blink {
+    animation: blink 0.5s infinite;
+    font-size: 2rem;
+}
+  
+@keyframes blink {
+    to {
+      opacity: 0;
+    }
+}
