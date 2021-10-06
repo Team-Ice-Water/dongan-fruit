@@ -11,13 +11,6 @@ const ending = [
 ]
 
 
-
-$(document).ready(function(){
-    $("body").slideDown('slow');
-})
-
-
-
 $(document).ready(function() {
     const temp = location.href.split("?");
     //const data= temp[1].split(":");
@@ -28,7 +21,7 @@ $(document).ready(function() {
         if(value['id'] == data){
             $('body').css( "background", "url('../img/ending/"+data+".png') no-repeat center/cover" );
             $('body').css( "height", "100vh" );
-            content = value['text']
+            content = value['text'];
             var interval  = setInterval(typing, 130); // .text 에 글쓰기
         }
     }
