@@ -14,8 +14,9 @@
 
 body{
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .content{
@@ -32,6 +33,10 @@ body{
     height: 20vh;
 }
 
+.startBtn{
+    align-self: center;
+    margin: auto;   /*위의 남는(flex-end로 시작) 여백을 모두 나눠가져서 정중앙 배치가 됨*/
+}
 
 /* 깜빡이는 커서 */
 .blink {

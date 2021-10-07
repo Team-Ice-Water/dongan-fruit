@@ -7,7 +7,8 @@ const ending = [
     {id: 'soil', text: "청지기의 역할을 잘 감당하지 못해서 토양오염이 너무 심해졌구나. \n토양오염이 심해져서 지구는 식물이 살지 못하는 땅이 되었단다. 다시 기회를 줄 테니 다시 한 번 청지기로서 잘 살아가보렴."},
     { id: "earth", text: "청지기의 역할을 잘 감당하지 못해서 모든 오염이 너무 심해졌구나. \n모든 오염도가 너무 심해져서 지구가 버티지 못하고 멸망해 버렸단다. 다시 기회를 줄 테니 다시 한 번 청지기로서 잘 살아가보렴."},
     { id: "health", text: "청지기의 역할에만 너무 집중하다가 너의 몸을 돌보지 못했구나. \n열심히 하는 것은 좋지만 너의 몸을 잘 돌보면서 행복하게 살아갔으면 좋겠구나. 다시 기회를 줄 테니 다시 한 번 청지기로서 잘 살아가보렴."},
-    {id: 'normal', text: "청지기의 역할을 잘 감당했구나. 덕분에 지구가 많이 살기 좋아졌단다. \n 하지만 혼자 노력하는 것이 아니라 다른 사람들과 함께 협력해 보면 어떻겠니? 그럼 더 좋을 것 같구나."}
+    {id: 'normal', text: "청지기의 역할을 잘 감당했구나. 덕분에 지구가 많이 살기 좋아졌단다. \n 하지만 혼자 노력하는 것이 아니라 다른 사람들과 함께 협력해 보면 어떻겠니? 그럼 더 좋을 것 같구나."},
+    {id: 'test', text: "끝났다 ~"}
 ]
 
 
@@ -22,7 +23,12 @@ $(document).ready(function() {
             $('body').css( "background", "url('../img/ending/"+data+".png') no-repeat center/cover" );
             $('body').css( "height", "100vh" );
             content = value['text'];
-            var interval  = setInterval(typing, 130); // .text 에 글쓰기
+            var interval  = setInterval(typing, 180); // .text 에 글쓰기
+        } else if(value['id'] == data){
+            $('body').css( "background", "url('../img/ending/water.png') no-repeat center/cover" );
+            $('body').css( "height", "100vh" );
+            content = value['text'];
+            var interval  = setInterval(typing, 180); // .text 에 글쓰기
         }
     }
     
