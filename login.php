@@ -2,8 +2,8 @@
     session_start();
     include 'connect.php';
 
-    if (isset($_POST["userid"])){
-        $userID = $_POST["userid"];
+    if (isset($_POST["username"])){
+        $userID = $_POST["username"];
         $userPW = $_POST["password"];
         // 아이디가 member table에 있는지 확인
         $sql = "select * from member where m_id='$userID'";
@@ -25,7 +25,7 @@
                     $_SESSION['current_id']=$userID;    //세선 변수 생성
 ?>                  <script>
                         alert( '로그인 성공' );
-                        location.href = '/startPage.html';
+                        location.href = '/start.html';
                     </script>
 <?php
                 }
