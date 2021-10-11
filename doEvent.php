@@ -3,6 +3,7 @@
     session_start();
     
     $userId = $_SESSION['current_id'];
+    $userToon = $_SESSION['current_toon'];
 
     $reciveData = file_get_contents('php://input');
     $input = json_decode(stripcslashes($reciveData), true);
@@ -20,7 +21,7 @@
     $sql = "";
 
     // 기존 데이터(이벤트 실행 전)를 가져와서 비교한다.
-    $getSql = "select * from character_info where m_id='$userId'";
+    $getSql = "select * from character_info where m_id='$userId' AND cname = '$userToon';";
     $getRet = mysqli_query($con, $getSql);
 
     if($getRet){
@@ -41,14 +42,14 @@
                 $sql .="
                     UPDATE ending_info
                     SET culture_day = $culDay 
-                    WHERE m_id='$userId';";
+                    WHERE m_id='$userId' AND cname = '$userToon';";
             }
     
             if($culStage > 0){
                 $sql .="
                     UPDATE ending_info
                     SET culture_stage = $culStage 
-                    WHERE m_id='$userId';";
+                    WHERE m_id='$userId' AND cname = '$userToon';";
             }
         }
 
@@ -58,14 +59,14 @@
                 $sql .="
                     UPDATE ending_info
                     SET school_day = $envDay 
-                    WHERE m_id='$userId';";
+                    WHERE m_id='$userId' AND cname = '$userToon';";
             }
     
             if($envStage > 0){
                 $sql .="
                     UPDATE ending_info
                     SET school_stage = $envStage 
-                    WHERE m_id='$userId';";
+                    WHERE m_id='$userId' AND cname = '$userToon';";
             }
         }
 
@@ -76,14 +77,14 @@
                 $sql .="
                     UPDATE ending_info
                     SET home_day = $homeDay 
-                    WHERE m_id='$userId';";
+                    WHERE m_id='$userId' AND cname = '$userToon';";
             }
     
             if($homeStage > 0){
                 $sql .="
                     UPDATE ending_info
                     SET home_stage = $homeStage 
-                    WHERE m_id='$userId';";
+                    WHERE m_id='$userId' AND cname = '$userToon';";
             }
         }
     }

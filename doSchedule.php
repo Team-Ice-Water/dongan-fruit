@@ -5,6 +5,7 @@
     session_start();
     
     $userId = $_SESSION['current_id'];
+    $userToon = $_SESSION['current_toon'];
 
     $reciveData = file_get_contents('php://input');
     $input = json_decode(stripcslashes($reciveData), true);
@@ -15,7 +16,7 @@
     $air = intval($input['air']);
 
 
-    $getSql = "select * from character_info where m_id='$userId'";
+    $getSql = "select * from character_info where m_id='$userId' AND cname = '$userToon';";
     $getRet = mysqli_query($con, $getSql);
 
     if($getRet){
@@ -32,12 +33,12 @@
                 $sql ="
                 UPDATE character_info
                 SET health = 100 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             } else{
                 $sql = "
                 UPDATE character_info
                 SET health= health +($health) 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             }
         }
 
@@ -47,19 +48,19 @@
                 $sql .= "
                 UPDATE character_info
                 SET water=100 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             }
             else if(($oldWater + $water) <= 0){
                 $sql .= "
                 UPDATE character_info
                 SET water = 0 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             }
             else{
                 $sql .= "
                 UPDATE character_info
                 SET water=water+($water) 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             }
         }
 
@@ -69,19 +70,19 @@
                 $sql .= "
                 UPDATE character_info
                 SET soil=100 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             }
             else if(($oldSoil + $soil) <= 0){
                 $sql .= "
                 UPDATE character_info
                 SET soil = 0 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             }
             else{
                 $sql .= "
                 UPDATE character_info
                 SET soil=soil+($soil) 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             }
         }
 
@@ -91,19 +92,19 @@
                 $sql .= "
                 UPDATE character_info
                 SET air=100
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             }
             else if(($oldAir + $air) <= 0){
                 $sql .= "
                 UPDATE character_info
                 SET air = 0 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             }
             else{
                 $sql .= "
                 UPDATE character_info
                 SET air=air+($air)
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             }
         }
 

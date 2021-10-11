@@ -4,8 +4,9 @@
     session_start();
     
     $userId = $_SESSION['current_id'];
+    $userToon = $_SESSION['current_toon'];
     // 해당 id의 정보 선택
-    $sql = "select * from character_info where m_id='$userId'";
+    $sql = "select * from character_info where m_id='$userId' AND cname = '$userToon';";
     $ret = mysqli_query($con, $sql);
 
     if($ret){

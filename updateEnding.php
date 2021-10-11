@@ -4,6 +4,7 @@
     session_start();
     
     $userId = $_SESSION['current_id'];
+    $userToon = $_SESSION['current_toon'];
 
     $reciveData = file_get_contents('php://input');
     $input = json_decode(stripcslashes($reciveData), true);
@@ -15,21 +16,21 @@
             $sql ="
                 UPDATE character_info
                 SET culture_end_count = culture_end_count +1 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         case 'school':
             $sql ="
                 UPDATE character_info
                 SET school_end_count = school_end_count +1 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         case 'home':
             $sql ="
                 UPDATE character_info
                 SET home_end_count = home_end_count +1
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             break;
               
         default:

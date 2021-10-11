@@ -25,7 +25,7 @@
                     $_SESSION['current_id']=$userID;    //세선 변수 생성
 ?>                  <script>
                         alert( '로그인 성공' );
-                        location.href = '/mypage.php';
+                        location.href = '/startPage.html';
                     </script>
 <?php
                 }
@@ -39,6 +39,6 @@
             echo "실패 원인: ".mysqli_error($con);
         }
     }
-    
+
     mysqli_close($con);
 ?>

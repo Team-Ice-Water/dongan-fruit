@@ -3,6 +3,7 @@
     session_start();
     
     $userId = $_SESSION['current_id'];
+    $userToon = $_SESSION['current_toon'];
 
     $reciveData = file_get_contents('php://input');
     $input = json_decode(stripcslashes($reciveData), true);
@@ -24,7 +25,7 @@
     UPDATE character_info
     SET tumbler = $tumbler, flowerpot = $flowerpot, mic = $mic, basket = $basket,
     book = $book, vitamin = $vitamin, bicycle = $bicycle, bible = $bible, soap = $soap, soapnut = $soapnut, ginseng = $ginseng
-    WHERE m_id='$userId';";
+    WHERE m_id='$userId' AND cname = '$userToon';";
 
     $ret = mysqli_query($con, $sql);
     
