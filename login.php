@@ -39,4 +39,6 @@
             echo "실패 원인: ".mysqli_error($con);
         }
     }
+    
+    mysqli_close($con);
 ?>
