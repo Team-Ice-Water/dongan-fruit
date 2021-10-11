@@ -37,7 +37,7 @@ body {
     text-align: center;
 }
 
-#container {
+#game-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,26 +65,11 @@ ul > li {
 /*----------------------------------  
 Header
 ------------------------------------*/
-
-h1{
-    font-size: 3em;
+.title h1{
+    font-size: 5.5em;
     font-weight: 300;
     font-family: 'CookieRunOTF-Black';
 }
-
-h2{
-    font-size: 2.5em;
-    font-weight: 600;
-}
-
-p{
-    font-size: 1.6em;
-}
-
-h3{
-    font-weight: 500;
-}
-
 
 /*----------------------------------  
 Section - 점수판
@@ -109,28 +94,34 @@ Section - 점수판
 
 
 /*----------------------------------  
-Section - Modal
+Section - Result Modal
 ------------------------------------*/
-.modal-content{
-    height: 60%;
-    max-height: 50vh;
+.modal-dialog{
+    height: 65%;
+    max-height: 30vh;
 }
 
 .modal-body{
-    padding: 4rem 1rem !important;
-    display: grid;
+    padding: 4em 1em !important;
+    /*display: grid;
     grid-template-rows: 5fr 3fr 2fr;
-    gap: 2rem;
+    gap: 2em;
     justify-items: center;
+    align-items: center;*/
+    display: flex;
     align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
-p.stats{
+.modal-body h2{
     font-weight: 600;
 }
 
-p.stats:last-child{
+p.item{
+    font-weight: 500;
     margin-bottom: 2em;
+    background-color: #CEFD0C;
 }
 
 
@@ -238,7 +229,7 @@ img{
 
     /*.deck img{
         width: 9em;
-    }*/
+    }
 
     .modal-content h2 {
         font-size: 4em;
@@ -246,19 +237,13 @@ img{
 
     .modal-content a{
         font-size: 1.8em;
-    }
+    }*/
 }
 
 /*---------------------------------- 
 Desktops
 ------------------------------------*/
 @media screen and (min-width: 800px) {
-    h1 {
-        font-size: 6em;
-    }
-    p {
-        font-size: 2.3em;
-    }
     .deck{
         height: 70em;
         width: 85em;
@@ -267,16 +252,18 @@ Desktops
         height: 15em;
         width: 15em;
     }
-    /*.deck-img{
-        width: 13em;
-    }*/
+
     .footer{
         font-size: 1.2em;
     }
+    /*.deck-img{
+        width: 13em;
+    }
+    
     .modal-content h2{
         font-size: 5em;
     }
     .modal-content a{
         font-size: 2em;
-    }
+    }*/
 }
