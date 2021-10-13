@@ -47,7 +47,7 @@ body {
       }
       
       
-      input[type=submit]{
+      .button{
           background-color: #fcc500;
           font-family: 'CookieRunOTF-Bold';
           border:none;
