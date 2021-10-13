@@ -99,7 +99,7 @@ function random(percent) {
     }
 }
 
-function resultModal(choice) {
+function setResultModal(choice) {
     var text = "";
     var result = "";
     switch (choice) {
@@ -293,7 +293,7 @@ function resultModal(choice) {
             console.log("(above_6_item) 가진 아이템: ", haveItems);          
             giveItem = chooseItem(haveItems);
             text = "흠 쓰지 않는 물건들이 너무 많네."+matchItemTxt(giveItem)+ "을(를) 버려야겠다.";
-            result = giveItem+" 소모";
+            result = matchItemTxt(giveItem)+" 소모";
             break;
 
         case 'below_6_item':
@@ -601,70 +601,47 @@ function resultModal(choice) {
     $("#result").html(result);
 }
 
-function sendValue(value) {
-    console.log("sendValue(): ", value);
-    // php에 정보를 보냄 (= 선택결과에 따른 DB 변경)
+
+function sendValue(value, location) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
-            console.log("sendValue응답:", xhr.responseText);
+            console.log("응답:", xhr.responseText);
         }
     };
-    xhr.open('POST', '../event.php');
+    xhr.open('POST', '../'+location);
     xhr.setRequestHeader('Content-Type', "application/json");
     xhr.send(JSON.stringify(value));
 }
-
-function updateEco(value) {
-    console.log("updateEco(): ", value);
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../changeMaxEco.php');
-    xhr.onload = function(){
-        if(xhr.readyState === 4 && xhr.status === 200){
-            console.log("changeMaxEco응답:", xhr.responseText);
-        }
-    };
-    xhr.setRequestHeader('Content-Type', "application/json");
-    xhr.send(JSON.stringify(value));
-}
-
-function changeItem(value) {
-    console.log("changeItem(): ", value);
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../changeItem.php');
-    xhr.onload = function(){
-        if(xhr.readyState === 4 && xhr.status === 200){
-            console.log("changeItem응답:", xhr.responseText);
-        }
-    };
-    xhr.setRequestHeader('Content-Type', "application/json");
-    xhr.send(JSON.stringify(value));
-}
-
 
 function doEvent() {
     
     console.log('전송하는 user_pick: ', userSelect);
     // 1. input hidden의 value를 결과를 토대로 모달창 내용 생성
-    resultModal(userSelect);
+    setResultModal(userSelect);
     // 2. php로 전달
-    sendValue({id: userSelect});          // 기본적인 오염도, 체력 수정
-    
+    sendValue({id: userSelect}, 'event.php'); // 기본적인 오염도, 체력 수정
 
     if(changeEco['value'] != 0){    // 최대 오염도를 수정해야 하면
-        updateEco(changeEco);
+        sendValue(changeEco, 'changeMaxEco.php');
     }
     if(getItem != ""){  // 얻은 아이템이 있으면
         const value = {item: getItem, type: 'add'};
-        changeItem(value);
+        sendValue(value, 'changeItem.php');
     }
     if(giveItem != ""){
         const value = {item: giveItem, type: 'remove'};
-        changeItem(value);
+        sendValue(value, 'changeItem.php');
     }
     if(damageItem != ""){   // 손상된 아이템이 있으면
         const value = {item: damageItem, type: 'damage'};
-        changeItem(value);
+        sendValue(value, 'changeItem.php');
     }
-    
+
+    var resultModal = document.getElementById('result-modal');
+
+    resultModal.addEventListener('hidden.bs.modal', function (event) {
+        console.log("닫힘 이벤트 발생");
+        (location || window.location || document.location).reload();
+    })
 }

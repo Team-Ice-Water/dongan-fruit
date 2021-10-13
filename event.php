@@ -380,14 +380,14 @@
           break;
     }
 
-    if($sql){
+    if($sql){   // 변화가 없으면 sql 값이 없음
         mysqli_query($con, $sql);
         echo $sql ;
     }
 
     $update_sql = "
         UPDATE character_info
-        SET done_event = true
+        SET done_event = $today
         WHERE m_id='$userId' AND cname = '$userToon';";
     mysqli_query($con, $update_sql);
     

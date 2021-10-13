@@ -1,4 +1,5 @@
-console.log("event_choice 열림: ", select);
+// event.js 로부터 모달의 id를 받아 이벤트 모달 내용을 채우고, 띄우는 JS
+
 // itemInfo["basket"] == 0 // 없음
 // itemInfo["basket"] == 1 // 있음
 // itemInfo["basket"] == 2 // 손상된 상태
@@ -16,6 +17,8 @@ var itemInfo = {
     ginseng: 0,
     item_count: 0
 }
+
+var interval;
 
 // 아이템 정보 요청
 function itemRequest() {
@@ -71,21 +74,28 @@ function itemRequest() {
                     itemInfo['item_count']++;  
                 }
             }
-
-            setOption(select);
+            // event.js에서 select(띄울 모달의 id)를 넘겨줘야 하는데 첫 실행 시점에서는 select가 없을 수도 있음.
+            // 기다리면 값이 넘어옴 -> 그 때 실행해야 함 -> 반복 실행시켜둠
+            let interval  = setInterval(()=>{
+                if(select){
+                    console.log("실행 성공!");
+                    clearInterval(interval);
+                    setOption(select);
+                }
+            }, 200);
         }
     };
 }
 
-itemRequest();
-
 function setOption(choice) {
-    console.log("event_choice.js의 setoption() 실행");
-    switch (choice) {
+    // 매개변수 choice는 {id: 'event_9'} 형식
+    console.log("event_choice.js의 setoption() 실행 ", choice);
+
+    switch (choice.id) {
         case 'event_1':
             // event_1
-            $('.modal-title').text("장을 보러간다.");
-            $('.modal-body .passage').html("오늘은 장을 보러가는 날이다. 따라가서 과자랑 아이스크림도 사달라고 해야지! </br> 장바구니 챙기라고 했는데 어디에 있더라...?");
+            $('#event #event-title').text("장을 보러간다.");
+            $('#event #event-passage').html("오늘은 장을 보러가는 날이다. 따라가서 과자랑 아이스크림도 사달라고 해야지! </br> 장바구니 챙기라고 했는데 어디에 있더라...?");
 
             if(itemInfo["basket"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBasket" onclick="sendUserPick(this.name)">선택지 1 (장바구니 선택하기) </button>';
@@ -96,8 +106,8 @@ function setOption(choice) {
     
         case 'event_2':
             // event_2
-            $('.modal-title').text("카페를 간다.");
-            $('.modal-body .passage').html("오늘은 친구들이랑 약속이 있는데 빡다방에서 만나야겠다! </br> 사라다 빵이랑 아이스 초코 한잔 해야지! </br> 엄마! 저 나갔다올게요!");
+            $('#event #event-title').text("카페를 간다.");
+            $('#event #event-passage').html("오늘은 친구들이랑 약속이 있는데 빡다방에서 만나야겠다! </br> 사라다 빵이랑 아이스 초코 한잔 해야지! </br> 엄마! 저 나갔다올게요!");
 
             if(itemInfo["tumbler"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesTumbler" onclick="sendUserPick(this.name);">선택지 1 (텀블러 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="yesTumbler" onclick="sendUserPick(this.name);">선택지 2 (텀블러 두고가기) </button>';
@@ -108,8 +118,8 @@ function setOption(choice) {
     
         case 'event_3':
             // event_3 -- 선택지 검토
-            $('.modal-title').text("땀이 많이 났다.");
-            $('.modal-body .passage').html("하나 둘! 하나 둘! 나는 태권도 노랑띠다. </br> 빨리 검은띠가 되고 싶은 맘에 오늘도 도장에서 땀으로 흠뻑 젖을 때까지 발차기를 하고 왔다. </br> 이제 샤워를 해볼까??");
+            $('#event #event-title').text("땀이 많이 났다.");
+            $('#event #event-passage').html("하나 둘! 하나 둘! 나는 태권도 노랑띠다. </br> 빨리 검은띠가 되고 싶은 맘에 오늘도 도장에서 땀으로 흠뻑 젖을 때까지 발차기를 하고 왔다. </br> 이제 샤워를 해볼까??");
 
             if(itemInfo["soap"] == 0){  // 비누 없을때 샴푸바디워시 & 물로만
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="Shampoowash" onclick="sendUserPick(this.name);">선택지 1 (바디워시, 샴푸 사용하기) </button> <button type="button" class="list-group-item list-group-item-action" name="waterwash" onclick="sendUserPick(this.name);">선택지 2 (물로만 샤워하기) </button>';
@@ -120,8 +130,8 @@ function setOption(choice) {
     
         case 'event_4':
             // event_4
-            $('.modal-title').text("분리수거 날이다.");
-            $('.modal-body .passage').html("오늘은 우리 집 분리수거 날이다. </br> 이번주는 내가 분리수거 할 차례구나! 분리수거할 쓰레기가 가득하군! 빨리 갖다 버려야겠다! </br> 그런데 이게 플라스틱이야 캔이야? 헷갈리네...?");
+            $('#event #event-title').text("분리수거 날이다.");
+            $('#event #event-passage').html("오늘은 우리 집 분리수거 날이다. </br> 이번주는 내가 분리수거 할 차례구나! 분리수거할 쓰레기가 가득하군! 빨리 갖다 버려야겠다! </br> 그런데 이게 플라스틱이야 캔이야? 헷갈리네...?");
 
             if(itemInfo["book"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBook" onclick="sendUserPick(this.name);">선택지 1 (환경지침 도서 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noBook" onclick="sendUserPick(this.name);">선택지 2 (환경지침 도서 선택 안함) </button>';
@@ -132,8 +142,8 @@ function setOption(choice) {
     
         case 'event_5':
             // event_5
-            $('.modal-title').text("건강보조제");
-            $('.modal-body .passage').html("요즘 너무 컨디션이 안좋은걸? 공부를 열심히 해서 그런가? </br> 안되겠다. 몸 보신을 좀 해야겠다!");
+            $('#event #event-title').text("건강보조제");
+            $('#event #event-passage').html("요즘 너무 컨디션이 안좋은걸? 공부를 열심히 해서 그런가? </br> 안되겠다. 몸 보신을 좀 해야겠다!");
 
             if(itemInfo["ginseng"] != 0 && itemInfo["vitamin"] != 0){  // 산삼O, 비타민O
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesGinseng" onclick="sendUserPick(this.name);">선택지 1 (최고급 산삼을 먹는다.) </button>';
@@ -149,8 +159,8 @@ function setOption(choice) {
             
         case 'event_6':
             // event_6
-            $('.modal-title').text("설거지");
-            $('.modal-body .passage').html("친구들과 집에서 떡볶이를 만들어 먹었다. 꿀맛이었다. </br> 헉! 싱크대를 보니 설거지가 쌓여있네..! </br> 설거지 담당 정하기 가위 바위 보를 했는데 내가 걸렸다. </br> 후훗... 고무장갑을 끼고.. 세제를 어떤거로 쓸까?");
+            $('#event #event-title').text("설거지");
+            $('#event #event-passage').html("친구들과 집에서 떡볶이를 만들어 먹었다. 꿀맛이었다. </br> 헉! 싱크대를 보니 설거지가 쌓여있네..! </br> 설거지 담당 정하기 가위 바위 보를 했는데 내가 걸렸다. </br> 후훗... 고무장갑을 끼고.. 세제를 어떤거로 쓸까?");
 
             if(itemInfo["soapnut"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesSoapnut" onclick="sendUserPick(this.name);">선택지 1 (소프넛 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noSoapnut" onclick="sendUserPick(this.name);">선택지 2 (소프넛 선택 안함) </button>';
@@ -161,8 +171,8 @@ function setOption(choice) {
     
         case 'event_7':
             // event_7
-            $('.modal-title').text("집 근처 이동");
-            $('.modal-body .passage').html("이제 곧 영어학원을 갈 시간이다. 걸어가기엔 좀 힘들거 같은데,,,  </br> 자전거를 타고 갈까 아니면 엄마나 아빠한테 차로 데려다달라고 할까?");
+            $('#event #event-title').text("집 근처 이동");
+            $('#event #event-passage').html("이제 곧 영어학원을 갈 시간이다. 걸어가기엔 좀 힘들거 같은데,,,  </br> 자전거를 타고 갈까 아니면 엄마나 아빠한테 차로 데려다달라고 할까?");
 
             var num = 1;
             if(itemInfo["bicycle"] != 0){   // 자전거 있으면
@@ -174,8 +184,8 @@ function setOption(choice) {
     
         case 'event_8':
             // event_8
-            $('.modal-title').text("환경 단체 방문");
-            $('.modal-body .passage').html("오늘은 전도사님들과 친구들과 함께 환경 단체 견학을 가는 날이다! </br> 일정표를 한번 볼까? 모여서..음.. 먼저 예배를 하고 출발하는구나! </br> 그렇다면 성경책을 챙겨가야겠군!?");
+            $('#event #event-title').text("환경 단체 방문");
+            $('#event #event-passage').html("오늘은 전도사님들과 친구들과 함께 환경 단체 견학을 가는 날이다! </br> 일정표를 한번 볼까? 모여서..음.. 먼저 예배를 하고 출발하는구나! </br> 그렇다면 성경책을 챙겨가야겠군!?");
 
             if(itemInfo["bible"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesBible" onclick="sendUserPick(this.name);">선택지 1 (성경책 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noBible" onclick="sendUserPick(this.name);">선택지 2 (성경책 선택 안함) </button>';
@@ -185,29 +195,29 @@ function setOption(choice) {
             break;
 
         case 'event_9':
-            $('.modal-title').text("친구 방문");
-            $('.modal-body .passage').html("(똑똑똑) </br> 생일을 맞이해서, 친구가 선물을 전해 주었어요. </br> “ 환경을 사랑하는 너에게 꼭 필요한 선물인거 같아서 준비했어 ” ");
+            $('#event #event-title').text("친구 방문");
+            $('#event #event-passage').html("(똑똑똑) </br> 생일을 맞이해서, 친구가 선물을 전해 주었어요. </br> “ 환경을 사랑하는 너에게 꼭 필요한 선물인거 같아서 준비했어 ” ");
             $('.option').html('<button type="button" class="list-group-item list-group-item-action" name="yesChildren" onclick="sendUserPick(this.name)">선택지 1 (선물을 받는다)</button>');
             break;
 
         case 'event_10':
-            $('.modal-title').text("선생님의 심방");
-            $('.modal-body .passage').html("(똑똑똑) </br> 교회학교 선생님이 집으로 찾아왔어요. </br> “하나님이 창조한 자연을 사랑하고 있었니?, 이게 꼭 필요할 거 같아서 가져왔단다. 선물로 줄게” ");
+            $('#event #event-title').text("선생님의 심방");
+            $('#event #event-passage').html("(똑똑똑) </br> 교회학교 선생님이 집으로 찾아왔어요. </br> “하나님이 창조한 자연을 사랑하고 있었니?, 이게 꼭 필요할 거 같아서 가져왔단다. 선물로 줄게” ");
 
             $('.option').html('<button type="button" class="list-group-item list-group-item-action" name="yesTeacher" onclick="sendUserPick(this.name)">선택지 1 (선물을 받는다)</button>');
             break;
 
         case 'event_11':
-            $('.modal-title').text("교회 전도대");
-            $('.modal-body .passage').html("“예수님 믿으세요~” </br> 앗 우리교회 전도대다! 나도 같이 예수님의 사랑을 전해야지! </br> “오늘 고생많았단다~ 이거 선물로 줄게”");
+            $('#event #event-title').text("교회 전도대");
+            $('#event #event-passage').html("“예수님 믿으세요~” </br> 앗 우리교회 전도대다! 나도 같이 예수님의 사랑을 전해야지! </br> “오늘 고생많았단다~ 이거 선물로 줄게”");
 
             $('.option').html('<button type="button" class="list-group-item list-group-item-action" name="yesChurch" onclick="sendUserPick(this.name)">선택지 1 (선물을 받는다)</button>');
             break;
     
         case 'event_12':
             // event_12
-            $('.modal-title').text("성경책 판매");
-            $('.modal-body .passage').html("(똑똑똑) </br> 성경책을 파는 아저씨가 찾아왔어요. </br> “성경책 팝니다”");
+            $('#event #event-title').text("성경책 판매");
+            $('#event #event-passage').html("(똑똑똑) </br> 성경책을 파는 아저씨가 찾아왔어요. </br> “성경책 팝니다”");
 
             if(itemInfo["bible"] != 0){  // 성경책 있으면 구매 X
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="noBuyBible" onclick="sendUserPick(this.name);">선택지 1 (성경책 구입 안함) </button>';
@@ -217,8 +227,8 @@ function setOption(choice) {
             break;
     
         case 'event_13':
-            $('.modal-title').text("이웃집 방문");
-            $('.modal-body .passage').html("(똑똑똑) </br> 이웃집 아주머니가 찾아왔어요. </br> “우리 아이가 아토피가 심해서 그러는데 혹시 천연비누를 줄 수 있니?”");
+            $('#event #event-title').text("이웃집 방문");
+            $('#event #event-passage').html("(똑똑똑) </br> 이웃집 아주머니가 찾아왔어요. </br> “우리 아이가 아토피가 심해서 그러는데 혹시 천연비누를 줄 수 있니?”");
 
             if(itemInfo["soap"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesGiveSoap" onclick="sendUserPick(this.name);">선택지 1 (천연비누를 주기) </button> <button type="button" class="list-group-item list-group-item-action" name="noGiveSoap" onclick="sendUserPick(this.name);">선택지 2 (천연비누를 주지 않음) </button>';
@@ -230,8 +240,8 @@ function setOption(choice) {
     
         case 'event_14':
             // event_14 - 검토하기
-            $('.modal-title').text("환경운동가 방문");
-            $('.modal-body .passage').html("(똑똑똑) </br> 초록 옷을 입은 환경운동가가 방문을 했어요.</br> “여러분 우리는 자연을 사랑해야 합니다!”");
+            $('#event #event-title').text("환경운동가 방문");
+            $('#event #event-passage').html("(똑똑똑) </br> 초록 옷을 입은 환경운동가가 방문을 했어요.</br> “여러분 우리는 자연을 사랑해야 합니다!”");
 
             if((ecoLevelInfo['air'] + ecoLevelInfo['soil'] + ecoLevelInfo['water']) < 130){
                 // 오염수치 총합이 130미만 일 때, pollution_below130
@@ -243,8 +253,8 @@ function setOption(choice) {
             break;
     
         case 'event_15':
-            $('.modal-title').text("식목일 이벤트");
-            $('.modal-body .passage').html("오늘은 식목일이구나? </br> 그동안 집에서 무럭무럭 키우던 화분을 옆 동산에 심어야겠다.");
+            $('#event #event-title').text("식목일 이벤트");
+            $('#event #event-passage').html("오늘은 식목일이구나? </br> 그동안 집에서 무럭무럭 키우던 화분을 옆 동산에 심어야겠다.");
 
             if(itemInfo["flowerpot"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yesFlowerpot" onclick="sendUserPick(this.name);">선택지 1 (화분 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="noFlowerpot" onclick="sendUserPick(this.name);">선택지 2 (화분 선택하지 않음) </button>';
@@ -255,8 +265,8 @@ function setOption(choice) {
     
         case 'event_16':
             // event_16
-            $('.modal-title').text("집안 대청소");
-            $('.modal-body .passage').html("부모님이 집안 대청소를 하자고 하시네. </br> 좋아! 나도 내 방을 청소해보자.");
+            $('#event #event-title').text("집안 대청소");
+            $('#event #event-passage').html("부모님이 집안 대청소를 하자고 하시네. </br> 좋아! 나도 내 방을 청소해보자.");
 
             if(itemInfo['item_count'] >= 6){
                 // 갖고 있는 아이템이 6개 이상이다.
@@ -268,16 +278,16 @@ function setOption(choice) {
             break;
 
         case 'event_17':
-            $('.modal-title').text("전도사님 찬스");
-            $('.modal-body .passage').html("음.. 환경을 보호하기 위해서는 뭔가 더 필요할꺼같은데.. </br> 아! 전도사님이 필요할 때 전화하라 하셨어!");
+            $('#event #event-title').text("전도사님 찬스");
+            $('#event #event-passage').html("음.. 환경을 보호하기 위해서는 뭔가 더 필요할꺼같은데.. </br> 아! 전도사님이 필요할 때 전화하라 하셨어!");
 
             $('.option').html('<button type="button" class="list-group-item list-group-item-action" name="evangelist_chance" onclick="sendUserPick(this.name)">선택지 1 (전도사님께 전화한다)</button>');
             break;
 
         case 'event_18':
             // event_18 - 검토
-            $('.modal-title').text("친구들 초대");
-            $('.modal-body .passage').html("내일은 친구들이 집에 놀러오는 날이니, 음식을 준비해야겠다. </br> 장을 보러 마트에 가야할꺼같은데..필요한게 뭐있지?");
+            $('#event #event-title').text("친구들 초대");
+            $('#event #event-passage').html("내일은 친구들이 집에 놀러오는 날이니, 음식을 준비해야겠다. </br> 장을 보러 마트에 가야할꺼같은데..필요한게 뭐있지?");
 
             if(itemInfo["basket"] != 0 && itemInfo["bicycle"] != 0){    
                 // 장바구니O 자전거O
@@ -296,8 +306,8 @@ function setOption(choice) {
     
         case 'event_19':
             // event_19 - 검토
-            $('.modal-title').text("자발적 청지기");
-            $('.modal-body .passage').html("하나님께서 사랑하는 자연이 깨끗해 지기 위해서 내가 실천할 수 있는 것은 무엇이 있을까? </br> 어디서 찾아봐야하지..?");
+            $('#event #event-title').text("자발적 청지기");
+            $('#event #event-passage').html("하나님께서 사랑하는 자연이 깨끗해 지기 위해서 내가 실천할 수 있는 것은 무엇이 있을까? </br> 어디서 찾아봐야하지..?");
 
             if(itemInfo["bible"] != 0 && itemInfo["book"] != 0){
                 // 성경O 책O
@@ -315,30 +325,30 @@ function setOption(choice) {
             break;
 
         case 'event_20':
-            $('.modal-title').text("자연 착취 이벤트 1");
-            $('.modal-body .passage').html("오늘은 체력이 많이 없기 때문에 에어컨을 빵빵하게 틀고 쉬어야겠다.");
+            $('#event #event-title').text("자연 착취 이벤트 1");
+            $('#event #event-passage').html("오늘은 체력이 많이 없기 때문에 에어컨을 빵빵하게 틀고 쉬어야겠다.");
 
             $('.option').html('<button type="button" class="list-group-item list-group-item-action" name="yes_nature_1" onclick="sendUserPick(this.name)">선택지 1 (에어컨을 튼다.)</button> <button type="button" class="list-group-item list-group-item-action" name="no_nature_1" onclick="sendUserPick(this.name)">선택지 2 (에어컨을 틀지 않는다.)</button>');
             break;
 
         case 'event_21':
-            $('.modal-title').text("자연 착취 이벤트 2");
-            $('.modal-body .passage').html("오늘은 너무 덥다. 환경을 지키는 것도 중요하지만 내 건강이 더 중요하다. </br> 이런 상황에선 샤워를 하루에 다섯 번은 해줘야지.");
+            $('#event #event-title').text("자연 착취 이벤트 2");
+            $('#event #event-passage').html("오늘은 너무 덥다. 환경을 지키는 것도 중요하지만 내 건강이 더 중요하다. </br> 이런 상황에선 샤워를 하루에 다섯 번은 해줘야지.");
 
             $('.option').html('<button type="button" class="list-group-item list-group-item-action" name="yes_nature_2" onclick="sendUserPick(this.name)">선택지 1 (샤워 하기)</button> <button type="button" class="list-group-item list-group-item-action" name="no_nature_2" onclick="sendUserPick(this.name)">선택지 2 (샤워 안하기)</button>');
             break;
 
         case 'event_22':
-            $('.modal-title').text("자연 착취 이벤트 3");
-            $('.modal-body .passage').html("아이 배고파. 일단 지금 너무 배고프니까 음식을 많이 담아야지. </br> 남으면 어쩔 수 없지.");
+            $('#event #event-title').text("자연 착취 이벤트 3");
+            $('#event #event-passage').html("아이 배고파. 일단 지금 너무 배고프니까 음식을 많이 담아야지. </br> 남으면 어쩔 수 없지.");
 
             $('.option').html(' <button type="button" class="list-group-item list-group-item-action" name="yes_nature_3" onclick="sendUserPick(this.name)">선택지 1 (음식을 충분히 많이 담는다.)</button> <button type="button" class="list-group-item list-group-item-action" name="no_nature_3" onclick="sendUserPick(this.name)">선택지 2 (음식을 적당히 담는다.)</button>');
             break;
     
     
         case 'event_23':
-            $('.modal-title').text("성경책 이벤트");
-            $('.modal-body .passage').html("어휴 책상이 언제 이렇게 더러워졌지. 간만에 책상 좀 치워볼까?");
+            $('#event #event-title').text("성경책 이벤트");
+            $('#event #event-passage').html("어휴 책상이 언제 이렇게 더러워졌지. 간만에 책상 좀 치워볼까?");
 
             if(itemInfo["bible"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yes_culture_1" onclick="sendUserPick(this.name);" >선택지 1 (성경책 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="no_culture_1" onclick="sendUserPick(this.name);" >선택지 2 (성경책 선택하지 않음) </button>';
@@ -348,8 +358,8 @@ function setOption(choice) {
             break;
     
         case 'event_24':
-            $('.modal-title').text("전도사님 이벤트");
-            $('.modal-body .passage').html("자 오늘은 성경퀴즈대회를 할 거예요. 모두 성경책 준비됐죠? 없는 친구들은 프린트물을 나눠 줄게요");
+            $('#event #event-title').text("전도사님 이벤트");
+            $('#event #event-passage').html("자 오늘은 성경퀴즈대회를 할 거예요. 모두 성경책 준비됐죠? 없는 친구들은 프린트물을 나눠 줄게요");
 
             if(itemInfo["bible"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yes_culture_2_bible" onclick="sendUserPick(this.name);" >선택지 1 (성경책을 챙겨간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="no_culture_2_bible" onclick="sendUserPick(this.name);" >선택지 2 (무거우니 성경책은 두고 간다.) </button>';
@@ -360,8 +370,8 @@ function setOption(choice) {
     
         case 'event_25':
             // 문화 2단계 - 발표 
-            $('.modal-title').text("발표 이벤트");
-            $('.modal-body .passage').html("저번 주에 들은 하나님의 창조세계에 대해 발표해 볼 친구 있나요?");
+            $('#event #event-title').text("발표 이벤트");
+            $('#event #event-passage').html("저번 주에 들은 하나님의 창조세계에 대해 발표해 볼 친구 있나요?");
 
             if(itemInfo["mic"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yes_culture_2_mic" onclick="sendUserPick(this.name);" >선택지 1 (발표 하기) </button> <button type="button" class="list-group-item list-group-item-action" name="no_culture_2_mic" onclick="sendUserPick(this.name);" >선택지 2 (발표 안하기) </button>';
@@ -372,8 +382,8 @@ function setOption(choice) {
     
         case 'event_26':
             // 문화 3단계 - 환경보호 동아리
-            $('.modal-title').text("환경보호 동아리");
-            $('.modal-body .passage').html("자 오늘은 동아리 활동 시간이에요. 모두 원하는 동아리를 선택해보세요.");
+            $('#event #event-title').text("환경보호 동아리");
+            $('#event #event-passage').html("자 오늘은 동아리 활동 시간이에요. 모두 원하는 동아리를 선택해보세요.");
 
             if(itemInfo["book"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yes_culture_3_book" onclick="sendUserPick(this.name);" >선택지 1 (환경 보호 동아리를 간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="no_culture_3_book" onclick="sendUserPick(this.name);" >선택지 2 (환경 동아리가 아닌 다른 동아리로 간다.) </button>';
@@ -384,8 +394,8 @@ function setOption(choice) {
     
         case 'event_27':
             // 문화 3단계 - 간식
-            $('.modal-title').text("간식");
-            $('.modal-body .passage').html("오늘은 선생님이 특별 간식을 준비했어요. 나와서 과자와 음료수를 받아가세요~");
+            $('#event #event-title').text("간식");
+            $('#event #event-passage').html("오늘은 선생님이 특별 간식을 준비했어요. 나와서 과자와 음료수를 받아가세요~");
 
             if(itemInfo["tumbler"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yes_culture_3_tumbler" onclick="sendUserPick(this.name);" >선택지 1 (텀블러를 챙겨간다) </button> <button type="button" class="list-group-item list-group-item-action" name="no_culture_3_tumbler" onclick="sendUserPick(this.name);" >선택지 2 (텀블러를 두고간다) </button>';
@@ -396,8 +406,8 @@ function setOption(choice) {
     
         case 'event_28':
             // 문화 3단계 - 자전거
-            $('.modal-title').text("자전거");
-            $('.modal-body .passage').html("앗 늦잠을 자버렸다! 빨리 학교 가야하는데!");
+            $('#event #event-title').text("자전거");
+            $('#event #event-passage').html("앗 늦잠을 자버렸다! 빨리 학교 가야하는데!");
 
             if(itemInfo["bicycle"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yes_culture_3_bicycle" onclick="sendUserPick(this.name);" >선택지 1 (자전거를 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action" name="no_culture_3_bicycle" onclick="sendUserPick(this.name);" >선택지 2 (빠른 자동차를 이용한다.) </button>';
@@ -408,8 +418,8 @@ function setOption(choice) {
     
         case 'event_29':
             // 문화 3단계 - 동네청소
-            $('.modal-title').text("동네청소");
-            $('.modal-body .passage').html("전도사님이 어딜 바쁘게 가시네. “전도사님 어디가세요?” </br> “오 반가워라. 지금 교회에서 우리 동네를 청소하러 간다고 하는데 너도 같이 갈래?");
+            $('#event #event-title').text("동네청소");
+            $('#event #event-passage').html("전도사님이 어딜 바쁘게 가시네. “전도사님 어디가세요?” </br> “오 반가워라. 지금 교회에서 우리 동네를 청소하러 간다고 하는데 너도 같이 갈래?");
 
             if(userInfo["health"] >= 70){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yes_culture_4" onclick="sendUserPick(this.name);" >선택지 1 (체력이 충분하다. 전도사님과 함께 청소한다.) </button>';
@@ -420,8 +430,8 @@ function setOption(choice) {
     
         case 'event_30':
             // 환경지킴이 1단계 - 친구들과 환경지침도서
-            $('.modal-title').text("친구들과 환경지침도서");
-            $('.modal-body .passage').html("환경지침도서라는게 있다고? 그거 꼭 필요한 중요한 책 같은데... 친구들과 같이 읽었으면 좋겠다.");
+            $('#event #event-title').text("친구들과 환경지침도서");
+            $('#event #event-passage').html("환경지침도서라는게 있다고? 그거 꼭 필요한 중요한 책 같은데... 친구들과 같이 읽었으면 좋겠다.");
 
             if(itemInfo["book"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yes_env_1_children" onclick="sendUserPick(this.name);" >선택지 1 (환경지침 도서를 가지러 간다.)</button> <button type="button" class="list-group-item list-group-item-action" name="no_env_1_children" onclick="sendUserPick(this.name);" >선택지 2 (환경지침 도서를 가지러 가지 않는다.)</button>';
@@ -432,8 +442,8 @@ function setOption(choice) {
     
         case 'event_31':
             // 환경지킴이 1단계 - 선생님과 환경지침도서
-            $('.modal-title').text("선생님과 환경지침도서");
-            $('.modal-body .passage').html("환경지침도서라는게 있다고? 그거 꼭 필요한 중요한 책 같은데... 선생님께 내용을 물어볼까?");
+            $('#event #event-title').text("선생님과 환경지침도서");
+            $('#event #event-passage').html("환경지침도서라는게 있다고? 그거 꼭 필요한 중요한 책 같은데... 선생님께 내용을 물어볼까?");
 
             if(itemInfo["book"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yes_env_1_teacher" onclick="sendUserPick(this.name);" >선택지 1 (선생님께 여쭤본다.) </button> <button type="button" class="list-group-item list-group-item-action" name="no_env_1_teacher" onclick="sendUserPick(this.name);" >선택지 2 (환경지침도서 선택 안함) </button>';
@@ -444,8 +454,8 @@ function setOption(choice) {
         
         case 'event_32':
             // 환경지킴이 1단계 - 도서실에 환경지침도서
-            $('.modal-title').text("도서실에 환경지침도서");
-            $('.modal-body .passage').html("환경지침도서라는게 있다고? 그거 꼭 필요한 중요한 책 같은데... 도서실에는 있나??");
+            $('#event #event-title').text("도서실에 환경지침도서");
+            $('#event #event-passage').html("환경지침도서라는게 있다고? 그거 꼭 필요한 중요한 책 같은데... 도서실에는 있나??");
 
             if(itemInfo["book"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="yes_env_1_library" onclick="sendUserPick(this.name);" >선택지 1 (환경지침도서 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="no_env_1_teacher" onclick="sendUserPick(this.name);" >선택지 2 (환경지침도서 선택 안함) </button>';
@@ -456,8 +466,8 @@ function setOption(choice) {
     
         case 'event_33':
             // 환경지킴이 2단계 - 환경 물품 기부
-            $('.modal-title').text("환경 물품 기부");
-            $('.modal-body .passage').html("앗! 학교에서 환경지킴 이벤트를 진행하네? 환경을 지키기 위해 필요한 물건을 모으고 있구나. 나는 무엇을 줄 수 있을까?");
+            $('#event #event-title').text("환경 물품 기부");
+            $('#event #event-passage').html("앗! 학교에서 환경지킴 이벤트를 진행하네? 환경을 지키기 위해 필요한 물건을 모으고 있구나. 나는 무엇을 줄 수 있을까?");
 
             var num = 1;
             var btnTxt = "";
@@ -485,8 +495,8 @@ function setOption(choice) {
     
         case 'event_34':
             // 환경지킴이 2단계 - 화장실 리모델링
-            $('.modal-title').text("화장실 리모델링");
-            $('.modal-body .passage').html("우리의 힘으로 우리 학교를 환경 지킴이 학교로 변화시켜보자! 먼저 화장실부터 바꿔볼까?");
+            $('#event #event-title').text("화장실 리모델링");
+            $('#event #event-passage').html("우리의 힘으로 우리 학교를 환경 지킴이 학교로 변화시켜보자! 먼저 화장실부터 바꿔볼까?");
 
             var num = 1;
             var btnTxt = "";
@@ -514,8 +524,8 @@ function setOption(choice) {
     
         case 'event_35':
             // 청지기 1단계 - 부모님 설득
-            $('.modal-title').text("부모님 설득");
-            $('.modal-body .passage').html("전도사님은 나뿐만 아니라 우리 가정도 하나님의 청지기가 되어야 한다고 하셨어! </br> 내가 우리 가정을 하나님의 청지기다운 가정으로 바꾸어봐야겠다!");
+            $('#event #event-title').text("부모님 설득");
+            $('#event #event-passage').html("전도사님은 나뿐만 아니라 우리 가정도 하나님의 청지기가 되어야 한다고 하셨어! </br> 내가 우리 가정을 하나님의 청지기다운 가정으로 바꾸어봐야겠다!");
 
             var num = 1;
             var btnTxt = "";
@@ -540,16 +550,16 @@ function setOption(choice) {
 
         case 'event_36':
             // 청지기 2단계 - 변화하는 가정
-            $('.modal-title').text("변화하는 가정");
-            $('.modal-body .passage').html("부모님이 무언가 결단하신 표정으로 나에게 오셨다. 무슨 일이지?");
+            $('#event #event-title').text("변화하는 가정");
+            $('#event #event-passage').html("부모님이 무언가 결단하신 표정으로 나에게 오셨다. 무슨 일이지?");
 
             $('.option').html('<button type="button" class="list-group-item list-group-item-action" name="keeper_2_yesTalk" onclick="sendUserPick(this.name)">선택지 1 (부모님과 대화한다.)</button> <button type="button" class="list-group-item list-group-item-action" name="keeper_2_noTalk" onclick="sendUserPick(this.name)">선택지 2 (부모님과 대화하지 않는다.)</button>');
             break;
     
         case 'event_37':
             // 청지기 3단계 - 주방세제
-            $('.modal-title').text("주방세제");
-            $('.modal-body .passage').html("부모님이 주방세제는 환경에 좋지 않으니 좋은 방법이 없냐고 물어보신다.");
+            $('#event #event-title').text("주방세제");
+            $('#event #event-passage').html("부모님이 주방세제는 환경에 좋지 않으니 좋은 방법이 없냐고 물어보신다.");
 
             if(itemInfo["soapnut"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action" name="keeper_3_yesSoapnut" onclick="sendUserPick(this.name);" >선택지 1 (소프넛 선택하기) </button> <button type="button" class="list-group-item list-group-item-action" name="keeper_3_noSoapnut" onclick="sendUserPick(this.name);" >선택지 2 (소프넛 선택하지 않음) </button>';
@@ -560,8 +570,8 @@ function setOption(choice) {
     
         case 'event_38':
             // 청지기 4단계 - 앞장서는 부모님
-            $('.modal-title').text("앞장서는 부모님");
-            $('.modal-body .passage').html("부모님께서 주변 이웃들에게도 자발적 불편함을 알려주려고 하신다. 어떻게 하면 부모님을 도와드릴 수 있을까?");
+            $('#event #event-title').text("앞장서는 부모님");
+            $('#event #event-passage').html("부모님께서 주변 이웃들에게도 자발적 불편함을 알려주려고 하신다. 어떻게 하면 부모님을 도와드릴 수 있을까?");
 
             var num = 1;
             var btnTxt = "";
@@ -589,9 +599,24 @@ function setOption(choice) {
     
     
         default:
+            console.log('switch문에 안걸림');
             break;
     }
+
+    // 모달 내용을 만들었으면, 자동으로 띄운다.
+    showModal();
 }
- 
+
+function showModal() {
+    var eventModal = new bootstrap.Modal(document.getElementById('event'), {
+        keyboard: false
+    });
+    setTimeout(() => {
+        eventModal.show();
+        console.log("이벤트 모달 띄움.");
+    }, 1300);
+}
 
 
+
+itemRequest();

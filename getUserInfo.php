@@ -15,10 +15,12 @@
         $health = $row['health'];
         $day = $row['day'];
         $character = $row['ctype'];
+        $event_day = $row['done_event'];
 
         $value = array('day' => $day,
                         'health' => $health,
-                        'ctype' => $character); 
+                        'ctype' => $character,
+                        'event_day' => $event_day); 
 
         echo json_encode($value); 
     }
