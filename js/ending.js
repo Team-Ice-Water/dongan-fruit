@@ -43,8 +43,21 @@ function nameRequest() {
     };
 }
 
+function endingSend() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../ending.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+           console.log(xhr.responseText);
+        }
+    };
+}
+
 
 $(document).ready(function() {
+    endingSend();
+
     const temp = location.href.split("?");
     const data= temp[1];
     var content;

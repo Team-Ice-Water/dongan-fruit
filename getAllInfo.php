@@ -7,7 +7,7 @@
     
     $userId = $_SESSION['current_id'];
     // 해당 id의 정보 선택
-    $sql = "select * from character_info where m_id='$userId';";
+    $sql = "select * from character_info where m_id='$userId' AND is_end = 0;";
     $result = mysqli_query($con, $sql);
 
     class Character {
