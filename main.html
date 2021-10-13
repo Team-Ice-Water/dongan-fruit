@@ -1,13 +1,16 @@
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>슬기로운 청지기 생활</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="css/navbar.css" rel="stylesheet">
     <link href="css/userInfo.css" rel="stylesheet">
     <link href="css/userItem.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+    <link href="css/event.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head>
 <body>
@@ -74,16 +77,16 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="event-title"></h5>
+                    <h5 class="modal-title fs-3" id="event-title"></h5>
                 </div>
 
                 <div class="modal-body">
-                    <section id="event-passage">
+                    <section id="event-passage" class="container fs-4">
                     </section>
                     </br>
                     </br>
                     <section>
-                        <div class="list-group option">
+                        <div class="list-group option fs-5">
                         </div>
                     </section>
                 </div>
@@ -100,19 +103,23 @@
     <div class="modal fade" id="result-modal" tabindex="-1" aria-hidden="true" aria-labelledby="result-modal-label">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="result-modal-label">이벤트 결과</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="text"></p>
-                <p id="result"></p>
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title fs-3" id="result-modal-label">이벤트 결과</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="text" class="container fs-4"></p>
+                    <br/>
+                    <p id="result" class="container fs-5 text-center bg-light"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
             </div>
         </div>
     </div>
 
-
+    <script type="text/javascript" src="js/navbar.js"></script>
     <script type="text/javascript" src="js/getItem.js"></script>
     <script type="text/javascript" src="js/getRoomInfo.js"></script>
     <script type="text/javascript" src="js/event.js"></script>

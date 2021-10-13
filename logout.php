@@ -2,6 +2,6 @@
     session_start();
     $res = session_destroy();
     if ($res){
-        header('Location: ./index.html');
+        header('Location: index.html');
     }
 ?>
