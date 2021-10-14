@@ -1,34 +1,63 @@
 $('head').append('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">');
 
-$('body').prepend(`
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="메인화면으로" href="start.html">
-                    <span class="material-icons fs-2">home</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="다른 캐릭터로 바꾸기" href="choice_toon.html">
-                        <span class="material-icons fs-2">autorenew</span>
-                    </a>
-                </li>
-                <li class="nav-item fullscreen">              <!--전체화면-->
-                    <a class="nav-link" href="#" onclick="notFullnow();">
-                        <span class="material-icons fs-2">fullscreen</span>
-                    </a>   
-                </li>      
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="로그아웃" onclick="logout()">
-                        <span class="material-icons fs-2">logout</span>
-                    </a>
-                </li>
-            </ul>
+if($('title').text() == "만든 사람들"){
+    $('body').prepend(`
+    <nav class="nav justify-end navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="메인화면으로" href="start.html">
+                        <span class="material-icons fs-2">home</span>
+                        </a>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="로그인 하기" href="login.html">
+                            <span class="material-icons fs-2">login</span>
+                        </a>
+                    </li>
+                    -->
+                    <li class="nav-item fullscreen">              <!--전체화면-->
+                        <a class="nav-link" href="#" onclick="notFullnow();">
+                            <span class="material-icons fs-2">fullscreen</span>
+                        </a>   
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>`);
+    </nav>`);
+} else{
+    $('body').prepend(`
+    <nav class="nav justify-end navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="메인화면으로" href="start.html">
+                        <span class="material-icons fs-2">home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="다른 캐릭터로 바꾸기" href="choice_toon.html">
+                            <span class="material-icons fs-2">autorenew</span>
+                        </a>
+                    </li>
+                    <li class="nav-item fullscreen">              <!--전체화면-->
+                        <a class="nav-link" href="#" onclick="notFullnow();">
+                            <span class="material-icons fs-2">fullscreen</span>
+                        </a>   
+                    </li>      
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="로그아웃" onclick="logout()">
+                            <span class="material-icons fs-2">logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>`);
+}
 
 function toggleFullScreen() {
     /*
