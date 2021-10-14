@@ -122,19 +122,6 @@
                 }
             } while (mysqli_more_results($con) && mysqli_next_result($con));
         } 
-
-        if(($oldHealth + $health) <= 0){
-            echo 'health_ending';
-        } else if(80 < ($oldWater + $water)){
-            echo 'water_ending';
-        } else if(80 < ($oldSoil + $soil)){
-            echo 'soil_ending';
-        } else if(80 < ($oldAir + $air)){
-            echo 'air_ending';
-        } else if(220 < ($oldWater + $water + $oldSoil + $soil + $oldAir + $air)){
-            echo 'earth_ending';
-        }
-
     }    
     
     mysqli_close($con);

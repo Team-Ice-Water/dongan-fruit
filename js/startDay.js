@@ -100,29 +100,6 @@ function changeRequest(data) {
     xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             console.log("응답:", xhr.responseText);
-
-            switch (xhr.responseText) {
-                case 'health_ending':
-                    location.href = 'ending.html?health';
-                    break;
-                case 'water_ending':
-                    location.href = 'ending.html?water';
-                    break;
-                case 'soil_ending':
-                    location.href = 'ending.html?soil';
-                    break;
-                case 'air_ending':
-                    location.href = 'ending.html?air';
-                    break;
-                case 'earth_ending':
-                    location.href = 'ending.html?earth';
-                    break;
-                case 'normal_ending':
-                    location.href = 'ending.html?normal';
-                    break;
-                default:
-                    break;
-            }
         }
     };
     xhr.open('POST', '../doSchedule.php');
