@@ -1,15 +1,36 @@
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-          background: url('../img/back.png');
-          font-size: 70px;
-          font-weight : bolder;
-          background-repeat: no-repeat 
-          
-      }
+    font-size: 70px;
+    font-weight : bolder;
+    font-family: 'BMJUA';
+
+    width: 100vw;
+    background: url("../img/back.png") no-repeat center/cover;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+}
+
+.layout{
+    margin-left: 20vw;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    row-gap: 0.5em;
+}
+
 
 a:link {
           color: #fcc500;
           white-space: nowrap;
-          -webkit-text-stroke: 1px white;
+          -webkit-text-stroke: 0.5px white;
           text-decoration: none;
           text-shadow: -3px 0 #000,
 0 1px #000,
