@@ -27,6 +27,8 @@ var getEcoLevel = false;
 var getInfo = false;
 var isSend = false;
 
+const typingSound = new Audio('../audio/typing.wav');
+
 // 전날 오염도 정보 요청
 function ecoRequest() {
     var xhr = new XMLHttpRequest();
@@ -254,6 +256,7 @@ function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
     } 
         
     function typing(){ 
+        typingSound.play();
         console.log("liIndex: " ,liIndex);
         $(".typing ul li").removeClass("on");
         $(".typing ul li").eq(liIndex).addClass("on");
@@ -277,6 +280,7 @@ function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
             
                 //다음문장 타이핑전 1초 쉰다
                 clearInterval(tyInt);
+                typingSound.pause();
                 //타이핑종료
             
                 setTimeout(function(){
@@ -288,6 +292,8 @@ function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
                 clearInterval(tyInt);
                 // 커서 깜빡이는거 종료
                 $(".typing ul li").removeClass("on");
+                // 효과음 종료
+                typingSound.pause();
                 // 총 변화를 보여주는 텍스트 띄우기
                 showTotal();
                 $('.goBtn').html('<a href="main.html" role="button" class="btn btn-light"> 방으로 가기 </a>');

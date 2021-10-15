@@ -28,6 +28,8 @@ var totalSoil = 0;
 var totalAir = 0;
 var totalHealth = 0;
 
+const typingSound = new Audio('../audio/typing.wav');
+
 function setText(findThis, tag) {
     for(let value of valueText){
         if(value['id'] == findThis){
@@ -127,6 +129,7 @@ function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
     } 
         
     function typing(){ 
+        typingSound.play();
         console.log("liIndex: " ,liIndex);
         if(typingTxt.length > 2){   // 텍스트가 없으면 커서 깜빡임 없이 넘어가기 위해!
             $(".typing ul li").removeClass("on");
@@ -154,6 +157,7 @@ function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
             
                 //다음문장 타이핑전 1초 쉰다
                 clearInterval(tyInt);
+                typingSound.pause();
                 //타이핑종료
             
                 setTimeout(function(){
@@ -165,6 +169,8 @@ function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
                 clearInterval(tyInt);
                 // 커서 깜빡이는거 종료
                 $(".typing ul li").removeClass("on");
+                // 효과음 종료
+                typingSound.pause();
                 // 총 변화를 보여주는 텍스트 띄우기
                 showTotal();
                 $('.nextBtn').html('<button type="button" class="btn btn-light" onclick="checkEnding();"> 내일로 넘어가기 </button>');
