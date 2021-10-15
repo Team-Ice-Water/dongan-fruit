@@ -24,6 +24,9 @@
         $soapnut = $row['soapnut'];
         $ginseng = $row['ginseng'];
 
+        // event_choice.js 에서 사용할 오늘 날짜
+        $today = $row['day'];
+
         $value = array('tumbler'=> $tumbler,
                         'flowerpot'=> $flowerpot,
                         'mic'=> $mic,
@@ -34,7 +37,8 @@
                         'bible'=> $bible,
                         'soap'=> $soap,
                         'soapnut'=> $soapnut,
-                        'ginseng'=> $ginseng); 
+                        'ginseng'=> $ginseng,
+                        'today' => $today); 
 
         echo json_encode($value); 
 
