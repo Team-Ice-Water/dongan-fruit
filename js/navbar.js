@@ -53,6 +53,7 @@ switch ($('title').text()) {
         </nav>`);
         break;
     case "캐릭터 선택":
+    case "슬기로운 청지기 생활":
         $('body').prepend(`
         <nav class="nav justify-end navbar-expand-lg navbar-light">
             <div class="container-fluid">
@@ -64,7 +65,7 @@ switch ($('title').text()) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="캐릭터 바꾸기" href="choice_toon.html">
+                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="기존 캐릭터로 선택하기" href="choice_toon.html">
                                 <span class="material-icons fs-2">autorenew</span>
                             </a>
                         </li>
