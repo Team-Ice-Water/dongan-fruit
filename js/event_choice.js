@@ -652,7 +652,7 @@ function showModal() {
     setTimeout(() => {
         eventModal.show();
         console.log("이벤트 모달 띄움.");
-    }, 2500);
+    }, 2000);
 }
 
 
