@@ -150,7 +150,7 @@ function updateValue(value) {
 function checkEnd() {
     if(endingInfo['culDay'] == 2){
         if(endingInfo['culStage'] == 5){    // culDay == (today + 5) -> DB에 culture_end_count 속성대신 ending false 와 같은 속성이 있어야 함
-            location.href="ending.html:culture";
+            location.replace("ending.html:culture");
         } else{
             if(ecoSum <= 180){
                 updateValue({id: 'culture'});
@@ -160,7 +160,7 @@ function checkEnd() {
 
     if(endingInfo['envDay'] == 4){
         if(endingInfo['envStage'] == 10){
-            location.href="ending.html:school";
+            location.replace("ending.html:school");
         } else{
             if(userInfo['health'] >= 60){
                 updateValue({id: 'school'});
@@ -170,7 +170,7 @@ function checkEnd() {
 
     if(endingInfo['homeDay'] == 4){
         if(endingInfo['homeStage'] == 5){
-            location.href="ending.html:home";
+            location.replace("ending.html:home");
         } else{
             if(ecoSum <= 180){
                 updateValue({id: 'home'});

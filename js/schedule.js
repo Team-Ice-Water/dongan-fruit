@@ -75,6 +75,14 @@ function itemRequest() {
 
 itemRequest();
 
+$('#vol-layout>.row-item').click(function () {
+    alert("랜덤으로 배정되는 활동입니다.\n지구의 왼쪽 '봉사활동' 상자를 클릭해주세요.");
+});
+
+$('#vac-layout>.row-item').click(function () {
+    alert("랜덤으로 배정되는 활동입니다.\n지구의 왼쪽 '바캉스' 상자를 클릭해주세요.");
+});
+
 // 아이템이 있어야 선택할 수 있는 선택지 검사하는 함수
 function needItem(tag) {
     if(item[tag.id] === "1"){
@@ -305,7 +313,10 @@ function doneRequest(send) {
             console.log('받아온 정보: ', JSON.parse(xhr.responseText));
             today = yesterday - 1;
             console.log("today: ", today);
-            location.href="briefing.html?"+today+':'+send;
+            $('body').addClass('fade-out-box');
+            setTimeout(() => {
+                location.replace("briefing.html?"+today+':'+send);
+            }, 3000);
         }
     };
 }
@@ -371,5 +382,6 @@ function decide() {
         }
         
     }
+
     doneRequest(send);
 }

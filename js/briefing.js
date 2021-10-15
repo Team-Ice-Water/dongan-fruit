@@ -208,7 +208,7 @@ function checkEnding() {
                     break;
                 default:
                     console.log("엔딩에 안걸림");
-                    location.href = 'startDay.html';
+                    location.replace('startDay.html');
                     break;
             }
         }
