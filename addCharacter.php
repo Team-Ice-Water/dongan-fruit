@@ -30,10 +30,11 @@
 
             $_SESSION['current_toon']= $newName;
 
-            echo '<script>alert("캐릭터 이름: {$newID} 으로 캐릭터가 생성되었습니다. 게임을 시작합니다.");</script>';
+            echo "<script>alert('캐릭터 이름: {$newName} (으)로 캐릭터가 생성되었습니다. 게임을 시작합니다.');</script>";
 
 ?>              <script>
-                     location.href = 'miniGame.html';
+                    //location.href = 'miniGame.html';
+                    location.replace('miniGame.html');
                 </script>
 <?php
 
