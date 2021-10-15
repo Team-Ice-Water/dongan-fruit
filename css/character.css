@@ -37,6 +37,7 @@ body {
 
 .clicked img{
   /*border: gray;*/
+  transform: scale(1.4);
 }
 
 [type=radio] {    /* 동그라미 숨기기 */
