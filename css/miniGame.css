@@ -78,6 +78,9 @@ Section - 점수판
 .score-panel{
     font-size: 1.6em;
     padding: 1em 0 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .timer-container{
@@ -86,6 +89,7 @@ Section - 점수판
     color: #000;
     margin:  0.5em;
     padding: 0.5em;
+    max-width: 20vw;
 }
 
 .timer{
