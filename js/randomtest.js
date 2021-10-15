@@ -77,13 +77,14 @@ function matchEcoTxt(max) {
         case 'air':
             var type = "대기오염";
             break;
-        case 'air':
+        case 'soil':
             var type = "토양오염";
             break;
-        case 'air':
+        case 'water':
             var type = "수질오염";
             break;            
         default:
+            var type = "오염";
             break;
     }
 

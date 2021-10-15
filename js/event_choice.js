@@ -18,6 +18,8 @@ var itemInfo = {
     item_count: 0
 }
 
+var today;
+
 var interval;
 
 // 아이템 정보 요청
@@ -64,6 +66,9 @@ function itemRequest() {
                     case 'ginseng':
                         itemInfo['ginseng'] = parseInt(value);
                         break; 
+                    case 'today':
+                        today = parseInt(value);
+                        break; 
                     default:
                         break;
                 }
@@ -82,23 +87,35 @@ function itemRequest() {
                     clearInterval(interval);
                     setOption(select);
                 }
-            }, 200);
+            }, 1000);
         }
     };
 }
 
 function setOption(choice) {
-    // 매개변수 choice는 {id: 'event_9'} 형식
+    // 매개변수 choice는 {id: 'event_9'} 형식인 것도 있고, 문자열 인 것도 있음
     console.log("event_choice.js의 setoption() 실행 ", choice);
+    var evnetID;
+    
+    if(typeof(choice) === 'object'){
+        if(Object.keys(choice).includes('id')){
+            evnetID = choice.id;
+        }        
+    } else{
+        evnetID = choice;
+    }
 
-    switch (choice.id) {
+    $('#event #event-title').text(today+"일차 이벤트: ");
+
+    switch (evnetID) {    // choice.id 
         case 'event_1':
             // event_1
             $('#event #event-title').text("장을 보러간다.");
             $('#event #event-passage').html("오늘은 장을 보러가는 날이다. 따라가서 과자랑 아이스크림도 사달라고 해야지! </br> 장바구니 챙기라고 했는데 어디에 있더라...?");
 
             if(itemInfo["basket"] != 0){
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesBasket" onclick="sendUserPick(this.name)">선택지 1 (장바구니 선택하기) </button>';
+                document.querySelector('.option').innerHTML = `<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesBasket" onclick="sendUserPick(this.name)">선택지 1 (장바구니 선택하기) </button> 
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="noBasket" onclick="sendUserPick(this.name)">선택지 2 (그냥 나간다.) </button>`;
             }else if(itemInfo["basket"] == 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="noBasket" onclick="sendUserPick(this.name)">선택지 1 (장바구니가 없다. 그냥 나간다.) </button>';
             }
@@ -110,7 +127,8 @@ function setOption(choice) {
             $('#event #event-passage').html("오늘은 친구들이랑 약속이 있는데 빡다방에서 만나야겠다! </br> 사라다 빵이랑 아이스 초코 한잔 해야지! </br> 엄마! 저 나갔다올게요!");
 
             if(itemInfo["tumbler"] != 0){
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesTumbler" onclick="sendUserPick(this.name);">선택지 1 (텀블러 선택하기) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesTumbler" onclick="sendUserPick(this.name);">선택지 2 (텀블러 두고가기) </button>';
+                document.querySelector('.option').innerHTML = `<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesTumbler" onclick="sendUserPick(this.name);">선택지 1 (텀블러 선택하기) </button> 
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesTumbler" onclick="sendUserPick(this.name);">선택지 2 (텀블러 두고가기) </button>`;
             }else if(itemInfo["tumbler"] == 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="noTumbler" onclick="sendUserPick(this.name);">선택지 1 (가져갈 텀블러가 없다. 그냥 나간다.) </button>';
             }
@@ -123,9 +141,12 @@ function setOption(choice) {
             $('#event>.modal-dialog').addClass("modal-lg");
 
             if(itemInfo["soap"] == 0){  // 비누 없을때 샴푸바디워시 & 물로만
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="Shampoowash" onclick="sendUserPick(this.name);">선택지 1 (바디워시, 샴푸 사용하기) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="waterwash" onclick="sendUserPick(this.name);">선택지 2 (물로만 샤워하기) </button>';
+                document.querySelector('.option').innerHTML = `<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="Shampoowash" onclick="sendUserPick(this.name);">선택지 1 (바디워시, 샴푸 사용하기) </button> 
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="waterwash" onclick="sendUserPick(this.name);">선택지 2 (물로만 샤워하기) </button>`;
             }else if(itemInfo["soap"] != 0){  // 비누 있을때 비누
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="Shampoowash" onclick="sendUserPick(this.name);">선택지 1 (바디워시, 샴푸 사용하기) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="soapwash" onclick="sendUserPick(this.name);">선택지 2 (천연비누 사용하기) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="waterwash" onclick="sendUserPick(this.name);">선택지 3 (물로만 샤워하기) </button>';
+                document.querySelector('.option').innerHTML = `<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="Shampoowash" onclick="sendUserPick(this.name);">선택지 1 (바디워시, 샴푸 사용하기) </button>
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="soapwash" onclick="sendUserPick(this.name);">선택지 2 (천연비누 사용하기) </button>
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="waterwash" onclick="sendUserPick(this.name);">선택지 3 (물로만 샤워하기) </button>`;
             }
             break;
     
@@ -148,12 +169,15 @@ function setOption(choice) {
             $('#event #event-passage').html("요즘 너무 컨디션이 안좋은걸? 공부를 열심히 해서 그런가? </br> 안되겠다. 몸 보신을 좀 해야겠다!");
 
             if(itemInfo["ginseng"] != 0 && itemInfo["vitamin"] != 0){  // 산삼O, 비타민O
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesGinseng" onclick="sendUserPick(this.name);">선택지 1 (최고급 산삼을 먹는다.) </button>';
-                document.querySelector('.option').insertAdjacentHTML('beforeend','<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesVitamin" onclick="sendUserPick(this.name);">선택지 2 (비타민을 먹는다.) </button>');
+                document.querySelector('.option').innerHTML = `<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesGinseng" onclick="sendUserPick(this.name);">선택지 1 (최고급 산삼을 먹는다.) </button>
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesVitamin" onclick="sendUserPick(this.name);">선택지 2 (비타민을 먹는다.) </button>
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="noGinsengNoVitamin" onclick="sendUserPick(this.name);">선택지 3 (먹지 않고 참는다.)</button>`;
             }else if(itemInfo["ginseng"] == 0 && itemInfo["vitamin"] != 0){  // 산삼X, 비타민O
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesVitamin" onclick="sendUserPick(this.name);">선택지 1 (비타민을 먹는다.)</button>';
+                document.querySelector('.option').innerHTML = `<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesVitamin" onclick="sendUserPick(this.name);">선택지 1 (비타민을 먹는다.)</button>
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="noGinsengNoVitamin" onclick="sendUserPick(this.name);">선택지 2 (먹지 않고 참는다.)</button>`;
             }else if(itemInfo["ginseng"] != 0 && itemInfo["vitamin"] == 0){  // 산삼O, 비타민X
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesGinseng" onclick="sendUserPick(this.name);">선택지 1 (최고급 산삼을 먹는다.)</button>';
+                document.querySelector('.option').innerHTML = `<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesGinseng" onclick="sendUserPick(this.name);">선택지 1 (최고급 산삼을 먹는다.)</button>
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="noGinsengNoVitamin" onclick="sendUserPick(this.name);">선택지 2 (먹지 않고 참는다.)</button>`;
             }else if(itemInfo["ginseng"] == 0 && itemInfo["vitamin"] == 0){  // 산삼X, 비타민X
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="noGinsengNoVitamin" onclick="sendUserPick(this.name);">선택지 1 (건강보조제가 없다. 그냥 참는다.)</button>';
             }
@@ -296,7 +320,10 @@ function setOption(choice) {
 
             if(itemInfo["basket"] != 0 && itemInfo["bicycle"] != 0){    
                 // 장바구니O 자전거O
-                document.querySelector('.option').innerHTML = ' <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="eitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 1 (자전거만 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="eitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 2 (장바구니만 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="bothBicycleBasket" onclick="sendUserPick(this.name);">선택지 3 (자전거와 장바구니 둘 다 가져간다.) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="neitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 4 (자전거와 장바구니를 모두 가져가지 않는다.) </button>';
+                document.querySelector('.option').innerHTML = `<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="eitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 1 (자전거만 가져간다.) </button> 
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="eitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 2 (장바구니만 가져간다.) </button> 
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="bothBicycleBasket" onclick="sendUserPick(this.name);">선택지 3 (자전거와 장바구니 둘 다 가져간다.) </button> 
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="neitherBicycleBasket" onclick="sendUserPick(this.name);">선택지 4 (자전거와 장바구니를 모두 가져가지 않는다.) </button>`;
                 // 모달 크게
                 $('#event>.modal-dialog').addClass("modal-lg");
             }else if(itemInfo["basket"] == 0 && itemInfo["bicycle"] != 0){ 
@@ -319,7 +346,7 @@ function setOption(choice) {
 
             if(itemInfo["bible"] != 0 && itemInfo["book"] != 0){
                 // 성경O 책O
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="eitherBibleBook" onclick="sendUserPick(this.name);">선택지 1 (환경지침 도서만 선택하기) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="eitherBibleBook" onclick="sendUserPick(this.name);">선택지 2 (성경책만 선택하기) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="bothBibleBook" onclick="sendUserPick(this.name);">선택지 1 (성경책과 환경지침 도서 둘 다 선택하기) </button>';
+                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="eitherBibleBook" onclick="sendUserPick(this.name);">선택지 1 (환경지침 도서만 선택하기) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="eitherBibleBook" onclick="sendUserPick(this.name);">선택지 2 (성경책만 선택하기) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="bothBibleBook" onclick="sendUserPick(this.name);">선택지 3 (성경책과 환경지침 도서 둘 다 선택하기) </button>';
             }else if(itemInfo["bible"] == 0 && itemInfo["book"] != 0){
                 // 성경X 책O
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="eitherBibleBook" onclick="sendUserPick(this.name);" >선택지 1 (환경지침 도서 선택하기) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="neitherBibleBook" onclick="sendUserPick(this.name);" >선택지 2 (환경지침 도서 선택하지 않음) </button>';
@@ -356,12 +383,13 @@ function setOption(choice) {
     
         case 'event_23':
             $('#event #event-title').text("성경책 이벤트");
-            $('#event #event-passage').html("어휴 책상이 언제 이렇게 더러워졌지. 간만에 책상 좀 치워볼까?");
 
             if(itemInfo["bible"] != 0){
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yes_culture_1" onclick="sendUserPick(this.name);" >선택지 1 (성경책 선택하기) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_culture_1" onclick="sendUserPick(this.name);" >선택지 2 (성경책 선택하지 않음) </button>';
+                $('#event #event-passage').html("어휴 책상이 언제 이렇게 더러워졌지. 간만에 책상 좀 치워볼까? <br> 어! 여기 성경책이 있었네.");
+                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yes_culture_1" onclick="sendUserPick(this.name);" >선택지 1 (잘보이는 곳에 보관한다.) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_culture_1" onclick="sendUserPick(this.name);" >선택지 2 (깊숙이 넣어두고 계속 치운다.) </button>';
             }else if(itemInfo["bible"] == 0){
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_culture_1" onclick="sendUserPick(this.name);" >선택지 1 (성경책 선택하지 않음) </button>';
+                $('#event #event-passage').html("어휴 책상이 언제 이렇게 더러워졌지. 간만에 책상 좀 치워볼까?");
+                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_culture_1" onclick="sendUserPick(this.name);" >선택지 1 (책상을 정리한다.) </button>';
             }
             break;
     
@@ -430,7 +458,7 @@ function setOption(choice) {
             $('#event #event-passage').html("전도사님이 어딜 바쁘게 가시네. “전도사님 어디가세요?” </br> “오 반가워라. 지금 교회에서 우리 동네를 청소하러 간다고 하는데 너도 같이 갈래?");
 
             if(userInfo["health"] >= 70){
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yes_culture_4" onclick="sendUserPick(this.name);" >선택지 1 (체력이 충분하다. 전도사님과 함께 청소한다.) </button>';
+                document.querySelector('.option').innerHTML = `<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yes_culture_4" onclick="sendUserPick(this.name);" >선택지 1 (전도사님과 함께 청소한다.) </button><button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_culture_4" onclick="sendUserPick(this.name);" >선택지 1 (좀 피곤한데.. 오늘은 그냥 집으로 간다.) </button>`;
             }else if(userInfo["health"] < 70){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_culture_4" onclick="sendUserPick(this.name);" >선택지 1 (체력이 부족하다. 집으로 간다.) </button>';
             }
@@ -454,9 +482,9 @@ function setOption(choice) {
             $('#event #event-passage').html("환경지침도서라는게 있다고? 그거 꼭 필요한 중요한 책 같은데... 선생님께 내용을 물어볼까?");
 
             if(itemInfo["book"] != 0){
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yes_env_1_teacher" onclick="sendUserPick(this.name);" >선택지 1 (선생님께 여쭤본다.) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_env_1_teacher" onclick="sendUserPick(this.name);" >선택지 2 (환경지침도서 선택 안함) </button>';
+                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yes_env_1_teacher" onclick="sendUserPick(this.name);" >선택지 1 (선생님께 여쭤본다.) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_env_1_teacher" onclick="sendUserPick(this.name);" >선택지 2 (혼자 찾아본다.) </button>';
             }else if(itemInfo["book"] == 0){
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_env_1_teacher" onclick="sendUserPick(this.name);" >선택지 1 (환경지침도서 선택 안함) </button>';
+                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_env_1_teacher" onclick="sendUserPick(this.name);" >선택지 1 (나한테는 환경지침도서가 없네!) </button>';
             }
             break;
         
@@ -623,9 +651,8 @@ function showModal() {
     setTimeout(() => {
         eventModal.show();
         console.log("이벤트 모달 띄움.");
-    }, 2000);
+    }, 2500);
 }
-
 
 
 itemRequest();
