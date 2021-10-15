@@ -27,6 +27,26 @@ if($('title').text() == "만든 사람들"){
             </div>
         </div>
     </nav>`);
+} else if(($('title').text() == "회원가입") || ($('title').text() == "로그인")){
+    $('body').prepend(`
+    <nav class="nav justify-end navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="시작화면으로" href="index.html">
+                        <span class="material-icons fs-2">home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item fullscreen">              <!--전체화면-->
+                        <a class="nav-link" href="#" onclick="notFullnow();">
+                            <span class="material-icons fs-2">fullscreen</span>
+                        </a>   
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>`);
 } else{
     $('body').prepend(`
     <nav class="nav justify-end navbar-expand-lg navbar-light">

@@ -2,8 +2,8 @@
     session_start();
     include 'connect.php';
 
-    if (isset($_POST["username"])){
-        $userID = $_POST["username"];
+    if (isset($_POST["userid"])){
+        $userID = $_POST["userid"];
         $userPW = $_POST["password"];
         // 아이디가 member table에 있는지 확인
         $sql = "select * from member where m_id='$userID'";
