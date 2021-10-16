@@ -192,7 +192,8 @@ function displayModal(){
 }
 
 function finishGame() {
-    if(seconds >= 30){
+    if((seconds >= 30)||(matched.length == 10)){
+        // 시간이 다 되었거나, 모든 카드를 찾았으면
         clearInterval(check);
 
         stopTime();
@@ -246,4 +247,5 @@ deck.addEventListener("click", function(evt){
     }
 });
 
-var check = setInterval(finishGame , 2000); // 가만히 있어도 시간이 지나면 게임은 종료되어야 함
+// 가만히 있어도 시간이 지나면 게임은 종료되어야 함
+var check = setInterval(finishGame , 2000); 
