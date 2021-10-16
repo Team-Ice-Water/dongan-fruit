@@ -6,12 +6,21 @@
     $userId = $_SESSION['current_id'];
     $userToon = $_SESSION['current_toon'];
 
+    $reciveData = file_get_contents('php://input');
+    $input = json_decode(stripcslashes($reciveData), true);
+    $what_ending = $input['ending'];
+
     $sql = "
-        UPDATE character_info
+        UPDATE character_state
         SET is_end = '1' 
         WHERE m_id = '$userId' AND cname = '$userToon';
     ";
     $ret = mysqli_query($con, $sql);
+
+    $sql2 = "UPDATE character_state
+    SET ending_type = '$what_ending'
+    WHERE m_id='$userId' AND cname = '$userToon';";
+    $ret2 = mysqli_query($con, $sql2);
 
     mysqli_close($con);
 

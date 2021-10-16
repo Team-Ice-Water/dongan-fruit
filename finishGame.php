@@ -28,6 +28,13 @@
     WHERE m_id='$userId' AND cname = '$userToon';";
 
     $ret = mysqli_query($con, $sql);
+
+    $sql2 ="
+    UPDATE character_state
+    SET done_game = 1
+    WHERE m_id='$userId' AND cname = '$userToon';";
+
+    $ret2 = mysqli_query($con, $sql2);
     
     mysqli_close($con);
 ?>

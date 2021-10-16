@@ -43,10 +43,11 @@ function nameRequest() {
     };
 }
 
-function endingSend() {
+function endingSend(type) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../ending.php');
-    xhr.send();
+    xhr.setRequestHeader('Content-Type', "application/json");
+    xhr.send(JSON.stringify({ending: type}));
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
            console.log(xhr.responseText);
@@ -67,7 +68,7 @@ function done() {
 }
 
 $(document).ready(function() {
-    endingSend();
+    endingSend(data);
 
     const temp = location.href.split("?");
     const data= temp[1];

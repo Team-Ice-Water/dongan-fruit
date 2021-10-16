@@ -386,7 +386,7 @@
     }
 
     $update_sql = "
-        UPDATE character_info
+        UPDATE character_state
         SET done_event = $today
         WHERE m_id='$userId' AND cname = '$userToon';";
     mysqli_query($con, $update_sql);

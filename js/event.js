@@ -76,6 +76,9 @@ function makeModal() {
             select = selectOne(eventList);   // 최종 리스트 중에 하나 선택
             
             console.log(select);
+        } else{ // 이미 이벤트 했으면 스케쥴 버튼 누를 수 있게
+            $('.schedule.btn').removeClass('disabled');
+            $('.schedule.btn').removeAttr('aria-disabled');
         }
     }    
 }

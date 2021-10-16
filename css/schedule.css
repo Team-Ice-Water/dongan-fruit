@@ -201,8 +201,9 @@ schedule
     color:#fff;
 }
 
-.nav-tabs{
-   /*max-width: 40vw;*/
+.nav-tabs button{
+   /*max-width: 40vw;
+    display:inline-block;    내부 요소에 너비 맞춤*/
 }
 
 .tab-pane{

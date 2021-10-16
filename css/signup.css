@@ -7,75 +7,89 @@ body {
           text-align:center;
           height: 100vh;
       }  
-      
-      @font-face {
-          font-family: 'CookieRunOTF-Bold';
-          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff');
-          font-weight: normal;
-          font-style: normal;
-      }
+     
+@font-face {
+    font-family: 'CookieRunOTF-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
-
-      header{
-          display:flex;
-          justify-content: center;
-      }
-      form{
-          padding:10px;
-      }
-      .input-box{
-          position:relative;
-          margin:px 0;
-      }
-      .input-box > input{
-          font-family: 'CookieRunOTF-Bold';
-          background:transparent;
-          border:none;
-          border-bottom: solid 1px #FCC500;
-          padding:20px 0px 5px 0px;
-          font-size:14pt;
-          width:20%;
-      }
-      input::placeholder{
-          color:transparent;
-      }
-      input:placeholder-shown + label{
+header{
+    display:flex;
+     justify-content: center;
+}
+form{
+    padding:10px;
+}
+.input-box{
+    position:relative;
+    margin:px 0;
+}
+.input-box > input{
+    font-family: 'CookieRunOTF-Bold';
+    background:transparent;
+    border:none;
+    border-bottom: solid 1px #FCC500;
+    padding:20px 0px 5px 0px;
+    font-size:14pt;
+    width:20%;
+}
+input::placeholder{
+    color:transparent;
+}
+input:placeholder-shown + label{
           font-family: 'CookieRunOTF-Bold';
           color:#111;
           font-size:14pt;
           top:15px;
 
-      }
-      input:focus + label, label{
+}
+input:focus + label, 
+label{
 	color:#111;
-          font-size:10pt;
-          pointer-events: none;
-          position: absolute;
-          left:0px;
-          top:0px;
-          transition: all 0.2s ease ;
-          -webkit-transition: all 0.2s ease;
-          -moz-transition: all 0.2s ease;
-          -o-transition: all 0.2s ease;
-      }
+    font-size:10pt;
+    pointer-events: none;
+    position: absolute;
+    left:0px;
+    top:0px;
+    transition: all 0.2s ease ;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+}
 
-      input:focus, input:not(:placeholder-shown){
+input:focus, input:not(:placeholder-shown){
           border-bottom: solid 1px #FCC500;
           outline:none;
-      }
-      input[type=submit]{
-          font-family: 'CookieRunOTF-Bold';
-          background-color: #fcc500;
-          border:none;
+}
+input[type=submit]{
+    font-family: 'CookieRunOTF-Bold';
+    background-color: #fcc500;
+    border:none;
 	color:#14396a;
-          border-radius: 5px;
-          width:20%;
-          height:35px;
-          font-size: 14pt;
-          margin-top:100px;
-      }
+    border-radius: 5px;
+    width: 20%;
+    height: 2.5em;
+    font-size: 14pt;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
 
-.title-logo{
-	width: 100%;
-    max-width: 30vw;
+.warning{
+    font-family: 'GmarketSansMedium';
+    /*width: 70%;
+    max-width: 65vw;*/
+    display:inline-block;   /* 내부 요소에 너비 맞춤*/
+}
+
+.material-icons{    /* 아이콘이 텍스트와 가로선이 안맞음*/
+    display: inline-block;
+    vertical-align: text-bottom;
 }

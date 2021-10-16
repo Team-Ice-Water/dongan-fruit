@@ -652,6 +652,8 @@ function showModal() {
     setTimeout(() => {
         eventModal.show();
         console.log("이벤트 모달 띄움.");
+        $('.schedule.btn').removeClass('disabled');
+        $('.schedule.btn').removeAttr('aria-disabled');
     }, 2000);
 }
 

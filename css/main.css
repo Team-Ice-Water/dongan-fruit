@@ -34,10 +34,12 @@ body{
     top: 5vh;
 }
 
+
 .schedule{
     position: absolute;
+    top: 87vh;
     left: 80vw;
-    top: 90vh;
+    
     z-index: 5;
 
     font-family: "GmarketSansMedium", sans-serif;

@@ -23,10 +23,16 @@
             $ret = mysqli_query($con, $sql);
 
             $sql2 = "
-                insert into ending_info(m_id, cname)
+                insert into character_state(m_id, cname) 
                 values('$userId', '$newName');
             ";
             $ret2 = mysqli_query($con, $sql2);
+
+            $sql3 = "
+                insert into ending_info(m_id, cname)
+                values('$userId', '$newName');
+            ";
+            $ret3 = mysqli_query($con, $sql3);
 
             $_SESSION['current_toon']= $newName;
 

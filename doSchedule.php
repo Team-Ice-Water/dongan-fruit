@@ -29,7 +29,7 @@
         
         // 체력 update
         if($health){
-            if(100 < ($oldHealth + $health)){   // 100을 초과할 수 없음
+            if(100 <= ($oldHealth + $health)){   // 100을 초과할 수 없음
                 $sql ="
                 UPDATE character_info
                 SET health = 100 
@@ -44,7 +44,7 @@
 
         // 수질 오염도 update
         if($water){
-            if(100 < ($oldWater + $water)){
+            if(100 <= ($oldWater + $water)){
                 $sql .= "
                 UPDATE character_info
                 SET water=100 
@@ -66,7 +66,7 @@
 
         // 토양 오염도 update
         if($soil){
-            if(100 < ($oldSoil + $soil)){
+            if(100 <= ($oldSoil + $soil)){
                 $sql .= "
                 UPDATE character_info
                 SET soil=100 
@@ -88,7 +88,7 @@
 
         // 대기 오염도 update
         if($air){
-            if(100 < ($oldAir + $air)){   // 100을 초과할 수 없음
+            if(100 <= ($oldAir + $air)){   // 100을 초과할 수 없음
                 $sql .= "
                 UPDATE character_info
                 SET air=100

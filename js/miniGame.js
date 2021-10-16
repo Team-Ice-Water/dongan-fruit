@@ -211,7 +211,10 @@ function itemRequest(data) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
-            $('.Btn').html('<a class="btn btn-primary fs-5" href="main.html" role="button">청지기 1일차 시작하기</a>');             
+            $('.Btn>a').removeClass('disabled');
+            $('.Btn>a').removeAttr('aria-disabled');
+            $('.Btn>a').text("청지기 1일차 시작하기");
+            // $('.Btn').html('<a class="btn btn-primary fs-5" href="main.html" role="button">청지기 1일차 시작하기</a>');             
         }
     };
     xhr.open('POST', '../finishGame.php');
