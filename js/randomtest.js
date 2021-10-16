@@ -357,7 +357,7 @@ function setResultModal(choice) {
         case 'eitherBibleBook': // 둘 중 하나만 선택
             var maxEco = findMaxEco();
             var eco = matchEcoTxt(maxEco);
-            changeEco = {eco: maxEco, value: -15};
+            changeEco = {eco: maxEco, value: -5};
 
             text = "찾아보긴 했는데 뭔가 더 알아야할 것 같은데.";
             result = eco+" 15 감소";
@@ -365,7 +365,7 @@ function setResultModal(choice) {
         case 'bothBibleBook':   // 둘 다 선택
             var maxEco = findMaxEco();
             var eco = matchEcoTxt(maxEco);
-            changeEco = {eco: maxEco, value: -5};
+            changeEco = {eco: maxEco, value: -15};
 
             text = "성경책이랑 환경지침도서를 보면 잘 나와있어!";
             result = eco+" 5 감소";
