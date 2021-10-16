@@ -43,12 +43,13 @@ function nameRequest() {
     };
 }
 
-function endingSend(type) {
+function endingSend(value) {
+    console.log("엔딩 종류(보내는 데이터): ", value);
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../ending.php');
+    xhr.open('POST', '../ending.php');
     xhr.setRequestHeader('Content-Type', "application/json");
-    xhr.send(JSON.stringify({ending: type}));
-    xhr.onreadystatechange = function(){
+    xhr.send(JSON.stringify(value));
+    xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
            console.log(xhr.responseText);
         }
@@ -68,10 +69,12 @@ function done() {
 }
 
 $(document).ready(function() {
-    endingSend(data);
+    
+    const typingSound = new Audio('../audio/typing.wav');
 
     const temp = location.href.split("?");
     const data= temp[1];
+    endingSend({type: data});
     var content;
 
     for (let value of ending){
@@ -91,9 +94,11 @@ $(document).ready(function() {
     let i = 0;
 
     function typing(modal){
+        typingSound.play();
         let txt = content[i++];
         text.innerHTML += txt=== "\n" ? "<br/>": txt;
         if (i >= content.length) {
+            typingSound.pause();
             clearInterval(interval);
             $('.blink').remove();  // 깜빡이는 커서 삭제
             setTimeout(() => modal.show() , 1500);

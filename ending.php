@@ -8,8 +8,8 @@
 
     $reciveData = file_get_contents('php://input');
     $input = json_decode(stripcslashes($reciveData), true);
-    $what_ending = $input['ending'];
-
+    $what_ending = $input['type'];
+    
     $sql = "
         UPDATE character_state
         SET is_end = '1' 
@@ -17,10 +17,14 @@
     ";
     $ret = mysqli_query($con, $sql);
 
-    $sql2 = "UPDATE character_state
-    SET ending_type = '$what_ending'
-    WHERE m_id='$userId' AND cname = '$userToon';";
+    $sql2 = "
+        UPDATE character_state
+        SET ending_type = '$what_ending'
+        WHERE m_id='$userId' AND cname = '$userToon';
+    ";
     $ret2 = mysqli_query($con, $sql2);
+
+    echo $sql2;
 
     mysqli_close($con);
 
