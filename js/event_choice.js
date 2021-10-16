@@ -129,7 +129,7 @@ function setOption(choice) {
 
             if(itemInfo["tumbler"] != 0){
                 document.querySelector('.option').innerHTML = `<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesTumbler" onclick="sendUserPick(this.name);">선택지 1 (텀블러 선택하기) </button> 
-                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesTumbler" onclick="sendUserPick(this.name);">선택지 2 (텀블러 두고가기) </button>`;
+                <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="noTumbler" onclick="sendUserPick(this.name);">선택지 2 (텀블러 두고가기) </button>`;
             }else if(itemInfo["tumbler"] == 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="noTumbler" onclick="sendUserPick(this.name);">선택지 1 (가져갈 텀블러가 없다. 그냥 나간다.) </button>';
             }
