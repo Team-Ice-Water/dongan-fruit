@@ -116,7 +116,7 @@ function checkHealth() {
         if(isFill['count'] == 2){   // 체력 50 이하. 2개 채워짐
             return false;
         } 
-        else{ // 체력 50 이하. 2개 이하 채워짐
+        else{ // 체력 50 이하. 1개 채워짐
             return 1;
         }
     } 
@@ -337,6 +337,22 @@ function sendValue(findThis) {
 }
 
 function decide() {
+    if(checkHealth() === 1){
+        // 1개만 채워졌으면 안됨
+        alert("하루 스케쥴 2개를 모두 채워야 합니다.");
+    } else if(checkHealth() === true){
+        // 3개 아니면 안됨
+        if(isFill['count'] != 3){
+            alert("하루 스케쥴 3개를 모두 채워야 합니다.");
+        } else{
+            sendSchedule();
+        }
+    } else{
+        sendSchedule();
+    }
+}
+
+function sendSchedule() {
     const dawn = dawnText.getAttribute('name');
     const am = amText.getAttribute('name');
     const pm = pmText.getAttribute('name');

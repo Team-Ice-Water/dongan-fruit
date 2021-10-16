@@ -201,6 +201,10 @@ schedule
     color:#fff;
 }
 
+.nav-tabs{
+   /*max-width: 40vw;*/
+}
+
 .tab-pane{
     height: 75vh;
     max-height: 76em;
@@ -270,7 +274,7 @@ schedule
     justify-items: center;
     align-items: center;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 2fr 1fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 #vol-layout .row-item,
