@@ -4,7 +4,6 @@
     if(isset($_SESSION['current_id'])){
         echo "현재 로그인된 사용자 id는".$_SESSION['current_id']."입니다.";
         ?>
-        <button type="button" onclick="location.href='logout.php'">로그아웃</button><br>
     <?php
     }
     else if(!isset($_SESSION['current_id'])){
