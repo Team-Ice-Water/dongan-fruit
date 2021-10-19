@@ -27,7 +27,11 @@
         // event_choice.js 에서 사용할 오늘 날짜
         $today = $row['day'];
 
-        $value = array('tumbler'=> $tumbler,
+        
+        if($tumbler == null){
+            echo $sql;
+        } else{
+            $value = array('tumbler'=> $tumbler,
                         'flowerpot'=> $flowerpot,
                         'mic'=> $mic,
                         'basket'=> $basket,
@@ -40,7 +44,8 @@
                         'ginseng'=> $ginseng,
                         'today' => $today); 
 
-        echo json_encode($value); 
+            echo json_encode($value);
+        } 
 
     }
 

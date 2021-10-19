@@ -167,6 +167,7 @@ function ecoRequest() {
     xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
+            console.log(xhr.responseText);
             let json = JSON.parse(xhr.responseText);
 
             for (let jkey in json) {
@@ -203,6 +204,7 @@ function infoRequest() {
     xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
+            console.log(xhr.responseText);
             let json = JSON.parse(xhr.responseText);
 
             for (let key in json) {
