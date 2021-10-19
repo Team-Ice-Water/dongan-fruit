@@ -55,7 +55,7 @@
             break;
         case 'waterwash':
             $sql = "UPDATE character_info
-            SET soil = soil+4, health = health -1
+            SET health = health -2
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
