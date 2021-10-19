@@ -101,3 +101,19 @@ function makeSlide() {
     }   
         
 }
+
+// html에서 결정하기 버튼 누르면 아래 함수 수행
+function saveToon() {
+    var character = $('.carousel-item.active .name').text();
+    console.log("클릭한 것: ", character);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../setCharacter.php');
+    xhr.setRequestHeader('Content-Type', "application/json");
+    xhr.send(JSON.stringify({name: character}));
+    xhr.onload = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            console.log("응답:", xhr.responseText);
+        }
+    };
+}
