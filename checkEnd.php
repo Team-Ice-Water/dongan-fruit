@@ -22,9 +22,11 @@
         $max_int = max($arr); #배열중 가장 큰 값 추출 
         $max_int_key = array_search($max_int, $arr); #값이 가리키는 키값 추출
 
-        if(($health) <= 0){
+        if( ($water+ $soil+ $air) <= 20){
+            echo 'normal_ending';
+        } else if(($health) <= 0){
             echo 'health_ending';
-        } else if(220 < $water+ $soil+ $air){
+        } else if(220 < ($water+ $soil+ $air)){
             echo 'earth_ending';
         } else if(80 < $max_int){
             switch ($max_int_key) {
