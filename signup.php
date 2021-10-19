@@ -20,6 +20,7 @@
             ";
 
             $ret = mysqli_query($con, $sql);
+            echo $sql;
             echo "<script>alert('ID: {$newID} 로 회원가입이 완료되었습니다. 로그인 후 이용해주세요.');</script>";
 ?>              <script>
                     location.href = 'login.html';

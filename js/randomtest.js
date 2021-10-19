@@ -229,7 +229,7 @@ function setResultModal(choice) {
         case 'yesBuyBible':
             var haveItems = [];      // 가지고 있는 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if(itemInfo[key] == 1){
+                if((key !='item_count')||(itemInfo[key] == 1)){
                     haveItems.push(key);
                 }
             }
@@ -260,7 +260,7 @@ function setResultModal(choice) {
         case 'pollution_above130':
             var haveItems = [];      // 가지고 있는 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if(key != 'book'){      // 가진 아이템 배열에서 책 제외
+                if((key != 'book') || (key !='item_count')){      // 가진 아이템 배열에서 책 제외
                     if(itemInfo[key] == 1){
                         haveItems.push(key);
                     }
@@ -285,7 +285,7 @@ function setResultModal(choice) {
         case 'above_6_item':
             var haveItems = [];
             for (let key in itemInfo) {
-                if(key != 'book'){      // 가진 아이템 배열에서 책 제외
+                if((key != 'book')||(key !='item_count')){      // 가진 아이템 배열에서 책 제외
                     if(itemInfo[key] == 1){
                         haveItems.push(key);
                     }
@@ -300,7 +300,7 @@ function setResultModal(choice) {
         case 'below_6_item':
             var noItems = [];      // 없는 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if(itemInfo[key] == 0){
+                if((key !='item_count') || (itemInfo[key] == 0)){
                     noItems.push(key);
                 }               
             }
@@ -314,7 +314,7 @@ function setResultModal(choice) {
         case 'evangelist_chance':
             var damages = [];      // 손상된 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if(itemInfo[key] == 2){
+                if((key !='item_count') || (itemInfo[key] == 2)){
                     damages.push(key);
                 }               
             }
@@ -322,7 +322,7 @@ function setResultModal(choice) {
             if(damages.length == 0){
                 var noItems = [];      // 없는 아이템들의 이름을 저장하는 배열
                 for (let key in itemInfo) {
-                    if(itemInfo[key] == 0){
+                    if((key !='item_count')||(itemInfo[key] == 0)){
                         noItems.push(key);
                     }               
                 }

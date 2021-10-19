@@ -193,7 +193,7 @@ function nondeletable(){
 function selectVolunteer() {
     if(checkHealth()){
         var jbRandom = Math.random();
-        var index = Math.floor( jbRandom * 6 );
+        var index = Math.floor( jbRandom * 7 ); // 0 ~ 6 사이의 숫자
         select(volunteer[index], false);
     } else{
         alert("건강수치가 50 이하면 하루에 2개의 스케쥴 밖에 선택할 수 없습니다.");

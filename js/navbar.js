@@ -8,7 +8,7 @@ switch ($('title').text()) {
                 <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="메인화면으로" href="start.html">
+                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="시작화면으로" href="index.html">
                             <span class="material-icons fs-2">home</span>
                             </a>
                         </li>
@@ -54,6 +54,7 @@ switch ($('title').text()) {
         break;
     case "캐릭터 선택":
     case "슬기로운 청지기 생활":
+    case "엔딩 모음":
         $('body').prepend(`
         <nav class="nav justify-end navbar-expand-lg navbar-light">
             <div class="container-fluid">
@@ -65,7 +66,7 @@ switch ($('title').text()) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="기존 캐릭터로 선택하기" href="choice_toon.html">
+                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="기존 캐릭터 선택하기" href="choice_toon.html">
                                 <span class="material-icons fs-2">autorenew</span>
                             </a>
                         </li>
