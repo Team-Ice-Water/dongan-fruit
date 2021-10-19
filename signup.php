@@ -18,34 +18,13 @@
                 insert into member(m_id, m_pw, mname) 
                 values('$newID', '$newPW', '$newName');
             ";
-            
-            $sql .= "
-                insert into character_info(m_id, cname) 
-                values('$newID', '$newName');
-            ";
 
-            $sql .= "
-                insert into ending_info(m_id) 
-                values('$newID');
-            ";
-
-            if( mysqli_multi_query($con, $sql) ){
-                do {
-                  // store first result set
-                  if ($result = mysqli_store_result($con)) {
-                    // fetch one and one row
-                    while ($row = mysqli_fetch_row($result)) {
-                       console.log('$row[0]: ', $row[0]);
-                    }              
-                    // free result set
-                    mysqli_free_result($result);
-                  }
-                } while (mysqli_more_results($con) && mysqli_next_result($con));
-            }
-
-            echo "ID: ".$newID."로 회원가입이 완료되었습니다. 로그인 후 이용해주세요."."<br>";
-            echo "<br> <a href='login.html'> 로그인 하기 </a>";
-            echo "<br> <a href='/'> 메인화면으로 돌아가기 </a>";
+            $ret = mysqli_query($con, $sql);
+            echo "<script>alert('ID: {$newID} 로 회원가입이 완료되었습니다. 로그인 후 이용해주세요.');</script>";
+?>              <script>
+                    location.href = 'login.html';
+                </script>
+<?php
             exit();
         }
         else{ // 아이디가 이미 있다면
@@ -63,11 +42,4 @@
         echo "<br> <a href='/'> 메인화면으로 돌아가기 </a>";
         exit();
     }
-    ?>              <script>
-    alert( '"<?php $newID?>로 회원가입이 완료되었습니다. 로그인 후 이용해주세요.'");
-    location.href = 'login.html';
-</script>
-<?php  
 ?>
-
-

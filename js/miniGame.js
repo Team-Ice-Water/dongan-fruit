@@ -10,13 +10,6 @@ let opened = [];
 // 매칭된 카드를 저장하는 배열
 let matched = [];
 
-
-// moves-counter 클래스 선택 and change it's HTML
-const movesCount = document.querySelector(".moves-counter");
-
-// move counter(움직임 횟수)를 위한 변수
-let moves = 0;
-
 const timeCounter = document.querySelector(".timer");
 let time;
 let minutes = 0;
@@ -83,18 +76,12 @@ function timer(){
             seconds = 0;
         }
         // html에 표시되는 시간 변경
-        timeCounter.innerHTML="<i class='fa fa-hourglass-start'></i>"+" 타이머: "+ seconds+" 초";
+        timeCounter.innerHTML="<i class='fa fa-hourglass-start'></i> 지난 시간: "+ seconds+" 초";
     }, 1000);
 }
 
 function stopTime(){
     clearInterval(time);
-}
-
-
-function movesCounter() {
-    movesCount.innerHTML++;
-    moves++;
 }
 
 // 열린(클릭된) 두 카드가 매칭하는지를 비교
@@ -122,11 +109,10 @@ function match(){
         matched.push(opened[0]);    // 매칭된 둘은 같은 사진이므로 하나만 넣어줌
         document.body.style.pointerEvents = "auto";
 
+        clearInterval(check);
         finishGame();
         opened = [];
     }, 600);
-
-    movesCounter();
 }
 
 function noMatch() {
@@ -138,22 +124,14 @@ function noMatch() {
 
         opened = [];
 
+        clearInterval(check);
         finishGame();
     }, 1200);
-
-    movesCounter();
 }
 
 function showResult() {
     console.log("matched list: ", matched);
-    const stats = document.querySelector(".modal-content");
     var itemList = "";
-
-    for (let i = 1; i<=2; i++){     // 모달창 하단에 띄울 <p>태그 생성
-        const statsElements = document.createElement("p");
-        statsElements.classList.add("stats");
-        stats.appendChild(statsElements);
-    }
 
     for (let k = 0; k < matched.length; k++) {
         switch (matched[k].alt) {
@@ -202,14 +180,8 @@ function showResult() {
         }        
     }
 
-    let p = stats.querySelectorAll("p.stats");
-
-    p[0].innerHTML = "얻은 아이템: ";
-    p[1].innerHTML = itemList;
+    $('.item').text(itemList);
 }
-
-//const modal = document.getElementById("finish-modal");
-//var modal = new bootstrap.Modal(document.getElementById('finish-modal'))
 
 function displayModal(){
     var myModal = new bootstrap.Modal(document.getElementById('finishModal'), {
@@ -221,11 +193,11 @@ function displayModal(){
 
 function finishGame() {
     if(seconds >= 30){
+        clearInterval(check);
+
         stopTime();
         showResult();
         displayModal();
-        
-        clearInterval(check);
 
         itemRequest(JSON.stringify(item));
     }
@@ -238,7 +210,7 @@ function itemRequest(data) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
-            $('.Btn').html('<a class="btn btn-primary" href="main.html" role="button">청지기 1일차 시작하기</a>');             
+            $('.Btn').html('<a class="btn btn-primary fs-5" href="main.html" role="button">청지기 1일차 시작하기</a>');             
         }
     };
     xhr.open('POST', '../finishGame.php');

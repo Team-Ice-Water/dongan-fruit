@@ -98,7 +98,8 @@ function infoRequest() {
 function changeRequest(data) { 
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
-        if(xhr.readyState === 4 && xhr.status === 200){ 
+        if(xhr.readyState === 4 && xhr.status === 200){
+            console.log("응답:", xhr.responseText);
         }
     };
     xhr.open('POST', '../doSchedule.php');

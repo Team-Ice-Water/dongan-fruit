@@ -41,13 +41,43 @@ var endingInfo = {
 
 var userInfo = {
     day: 0,
-    health: 0
+    health: 0,
+    event_day: 0
 }
 
 var ecoLevelInfo = {
     air: 0,
     soil: 0,
     water: 0
+}
+
+var userReq = false;
+var endingReq = false;
+var ecoReq = false;
+
+var select; // event_choice.js 에 보낼 변수
+
+// 메인 코드 -> event_choice.js로 어떤 모달을 만들지 id를 보내주는 함수
+function makeModal() {
+    console.log("오늘날짜: ", userInfo.day);
+    console.log("이벤트 날짜: ", userInfo.event_day);
+
+    if(userReq && endingReq && ecoReq){ // 정보를 다 받아왔으면 실행함
+        if(userInfo.day > userInfo.event_day){ // 아직 이벤트를 하지 않았으면
+            console.log("select 보낸다.");           
+
+            if(userInfo['health'] <= 50){
+                natural();  // 자연착취엔딩
+            }
+            culture();      // 문화엔딩
+            school();       // 환경지킴이 학교 엔딩
+            home();         // 청지기 가정 엔딩
+            
+            select = selectOne(eventList);   // 최종 리스트 중에 하나 선택
+            
+            console.log(select);
+        }
+    }    
 }
 
 
@@ -68,12 +98,18 @@ function userRequest() {
                         break;
                     case 'health':
                         userInfo['health'] = parseInt(value);
+                        break;
+                    case 'event_day':
+                        userInfo['event_day'] = parseInt(value);
                         break;             
                     default:
                         break;
                 }
             }
-        }
+
+            userReq = true;
+            makeModal();
+        }        
     };
 }
 
@@ -111,11 +147,12 @@ function endingRequest() {
                         break;
                 }
             }
-        }
+
+            endingReq = true;
+            makeModal();
+        }        
     };
 }
-
-
 
 // 오염도 정보 요청
 function ecoRequest() {
@@ -142,6 +179,9 @@ function ecoRequest() {
                         break;
                 }
             }
+
+            ecoReq = true;
+            makeModal();
         }
     };
 }
@@ -169,12 +209,12 @@ function culture() {
             if(endingInfo['culStage'] == 0){  // 문화 1단계 선택 X
                 eventList.push({ id: "event_23", ending: "문화"});
             }else if(endingInfo['culStage'] == 1){  // 문화 1단계 선택 O (아직 5일 안지난 상태)
-                pass
+                // pass;
             }
         }
     }else if(userInfo['day']>=7){  // 7일차 ~
         if(endingInfo['culDay'] == 0){  // 한번도 1단계 발생한적 X
-            pass  //(문화 엔딩 소멸)
+            // pass;  //(문화 엔딩 소멸)
         }else if(endingInfo['culDay'] != 0){  // 한번이라도 1단계 발생한적 O
 
             if(endingInfo['culStage'] == 0){  // 1단계 선택 X 상태
@@ -182,7 +222,7 @@ function culture() {
 
             }else if(endingInfo['culStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['culDay']+5)){ // 선택 후 1~4일째
-                    pass
+                    // pass
                 }else if(userInfo['day'] == (endingInfo['culDay']+5)){  // 선택 후 5일째
                     var order = Math.floor(Math.random() * 2);
 
@@ -195,7 +235,7 @@ function culture() {
 
             }else if(endingInfo['culStage'] == 2){  // (2단계 선택 O) 상태 and (3단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['culDay']+5)){ // 선택 후 1~4일째
-                    pass
+                    // pass
                 }else if(userInfo['day'] == (endingInfo['culDay']+5)){  // 선택 후 5일째
 
                     var order = Math.floor(Math.random() * 3);
@@ -211,7 +251,7 @@ function culture() {
 
             }else if(endingInfo['culStage'] == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['culDay']+5)){ // 선택 후 1~4일째
-                    pass
+                    // pass
                 }else if(userInfo['day'] == (endingInfo['culDay']+5)){  // 선택 후 5일째
                     eventList.push({ id: "event_29", ending: "문화", condition: 100});  // event_29 : 문화 4단계 - 동네청소
                 }
@@ -236,16 +276,16 @@ function school() {
             }
 
         }else if(endingInfo['envDay'] != 0){  // 한번이라도 환경지킴이 1단계 발생한적 O
-            pass
+            // pass
         }
     }else if(userInfo['day']>=8){  // 8일차 ~
         if(endingInfo['envDay'] == 0){  // 한번도 1단계 발생한적 X
-            pass  //(환경지킴이 엔딩 소멸)
+            // pass  //(환경지킴이 엔딩 소멸)
         }else if(endingInfo['envDay'] != 0){  // 한번이라도 1단계 발생한적 O
 
             if(endingInfo['envStage'] == 0){  // 1단계 선택 X 상태
                 if(userInfo['day'] < (endingInfo['envDay']+7)){ // 선택 후 1~6일째
-                    pass
+                    // pass
                 }else if(userInfo['day'] == (endingInfo['envDay']+7)){  // 선택 후 7일째
 
                     var order = Math.floor(Math.random() * 3);
@@ -261,7 +301,7 @@ function school() {
 
             }else if(endingInfo['envStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['envDay']+7)){ // 선택 후 1~6일째
-                    pass
+                    // pass
                 }else if(userInfo['day'] == (endingInfo['envDay']+7)){  // 선택 후 7일째
 
                     var order = Math.floor(Math.random() * 2);
@@ -285,28 +325,28 @@ function home() {
 
         if(endingInfo['homeStage'] == 0){  // (1단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
-                pass
+                // pass
             }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_35", ending: "청지기", condition: 100});  // event_35 : 청지기 1단계
             }
 
         }else if(endingInfo['homeStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
-                pass
+                // pass
             }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_36", ending: "청지기", condition: 100});  // event_36 : 청지기 2단계 - 변화하는 가정
             }
 
         }else if(endingInfo['homeStage'] == 2){  // (2단계 선택 O) and (3단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
-                pass
+                // pass
             }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_37", ending: "청지기", condition: 100});  // event_37 : 청지기 3단계 - 주방 세제
             }
 
         }else if(endingInfo['homeStage'] == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
-                pass
+                // pass
             }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_38", ending: "청지기", condition: 100});  // event_38 : 청지기 4단계 - 앞장서는 부모님
             }
@@ -385,35 +425,7 @@ function selectOne(list) {
 
 /* JS로딩 시 실행시키는 부분 */
 // DB로부터 정보 불러옴
-userRequest(); endingRequest(); ecoRequest();
-
-
-if(userInfo['health'] <= 50){
-    natural();  // 자연착취엔딩
-}
-culture();      // 문화엔딩
-school();       // 환경지킴이 학교 엔딩
-home();         // 청지기 가정 엔딩
-
-const select = selectOne(eventList);   // 최종 리스트 중에 하나 선택
-
-// modal 버튼의 속성값 변경
-const modalBtn= document.querySelector(".btn");
-modalBtn.setAttribute('data-bs-target', "#"+select);  // selectOne()의 값을 저장하는 변수
-
-console.log(select);
-
-
-/* 하나 선택된 이후의 과정 */
-function sendending(obj) {
-    // php에 정보를 보냄 (=DB 변경)
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function(){
-        if(xhr.readyState === 4 && xhr.status === 200){ 
-        }
-    };
-    xhr.open('POST', '../doEvent.php');
-    xhr.setRequestHeader('Content-Type', "application/json");
-    xhr.send(JSON.stringify(obj));
-}
+userRequest(); 
+endingRequest(); 
+ecoRequest();
 

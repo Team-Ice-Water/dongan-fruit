@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SEBANG_Gothic_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.content{
+    margin: 3rem;
+    padding: 1rem;
+
+    font-family: 'DungGeunMo', 'PFStardust';  
+    font-size: 1.5rem;
+    /*text-align: center;*/
+
+    border: 0.8rem double #263D48;
+    background-color: white;
+    width: 80vw;
+    height: 20vh;
+}
+
+/* 깜빡이는 커서 */
+.blink {
+    animation: blink 0.5s infinite;
+    font-size: 2rem;
+}
+  
+@keyframes blink {
+    to {
+      opacity: 0;
+    }
+}
+
+.modal-content{
+    font-family: 'GmarketSansMedium';
+}
+
+.modal-body{
+    display: grid;
+    grid-template-rows: 1.5fr 2fr 6fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.modal-body .item:nth-child(-n+3) {
+    grid-column: 1 / 3; 
+}
+
+.title{
+    font-family: 'SEBANG_Gothic_Bold';
+    color: #CEFD0C;
+    text-shadow:3px 3px 3px rgb(0 0 0 / 70%);
+    align-self: center;
+    font-size: 3rem;
+}
+
+.earth{
+    width: 70%;
+    align-self: center;
+    justify-self: center;
+}

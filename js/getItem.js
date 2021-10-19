@@ -30,11 +30,15 @@ const itemFile = {
 }
 
 // 아이템 등을 띄울 이미지 태그를 만드는 함수
-function makeImg(section, file, type) {
+function makeImg(section, file, name, damage) {
+    console.log("makeImg()");
     const newImage = document.createElement("IMG");
     newImage.setAttribute('src', 'img/' + file);
-    newImage.setAttribute('id', type);
+    newImage.setAttribute('id', name);
     newImage.setAttribute('alt', 'image of ' + file);
+    if(damage){
+        newImage.style.opacity="0.4";
+    }    
     section.appendChild(newImage);
 }
 
@@ -42,10 +46,14 @@ function makeImg(section, file, type) {
 // 받아온 값을 기반으로 아이템 이미지 생성
 function addItem(obj) {
     for (let key in obj) {
-        const value = obj[key]
+        const value = obj[key];
+        const fileName = itemFile[key];
+        console.log(fileName +": " +value);
         if(value == "1"){  // true이면
-            const file = itemFile[key]
-            makeImg(itemSection, file, key)
+            makeImg(itemSection, fileName, key, false);
+        } else if(value == "2"){
+            console.log("손상 이미지");
+            makeImg(itemSection, fileName, key, true);
         }
     }  
 }
@@ -62,8 +70,8 @@ function itemRequest() {
             for (let jkey in json) {
                 for (let ikey in itemList) {
                     if(jkey == ikey){
-                        const jvalue = json[jkey]
-                        itemList[ikey] = jvalue
+                        const jvalue = json[jkey];
+                        itemList[ikey] = jvalue;
                         break
                     } 
                 }

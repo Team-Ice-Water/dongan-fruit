@@ -5,6 +5,7 @@
     session_start();
     
     $userId = $_SESSION['current_id'];
+    $userToon = $_SESSION['current_toon'];
 
     $reciveData = file_get_contents('php://input');
     $input = json_decode(stripcslashes($reciveData), true);
@@ -15,7 +16,7 @@
     $sql ="
         UPDATE character_info
         SET $type = $type + $value
-        WHERE m_id='$userId';";
+        WHERE m_id='$userId' AND cname = '$userToon';";
     $ret = mysqli_query($con, $sql);
     
     mysqli_close($con);

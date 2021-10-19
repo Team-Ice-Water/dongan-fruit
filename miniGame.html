@@ -10,29 +10,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
-    <div id="container">
+    <div id="game-container" class="container">
         <header class="title">
             <h1>아이템 획득 게임</h1>
         </header>
 
         <section class="score-panel">
-            <h3>점수판</h3>
-            <div class="timer-container">
-                <span class="timer"><i class="fa fa-hourglass-start"></i>  타이머: 00:00</span>
+            <p class="fs-5 bg-light">짝이 맞는 두 개의 카드를 찾으면, 카드에 그려진 아이템을 획득하게 됩니다.
+            <br/> 카드를 누르면 게임이 시작됩니다.</p>
+            <div class="timer-container">                
+                <span class="timer fs-4"><i class="fa fa-hourglass-start"></i>제한시간 30초</span>
             </div>
 
         </section>
 
-        <!-- Modal -->
+        <!-- 결과 Modal -->
         <div class="modal fade" id="finishModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-            
-            <div class="modal-body">
-                <h2> 게임이 종료되었습니다. </h2>
-                <p> 제한 시간 30초가 끝나, 아이템 얻기 게임이 종료되었습니다. </p>
-                <section class="Btn"></section>
-            </div>
+                <div class="modal-body">
+                    <br/>
+                    <h2 class="fs-2"> 게임이 종료되었습니다. </h2>
+                    <br/>
+                    <p class="fs-4"> 제한 시간 30초가 끝나, 아이템 얻기 게임이 종료되었습니다. </p>
+                    <br/>
+                    <br/>
+                    <p class="fs-3">얻은 아이템: </p>
+                    <p class="item fs-4"></p>
+                    <br/>
+                    <section class="Btn"></section>
+                    <br/>
+                </div>
             </div>
         </div>
         </div>

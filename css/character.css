@@ -15,62 +15,52 @@ body {
 
       }
 
-      /라디오버튼 디자인/
+.container {
+  display: grid;
+  grid-template-columns: 16% 16% 16% 16% 16% 16%;
+  grid-template-rows: 50% 50%;
+  row-gap: 1em;
+}
 
-      input[type='radio'] {
-        appearance: 10%; 
-        background-color: #2f2f2f;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        opacity: 50%;
-        margin: 10px;
-        border: 100px;
-      
-          &:checked {
-            opacity: 1;
-          }
-        }
+.item img{
+  height: 100%;
+  max-height: 30vh;
+}
 
+.item img {
+  transition: all 0.2s linear;
+}
 
-      .container {
-        display: grid;
-        grid-template-columns: 30% 30% 30%;
+.item:hover img { /* 마우스 올렸을 때 커짐*/
+  transform: scale(1.4);
+}
 
-	grid-template-rows: 20% 20% 20%;
-	
-    }
-   
-      .insertCardImg{
-          float: left;
-         
-      }
-      
-      
-      .button{
-          background-color: #fcc500;
-          font-family: 'CookieRunOTF-Bold';
-          border:none;
-          color:111;
-          border-radius: 100px;
-          width:70%;
-          height:50%;
-          font-size: 14pt;
-          margin-top:10%;
-          margin-left:20%
-      } //제출버튼
+.clicked img{
+  /*border: gray;*/
+  transform: scale(1.4);
+}
 
-      .btn>label{
-          padding: 5px 10px; border:1px solid #ccc; border-radius:3px}
+[type=radio] {    /* 동그라미 숨기기 */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 
+.input-group{
+  width: 60%;
+  margin-top: 2em;
+}
 
-      
+input[name="cname"]{
+  border-radius: 50px;
+}
 
-     
-
-
-
-
-
-      
-      
+[type="submit"]{  /* 제출버튼 */
+  background-color: #fcc500;
+  font-family: 'CookieRunOTF-Bold';
+  border: none;
+  color: 111;  
+  border-radius: 50px;
+  width:30%;
+} 

@@ -1,0 +1,68 @@
+@font-face {
+    font-family: 'CookieRunOTF-Black';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Black00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    align-content: center;    /*container 뿐*/
+
+    background-color: #85d6ff;
+    flex-direction: column;
+}
+
+.container{
+    align-self: center;
+
+    height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title,
+.carousel,
+.info{
+    align-self: center;
+}
+
+.title{
+    font-family: 'CookieRunOTF-Black';
+    margin-bottom: auto;
+}
+
+.carousel{
+    width: 70%;     /* container의 70%를 의미 */
+    padding: 3% 0 3% 0;
+    margin: auto;
+    background-color: rgb(57 91 109 / 30%);
+    border-radius: 50px;
+
+    font-family: 'GmarketSansMedium';
+}
+
+.toon-slide{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+}
+
+.toon-slide > img{     /* 캐릭터 이미지*/
+    margin : auto;  /* 이미지 중앙 정렬 */
+    justify-self: center;
+}
+
+.toon-slide > .caption{     /* 캐릭터 상태(정보)*/
+    justify-self: start;
+}

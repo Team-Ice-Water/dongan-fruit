@@ -5,6 +5,7 @@ body {
           letter-spacing: 1.5px;
           margin: 0;
           text-align:center;
+          height: 100vh;
       }  
       
       @font-face {
@@ -73,3 +74,8 @@ body {
           font-size: 14pt;
           margin-top:100px;
       }
+
+.title-logo{
+	width: 100%;
+    max-width: 30vw;
+}

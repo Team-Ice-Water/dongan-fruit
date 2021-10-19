@@ -1,65 +1,49 @@
-<link rel="stylesheet" href="css/character.css">
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="type" value="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캐릭터 선택</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/character.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
 <body>
-    <h1>캐릭터 선택</h1>
+    <h1>캐릭터 만들기</h1>
+    <br/>
+    <form method="post" action="addCharacter.php">
+        <div class="container">
+            <label class="item"><input type="radio" name="type" value="man1"><img src="img/toon/man1.png"/></label>
+            <label class="item"><input type="radio" name="type" value="man2"><img src="img/toon/man2.png"/></label>
+            <label class="item"><input type="radio" name="type" value="man3"><img src="img/toon/man3.png"/></label>
+            <label class="item"><input type="radio" name="type" value="man4"><img src="img/toon/man4.png"/></label>
+            <label class="item"><input type="radio" name="type" value="man5"><img src="img/toon/man5.png"/></label>
+            <label class="item"><input type="radio" name="type" value="man6"><img src="img/toon/man6.png"/></label>
+            <label class="item"><input type="radio" name="type" value="woman1"><img src="img/toon/woman1.png"/></label>
+            <label class="item"><input type="radio" name="type" value="woman2"><img src="img/toon/woman2.png"/></label>
+            <label class="item"><input type="radio" name="type" value="woman3"><img src="img/toon/woman3.png"/></label>
+            <label class="item"><input type="radio" name="type" value="woman4"><img src="img/toon/woman4.png"/></label>
+            <label class="item"><input type="radio" name="type" value="woman5"><img src="img/toon/woman5.png"/></label>
+            <label class="item"><input type="radio" name="type" value="woman6"><img src="img/toon/woman6.png"/></label>
+        </div>
 
-    <form method="post" action="login.php"></form>
+        <div class="input-group mb-3 mx-auto">
+            <input type="text" name="cname" class="form-control fs-4" placeholder="캐릭터 이름" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input class="fs-4" type="submit" value="만들기" id="button-addon2">
+        </div>
+    </form>
 
-    <div class="container" style="
-    margin-left: 100px;
-">
-
-        <div class="item"><input type="radio" name="major" value="man1" class="btn" id="id_btn_01"><label
-                for="id_btn_01">남자1<img src="img/toon/man1.png" height="120" width="70"></label></input> </div>
-        <div class="item"><input type="radio" name="major" value="man2" class="btn" id="id_btn_02"><label
-                for="id_btn_02">남자2<img src="img/toon/man2.png" height="120" width="70"></label></input> </div>
-        <div class="item"><input type="radio" name="major" value="man3" class="btn" id="id_btn_03"><label
-                for="id_btn_03">남자3<img src="img/toon/man3.png" height="120" width="70"></label></input> </div>
-        <div class="item"><input type="radio" name="major" value="man4" class="btn" id="id_btn_04"><label
-                for="id_btn_04">남자4<img src="img/toon/man4.png" height="120" width="70"></label></input> </div>
-        <div class="item"><input type="radio" name="major" value="man5" class="btn" id="id_btn_05"><label
-                for="id_btn_05">남자5<img src="img/toon/man5.png" height="120" width="70"></label></input> </div>
-        <div class="item"><input type="radio" name="major" value="man6" class="btn" id="id_btn_06"><label
-                for="id_btn_06">남자6<img src="img/toon/man6.png" height="120" width="70"></label></input> </div>
-        <div class="item"><input type="radio" name="major" value="woman1" class="btn" id="id_btn_07"><label
-                for="id_btn_07">여자1<img src="img/toon/woman1.png" height="120" width="70"></label></input> </div>
-        <div class="item"><input type="radio" name="major" value="woman2" class="btn" id="id_btn_08"><label
-                for="id_btn_08">여자2<img src="img/toon/woman2.png" height="120" width="70"></label></input> </div>
-        <div class="item"><input type="radio" name="major" value="woman3" class="btn" id="id_btn_09"><label
-                for="id_btn_09">여자3<img src="img/toon/woman3.png" height="120" width="70"></label></input> </div>
-        <div class="item"><input type="radio" name="major" value="woman4" class="btn" id="id_btn_10"><label
-                for="id_btn_10">여자4<img src="img/toon/woman4.png" height="120" width="70"></label></input> </div>
-        <div class="item"><input type="radio" name="major" value="woman5" class="btn" id="id_btn_11"><label
-                for="id_btn_11">여자5<img src="img/toon/woman5.png" height="120" width="70"></label></input> </div>
-        <div class="item"><input type="radio" name="major" value="woman6" class="btn" id="id_btn_12"><label
-                for="id_btn_12">여자6<img src="img/toon/woman6.png" height="120" width="70"></label></input> </div>
-        <br>
-        <div><input id="usercha" type="text" name="usercha" value="캐릭터 이름 설정"
-                style=" width:50%;height:70%;margin-left: 10%; margin-top: 20px;"> </div>
-        <br>
-        <button onclick="test()" style="margin-left: 120%;width: 70%;height: 50%;margin-top: 10%;" class="button" >캐릭터 설정</button>
-        
-    </div>
-    
     <script>
-        function test() {
-            var obj_length = document.getElementsByName("major").length;
-      
-            for (var i=0; i<obj_length; i++) {
-                if (document.getElementsByName("major")[i].checked == true) {
-                    alert(document.getElementsByName("major")[i].value);
-                }
+        $('.item').on('click',function(e){
+            if($('.clicked')){  // 이미 클릭된게 있으면
+                $('.clicked').removeClass('clicked');
             }
-        }
+            $(this).addClass('clicked');
+        });
     </script>
-         
-
-
-   
-   
-
-<script src="js/character.js"></script>
-
+    <script type="text/javascript" src="js/navbar.js"></script>
 </body>
-
-
+</html>

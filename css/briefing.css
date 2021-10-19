@@ -29,12 +29,12 @@ body{
 }
 
 #text {
-    margin-top: 15vh;
+    margin-top: 6vh;
     display: grid;
     justify-items: center;
     align-items: center;
 
-    font-family: 'DungGeunMo', 'PFStardust',  'IM_Hyemin-Regular';   
+    font-family: 'DungGeunMo', 'PFStardust', 'IM_Hyemin-Regular';   
 }
 
 .title{
@@ -46,7 +46,7 @@ body{
     text-align: center;
 }
 .typing {
-    display:table;
+    display: table;
 }
 
 .info {

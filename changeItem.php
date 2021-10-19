@@ -4,6 +4,7 @@
     session_start();
     
     $userId = $_SESSION['current_id'];
+    $userToon = $_SESSION['current_toon'];
 
     $reciveData = file_get_contents('php://input');
     $input = json_decode(stripcslashes($reciveData), true);
@@ -16,21 +17,22 @@
             $sql ="
                 UPDATE character_info
                 SET $item = 1 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         case 'remove':
             $sql ="
                 UPDATE character_info
                 SET $item = 0 
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         case 'damage':
             $sql ="
                 UPDATE character_info
                 SET $item = 2
-                WHERE m_id='$userId';";
+                WHERE m_id='$userId' AND cname = '$userToon';";
+            break;
         
         default:
             break;

@@ -4,24 +4,25 @@
     session_start();
     
     $userId = $_SESSION['current_id'];
+    $userToon = $_SESSION['current_toon'];
     // 해당 id의 정보 선택
-    $sql = "select * from ending_info where m_id='$userId'";
+    $sql = "select * from ending_info where m_id='$userId' AND cname = '$userToon';";
     $ret = mysqli_query($con, $sql);
 
     if($ret){
         $row = mysqli_fetch_array($ret);
         
-        $culDay = $row['cultureDay'];
-        $culStage = $row['cultureStage'];
-        $culEnd = $row['cultureEnd'];
+        $culDay = $row['culture_day'];
+        $culStage = $row['culture_stage'];
+        $culEnd = $row['culture_end_count'];
         
-        $envDay = $row['envDay'];
-        $envStage = $row['envStage'];
-        $envEnd = $row['envEnd'];
+        $envDay = $row['school_day'];
+        $envStage = $row['school_stage'];
+        $envEnd = $row['school_end_count'];
 
-        $homeDay = $row['homeDay'];
-        $homeStage = $row['homeStage'];
-        $homeEnd = $row['homeEnd'];
+        $homeDay = $row['home_day'];
+        $homeStage = $row['home_stage'];
+        $homeEnd = $row['home_end_count'];
 
         $value = array('culDay' => $culDay,
                         'culStage' => $culStage,

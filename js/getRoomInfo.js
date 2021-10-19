@@ -64,20 +64,23 @@ function setUserInfo() {
     changeAttr(healthLevel, userInfo, 'health');
     day.innerHTML = userInfo['day']+'일';       
 }
+
 var getInfo = false;
 var getItem = false;
+var info = document.querySelector(".user-info");
 
 function setDetailModal() {
     if(getInfo && getItem){   // 서버에서 정보를 여러번 받아오기를 시도하기 때문에, setUserInfo()도 여러번 호출된다. bootstrap 객체를 사용하려면 다운받아올 시간을 주어야 하는데, 결국 서버에서 값을 다 받아오면 객체도 사용할 준비가 완료되므로 클릭하면 모달창을 띄울 수 있는 이벤트를 지정할 때, 조건을 준다.
+        clearInterval(setInfoModal);
+        console.log("이벤트 추가");
+
         var myModal = new bootstrap.Modal(document.getElementById('detail-info'), {
             keyboard: false
-        })
-        
-        $(".user-info").click(function(){
-            myModal.show();
         });
 
-        clearInterval(makeModal);
+        info.addEventListener("click", function() {
+            myModal.show();
+        });
     }
 }
 
@@ -231,4 +234,4 @@ function infoRequest() {
 ecoRequest();
 infoRequest();
 
-var makeModal = setInterval(setDetailModal, 1000);
+let setInfoModal = setInterval(setDetailModal, 2000);
