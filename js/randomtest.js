@@ -360,7 +360,7 @@ function setResultModal(choice) {
             changeEco = {eco: maxEco, value: -5};
 
             text = "찾아보긴 했는데 뭔가 더 알아야할 것 같은데.";
-            result = eco+" 15 감소";
+            result = eco+" 5 감소";
             break;        
         case 'bothBibleBook':   // 둘 다 선택
             var maxEco = findMaxEco();
@@ -368,7 +368,7 @@ function setResultModal(choice) {
             changeEco = {eco: maxEco, value: -15};
 
             text = "성경책이랑 환경지침도서를 보면 잘 나와있어!";
-            result = eco+" 5 감소";
+            result = eco+" 15 감소";
             break;
         case 'neitherBibleBook':    // 둘 다 안선택
             text = "아 조금 더 공부해야겠어. 아무것도 모르겠네...";
@@ -627,8 +627,16 @@ function doEvent() {
         sendValue(changeEco, 'changeMaxEco.php');
     }
     if(getItem != ""){  // 얻은 아이템이 있으면
-        const value = {item: getItem, type: 'add'};
-        sendValue(value, 'changeItem.php');
+        if(getItem.length > 1){
+            for (let i = 0; i < getItem.length; i++) {
+                const value = {item: getItem[i], type: 'add'};
+                sendValue(value, 'changeItem.php');
+            }
+        } else{     // 배열이 아니면 .length를 사용 못해서 else인 경우로 처리해줌
+            const value = {item: getItem, type: 'add'};
+            sendValue(value, 'changeItem.php');
+        }
+        
     }
     if(giveItem != ""){
         const value = {item: giveItem, type: 'remove'};
