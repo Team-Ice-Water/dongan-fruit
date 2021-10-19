@@ -34,7 +34,13 @@
                 UPDATE character_info
                 SET health = 100 
                 WHERE m_id='$userId' AND cname = '$userToon';";
-            } else{
+            } else if(($oldHealth + $health) <= 0){
+                $sql .= "
+                UPDATE character_info
+                SET health = 0 
+                WHERE m_id='$userId' AND cname = '$userToon';";
+            }
+            else{
                 $sql = "
                 UPDATE character_info
                 SET health= health +($health) 

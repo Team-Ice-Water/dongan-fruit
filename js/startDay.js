@@ -5,7 +5,8 @@ const state = [
     { id: "good_nature", text: "오염수치가 낮아졌어요. 지구의 상태가 좋아지고 있어요!", water: 3, air: 3, soil: 3},
     { id: "bad_nature", text: "오염 수치가 높아요. 지구의 상태가 급격하게 나빠지고 있어요.", water: 7, air: 7, soil: 7},
     { id: "bad_pollution", text: "환경 오염이 심각해져서 건강에도 문제가 생기고 있어요.", health: -1},
-    { id: "good_pollution", text: "요즘 지구의 환경이 너무 좋아요. 건강이 좋아지는 기분이에요.", health: 1}    
+    { id: "good_pollution", text: "요즘 지구의 환경이 너무 좋아요. 건강이 좋아지는 기분이에요.", health: 1},
+    { id: "flowepot", text: "화분이 지구의 공기를 정화해줘요.", air: 2}    
 ]
 
 
@@ -22,6 +23,8 @@ var userInfo = {
     day: 0,
     health: 0
 }
+
+var flowerpot;
 
 var getEcoLevel = false;
 var getInfo = false;
@@ -97,6 +100,28 @@ function infoRequest() {
     };
 }
 
+// 아이템 정보 요청
+function itemRequest() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../getItemInfo.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            let json = JSON.parse(xhr.responseText);
+            for (let key in json) {
+                const value = json[key];
+                switch (key) {
+                    case 'flowerpot':
+                        flowerpot = parseInt(value);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    };
+}
+
 function changeRequest(data) { 
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
@@ -158,6 +183,12 @@ function sendValue() {
     if(userInfo['health'] <= 40){
         changeRequest(findItem('bad_health'));  // 체력-2
         findItem('bad_health').filtered = true;      
+    }
+
+    /* 화분 정화 작용 */
+    if(flowerpot != 0){
+        changeRequest(findItem('flowerpot'));  // 대기-2
+        findItem('flowerpot').filtered = true;      
     }
 
 
@@ -327,6 +358,7 @@ function showTotal() {
 
 
 /* 비교를 위한 값 요청*/
+itemRequest();
 ecoRequest();
 infoRequest();
 /* 비교 후 해당되는 정보 전송
