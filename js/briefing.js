@@ -293,6 +293,8 @@ if((data1 == data2)){
     if(data3 !== ""){
         // 새벽 = 아침 != 저녁
         setText(data3, pmTxt);
+    } else{
+        // setText(data1, dawnTxt);   // 새벽
     }
 } else if((data1 == data3) || ((data2 == data3))){
     // 새벽 = 저녁 or 아침 = 저녁 

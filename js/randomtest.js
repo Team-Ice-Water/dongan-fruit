@@ -18,7 +18,7 @@ var changeEco = {
     value: 0
 };     // 가장 수치가 높은 오염도의 {종류, 변동수치}
 var giveItem ="";
-var getItem ="";
+var getItem;
 var damageItem ="";
 
 function chooseItem(haveItems) {
@@ -229,7 +229,7 @@ function setResultModal(choice) {
         case 'yesBuyBible':
             var haveItems = [];      // 가지고 있는 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if((key !='item_count')||(itemInfo[key] == 1)){
+                if((key !='item_count') && (itemInfo[key] == 1)){
                     haveItems.push(key);
                 }
             }
@@ -260,7 +260,7 @@ function setResultModal(choice) {
         case 'pollution_above130':
             var haveItems = [];      // 가지고 있는 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if((key != 'book') || (key !='item_count')){      // 가진 아이템 배열에서 책 제외
+                if((key != 'bible') && (key !='item_count')){      // 가진 아이템 배열에서 성경 제외
                     if(itemInfo[key] == 1){
                         haveItems.push(key);
                     }
@@ -285,7 +285,7 @@ function setResultModal(choice) {
         case 'above_6_item':
             var haveItems = [];
             for (let key in itemInfo) {
-                if((key != 'book')||(key !='item_count')){      // 가진 아이템 배열에서 책 제외
+                if((key != 'book') && (key !='item_count')){      // 가진 아이템 배열에서 책 제외
                     if(itemInfo[key] == 1){
                         haveItems.push(key);
                     }
@@ -300,7 +300,7 @@ function setResultModal(choice) {
         case 'below_6_item':
             var noItems = [];      // 없는 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if((key !='item_count') || (itemInfo[key] == 0)){
+                if((key !='item_count') && (itemInfo[key] == 0)){
                     noItems.push(key);
                 }               
             }
@@ -314,7 +314,7 @@ function setResultModal(choice) {
         case 'evangelist_chance':
             var damages = [];      // 손상된 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if((key !='item_count') || (itemInfo[key] == 2)){
+                if((key !='item_count') && (itemInfo[key] == 2)){
                     damages.push(key);
                 }               
             }
@@ -322,7 +322,7 @@ function setResultModal(choice) {
             if(damages.length == 0){
                 var noItems = [];      // 없는 아이템들의 이름을 저장하는 배열
                 for (let key in itemInfo) {
-                    if((key !='item_count')||(itemInfo[key] == 0)){
+                    if((key !='item_count') && (itemInfo[key] == 0)){
                         noItems.push(key);
                     }               
                 }
@@ -626,8 +626,8 @@ function doEvent() {
     if(changeEco['value'] != 0){    // 최대 오염도를 수정해야 하면
         sendValue(changeEco, 'changeMaxEco.php');
     }
-    if(getItem != ""){  // 얻은 아이템이 있으면
-        if(getItem.length > 1){
+    if(getItem){  // 얻은 아이템이 있으면 -> "", null, undefined, 0, NaN은 false
+        if(Array.isArray(getItem)){
             for (let i = 0; i < getItem.length; i++) {
                 const value = {item: getItem[i], type: 'add'};
                 sendValue(value, 'changeItem.php');
@@ -638,11 +638,11 @@ function doEvent() {
         }
         
     }
-    if(giveItem != ""){
+    if(giveItem){
         const value = {item: giveItem, type: 'remove'};
         sendValue(value, 'changeItem.php');
     }
-    if(damageItem != ""){   // 손상된 아이템이 있으면
+    if(damageItem){   // 손상된 아이템이 있으면
         const value = {item: damageItem, type: 'damage'};
         sendValue(value, 'changeItem.php');
     }
