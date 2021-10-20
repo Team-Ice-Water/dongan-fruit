@@ -68,6 +68,8 @@ function done() {
     };
 }
 
+function noBack(){window.history.forward();}    // 뒤로가기 금지
+
 $(document).ready(function() {
     
     const typingSound = new Audio('../audio/typing.wav');

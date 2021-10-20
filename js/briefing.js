@@ -189,28 +189,28 @@ function checkEnding() {
 
             switch (xhr.responseText) {
                 case 'health_ending':
-                    window.open('ending.html?health', '_self', '');
-                    //location.href = 'ending.html?health';
+                    //window.open('ending.html?health', '_self', '');
+                    location.replace('ending.html?health');
                     break;
                 case 'water_ending':
-                    window.open('ending.html?water', '_self', '');
-                    //location.href = 'ending.html?water';
+                    //window.open('ending.html?water', '_self', '');
+                    location.replace('ending.html?water');
                     break;
                 case 'soil_ending':
-                    window.open('ending.html?soil', '_self', '');
-                    //location.href = 'ending.html?soil';
+                    //window.open('ending.html?soil', '_self', '');
+                    location.replace('ending.html?soil');
                     break;
                 case 'air_ending':
-                    window.open('ending.html?air', '_self', '');
-                    //location.href = 'ending.html?air';
+                    //window.open('ending.html?air', '_self', '');
+                    location.replace('ending.html?air');
                     break;
                 case 'earth_ending':
-                    window.open('ending.html?earth', '_self', '');
-                    //location.href = 'ending.html?earth';
+                    //window.open('ending.html?earth', '_self', '');
+                    location.replace('ending.html?earth');
                     break;
                 case 'normal_ending':
-                    window.open('ending.html?normal', '_self', '');
-                    //location.href = 'ending.html?normal';
+                    //window.open('ending.html?normal', '_self', '');
+                    location.replace('ending.html?normal');
                     break;
                 default:
                     console.log("엔딩에 안걸림");
