@@ -73,9 +73,9 @@ $(document).ready(function() {
     const typingSound = new Audio('../audio/typing.wav');
 
     const temp = location.href.split("?");
-    const data= temp[1];
+    const data= temp[1];    // 엔딩 페이지에 진입하면, 어떤 엔딩인지 DB에 저장(ending_type 속성)
     endingSend({type: data});
-    var content;
+    var content;        // 적힐 내용을 저장하는 문자열
 
     for (let value of ending){
         if(value['id'] == data){

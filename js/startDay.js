@@ -6,7 +6,7 @@ const state = [
     { id: "bad_nature", text: "오염 수치가 높아요. 지구의 상태가 급격하게 나빠지고 있어요.", water: 7, air: 7, soil: 7},
     { id: "bad_pollution", text: "환경 오염이 심각해져서 건강에도 문제가 생기고 있어요.", health: -1},
     { id: "good_pollution", text: "요즘 지구의 환경이 너무 좋아요. 건강이 좋아지는 기분이에요.", health: 1},
-    { id: "flowepot", text: "화분이 지구의 공기를 정화해줘요.", air: 2}    
+    { id: "flowerpot", text: "미약하지만 화분의 공기정화식물이 공기를 조금 좋게 만들었어요.", air: 2}    
 ]
 
 
@@ -265,6 +265,10 @@ function setText(obj, tag, nexttag) {
             text += " 각 오염도 " + obj['water'] + " 증가";
             total += obj['water'];
         }
+    }
+
+    if(obj['id'] == 'flowerpot'){
+        text += "  대기 오염도 2 감소";
     }
     
     /* 다음 줄에 변동사항을 적는다. */
