@@ -16,6 +16,20 @@ let minutes = 0;
 let seconds = 0;
 let timeStart = false;
 
+const wrong = new Audio('../audio/wrong.mp3');
+wrong.volume = 0.4;
+
+const correct = new Audio('../audio/correct.mp3');
+correct.volume = 0.4;
+
+const end = new Audio('../audio/end.mp3');
+
+const clock = new Audio('../audio/clock.wav');
+clock.addEventListener('ended', function() { 
+    this.currentTime = 0;
+    this.play();
+}, false);
+
 var item = {
     tumbler: "0",
     mic: "0",
@@ -93,10 +107,12 @@ function compareTwo(){
 
     if(opened.length === 2 && opened[0].src === opened[1].src){
         match();
+        correct.play();
         console.log("It's a Match!");
     } 
     else if (opened.length === 2 && opened[0].src != opened[1].src){
         noMatch();
+        wrong.play();
         console.log("NO Match!");
     }
 }
@@ -187,13 +203,14 @@ function displayModal(){
     var myModal = new bootstrap.Modal(document.getElementById('finishModal'), {
         keyboard: false
     });
-    myModal.show();   
-
+    myModal.show();
+    end.play();
 }
 
 function finishGame() {
     if((seconds >= 30)||(matched.length == 10)){
         // 시간이 다 되었거나, 모든 카드를 찾았으면
+        clock.pause();
         clearInterval(check);
 
         stopTime();
@@ -233,6 +250,7 @@ deck.addEventListener("click", function(evt){
 
         if(timeStart === false){
             timeStart = true;
+            clock.play();
             timer();
         }
         flipCard();
