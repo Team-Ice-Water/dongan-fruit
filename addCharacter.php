@@ -9,11 +9,14 @@
     $type = $_POST["type"];
 
     // 캐릭터 이름이 character에 있는지 확인
-    $check_sql = "select * from character_info where m_id='$newID' AND cname='$newName'";
+    $check_sql = "select * from character_info where m_id='$userId' AND cname='$newName'";
     $check_ret = mysqli_query($con, $check_sql);
 
     if($check_ret){
         $count = mysqli_num_rows($check_ret);
+        echo $check_sql;
+        echo $count;
+
         if($count == 0){ //원래 없던 이름이면 없었으면 추가
             
             $sql = "
@@ -39,8 +42,7 @@
             echo "<script>alert('캐릭터 이름: {$newName} (으)로 캐릭터가 생성되었습니다. 게임을 시작합니다.');</script>";
 
 ?>              <script>
-                    //location.href = 'miniGame.html';
-                    location.replace('miniGame.html');
+                    //location.replace('miniGame.html');
                 </script>
 <?php
 
