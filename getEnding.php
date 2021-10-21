@@ -27,7 +27,7 @@
     $array = array();
     if($result){
         while ($row = mysqli_fetch_array($result)) {    // assoc 는 안됨.. 
-            $array[$num] = new Character($row['cname'], $row['ending_type']]);
+            $array[$num] = new Character($row['cname'], $row['ending_type']);
             $num++;
         }
     }
