@@ -1,7 +1,22 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .navbar{
     position: absolute;
     left: 0px;
     top: 0px;
     z-index: 999;
     width: 40%;
+}
+
+.id-txt {  
+    font-family: 'GmarketSansMedium';
+    line-height: 260%;  /* 텍스트 혼자 너무 위로 가있음*/
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    color: #000000ad;
 }
