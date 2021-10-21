@@ -34,6 +34,31 @@ function infoRequest() {
 
 infoRequest();
 
+function changeTxt(type) {
+    switch (type) {
+        case 'earth':
+            return "지구 멸망 엔딩";
+        case 'air':
+            return "찜통 지구 엔딩";
+        case 'water':
+            return "물 부족 지구 엔딩";
+        case 'soil':
+            return "황량한 지구 엔딩";
+        case 'health':
+            return "체력 고갈 엔딩";
+        case 'normal':
+            return "기본 엔딩";
+        case 'culture':
+            return "문화를 바꿔가는 그리스도인 엔딩";
+        case 'school':
+            return "우리 학교는 환경지킴이 학교 엔딩";
+        case 'home':
+            return "청지기 가정 엔딩";
+        default:
+            break;
+    }
+}
+
 function makeCard() {
 
     if(characterInfo.length == 0){
@@ -41,11 +66,13 @@ function makeCard() {
         $('.card-section').append(text);
     } else{
         for (let i = 0; i < characterInfo.length; i++) {
+            var ending = characterInfo[i].ending_type;
             var item = $(`
             <div class="card shadow">
-                <img src="img/ending/`+characterInfo[i].type+`.png" class="card-img-top" alt="`+characterInfo[i].type+`">
+                <img src="img/ending/`+ending+`.png" class="card-img-top" alt="`+ending+`">
                 <div class="card-body">
-                    <p class="card-text text-center">`+characterInfo[i].name+`</p>
+                    <p class="card-text text-center fs-4">`+characterInfo[i].name+`<br/>
+                    <span class="fs-5 highlight">`+changeTxt(ending)+`</span></p>
                 </div>
             </div>`);
 
