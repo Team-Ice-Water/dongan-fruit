@@ -30,6 +30,13 @@ var totalHealth = 0;
 
 const typingSound = new Audio('../audio/typing.wav');
 
+const night = new Audio('../audio/night.mp3');
+night.volume = 0.4;
+night.addEventListener('ended', function() { 
+    this.currentTime = 0;
+    this.play();
+}, false);
+
 function setText(findThis, tag) {
     for(let value of valueText){
         if(value['id'] == findThis){
@@ -41,7 +48,7 @@ function setText(findThis, tag) {
             if(value['health'] < 0){
                 text = "체력 "+ Math.abs(value['health']) + " 감소";
             } else{
-                text = "체력" + value['health'] + " 증가";
+                text = "체력 " + value['health'] + " 증가";
             }
 
             if('water' in value){
@@ -312,4 +319,5 @@ setText(data1, dawnTxt);
 /* 화면 전환 효과가 끝나고 텍스트의 타이핑 효과가 시작된다. */
 setTimeout(() => {
     startTyping();
+    night.play();
 }, 3000);

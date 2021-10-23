@@ -32,6 +32,13 @@ var isSend = false;
 
 const typingSound = new Audio('../audio/typing.wav');
 
+const morning = new Audio('../audio/morning.mp3');
+morning.volume = 0.4;
+morning.addEventListener('ended', function() { 
+    this.currentTime = 0;
+    this.play();
+}, false);
+
 // 전날 오염도 정보 요청
 function ecoRequest() {
     var xhr = new XMLHttpRequest();
@@ -372,5 +379,6 @@ sendValue();    // 정보 받아온 뒤 실행해야 해서, ajax 결과에 따�
 // 화면 전환 효과가 끝나고 텍스트의 타이핑 효과가 시작
 setTimeout(() => {
     startTyping();
+    morning.play();
 }, 3000);
 

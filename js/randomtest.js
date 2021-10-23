@@ -620,6 +620,20 @@ function doEvent() {
     console.log('전송하는 user_pick: ', userSelect);
     // 1. input hidden의 value를 결과를 토대로 모달창 내용 생성
     setResultModal(userSelect);
+
+    const done = new Audio('../audio/doneEvent.mp3');
+    done.volume = 0.3;
+
+    var resultModal = document.getElementById('result-modal');
+    resultModal.addEventListener('shown.bs.modal', function (event) {
+        done.play();
+    });
+
+    resultModal.addEventListener('hidden.bs.modal', function (event) {
+        console.log("닫힘 이벤트 발생");
+        (location || window.location || document.location).reload();
+    });
+
     // 2. php로 전달
     sendValue({id: userSelect}, 'event.php'); // 기본적인 오염도, 체력 수정
 
@@ -646,11 +660,4 @@ function doEvent() {
         const value = {item: damageItem, type: 'damage'};
         sendValue(value, 'changeItem.php');
     }
-
-    var resultModal = document.getElementById('result-modal');
-
-    resultModal.addEventListener('hidden.bs.modal', function (event) {
-        console.log("닫힘 이벤트 발생");
-        (location || window.location || document.location).reload();
-    })
 }

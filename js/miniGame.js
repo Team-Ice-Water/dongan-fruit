@@ -23,6 +23,7 @@ const correct = new Audio('../audio/correct.mp3');
 correct.volume = 0.4;
 
 const end = new Audio('../audio/end.mp3');
+correct.volume = 0.7;
 
 const clock = new Audio('../audio/clock.wav');
 clock.addEventListener('ended', function() { 
@@ -269,4 +270,4 @@ deck.addEventListener("click", function(evt){
 });
 
 // 가만히 있어도 시간이 지나면 게임은 종료되어야 함
-var check = setInterval(finishGame , 2000); 
+var check = setInterval(finishGame , 2000);

@@ -69,7 +69,6 @@ function setNavBar() {
             </nav>`);
             break;
         case "캐릭터 선택":
-        case "슬기로운 청지기 생활":
         case "엔딩 모음":
             $('body').prepend(`
             <nav class="nav justify-end navbar-expand-lg navbar-light">
@@ -86,6 +85,45 @@ function setNavBar() {
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="기존 캐릭터 선택하기" href="choice_toon.html">
+                                    <span class="material-icons fs-2">autorenew</span>
+                                </a>
+                            </li>
+                            <li class="nav-item fullscreen">              <!--전체화면-->
+                                <a class="nav-link" href="#" onclick="notFullnow();">
+                                    <span class="material-icons fs-2">fullscreen</span>
+                                </a>   
+                            </li>      
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="로그아웃" onclick="logout()">
+                                    <span class="material-icons fs-2">logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>`);
+            break;
+        case "슬기로운 청지기 생활":
+            $('body').prepend(`
+            <nav class="nav justify-end navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item fs-5 id-txt">
+                                `+ID+`
+                            </li>
+                            <li class="nav-item" id="play">
+                                <a class="nav-link" href="#" onclick="mute();">
+                                    <span class="material-icons fs-2">volume_up</span>
+                                </a> 
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="메인으로" href="start.html">
+                                <span class="material-icons fs-2">home</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="다른 캐릭터 선택하기" href="choice_toon.html">
                                     <span class="material-icons fs-2">autorenew</span>
                                 </a>
                             </li>
@@ -179,6 +217,20 @@ function logout() {
             }
         };
     }
+}
+
+function mute() {
+    $('#play').html(`<a class="nav-link" href="#" onclick="play();">
+    <span class="material-icons fs-2">volume_off</span>
+    </a>`);
+    console.log("mute됨");
+}
+
+function play() {
+    $('#play').html(`<a class="nav-link" href="#" onclick="mute();">
+    <span class="material-icons fs-2">volume_up</span>
+    </a>`);
+    console.log("재생됨");
 }
 
 $(document).ready(function(){

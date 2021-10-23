@@ -14,8 +14,6 @@
 
     if($check_ret){
         $count = mysqli_num_rows($check_ret);
-        echo $check_sql;
-        echo $count;
 
         if($count == 0){ //원래 없던 이름이면 없었으면 추가
             
@@ -50,6 +48,7 @@
 ?>          <script>
                 alert( '이미 있는 캐릭터 이름입니다. 다른 이름으로 만들어주세요.' );
                 // 새로고침 안되겠지 ? <- 결정 버튼 누를 때마다 지금 php 호출되니까 ok
+                location.replace('character.html');
             </script>
 <?php
         }      
@@ -58,6 +57,7 @@
         ?>          <script>
                         alert( '이미 있는 캐릭터 이름입니다!! 다른 이름으로 만들어주세요.' );
                         // 새로고침 안되겠지 ? <- 결정 버튼 누를 때마다 지금 php 호출되니까 ok
+                        location.replace('character.html');
                     </script>
         <?php
                 }

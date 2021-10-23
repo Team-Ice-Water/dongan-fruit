@@ -51,6 +51,14 @@ const item = {
 
 var today = 0;
 
+const schedule_bgm = new Audio('../audio/schedule.mp3');
+schedule_bgm.volume = 0.4;
+schedule_bgm.addEventListener('ended', function() { 
+    this.currentTime = 0;
+    this.play();
+}, false);
+schedule_bgm.play();
+
 // 아이템이 있어야 선택 가능한 버튼 조건 구현
 function itemRequest() {
     var xhr = new XMLHttpRequest();
@@ -314,6 +322,7 @@ function doneRequest(send) {
             today = yesterday - 1;
             console.log("today: ", today);
             $('body').addClass('fade-out-box');
+            schedule_bgm.pause();
             setTimeout(() => {
                 location.replace("briefing.html?"+today+':'+send);
             }, 3000);

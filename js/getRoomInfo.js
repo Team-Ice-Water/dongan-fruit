@@ -9,6 +9,20 @@ const waterLevel = document.getElementById("water");
 const airLevel = document.getElementById("air");
 const healthLevel = document.getElementById("health");
 
+const bgm = new Audio('../audio/main.mp3');
+bgm.volume = 0.2;
+bgm.addEventListener('ended', function() { 
+    this.currentTime = 0;
+    this.play();
+}, false);
+
+const badbgm = new Audio('../audio/badmain.mp3');
+badbgm.volume = 0.2;
+badbgm.addEventListener('ended', function() { 
+    this.currentTime = 0;
+    this.play();
+}, false);
+
 var ecoLevel = {
     air: 0,
     soil: 0,
@@ -84,6 +98,14 @@ function setDetailModal() {
     }
 }
 
+function setBGM(is_good) {
+    if(is_good){
+        bgm.play();
+    } else{
+        badbgm.play();
+    }
+}
+
 // 창문 이미지 고르기
 function setEcoState() {
     var img = 'window/aws70-.png';
@@ -92,16 +114,20 @@ function setEcoState() {
         if(ecoLevel['water'] < 70){
             if(ecoLevel['soil'] < 70){
                 img = "window/aws70-.png";
+                setBGM(true);
             }
             else if(ecoLevel['soil'] >= 70){
                 img = "window/s70+aw70-.png";
+                setBGM(true);
             }
         } else if (ecoLevel['water'] >= 70){
             if(ecoLevel['soil'] < 70){
                 img = "window/w70+as70-.png";
+                setBGM(false);
             }
             else if(ecoLevel['soil'] >= 70){
                 img = "window/ws70+a70-.png";
+                setBGM(false);
             }
         }
     }
@@ -109,16 +135,20 @@ function setEcoState() {
         if(ecoLevel['water'] < 70){
             if(ecoLevel['soil'] < 70){
                 img = "window/a70+ws70-.png";
+                setBGM(false);
             }
             else if(ecoLevel['soil'] >= 70){
                 img = "window/as70+w70-.png";
+                setBGM(false);
             }
         } else if (ecoLevel['water'] >= 70){
             if(ecoLevel['soil'] < 70){
                 img = "window/aw70+s70-.png";
+                setBGM(false);
             }
             else if(ecoLevel['soil'] >= 70){
                 img = "window/aws70+.png";
+                setBGM(false);
             }
         }
     }
