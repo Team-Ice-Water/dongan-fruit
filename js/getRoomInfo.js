@@ -9,20 +9,6 @@ const waterLevel = document.getElementById("water");
 const airLevel = document.getElementById("air");
 const healthLevel = document.getElementById("health");
 
-const bgm = new Audio('../audio/main.mp3');
-bgm.volume = 0.2;
-bgm.addEventListener('ended', function() { 
-    this.currentTime = 0;
-    this.play();
-}, false);
-
-const badbgm = new Audio('../audio/badmain.mp3');
-badbgm.volume = 0.2;
-badbgm.addEventListener('ended', function() { 
-    this.currentTime = 0;
-    this.play();
-}, false);
-
 var ecoLevel = {
     air: 0,
     soil: 0,
@@ -50,6 +36,72 @@ const toonFile = {
     woman6: 'toon/woman6.png',
 }
 
+const bgm = new Audio('../audio/main.mp3');
+bgm.volume = 0.2;
+bgm.addEventListener('ended', function() { 
+    this.currentTime = 0;
+    this.play();
+}, false);
+
+const badbgm = new Audio('../audio/badmain.mp3');
+badbgm.volume = 0.2;
+badbgm.addEventListener('ended', function() { 
+    this.currentTime = 0;
+    this.play();
+}, false);
+
+var what_bgm;   // 아래 두 함수에서 체크하기 위해 필요한 변수 (navbar의 음소거 기능을 위해)
+// 메인화면과 스케쥴 화면에서 모두 이 js파일을 사용하기 때문에, mute 혹은 play시킬 노래가 다르다.
+var thisfilename = document.URL.substring(document.URL.lastIndexOf("/") + 1, document.URL.length);
+
+// ajax의 비동기 처리 때문에 , setEcoState 함수가 여러번 실행되고, 그에 따라 bgm이 중복으로 틀어질 수 있음. 방지하기 위해 setBGM에서 사용할 함수
+function isPlaying(audio) {
+    return !audio.paused; 
+}
+
+function mutebgm() {
+    $('#play').html(`<a class="nav-link" href="#" onclick="playbgm();">
+    <span class="material-icons fs-2">volume_off</span>
+    </a>`);
+    console.log("mute됨");
+    switch (thisfilename) {
+        case "main.html":
+            if(what_bgm == "good_bgm"){
+                bgm.pause();
+            } else{
+                badbgm.pause();
+            }
+            break;
+        case "schedule.html":
+            schedule_bgm.pause();
+            break;
+        default:
+            break;
+    }
+    
+}
+
+function playbgm() {
+    $('#play').html(`<a class="nav-link" href="#" onclick="mutebgm();">
+    <span class="material-icons fs-2">volume_up</span>
+    </a>`);
+    console.log("재생됨");
+    switch (thisfilename) {
+        case "main.html":
+            if(what_bgm == "good_bgm"){
+                bgm.play();
+            } else{
+                badbgm.play();
+            }
+            break;
+        case "schedule.html":
+            schedule_bgm.play();
+            break;
+        default:
+            break;
+    }
+    
+}
 
 // 캐릭터, 창문 등을 띄울 이미지 태그를 만드는 함수
 function makeImg(section, file, type) {
@@ -99,10 +151,19 @@ function setDetailModal() {
 }
 
 function setBGM(is_good) {
+    console.log("setBGM함수, 좋은 bgm인가? ", is_good);
     if(is_good){
+        if(isPlaying(badbgm)){
+            badbgm.pause();
+        }
         bgm.play();
+        what_bgm = "good_bgm";
     } else{
+        if(isPlaying(bgm)){
+            bgm.pause();
+        }
         badbgm.play();
+        what_bgm = "bad_bgm";
     }
 }
 

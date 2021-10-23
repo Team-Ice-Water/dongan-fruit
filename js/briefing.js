@@ -37,6 +37,23 @@ night.addEventListener('ended', function() {
     this.play();
 }, false);
 
+// navbar.js 에서 아이콘 클릭에 따라 아래의 두 함수 호출하게 됨
+function mutebgm() {
+    $('#play').html(`<a class="nav-link" href="#" onclick="playbgm();">
+    <span class="material-icons fs-2">volume_off</span>
+    </a>`);
+    console.log("mute됨");
+    night.pause();
+}
+
+function playbgm() {
+    $('#play').html(`<a class="nav-link" href="#" onclick="mutebgm();">
+    <span class="material-icons fs-2">volume_up</span>
+    </a>`);
+    console.log("재생됨");
+    night.play();
+}
+
 function setText(findThis, tag) {
     for(let value of valueText){
         if(value['id'] == findThis){
