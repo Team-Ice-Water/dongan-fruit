@@ -24,7 +24,7 @@ var userInfo = {
     health: 0
 }
 
-var flowerpot;
+var flowerpot = false;
 
 var getEcoLevel = false;
 var getInfo = false;
@@ -167,6 +167,8 @@ function findItem(id) {
 }
 
 function sendValue() {
+    
+    console.log(">>> sendValue flower 값: ", flowerpot);
 
     // 자고 일어나면 
     changeRequest(findItem('basic_health'));    // 체력 +5
@@ -211,6 +213,7 @@ function sendValue() {
 
     /* 화분 정화 작용 */
     if(flowerpot != 0){
+        console.log("flowerpot 값: ", flowerpot);
         changeRequest(findItem('flowerpot'));  // 대기-2
         findItem('flowerpot').filtered = true;      
     }
