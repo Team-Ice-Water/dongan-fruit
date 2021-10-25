@@ -193,7 +193,7 @@
         // event_23 문화 1단계
         case 'yes_culture_1':
             $ending = "UPDATE ending_info
-            SET culture_day = $today, cultureStage = 1
+            SET culture_day = $today, culture_stage = 1
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_culture_1':
@@ -205,7 +205,7 @@
             SET soil = soil-2, water = water-2, air = air-2, health = health -1
             WHERE m_id='$userId' AND cname = '$userToon';";
             $ending = "UPDATE ending_info
-            SET culture_day = $today, cultureStage = 2
+            SET culture_day = $today, culture_stage = 2
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
@@ -224,7 +224,7 @@
             SET soil = soil-2, water = water-2, air = air-2, health = health -1
             WHERE m_id='$userId' AND cname = '$userToon';";
             $ending = "UPDATE ending_info
-            SET culture_day = $today, cultureStage = 2
+            SET culture_day = $today, culture_stage = 2
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
@@ -243,7 +243,7 @@
             SET soil = soil-2, water = water-2, air = air-2, health = health -1
             WHERE m_id='$userId' AND cname = '$userToon';";
             $ending = "UPDATE ending_info
-            SET culture_day = $today, cultureStage = 3
+            SET culture_day = $today, culture_stage = 3
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_culture_3_book':
@@ -258,7 +258,7 @@
             SET soil = soil-3
             WHERE m_id='$userId' AND cname = '$userToon';";
             $ending = "UPDATE ending_info
-            SET culture_day = $today, cultureStage = 3
+            SET culture_day = $today, culture_stage = 3
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_culture_3_tumbler':
@@ -276,7 +276,7 @@
             SET air = air-3
             WHERE m_id='$userId' AND cname = '$userToon';";
             $ending = "UPDATE ending_info
-            SET culture_day = $today, cultureStage = 3
+            SET culture_day = $today, culture_stage = 3
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_culture_3_tumbler':
@@ -294,7 +294,7 @@
             SET soil = soil-10, water = water-10, air = air-10, health = health -5
             WHERE m_id='$userId' AND cname = '$userToon';";
             $ending = "UPDATE ending_info
-            SET culture_day = $today, cultureStage = 4
+            SET culture_day = $today, culture_stage = 4
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_culture_4':
