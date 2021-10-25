@@ -73,6 +73,7 @@ function makeModal() {
             school();       // 환경지킴이 학교 엔딩
             home();         // 청지기 가정 엔딩
             
+            console.log("makeModal()의 list: ", eventList);
             select = selectOne(eventList);   // 최종 리스트 중에 하나 선택
             
             console.log(select);
@@ -357,60 +358,78 @@ function home() {
     } 
 }
 
-var prob_100_list = []
-var prob_other_list = []
-var probability_list = []
-var prob_no_list = []
+var prob_100_list = [];
+var prob_other_list = [];
+var probability_list = [];
+var prob_no_list = [];
+var selected_id;
 
 function selectOne(list) {
     for (let i = 0; i < list.length; i++) {    // 배열 원소 순회
         if ("condition" in list[i]){           // "condition" key가 존재하는 원소인지 판단
-            for (let key in list[i]) {         // 객체 순회 (key)
-                if( key == "condition"){       // 객체가 "condition"이라는 데이터를 가지면,
-                    const probability = list[i][key];   // probability는 그 이벤트가 얼마의 등장 확률을 가지는지를 저장
-                    
-                    /* 확률 처리 */
-                    // push() 메서드는 배열의 끝에 요소를 추가하고, 배열의 새로운 길이를 반환함
-                    // 객체의 id를 list에 저장하면서 list의 원소 개수 update
-    
-                    if(probability == 100){  // probability가 100일때
-                        prob_100_list.push(list[i]["id"])  
-                    }else if(0 < probability < 100){  // 100 아닌 probability
-                        prob_other_list.push(list[i]["id"])
-                        probability_list.push(probability)
-                    }
-                }
+            const probability = list[i]["condition"];   // probability는 그 이벤트가 얼마의 등장 확률을 가지는지를 저장
+            console.log("확률 조건이 있는 원소: ", list[i]);
+            /* 확률 처리 */
+            // push() 메서드는 배열의 끝에 요소를 추가하고, 배열의 새로운 길이를 반환함
+            // 객체의 id를 list에 저장하면서 list의 원소 개수 update
+
+            if(probability == 100){  // probability가 100일때
+                prob_100_list.push(list[i]["id"]);
+            }else if(0 < probability < 100){  // 100 아닌 probability
+                prob_other_list.push(list[i]["id"]);
+                probability_list.push(probability);
             }
         }else{                                // "condition" key가 존재하지 않는 객체
-            prob_no_list.push(list[i]["id"])
+            prob_no_list.push(list[i]["id"]);
         }
     }
+
+    console.log("for문 이후 확률list: ", probability_list);
+    console.log("for문 이루 100확률 list: ", prob_100_list);
+
+    /* JS 로딩할때 natural, culture, school, home 함수를 순서대로 호출하기 때문에
+    prob_other_list에는
+     1) 20%만 들어가거나
+     2) 20% 들어가고 60% 들어가거나(순서대로)
+     3) 60%만 들어가거나
+     4) 둘다 안들어가는
+    4가지의 경우의 수 밖에 없음
+    (2)번의 20% 가 들어가고 다음으로 60%가 들어가는 경우에는 
+    -> probability_list[0]은 20%, probability_list[1]은 60%가 된다 */
 
     /* 확률 처리 */
     if(prob_other_list.length == 1){  // 다른 확률 가지는 원소 한개 (20% 또는 60%)
 
         const rand_0_99 = Math.floor(Math.random() * 100);
-        switch (true) {
-            case rand_0_99 < probability_list[0]:  // (20% 또는 60%)
-                selected_id = prob_other_list[0]
-                break;
-            case rand_0_99 >= probability_list[0]:
-                selected_id = prob_no_list[Math.floor(Math.random() * prob_no_list.length)]
-                break;
+        console.log("뽑힌 숫자: ", rand_0_99);
+
+        if(rand_0_99 <= probability_list[0]){ // (20% 또는 60%)
+            console.log("뽑힌 숫자 < 조건 확률");
+            selected_id = prob_other_list[0];
+        } else if(rand_0_99 > probability_list[0]){
+            console.log("뽑힌 숫자 >= 조건 확률");
+            // 60%의 확률로 등장인데 0~60가 뽑히면 등장/ 61~100이 뽑히면 등장하지 못하는 것
+            // 조건이 없는 랜덤 원소 중에서 하나를 반환할 변수selected_id에 넣음 
+            selected_id = prob_no_list[Math.floor(Math.random() * prob_no_list.length)];
         }
+
     }else if(prob_other_list.length == 2){  // 다른 확률 가지는 원소 두개 (20%, 60%)
 
         const rand_0_99 = Math.floor(Math.random() * 100);
-        switch (true) {
-            case rand_0_99 < probability_list[0]:  // 20%
-                selected_id = prob_other_list[0]
-                break;
-            case rand_0_99 >= probability_list[0] && rand_0_99 < probability_list[1]:  // 20% ~ 60%
-                selected_id = prob_other_list[1]
-                break;
-            case rand_0_99 >= probability_list[1]:  // 60% ~
-                selected_id = prob_no_list[Math.floor(Math.random() * prob_no_list.length)]
-                break;
+        console.log("뽑힌 숫자: ", rand_0_99);
+
+        if(rand_0_99 <= 20){ // 뽑힌 숫자가 0~20이면
+            // 20%조건도 60%조건인 원소도 등장 가능한 숫자.
+            // -> 그냥 랜덤(홀/짝)으로 넣는다..
+            if((rand_0_99 % 2) == 1){
+                selected_id = prob_other_list[1];   // 60%
+            } else{
+                selected_id = prob_other_list[0];   // 20%
+            }
+        } else if( 21 < rand_0_99 < probability_list[1]){ // 20% ~ 60%, 뽑힌 숫자가 21~60이면
+            selected_id = prob_other_list[1];
+        } else if(rand_0_99 >= probability_list[1]){ // 60% ~ , 뽑힌 숫자가 61~100 이면
+            selected_id = prob_no_list[Math.floor(Math.random() * prob_no_list.length)];
         }
     }
 
@@ -420,8 +439,10 @@ function selectOne(list) {
     }else if(prob_100_list.length == 1){       // 100% 확률 가지는 원소가 한개
         return prob_100_list[0];
     }else if((prob_100_list.length == 0) && (prob_other_list.length != 0)){   // 100% 확률 가지는 원소가 없음 & 다른 확률 가지는 원소 존재
+        console.log("return selected_id;")
         return selected_id;
     }else if((prob_100_list.length == 0) && (prob_other_list.length == 0)){   // 100% 확률 가지는 원소가 없음 & 다른 확률 가지는 원소 없음
+        console.log("리턴 직전 list: ", list);
         return list[Math.floor(Math.random() * list.length)];    // 초기 list에서 랜덤 선택해서 반환
     }
 }
