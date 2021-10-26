@@ -311,14 +311,14 @@
         case 'yes_env_1_teacher':
         case 'yes_env_1_library':
             $ending = "UPDATE ending_info
-            SET school = $today, school_stage = 1
+            SET school_day = $today, school_stage = 1
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_env_1_children':
         case 'no_env_1_teacher':
         case 'no_env_1_library':
             $ending = "UPDATE ending_info
-            SET school = $today
+            SET school_day = $today
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
