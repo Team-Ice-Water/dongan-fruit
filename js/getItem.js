@@ -48,7 +48,6 @@ function addItem(obj) {
     for (let key in obj) {
         const value = obj[key];
         const fileName = itemFile[key];
-        console.log(fileName +": " +value);
         if(value == "1"){  // true이면
             makeImg(itemSection, fileName, key, false);
         } else if(value == "2"){
