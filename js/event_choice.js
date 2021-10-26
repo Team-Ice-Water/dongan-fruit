@@ -497,7 +497,7 @@ function setOption(choice) {
             if(itemInfo["book"] != 0){
                 document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yes_env_1_library" onclick="sendUserPick(this.name);" >선택지 1 (환경지침도서 선택하기) </button> <button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_env_1_teacher" onclick="sendUserPick(this.name);" >선택지 2 (환경지침도서 선택 안함) </button>';
             }else if(itemInfo["book"] == 0){
-                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_env_1_library" onclick="sendUserPick(this.name);" >선택지 1 (환경지침도서 선택 안함) </button>';
+                document.querySelector('.option').innerHTML = '<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="no_env_1_library" onclick="sendUserPick(this.name);" >선택지 1 (환경지침도서가 없다) </button>';
             } 
             break;
     
