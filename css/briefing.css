@@ -49,7 +49,7 @@ body{
     display: table;
 }
 
-.info {
+.info, #dawnInfo, #amInfo, #pmInfo {
     height: 2rem;
     font-size: 1.2rem;
     margin-top: 1.1rem;

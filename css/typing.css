@@ -6,7 +6,8 @@ ul{
   list-style-type : none;
 }
 
-.typing ul li{
+.typing ul li,
+.typing-txt ul li{
   display: block;
 }
 
