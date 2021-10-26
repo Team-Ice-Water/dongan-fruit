@@ -12,3 +12,7 @@ $('a, img, .user-info').mousedown(function(){
 $('button, .btn').click(function(){
     clickSound.play();
 });
+
+$(".list-group").children().click(function(){
+    clickSound.play();
+});
