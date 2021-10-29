@@ -42,6 +42,10 @@ body{
     margin-bottom: auto;
 }
 
+.btn{ 
+    font-family: 'GmarketSansMedium';
+}
+
 .carousel{
     width: 70%;     /* container의 70%를 의미 */
     padding: 3% 0 3% 0;
