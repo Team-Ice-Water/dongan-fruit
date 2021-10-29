@@ -229,7 +229,7 @@ function sendValue() {
     makeLI();
 }
 
-const typingTxt = document.querySelector(".typing-txt").querySelector("ul");
+const typingtxt = document.querySelector(".typing-txt").querySelector("ul");
 const typing = document.querySelector(".typing").querySelector("ul");
 
 function makeLI() {
@@ -262,13 +262,13 @@ function makeLI() {
         infoTag2.classList.add('info');
         setText(state[filteredIdx[i]], liTag2, infoTag2);
         
-        typingTxt.appendChild(liTag2);
-        typingTxt.appendChild(infoTag2);
+        typingtxt.appendChild(liTag2);
+        typingtxt.appendChild(infoTag2);
     }
 }
 
 function setText(obj, tag, nexttag) {
-    tag.innerText = obj['text'];
+    tag.innerHTML = obj['text'];
 
     /* 수치 변동 사항 멘트를 지정한다. */
     var text = "";
@@ -396,6 +396,7 @@ function showTotal() {
 
 function skip() {
     console.log("스킵 눌림");
+    typingSound.pause();
     // 효과 적용된 부분을 감추고, 효과 인터벌 삭제
     $(".typing").css( "display", "none" );
     clearInterval(tyInt);

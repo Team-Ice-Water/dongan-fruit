@@ -297,7 +297,8 @@ function showTotal() {
 }
 
 function skip() {
-    console.log("스킵 눌림");
+    console.log("스킵 눌림");    
+    typingSound.pause();
     // 효과 적용된 부분을 감추고, 효과 인터벌 삭제
     $(".typing").css( "display", "none" );
     clearInterval(tyInt);
