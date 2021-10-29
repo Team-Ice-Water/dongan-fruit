@@ -6,7 +6,7 @@
 }
 
 body {
-    font-size: 4.2rem;
+    font-size: 4rem;
     font-weight : bolder;
     font-family: 'BMJUA';
 
@@ -22,7 +22,7 @@ body {
     margin-left: 20vw;
 
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     row-gap: 0.5em;
 }
 

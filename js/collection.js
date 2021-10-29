@@ -1,5 +1,6 @@
 var characterInfo = [
-    // {name: '테스트', ending: 'water'}, ....
+    // {name: '테스트', ending: 'water'},
+    // {name: '안녕', ending: 'normal'} ....
 ]
 
 // 1. 캐릭터 정보 불러옴
@@ -27,7 +28,18 @@ function infoRequest() {
             };
 
             console.log('캐릭터 엔딩 정보:', characterInfo);
-            makeCard();
+            switch ($('title').text()) {
+                case '엔딩 모음':
+                    console.log("엔딩 모음 함수 실행");
+                    makeCard();
+                    break;
+                case '모든 엔딩':
+                    console.log("모든 엔딩 함수 실행");
+                    setImg();
+                    break;
+                default:
+                    break;
+            }
         }
     };
 }
@@ -59,7 +71,7 @@ function changeTxt(type) {
     }
 }
 
-function makeCard() {
+function makeCard() {     // 엔딩 모음 페이지(collection.html)에서 사용할 함수
 
     if(characterInfo.length == 0){
         var text = $('<p class="fs-4 mx-auto mt-5 text-muted">아직 엔딩을 본 캐릭터가 없습니다.</p>')
@@ -80,4 +92,16 @@ function makeCard() {
         }
     }   
         
+}
+
+function setImg() {     // 모든 엔딩 페이지(allEnding.html)에서 사용할 함수
+    if(characterInfo.length > 0){
+        for (let i = 0; i < characterInfo.length; i++) {
+            var ending = characterInfo[i].ending_type;
+            console.log("for문 엔딩: ", ending+changeTxt(ending));
+            $("#"+ending+">img").attr('src',"img/ending/"+ending+".png");
+            console.log($("#"+ending+">.card-body>p").text());
+            $("#"+ending+">.card-body>p").text(changeTxt(ending));
+        }
+    }
 }
