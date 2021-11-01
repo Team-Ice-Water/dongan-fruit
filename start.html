@@ -27,21 +27,8 @@
         </div>
     </div>
 
-    <script>
-        function loginChcek() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '../checkLogin.php');
-            xhr.send();
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState === 4 && xhr.status === 200){
-                    console.log(xhr.responseText);
-                }
-            };
-        }
-        loginChcek();
-    </script>
-
     <script type="text/javascript" src="js/clicksound.js"></script>
+    <script type="text/javascript" src="js/checkLogin.js"></script>
 </body>
 </html>
 

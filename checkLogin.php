@@ -3,6 +3,8 @@
 
     if(isset($_SESSION['current_id'])){
         echo $_SESSION['current_id'];
+    }else{
+        echo "notLogin";
     }
     /*else if(!isset($_SESSION['current_id'])){
         echo "로그인 후 접근 가능한 페이지 입니다."."<br>";
