@@ -449,11 +449,11 @@ function setResultModal(choice) {
             break;
 
         // event_28 문화 3단계
-        case 'yes_culture_3_tumbler':
+        case 'yes_culture_3_bicycle':
             text = "자전거를 타고 가면 금방 도착할 수 있을거야! 빨리 가자!";
             result = "대기오염 3 감소";
             break;
-        case 'no_culture_3_tumbler':
+        case 'no_culture_3_bicycle':
             text = "아빠, 아빠, 저 학교에 늦었어요! 빨리 차로 데려다주세요!";
             result = "대기오염 2 증가"
             break;
