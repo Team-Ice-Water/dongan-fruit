@@ -64,10 +64,7 @@ function makeModal() {
 
     if(userReq && endingReq && ecoReq){ // 정보를 다 받아왔으면 실행함
         if(userInfo.day > userInfo.event_day){ // 아직 이벤트를 하지 않았으면
-            console.log("select 보낸다."); 
-            
-            console.log("endingInfo: ", endingInfo);
-            console.log("userInfo: ", userInfo);
+            console.log("select 보낸다.");           
 
             if(userInfo['health'] <= 50){
                 natural();  // 자연착취엔딩
@@ -230,9 +227,9 @@ function culture() {
             }else if(endingInfo['culStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['culDay']+5)){ // 선택 후 1~4일째
                     // pass
-                }else if(userInfo['day'] >= (endingInfo['culDay']+5)){  // 선택 후 5일째
+                }else if(userInfo['day'] == (endingInfo['culDay']+5)){  // 선택 후 5일째
                     var order = Math.floor(Math.random() * 2);
-                    console.log("문화1단계 선택 후 5일째, ", order);
+
                     if(order == 0){
                         eventList.push({ id: "event_24", ending: "문화", condition: 100});  // event_24 : 문화 2단계 - 전도사님
                     }else if(order == 1){
@@ -243,7 +240,7 @@ function culture() {
             }else if(endingInfo['culStage'] == 2){  // (2단계 선택 O) 상태 and (3단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['culDay']+5)){ // 선택 후 1~4일째
                     // pass
-                }else if(userInfo['day'] >= (endingInfo['culDay']+5)){  // 선택 후 5일째
+                }else if(userInfo['day'] == (endingInfo['culDay']+5)){  // 선택 후 5일째
 
                     var order = Math.floor(Math.random() * 3);
 
@@ -259,7 +256,7 @@ function culture() {
             }else if(endingInfo['culStage'] == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['culDay']+5)){ // 선택 후 1~4일째
                     // pass
-                }else if(userInfo['day'] >= (endingInfo['culDay']+5)){  // 선택 후 5일째
+                }else if(userInfo['day'] == (endingInfo['culDay']+5)){  // 선택 후 5일째
                     eventList.push({ id: "event_29", ending: "문화", condition: 100});  // event_29 : 문화 4단계 - 동네청소
                 }
             }
@@ -294,7 +291,7 @@ function school() {
             if(endingInfo['envStage'] == 0){  // 1단계 선택 X 상태
                 if(userInfo['day'] < (endingInfo['envDay']+7)){ // 선택 후 1~6일째
                     // pass
-                }else if(userInfo['day'] >= (endingInfo['envDay']+7)){  // 선택 후 7일째
+                }else if(userInfo['day'] == (endingInfo['envDay']+7)){  // 선택 후 7일째
 
                     var order = Math.floor(Math.random() * 3);
 
@@ -310,7 +307,7 @@ function school() {
             }else if(endingInfo['envStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['envDay']+7)){ // 선택 후 1~6일째
                     // pass
-                }else if(userInfo['day'] >= (endingInfo['envDay']+7)){  // 선택 후 7일째
+                }else if(userInfo['day'] == (endingInfo['envDay']+7)){  // 선택 후 7일째
 
                     var order = Math.floor(Math.random() * 2);
 
@@ -334,28 +331,28 @@ function home() {
         if(endingInfo['homeStage'] == 0){  // (1단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
                 // pass
-            }else if(userInfo['day'] >= (endingInfo['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_35", ending: "청지기", condition: 100});  // event_35 : 청지기 1단계
             }
 
         }else if(endingInfo['homeStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
                 // pass
-            }else if(userInfo['day'] >= (endingInfo['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_36", ending: "청지기", condition: 100});  // event_36 : 청지기 2단계 - 변화하는 가정
             }
 
         }else if(endingInfo['homeStage'] == 2){  // (2단계 선택 O) and (3단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
                 // pass
-            }else if(userInfo['day'] >= (endingInfo['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_37", ending: "청지기", condition: 100});  // event_37 : 청지기 3단계 - 주방 세제
             }
 
         }else if(endingInfo['homeStage'] == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
                 // pass
-            }else if(userInfo['day'] >= (endingInfo['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_38", ending: "청지기", condition: 100});  // event_38 : 청지기 4단계 - 앞장서는 부모님
             }
         }
@@ -369,107 +366,88 @@ var prob_no_list = [];
 var selected_id;
 
 function selectOne(list) {
+    for (let i = 0; i < list.length; i++) {    // 배열 원소 순회
+        if ("condition" in list[i]){           // "condition" key가 존재하는 원소인지 판단
+            const probability = list[i]["condition"];   // probability는 그 이벤트가 얼마의 등장 확률을 가지는지를 저장
+            console.log("확률 조건이 있는 원소: ", list[i]);
+            /* 확률 처리 */
+            // push() 메서드는 배열의 끝에 요소를 추가하고, 배열의 새로운 길이를 반환함
+            // 객체의 id를 list에 저장하면서 list의 원소 개수 update
 
-    // 가중치를 적용한 확률 ->  랜덤수로 확률을 뽑은 후, 누적 확률값을 사용한다.
-    /* 
-            1 event_1 , w: 5                                1 event_1 , w: 5
-            2 event_2, w: 5                                 2 event_2, w: 5
-            ..                  =확률이 작은 것부터 정렬=>
-            11 event_31, w: 30                              12 event_32, w: 30
-            12 event_32, w: 20                              11 event_31, w: 20
-        */
-        // 랜덤수로 72가 나왔다면, 
-        // 1은 5<72 이므로 탈락, 2도 5+5<72이므로 탈락.. 10도 50 <72 이므로 탈락
-        // 12(11번째)도 70<72 이므로 탈락, 마지막의 11이 선택된다.
-    var length = list.length;
+            if(probability == 100){  // probability가 100일때
+                prob_100_list.push(list[i]["id"]);
+            }else if(0 < probability < 100){  // 100 아닌 probability
+                prob_other_list.push(list[i]["id"]);
+                probability_list.push(probability);
+            }
+        }else{                                // "condition" key가 존재하지 않는 객체
+            prob_no_list.push(list[i]["id"]);
+        }
+    }
+
+    console.log(">> for문 이후 확률 list: ", probability_list);
+    console.log(">> for문 이후 100확률 list: ", prob_100_list);
+    console.log(">> for문 이후 노확률 list: ", prob_no_list);
     
-    var prob_length = 0;
-    var no_prob_length = 0;
 
-    var ending_weight = 0;          // 엔딩 이벤트들이 뜰 확률 (각각 나눠가질 것)
-    var random_weight = 0;
-    var prob_100 = false;           // 100% 등장인 이벤트가 있는지?
+    /* JS 로딩할때 natural, culture, school, home 함수를 순서대로 호출하기 때문에
+    prob_other_list에는
+     1) 20%만 들어가거나
+     2) 20% 들어가고 60% 들어가거나(순서대로)
+     3) 60%만 들어가거나
+     4) 둘다 안들어가는
+    4가지의 경우의 수 밖에 없음
+    (2)번의 20% 가 들어가고 다음으로 60%가 들어가는 경우에는 
+    -> probability_list[0]은 20%, probability_list[1]은 60%가 된다 */
 
-    for (let i = 0; i < list.length; i++) {
-        if ("ending" in list[i]){
-            if("condition" in list[i]){
-                // 등장 확률 조건을 가진 원소가 있으면,
-                // 엔딩 이벤트 전체 가중치가 달라짐
-                if(list[i]["condition"] == 100){
-                    ending_weight = 0;
-                    random_weight = 0;
-                    prob_100 = true;
-                } else{
-                    ending_weight = 70 - list[i]["condition"];
-                    random_weight = random_weight - list[i]["condition"];
-                }                
-            }
-            prob_length++;
-        }else{
-            no_prob_length++;
+    /* 확률 처리 */
+    if(prob_other_list.length == 1){  // 다른 확률 가지는 원소 한개 (20% 또는 60%)
+
+        const rand_0_99 = Math.floor(Math.random() * 100);
+        console.log("뽑힌 숫자: ", rand_0_99);
+
+        if(rand_0_99 <= probability_list[0]){ // (20% 또는 60%)
+            console.log("뽑힌 숫자 < 조건 확률");
+            selected_id = prob_other_list[0];
+        } else if(rand_0_99 > probability_list[0]){
+            console.log("뽑힌 숫자 >= 조건 확률");
+            // 60%의 확률로 등장인데 0~60가 뽑히면 등장/ 61~100이 뽑히면 등장하지 못하는 것
+            // 조건이 없는 랜덤 원소 중에서 하나를 반환할 변수selected_id에 넣음 
+            selected_id = prob_no_list[Math.floor(Math.random() * prob_no_list.length)];
         }
-    }
 
-    if(!prob_100){     // 조건 중 100%인게 없으면
-        random_weight = 100 - ending_weight + random_weight;    // random_weight는 -조건 값을 가지고 있음.
-        // random_weight = 100 - 엔딩확률 - 조건확률
-    }
-    console.log("random_weight: ", random_weight);
+    }else if(prob_other_list.length == 2){  // 다른 확률 가지는 원소 두개 (20%, 60%)
 
-    var sorted_list = [];
-    for (let i = 0; i < list.length; i++) {
-        if ("ending" in list[i]){
-            if("condition" in list[i]){
-                sorted_list.push({...list[i], weight: list[i]["condition"]});
+        const rand_0_99 = Math.floor(Math.random() * 100);
+        console.log("뽑힌 숫자: ", rand_0_99);
+
+        if(rand_0_99 <= 20){ // 뽑힌 숫자가 0~20이면
+            // 20%조건도 60%조건인 원소도 등장 가능한 숫자.
+            // -> 그냥 랜덤(홀/짝)으로 넣는다..
+            if((rand_0_99 % 2) == 1){
+                selected_id = prob_other_list[1];   // 60%
             } else{
-                sorted_list.push({...list[i], weight: ending_weight / prob_length});
+                selected_id = prob_other_list[0];   // 20%
             }
-        }else{
-            sorted_list.push({...list[i], weight: random_weight / no_prob_length});
+        } else if( 21 < rand_0_99 < probability_list[1]){ // 20% ~ 60%, 뽑힌 숫자가 21~60이면
+            selected_id = prob_other_list[1];
+        } else if(rand_0_99 >= probability_list[1]){ // 60% ~ , 뽑힌 숫자가 61~100 이면
+            selected_id = prob_no_list[Math.floor(Math.random() * prob_no_list.length)];
         }
     }
 
-    sorted_list = sorted_list.sort(function (a, b) {    // 가중치 작은 순으로 정렬
-        return a.weight - b.weight;
-    });
 
-    console.log("가중치 추가, 정렬된 새 리스트: ", sorted_list);
-
-    var rand_num = Math.floor(Math.random() * 101) +1;
-    console.log("rand_num: ", rand_num);
-
-    var cumulative = 0;
-
-    for(var i=0; i<length; i++){
-        cumulative += sorted_list[i]["weight"];
-        console.log("누적 확률: ", cumulative);
-        if(rand_num <= cumulative){
-            return sorted_list[i]["id"];
-        }
+    if (prob_100_list.length > 1){             // 100% 확률 가지는 원소가 여러개
+        return prob_100_list[Math.floor(Math.random() * prob_100_list.length)];    // 100% 확률 가지는 원소 중 랜덤 선택해서 반환
+    }else if(prob_100_list.length == 1){       // 100% 확률 가지는 원소가 한개
+        return prob_100_list[0];
+    }else if((prob_100_list.length == 0) && (prob_other_list.length != 0)){   // 100% 확률 가지는 원소가 없음 & 다른 확률 가지는 원소 존재
+        console.log("return selected_id;")
+        return selected_id;
+    }else if((prob_100_list.length == 0) && (prob_other_list.length == 0)){   // 100% 확률 가지는 원소가 없음 & 다른 확률 가지는 원소 없음
+        console.log("리턴 직전 list: ", list);
+        return list[Math.floor(Math.random() * list.length)];    // 초기 list에서 랜덤 선택해서 반환
     }
-
-    /*  테스트용 10000번 반복 코드
-    for (let k = 0; k < 10000; k++) {
-        var rand_num = Math.floor(Math.random() * 100);
-
-        var cumulative = 0;
-
-        for(var i=0; i<length; i++){
-            cumulative += sorted_list[i]["weight"];
-            if(rand_num <= cumulative){
-                sorted_list[i]["num"]++;
-                break;
-            }
-        }
-        
-    }
-
-    for (let k = 0; k < sorted_list.length; k++) {
-        sorted_list[k]["num"] = sorted_list[k]["num"]/10000;
-    }
-
-    console.log(sorted_list);
-     */
 }
 
 /* JS로딩 시 실행시키는 부분 */
@@ -477,3 +455,4 @@ function selectOne(list) {
 userRequest(); 
 endingRequest(); 
 ecoRequest();
+
