@@ -406,6 +406,8 @@ function selectOne(list) {
                     ending_weight = 70 - list[i]["condition"];
                     random_weight = random_weight - list[i]["condition"];
                 }                
+            } else{
+                ending_weight = 70;
             }
             prob_length++;
         }else{
@@ -413,6 +415,7 @@ function selectOne(list) {
         }
     }
 
+    console.log("for문 이후 ending_weight/ random_weight: "+ ending_weight + " / "+random_weight);
     if(!prob_100){     // 조건 중 100%인게 없으면
         random_weight = 100 - ending_weight + random_weight;    // random_weight는 -조건 값을 가지고 있음.
         // random_weight = 100 - 엔딩확률 - 조건확률
