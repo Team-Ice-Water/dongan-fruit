@@ -80,6 +80,9 @@ function makeModal() {
             select = selectOne(eventList);   // 최종 리스트 중에 하나 선택
             
             console.log(select);
+            if(!select){
+                alert("오류가 발생하여 이벤트를 띄울 수 없습니다. 페이지를 새로고침 해주세요.");
+            }
         } else{ // 이미 이벤트 했으면 스케쥴 버튼 누를 수 있게
             $('.schedule.btn').removeClass('disabled');
             $('.schedule.btn').removeAttr('aria-disabled');

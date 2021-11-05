@@ -293,7 +293,7 @@ function setResultModal(choice) {
             }
             console.log("(above_6_item) 가진 아이템: ", haveItems);          
             giveItem = chooseItem(haveItems);
-            text = "흠 쓰지 않는 물건들이 너무 많네."+matchItemTxt(giveItem)+ "을(를) 버려야겠다.";
+            text = "흠 쓰지 않는 물건들이 너무 많네. "+matchItemTxt(giveItem)+ "을(를) 버려야겠다.";
             result = matchItemTxt(giveItem)+" 소모";
             break;
 
