@@ -52,7 +52,7 @@ const item = {
 var today = 0;
 
 const schedule_bgm = new Audio('../audio/schedule.mp3');
-schedule_bgm.volume = 0.4;
+schedule_bgm.volume = 0.2;
 schedule_bgm.addEventListener('ended', function() { 
     this.currentTime = 0;
     this.play();
