@@ -49,8 +49,11 @@ function setNavBar() {
         case "회원가입":
         case "로그인":
             $('body').prepend(`
-            <nav class="nav justify-end navbar-expand-lg navbar-light">
+            <nav class="navbar justify-end navbar-expand-lg navbar-light px-3" style="background-color: #85d6ff; width: 100%;">
                 <div class="container-fluid">
+                    <a class="navbar-brand d-md-flex justify-content-md-start" href="#">
+                        <img src="/img/슬청생.png" alt="logo" width="30%" class="d-inline-block align-text-top">
+                    </a>
                     <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">

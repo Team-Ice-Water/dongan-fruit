@@ -1,5 +1,5 @@
 body {
-          background:#85d6ff;
+          background:white;
           font-family: 'CookieRunOTF-Bold';
           font-size: 100%;
           letter-spacing: 1.5px;
@@ -26,6 +26,14 @@ header{
     display:flex;
     justify-content: center;
 }*/
+
+.container{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
 form{
     padding:10px;
@@ -56,7 +64,7 @@ input::placeholder{
 
 input:placeholder-shown + label{
     font-family: 'CookieRunOTF-Bold';
-    color: #4A9EC7/*#2685AB*/;
+    color: #9e9e9e/*#2685AB*/;
     font-size:14pt;
     top:15px;
 }
@@ -84,9 +92,9 @@ input[type=submit]{
     font-family: 'CookieRunOTF-Bold';
     background-color: #fcc500;
     border:none;
-	color:#14396a;
+	color:#111;
     border-radius: 5px;
-    width: 20%;
+    width: 100%;
     height: 2.5em;
     font-size: 14pt;
     margin-top: 2em;
