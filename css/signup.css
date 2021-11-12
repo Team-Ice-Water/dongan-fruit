@@ -21,36 +21,46 @@ body {
     font-style: normal;
 }
 
+/*
 header{
     display:flex;
-     justify-content: center;
-}
+    justify-content: center;
+}*/
+
 form{
     padding:10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 .input-box{
-    position:relative;
-    margin:px 0;
+    display: flex;
+    align-items: center;
+
+    position: relative;
 }
+
 .input-box > input{
     font-family: 'CookieRunOTF-Bold';
     background:transparent;
-    border:none;
+    border: none;
     border-bottom: solid 1px #FCC500;
     padding:20px 0px 5px 0px;
     font-size:14pt;
-    width:20%;
+    width: 20em;
 }
 input::placeholder{
-    color:transparent;
+    color: transparent;
 }
-input:placeholder-shown + label{
-          font-family: 'CookieRunOTF-Bold';
-          color:#111;
-          font-size:14pt;
-          top:15px;
 
+input:placeholder-shown + label{
+    font-family: 'CookieRunOTF-Bold';
+    color: #4A9EC7/*#2685AB*/;
+    font-size:14pt;
+    top:15px;
 }
+
 input:focus + label, 
 label{
 	color:#111;
@@ -66,9 +76,10 @@ label{
 }
 
 input:focus, input:not(:placeholder-shown){
-          border-bottom: solid 1px #FCC500;
-          outline:none;
+    border-bottom: solid 1px #FCC500;
+    outline:none;
 }
+
 input[type=submit]{
     font-family: 'CookieRunOTF-Bold';
     background-color: #fcc500;
@@ -87,6 +98,7 @@ input[type=submit]{
     /*width: 70%;
     max-width: 65vw;*/
     display:inline-block;   /* 내부 요소에 너비 맞춤*/
+    font-style: italic;
 }
 
 .material-icons{    /* 아이콘이 텍스트와 가로선이 안맞음*/
