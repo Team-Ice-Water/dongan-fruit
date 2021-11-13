@@ -176,7 +176,7 @@ function checkEnd() {
         }*/
     } 
 
-    if(endingInfo['envStage'] == 4){
+    if(endingInfo['envStage'] == 2){
         if(endingInfo['envEnd'] == 10){
             location.replace("ending.html?school");
         } else{
