@@ -19,7 +19,7 @@ function setNavBar() {
     switch ($('title').text()) {
         case "만든 사람들":
             $('body').prepend(`
-            <nav class="nav justify-end navbar-expand-lg navbar-light" style="position: fixed; z-index: 999; width: 100%;">
+            <nav class="nav justify-end navbar-expand-lg navbar-light">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
                         <ul class="navbar-nav">
@@ -49,7 +49,7 @@ function setNavBar() {
         case "회원가입":
         case "로그인":
             $('body').prepend(`
-            <nav class="navbar justify-end navbar-expand-lg navbar-light px-3" style="background-color: #85d6ff; width: 100%; position: fixed; z-index: 999;">
+            <nav class="navbar justify-end navbar-expand-lg navbar-light px-3" style="background-color: #85d6ff; width: 100%;">
                 <div class="container-fluid">
                     <a class="navbar-brand d-md-flex justify-content-md-start" href="#">
                         <img src="/img/슬청생.png" alt="logo" width="30%" class="d-inline-block align-text-top">
@@ -76,7 +76,7 @@ function setNavBar() {
         case "캐릭터 선택":
         case "엔딩 모음":
             $('body').prepend(`
-            <nav class="nav justify-end navbar-expand-lg navbar-light" style="position: fixed; z-index: 999; width: 100%;">
+            <nav class="nav justify-end navbar-expand-lg navbar-light">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
                         <ul class="navbar-nav">
@@ -106,9 +106,9 @@ function setNavBar() {
 
         case "슬기로운 청지기 생활":
             $('body').prepend(`
-            <nav class="nav justify-end navbar-expand-lg navbar-light" style="position: fixed; z-index: 999; width: 100%;">
+            <nav class="nav justify-end navbar-expand-lg navbar-light">
                 <div class="container-fluid">
-                    <div class="d-flex" id="navbarNav">
+                    <div class="d-flex justify-content-end" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item fs-5 id-txt">
                                 `+ID+`
@@ -142,11 +142,11 @@ function setNavBar() {
         case "브리핑":
         case "아침 브리핑":
             $('body').prepend(`
-            <nav class="nav justify-end navbar-expand-lg navbar-light" style="position: fixed; z-index: 999; width: 100%;">
+            <nav class="nav justify-end navbar-expand-lg navbar-light">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
                         <ul class="navbar-nav">
-                            <li class="nav-item fs-5 id-txt">
+                            <li class="nav-item id-txt">
                                 `+ID+`
                             </li>
                             <li class="nav-item" id="play">
@@ -162,9 +162,9 @@ function setNavBar() {
 
         default:
             $('body').prepend(`
-            <nav class="nav justify-end navbar-expand-lg navbar-light" style="position: fixed; z-index: 999; width: 100%;">
+            <nav class="nav justify-end navbar-expand-lg navbar-light">
                 <div class="container-fluid">
-                    <div class="d-flex" id="navbarNav">
+                    <div class="d-flex justify-content-end" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item fs-5 id-txt">
                                 `+ID+`

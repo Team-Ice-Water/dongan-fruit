@@ -119,3 +119,23 @@ input[type=submit]{
     display: inline-block;
     vertical-align: text-bottom;
 }
+
+@media (orientation: portrait) {
+	/* 세로 모드일 때 적용할 CSS */
+    .container{
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media all and (min-width:480px) and (max-width:767px)  {
+	/* 가로 모드일 때 적용할 CSS */
+    .container{
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -29,7 +29,7 @@ body{
 }
 
 #text {
-    margin-top: 10vh;
+    margin-top: 6vh;
     display: grid;
     justify-items: center;
     align-items: center;
@@ -45,6 +45,7 @@ body{
     font-size: 1.5rem;
     text-align: center;
 }
+
 .typing {
     display: table;
 }
@@ -58,4 +59,35 @@ body{
 
 .total {
     font-size: 1.5rem;
+}
+
+@media (orientation: portrait) {
+	/* 세로 모드일 때 적용할 CSS */
+    .title{
+        font-size: 23px;
+    }
+    
+    .content{
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .total {
+        font-size: 20px;
+    }
+}
+
+@media all and (min-width:480px) and (max-width:767px) {
+    .title{
+        font-size: 19px;
+    }
+    
+    .content{
+        font-size: 17px;
+        text-align: center;
+    }
+
+    .total {
+        font-size: 17px;
+    }
 }

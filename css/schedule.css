@@ -38,9 +38,7 @@ html {
     column-gap: 5%;
 
     margin: auto;
-    padding-top: 2.5em;
     width: 86vw;
-    height: 100vh;
 }
 
 /*----------------------------------  
@@ -95,7 +93,7 @@ character
 .character{
     justify-self: center;
     align-self: flex-end;
-    margin: auto;
+    padding-bottom: 2em;
 }
 
 .character img {
@@ -290,6 +288,19 @@ schedule
 #vol-layout .row-item,
 #vac-layout .row-item {
     grid-column: 1/3;
+}
+
+@media all and (min-width:480px) and (max-width:767px)  {
+	/* 가로 모드일 때 적용할 CSS */
+    .schedule, .plan {
+        font-size: 1em;
+    }
+
+    .nav-tabs button{
+        max-width: 45%;
+        font-size: 18px;
+        display: inline-block;
+    }
 }
 
 

@@ -61,3 +61,17 @@ a:hover {
 a:active {
     text-decoration: none;
 }
+
+@media (orientation: portrait) {
+	/* 세로 모드일 때 적용할 CSS */
+    body {
+        font-size: 3rem;
+    }
+}
+
+@media all and (min-width:480px) and (max-width:767px)  {
+	/* 가로 모드일 때 적용할 CSS */
+    body {
+        font-size: 2rem;
+    }
+}

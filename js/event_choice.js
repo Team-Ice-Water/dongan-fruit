@@ -125,7 +125,7 @@ function setOption(choice) {
         case 'event_2':
             // event_2
             $('#event #event-title').text(today+"일차 이벤트: 카페를 간다.");
-            $('#event #event-passage').html("오늘은 친구들이랑 약속이 있는데 빡다방에서 만나야겠다! </br> 사라다 빵이랑 아이스 초코 한잔 해야지! </br> 엄마! 저 나갔다올게요!");
+            $('#event #event-passage').html("오늘은 친구들이랑 약속이 있는데 빽다방에서 만나야겠다! </br> 사라다 빵이랑 아이스 초코 한잔 해야지! </br> 엄마! 저 나갔다올게요!");
 
             if(itemInfo["tumbler"] != 0){
                 document.querySelector('.option').innerHTML = `<button type="button" class="list-group-item list-group-item-action list-group-item-light" name="yesTumbler" onclick="sendUserPick(this.name);">선택지 1 (텀블러 선택하기) </button> 
