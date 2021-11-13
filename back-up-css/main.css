@@ -13,19 +13,14 @@
 }
 
 body{
-    /*min-height: 100vh;
-    min-height: -webkit-fill-available;*/
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
     background: url("../img/room.png") no-repeat center/cover;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 html {
     height: -webkit-fill-available;
-}
-
-body > .container{
-    /* 모달 안에도 container 사용하는 중*/
-    height: 100vh;
 }
 
 .desk {

@@ -38,9 +38,7 @@ html {
     column-gap: 5%;
 
     margin: auto;
-    padding-top: 2.5em;
     width: 86vw;
-    height: 100vh;
 }
 
 /*----------------------------------  
@@ -95,7 +93,6 @@ character
 .character{
     justify-self: center;
     align-self: flex-end;
-    margin: auto;
 }
 
 .character img {
