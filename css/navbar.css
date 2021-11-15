@@ -1,7 +1,40 @@
-.navbar{
-    position: absolute;
-    left: 0px;
-    top: 0px;
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*
+.navbar, .nav{
+    position: fixed;
     z-index: 999;
-    width: 40%;
+    width: 100%;
+}*/
+
+.navbar-nav {
+    flex-direction: row !important; 
+}
+
+.id-txt {  
+    font-family: 'GmarketSansMedium';
+    font-size: 1.2em;
+    line-height: 260%;  /* 텍스트 혼자 너무 위로 가있음*/
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    color: #000000ad;
+}
+
+@media (orientation: portrait) {
+	/* 세로 모드일 때 적용할 CSS */
+    .id-txt {  
+        font-size: 17px;
+    }
+}
+
+@media all and (min-width:480px) and (max-width:767px)  {
+	/* 가로 모드일 때 적용할 CSS */
+    .id-txt {  
+        font-size: 13px;
+    }
 }

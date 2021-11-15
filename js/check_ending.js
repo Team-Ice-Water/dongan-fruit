@@ -14,7 +14,6 @@ var endingInfo = {
     homeEnd: 0
 }
 
-
 var ecoLevelInfo = {
     air: 0,
     soil: 0,
@@ -27,6 +26,10 @@ var userInfo = {
     health: 0
 }
 
+var is_ending_request = false;
+var is_user_request = false;
+var is_eco_request = false;
+
 // 엔딩 정보 요청
 function endingRequest() {
     var xhr = new XMLHttpRequest();
@@ -35,7 +38,7 @@ function endingRequest() {
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
-
+            console.log(json);
             for (let key in json) {
                 const value = json[key];
                 switch (key) {
@@ -70,10 +73,12 @@ function endingRequest() {
                         break;
                 }
             }
+            is_ending_request = true;
+            doneRequest();
+
         }
     };
 }
-endingRequest();
 
 // 오염도 정보 요청
 function ecoRequest() {
@@ -83,7 +88,7 @@ function ecoRequest() {
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
-
+            console.log(json);
             for (let key in json) {
                 const value = json[key];
                 switch (key) {
@@ -101,11 +106,13 @@ function ecoRequest() {
                 }
             }
 
-            ecoSum = ecoLevelInfo['air'] + ecoLevelInfo['soil'] +ecoLevelInfo['water']
+            ecoSum = ecoLevelInfo['air'] + ecoLevelInfo['soil'] +ecoLevelInfo['water'];
+            is_eco_request = true;
+            doneRequest();
+
         }
     };
 }
-ecoRequest();
 
 function infoRequest() {
     var xhr = new XMLHttpRequest();
@@ -114,7 +121,7 @@ function infoRequest() {
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
             let json = JSON.parse(xhr.responseText);
-
+            console.log(json);
             for (let key in json) {
                 const value = json[key]
                 switch (key) {
@@ -128,12 +135,14 @@ function infoRequest() {
                         break;
                 }
             }
+            is_user_request = true;
+            doneRequest();
         }
     };
 }
-infoRequest();
 
 function updateValue(value) {
+    console.log(value.id+" 값+ 1");
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
@@ -148,19 +157,28 @@ function updateValue(value) {
 
 /////////////////
 function checkEnd() {
-    if(endingInfo['culDay'] == 2){
-        if(endingInfo['culStage'] == 5){    // culDay == (today + 5) -> DB에 culture_end_count 속성대신 ending false 와 같은 속성이 있어야 함
-            location.href="ending.html:culture";
+    if(endingInfo['culStage'] == 4){
+        
+        if(endingInfo['culEnd'] == 5){    // culDay == (today + 5) -> DB에 culture_end_count 속성대신 ending false 와 같은 속성이 있어야 함
+            location.replace("ending.html?culture");
         } else{
             if(ecoSum <= 180){
                 updateValue({id: 'culture'});
             }
         }
+/*
+        if(userInfo['day'] >= endingInfo['culDay'] + 5){
+            location.replace("ending.html?culture");
+        } else{
+            if(ecoSum <= 180){
+                updateValue({id: 'culture'});
+            }
+        }*/
     } 
 
-    if(endingInfo['envDay'] == 4){
-        if(endingInfo['envStage'] == 10){
-            location.href="ending.html:school";
+    if(endingInfo['envStage'] == 2){
+        if(endingInfo['envEnd'] == 10){
+            location.replace("ending.html?school");
         } else{
             if(userInfo['health'] >= 60){
                 updateValue({id: 'school'});
@@ -168,9 +186,9 @@ function checkEnd() {
         }
     } 
 
-    if(endingInfo['homeDay'] == 4){
-        if(endingInfo['homeStage'] == 5){
-            location.href="ending.html:home";
+    if(endingInfo['homeStage'] == 4){
+        if(endingInfo['homeEnd'] == 5){
+            location.replace("ending.html?home");
         } else{
             if(ecoSum <= 180){
                 updateValue({id: 'home'});
@@ -179,4 +197,29 @@ function checkEnd() {
     } 
 }
 
-checkEnd();
+function doneRequest() {
+    if(is_ending_request && is_user_request ){
+        if(is_eco_request){
+            console.log("update 실행");
+            checkEnd();
+        }else{
+            console.log("아직");
+        }     
+    }else{
+        console.log("아직");
+    } 
+}
+endingRequest();
+ecoRequest();
+infoRequest();
+
+/*
+do {
+    if(is_ending_request && is_user_request ){
+        if(is_eco_request){
+            console.log("update 실행");
+            checkEnd();
+            break;
+        }        
+    }
+} while (1)*/

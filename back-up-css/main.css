@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'CookieRunOTF-Black';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Black00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    background: url("../img/room.png") no-repeat center/cover;
+    /*overflow: hidden;*/
+}
+
+html {
+    height: -webkit-fill-available;
+}
+
+.desk {
+    position: absolute;
+    height: 77vh;
+    z-index: 2;
+    left: 59vw;
+    top: 15.5vh;
+}
+
+#window {
+    position: absolute;
+    height: 55vh;
+    z-index: 1;
+    left: 13vw;
+    top: 5vh;
+}
+
+
+.schedule{
+    position: absolute;
+    top: 87vh;
+    left: 80vw;
+    
+    z-index: 5;
+
+    font-family: "GmarketSansMedium", sans-serif;
+}

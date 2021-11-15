@@ -1,0 +1,66 @@
+@font-face {
+          font-family: 'CookieRunOTF-Bold';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+      }
+
+body {
+          text-align: center;
+          background-color:#85d6ff ;
+          font-family: 'CookieRunOTF-Bold', sans-serif;
+          font-size: 200.5%;
+          letter-spacing: 1.5px;
+          margin: 0;
+
+      }
+
+.container {
+  display: grid;
+  grid-template-columns: 16% 16% 16% 16% 16% 16%;
+  grid-template-rows: 50% 50%;
+  row-gap: 1em;
+}
+
+.item img{
+  height: 100%;
+  max-height: 30vh;
+}
+
+.item img {
+  transition: all 0.2s linear;
+}
+
+.item:hover img { /* 마우스 올렸을 때 커짐*/
+  transform: scale(1.4);
+}
+
+.clicked img{
+  /*border: gray;*/
+  transform: scale(1.4);
+}
+
+[type=radio] {    /* 동그라미 숨기기 */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.input-group{
+  width: 60%;
+  margin-top: 2em;
+}
+
+input[name="cname"]{
+  border-radius: 50px;
+}
+
+[type="submit"]{  /* 제출버튼 */
+  background-color: #fcc500;
+  font-family: 'CookieRunOTF-Bold';
+  border: none;
+  color: 111;  
+  border-radius: 50px;
+  width:30%;
+} 

@@ -16,6 +16,21 @@ let minutes = 0;
 let seconds = 0;
 let timeStart = false;
 
+const wrong = new Audio('../audio/wrong.mp3');
+wrong.volume = 0.4;
+
+const correct = new Audio('../audio/correct.mp3');
+correct.volume = 0.4;
+
+const end = new Audio('../audio/end.mp3');
+correct.volume = 0.7;
+
+const clock = new Audio('../audio/clock.wav');
+clock.addEventListener('ended', function() { 
+    this.currentTime = 0;
+    this.play();
+}, false);
+
 var item = {
     tumbler: "0",
     mic: "0",
@@ -93,10 +108,12 @@ function compareTwo(){
 
     if(opened.length === 2 && opened[0].src === opened[1].src){
         match();
+        correct.play();
         console.log("It's a Match!");
     } 
     else if (opened.length === 2 && opened[0].src != opened[1].src){
         noMatch();
+        wrong.play();
         console.log("NO Match!");
     }
 }
@@ -187,12 +204,14 @@ function displayModal(){
     var myModal = new bootstrap.Modal(document.getElementById('finishModal'), {
         keyboard: false
     });
-    myModal.show();   
-
+    myModal.show();
+    end.play();
 }
 
 function finishGame() {
-    if(seconds >= 30){
+    if((seconds >= 30)||(matched.length == 10)){
+        // 시간이 다 되었거나, 모든 카드를 찾았으면
+        clock.pause();
         clearInterval(check);
 
         stopTime();
@@ -210,7 +229,10 @@ function itemRequest(data) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
-            $('.Btn').html('<a class="btn btn-primary fs-5" href="main.html" role="button">청지기 1일차 시작하기</a>');             
+            $('.Btn>a').removeClass('disabled');
+            $('.Btn>a').removeAttr('aria-disabled');
+            $('.Btn>a').text("청지기 1일차 시작하기");
+            // $('.Btn').html('<a class="btn btn-primary fs-5" href="main.html" role="button">청지기 1일차 시작하기</a>');             
         }
     };
     xhr.open('POST', '../finishGame.php');
@@ -229,6 +251,7 @@ deck.addEventListener("click", function(evt){
 
         if(timeStart === false){
             timeStart = true;
+            clock.play();
             timer();
         }
         flipCard();
@@ -246,4 +269,5 @@ deck.addEventListener("click", function(evt){
     }
 });
 
-var check = setInterval(finishGame , 2000); // 가만히 있어도 시간이 지나면 게임은 종료되어야 함
+// 가만히 있어도 시간이 지나면 게임은 종료되어야 함
+var check = setInterval(finishGame , 2000);

@@ -1,0 +1,273 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: inherit;
+}
+
+
+@font-face {
+    font-family: 'CookieRunOTF-Black';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Black00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html{
+    box-sizing: border-box;
+}
+
+body {
+    background: url('../img/stripes-light.png');
+    font-family: "GmarketSansMedium", sans-serif;
+    font-size: 62.5%;
+    letter-spacing: 1.5px;
+    margin: 0;
+    text-align: center;
+}
+
+#game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 0.5em;
+}
+
+ul > li {
+    list-style: none;
+}
+
+.card{
+    cursor: pointer;
+}
+
+.btn {
+    border-radius: 1em;
+    border: none;
+    color: #fff;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    padding: 0.8em;
+}
+
+
+/*----------------------------------  
+Header
+------------------------------------*/
+.title h1{
+    font-size: 5.5em;
+    font-weight: 300;
+    font-family: 'CookieRunOTF-Black';
+}
+
+/*----------------------------------  
+Section - 점수판
+------------------------------------*/
+
+.score-panel{
+    font-size: 1.6em;
+    padding: 1em 0 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-container{
+    background: #fff;
+    border-radius: 0.5em;
+    color: #000;
+    margin:  0.5em;
+    padding: 0.5em;
+    max-width: 20vw;
+}
+
+.timer{
+    font-size: 1em;
+}
+
+
+/*----------------------------------  
+Section - Result Modal
+------------------------------------*/
+.modal-dialog{
+    height: 65%;
+    max-height: 30vh;
+}
+
+.modal-body{
+    padding: 4em 1em !important;
+    /*display: grid;
+    grid-template-rows: 5fr 3fr 2fr;
+    gap: 2em;
+    justify-items: center;
+    align-items: center;*/
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.modal-body h2{
+    font-weight: 600;
+}
+
+p.item{
+    font-weight: 500;
+    margin-bottom: 2em;
+    background-color: #CEFD0C;
+}
+
+
+/*----------------------------------  
+Deck of Cards
+------------------------------------*/
+
+.deck{
+    background: linear-gradient(to bottom, #5cf, #28e); /*ecf*/
+    border-radius: 1.5em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 35em;
+    width: 35em;
+    margin-bottom: 6em;
+    padding: 0.5em;
+    
+}
+
+.deck, 
+.card{
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    
+}
+
+.card{
+    background: #fc4;
+    border-radius: 0.5em;
+    height: 7em;
+    width: 7em;
+    
+}
+
+img{
+    user-select: none;      /* 사용자가 선택할 수 없음*/
+    /*width: 6em;*/
+}
+
+.deck img {
+    visibility: hidden;
+    /*카드에 맞게 이미지 리사이징*/
+    object-fit: contain;
+    max-height: 100%;
+}
+
+.deck .card.flip{
+    background: #fff;
+    cursor: deafult;
+    transform: rotateY(360deg);
+    transition: transform 0.3s linear;
+    pointer-events: none;
+    line-height: 200px;
+    
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    
+    
+}
+
+.flip img{
+    background: #fff;
+    visibility: visible;
+    line-height: 200px;
+    
+}
+
+.deck .card.match{
+    background: #39d;
+    visibility: visible;
+    cursor: deafult;
+    animation: pulse 1s;
+    
+}
+
+.match img{
+    background: #39d;
+    
+}
+
+@keyframes pulse{
+    0% {
+        transform: scale(1);
+    }
+    80% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media screen and (min-width: 550px) {
+    .deck{
+        height: 65em;
+        padding: 2em;
+        width: 60em;
+    }
+
+    .card{
+        height: 10em;
+        width: 10em;
+    }
+
+    /*.deck img{
+        width: 9em;
+    }
+
+    .modal-content h2 {
+        font-size: 4em;
+    }
+
+    .modal-content a{
+        font-size: 1.8em;
+    }*/
+}
+
+/*---------------------------------- 
+Desktops
+------------------------------------*/
+@media screen and (min-width: 800px) {
+    .deck{
+        height: 70em;
+        width: 85em;
+    }
+    .card{
+        height: 15em;
+        width: 15em;
+    }
+
+    .footer{
+        font-size: 1.2em;
+    }
+    /*.deck-img{
+        width: 13em;
+    }
+    
+    .modal-content h2{
+        font-size: 5em;
+    }
+    .modal-content a{
+        font-size: 2em;
+    }*/
+}

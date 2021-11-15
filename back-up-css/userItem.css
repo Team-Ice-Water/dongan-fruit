@@ -1,0 +1,88 @@
+/*===== 아이템===== */
+#flowerpot{
+    position: absolute;
+    height: 14vh;
+    z-index: 2;
+    left: 71.5vw;
+    top: 13vh;
+}
+
+#vitamin{
+    position: absolute;
+    height: 9vh;
+    z-index: 2;
+    left: 80.5vw;
+    top: 18vh;
+}
+
+#soap{
+    position: absolute;
+    height: 9vh;
+    z-index: 2;
+    left: 74.5vw;
+    top: 18vh;
+}
+
+#tumbler{
+    position: absolute;
+    height: 10vh;
+    z-index: 3;
+    left: 66vw;
+    top: 44vh;
+}
+
+#book{
+    position: absolute;
+    height: 16vh;
+    z-index: 2;
+    left: 69.7vw;
+    top: 33.5vh;
+}
+
+#bible {
+    position: absolute;
+    height: 10vh;
+    z-index: 2;
+    left: 71vw;
+    top: 47vh;
+}
+
+#soapnut {
+    position: absolute;
+    height: 10vh;
+    z-index: 2;
+    left: 83vw;
+    top: 37vh;
+}
+
+#mic{
+    position: absolute;
+    height: 10vh;
+    z-index: 2;
+    left: 79vw;
+    top: 47vh;
+}
+
+#basket{
+    position: absolute;
+    height: 22vh;
+    z-index: 2;
+    left: 80vw;
+    top: 70vh;
+}
+
+#bicycle{
+    position: absolute;
+    height: 38vh;
+    z-index: 2;
+    left: 5vw;
+    top: 42vh;
+}
+
+#ginseng{
+    position: absolute;
+    height: 27vh;
+    z-index: 3;
+    left: 7vw;
+    top: 61vh;
+}

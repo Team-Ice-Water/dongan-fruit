@@ -14,21 +14,21 @@
     switch ($type) {
         case 'culture':
             $sql ="
-                UPDATE character_info
+                UPDATE ending_info
                 SET culture_end_count = culture_end_count +1 
                 WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         case 'school':
             $sql ="
-                UPDATE character_info
+                UPDATE ending_info
                 SET school_end_count = school_end_count +1 
                 WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         case 'home':
             $sql ="
-                UPDATE character_info
+                UPDATE ending_info
                 SET home_end_count = home_end_count +1
                 WHERE m_id='$userId' AND cname = '$userToon';";
             break;
@@ -36,6 +36,8 @@
         default:
             break;
     }
+
+    echo $sql;
     
     $ret = mysqli_query($con, $sql);
     mysqli_close($con);

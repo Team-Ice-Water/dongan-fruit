@@ -51,6 +51,14 @@ const item = {
 
 var today = 0;
 
+const schedule_bgm = new Audio('../audio/schedule.mp3');
+schedule_bgm.volume = 0.2;
+schedule_bgm.addEventListener('ended', function() { 
+    this.currentTime = 0;
+    this.play();
+}, false);
+schedule_bgm.play();
+
 // 아이템이 있어야 선택 가능한 버튼 조건 구현
 function itemRequest() {
     var xhr = new XMLHttpRequest();
@@ -74,6 +82,14 @@ function itemRequest() {
 }
 
 itemRequest();
+
+$('#vol-layout>.row-item').click(function () {
+    alert("랜덤으로 배정되는 활동입니다.\n지구의 왼쪽 '봉사활동' 상자를 클릭해주세요.");
+});
+
+$('#vac-layout>.row-item').click(function () {
+    alert("랜덤으로 배정되는 활동입니다.\n지구의 왼쪽 '바캉스' 상자를 클릭해주세요.");
+});
 
 // 아이템이 있어야 선택할 수 있는 선택지 검사하는 함수
 function needItem(tag) {
@@ -108,7 +124,7 @@ function checkHealth() {
         if(isFill['count'] == 2){   // 체력 50 이하. 2개 채워짐
             return false;
         } 
-        else{ // 체력 50 이하. 2개 이하 채워짐
+        else{ // 체력 50 이하. 1개 채워짐
             return 1;
         }
     } 
@@ -185,7 +201,7 @@ function nondeletable(){
 function selectVolunteer() {
     if(checkHealth()){
         var jbRandom = Math.random();
-        var index = Math.floor( jbRandom * 6 );
+        var index = Math.floor( jbRandom * 7 ); // 0 ~ 6 사이의 숫자
         select(volunteer[index], false);
     } else{
         alert("건강수치가 50 이하면 하루에 2개의 스케쥴 밖에 선택할 수 없습니다.");
@@ -305,7 +321,11 @@ function doneRequest(send) {
             console.log('받아온 정보: ', JSON.parse(xhr.responseText));
             today = yesterday - 1;
             console.log("today: ", today);
-            location.href="briefing.html?"+today+':'+send;
+            $('body').addClass('fade-out-box');
+            schedule_bgm.pause();
+            setTimeout(() => {
+                location.replace("briefing.html?"+today+':'+send);
+            }, 3000);
         }
     };
 }
@@ -326,6 +346,22 @@ function sendValue(findThis) {
 }
 
 function decide() {
+    if(checkHealth() === 1){
+        // 1개만 채워졌으면 안됨
+        alert("하루 스케쥴 2개를 모두 채워야 합니다.");
+    } else if(checkHealth() === true){
+        // 3개 아니면 안됨
+        if(isFill['count'] != 3){
+            alert("하루 스케쥴 3개를 모두 채워야 합니다.");
+        } else{
+            sendSchedule();
+        }
+    } else{
+        sendSchedule();
+    }
+}
+
+function sendSchedule() {
     const dawn = dawnText.getAttribute('name');
     const am = amText.getAttribute('name');
     const pm = pmText.getAttribute('name');
@@ -371,5 +407,6 @@ function decide() {
         }
         
     }
+
     doneRequest(send);
 }

@@ -48,7 +48,6 @@ function addItem(obj) {
     for (let key in obj) {
         const value = obj[key];
         const fileName = itemFile[key];
-        console.log(fileName +": " +value);
         if(value == "1"){  // true이면
             makeImg(itemSection, fileName, key, false);
         } else if(value == "2"){
@@ -65,6 +64,7 @@ function itemRequest() {
     xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
+            console.log(xhr.responseText);
             let json = JSON.parse(xhr.responseText);
 
             for (let jkey in json) {

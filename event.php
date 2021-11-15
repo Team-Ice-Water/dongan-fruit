@@ -55,7 +55,7 @@
             break;
         case 'waterwash':
             $sql = "UPDATE character_info
-            SET soil = soil+4, health = health -1
+            SET health = health -2
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
@@ -192,8 +192,8 @@
 
         // event_23 문화 1단계
         case 'yes_culture_1':
-            $sql = "UPDATE ending_info
-            SET culture_day = $today, cultureStage = 1
+            $ending = "UPDATE ending_info
+            SET culture_day = $today, culture_stage = 1
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_culture_1':
@@ -203,9 +203,9 @@
         case 'yes_culture_2_bible':
             $sql = "UPDATE character_info
             SET soil = soil-2, water = water-2, air = air-2, health = health -1
-            WHERE m_id='$userId' AND cname = '$userToon';
-            UPDATE ending_info
-            SET culture_day = $today, cultureStage = 2
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET culture_day = $today, culture_stage = 2
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
@@ -213,15 +213,18 @@
             $sql = "UPDATE character_info
             SET soil = soil+2, water = water=2, air = air+2, health = health -1
             WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET culture_day = $today
+            WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         // event_25 문화 2단계
         case 'yes_culture_2_mic':
             $sql = "UPDATE character_info
             SET soil = soil-2, water = water-2, air = air-2, health = health -1
-            WHERE m_id='$userId' AND cname = '$userToon';
-            UPDATE ending_info
-            SET culture_day = $today, cultureStage = 2
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET culture_day = $today, culture_stage = 2
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
@@ -229,32 +232,41 @@
             $sql = "UPDATE character_info
             SET soil = soil+2, water = water=2, air = air+2, health = health -1
             WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET culture_day = $today
+            WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         // event_26 문화 3단계
         case 'yes_culture_3_book':
             $sql = "UPDATE character_info
             SET soil = soil-2, water = water-2, air = air-2, health = health -1
-            WHERE m_id='$userId' AND cname = '$userToon';
-            UPDATE ending_info
-            SET culture_day = $today, cultureStage = 3
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET culture_day = $today, culture_stage = 3
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_culture_3_book':
+            $ending = "UPDATE ending_info
+            SET culture_day = $today
+            WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         // event_27 문화 3단계
         case 'yes_culture_3_tumbler':
             $sql = "UPDATE character_info
             SET soil = soil-3
-            WHERE m_id='$userId' AND cname = '$userToon';
-            UPDATE ending_info
-            SET culture_day = $today, cultureStage = 3
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET culture_day = $today, culture_stage = 3
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_culture_3_tumbler':
             $sql = "UPDATE character_info
             SET soil = soil+2
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET culture_day = $today
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
@@ -262,14 +274,17 @@
         case 'yes_culture_3_tumbler':
             $sql = "UPDATE character_info
             SET air = air-3
-            WHERE m_id='$userId' AND cname = '$userToon';
-            UPDATE ending_info
-            SET culture_day = $today, cultureStage = 3
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET culture_day = $today, culture_stage = 3
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_culture_3_tumbler':
             $sql = "UPDATE character_info
             SET air = air+2
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET culture_day = $today
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
@@ -277,14 +292,17 @@
         case 'yes_culture_4':
             $sql = "UPDATE character_info
             SET soil = soil-10, water = water-10, air = air-10, health = health -5
-            WHERE m_id='$userId' AND cname = '$userToon';
-            UPDATE ending_info
-            SET culture_day = $today, cultureStage = 4
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET culture_day = $today, culture_stage = 4
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_culture_4':
             $sql = "UPDATE character_info
             SET soil = soil+3, water = water+3, air = air+3
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET culture_day = $today
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
@@ -292,13 +310,16 @@
         case 'yes_env_1_children':
         case 'yes_env_1_teacher':
         case 'yes_env_1_library':
-            $sql = "UPDATE ending_info
-            SET school = $today, school_stage = 1
+            $ending = "UPDATE ending_info
+            SET school_day = $today, school_stage = 1
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'no_env_1_children':
         case 'no_env_1_teacher':
         case 'no_env_1_library':
+            $ending = "UPDATE ending_info
+            SET school_day = $today
+            WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         // event_33, 34 환경 2단계
@@ -310,8 +331,8 @@
         case 'env_2_2_basket':
             $sql = "UPDATE character_info
             SET soil = soil-2, water = water-2, air = air-2
-            WHERE m_id='$userId' AND cname = '$userToon';
-            UPDATE ending_info
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
             SET school_day = $today, school_stage = 2
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
@@ -327,38 +348,47 @@
         case 'keeper_1_book':
             $sql = "UPDATE character_info
             SET $eco = $eco + $changeValue
-            WHERE m_id='$userId' AND cname = '$userToon';
-            UPDATE ending_info
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
             SET home_day = $today, home_stage = 1
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;        
         case 'keeper_1_nothing':
+            $ending = "UPDATE ending_info
+            SET home_day = $today
+            WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         // event_36 청지기 2단계
         case 'keeper_2_yesTalk':
             $sql = "UPDATE character_info
             SET soil = soil-2, water = water-2, air = air-2
-            WHERE m_id='$userId' AND cname = '$userToon';
-            UPDATE ending_info
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
             SET home_day = $today, home_stage = 2
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'keeper_2_noTalk':
+            $ending = "UPDATE ending_info
+            SET home_day = $today
+            WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         // event_37 청지기 3단계
         case 'keeper_3_yesSoapnut':
             $sql = "UPDATE character_info
             SET water = water-5
-            WHERE m_id='$userId' AND cname = '$userToon';
-            UPDATE ending_info
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
             SET home_day = $today, home_stage = 3
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'keeper_3_noSoapnut':
             $sql = "UPDATE character_info
             SET water = water+3
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
+            SET home_day = $today
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
@@ -368,12 +398,15 @@
         case 'keeper_4_envbook':
             $sql = "UPDATE character_info
             SET soil = soil-5, water = water-5, air = air-5
-            WHERE m_id='$userId' AND cname = '$userToon';
-            UPDATE ending_info
+            WHERE m_id='$userId' AND cname = '$userToon';";
+            $ending = "UPDATE ending_info
             SET home_day = $today, home_stage = 4
             WHERE m_id='$userId' AND cname = '$userToon';";
             break;
         case 'keeper_4_nothing':
+            $ending = "UPDATE ending_info
+            SET home_day = $today
+            WHERE m_id='$userId' AND cname = '$userToon';";
             break;
 
         default:
@@ -384,9 +417,13 @@
         mysqli_query($con, $sql);
         echo $sql ;
     }
+    if($ending){   // 변화가 없으면 sql 값이 없음
+        mysqli_query($con, $ending);
+        echo $ending ;
+    }
 
     $update_sql = "
-        UPDATE character_info
+        UPDATE character_state
         SET done_event = $today
         WHERE m_id='$userId' AND cname = '$userToon';";
     mysqli_query($con, $update_sql);

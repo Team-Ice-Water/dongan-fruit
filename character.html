@@ -32,7 +32,7 @@
 
         <div class="input-group mb-3 mx-auto">
             <input type="text" name="cname" class="form-control fs-4" placeholder="캐릭터 이름" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <input class="fs-4" type="submit" value="만들기" id="button-addon2">
+            <input class="fs-4" type="submit" value="만들기" id="button-addon2" onclick="return check()">
         </div>
     </form>
 
@@ -43,7 +43,18 @@
             }
             $(this).addClass('clicked');
         });
+
+        function check() {
+            var num = $('input[name="type"]:checked').length;
+            if(num == 1){
+                return true;
+            }else{
+                alert("캐릭터가 제대로 선택되지 않았습니다.");
+                return false;
+            }
+        }
     </script>
     <script type="text/javascript" src="js/navbar.js"></script>
+    <script type="text/javascript" src="js/clicksound.js"></script>
 </body>
 </html>

@@ -1,11 +1,12 @@
 const state = [
     { id: "basic_health", text: "자고 일어났더니 체력이 보충되었어요.", health: 5},
-    { id: "bad_health", text: "체력이 40 이하로 떨어져 병에 걸렸어요./병을 방치하면 이제 매일 체력이 줄어들어요.", health: -2},
+    { id: "bad_health", text: "체력이 40 이하로 떨어져 병에 걸렸어요.<br>병을 방치하면 이제 매일 체력이 줄어들어요.", health: -2},
     { id: "basic_nature", text: "지구가 아픈 상태이기 때문에 점점 상황이 나빠지고 있어요.", water: 5, air: 5, soil: 5},
     { id: "good_nature", text: "오염수치가 낮아졌어요. 지구의 상태가 좋아지고 있어요!", water: 3, air: 3, soil: 3},
     { id: "bad_nature", text: "오염 수치가 높아요. 지구의 상태가 급격하게 나빠지고 있어요.", water: 7, air: 7, soil: 7},
     { id: "bad_pollution", text: "환경 오염이 심각해져서 건강에도 문제가 생기고 있어요.", health: -1},
-    { id: "good_pollution", text: "요즘 지구의 환경이 너무 좋아요. 건강이 좋아지는 기분이에요.", health: 1}    
+    { id: "good_pollution", text: "요즘 지구의 환경이 너무 좋아요. 건강이 좋아지는 기분이에요.", health: 1},
+    { id: "flowerpot", text: "미약하지만 화분의 공기정화식물이 공기를 조금 좋게 만들었어요.", air: -2}    
 ]
 
 
@@ -23,9 +24,37 @@ var userInfo = {
     health: 0
 }
 
+var flowerpot = false;
+
 var getEcoLevel = false;
 var getInfo = false;
 var isSend = false;
+
+const typingSound = new Audio('../audio/typing.wav');
+
+const morning = new Audio('../audio/morning.mp3');
+morning.volume = 0.4;
+morning.addEventListener('ended', function() { 
+    this.currentTime = 0;
+    this.play();
+}, false);
+
+// navbar.js 에서 아이콘 클릭에 따라 아래의 두 함수 호출하게 됨
+function mutebgm() {
+    $('#play').html(`<a class="nav-link" href="#" onclick="playbgm();">
+    <span class="material-icons fs-2">volume_off</span>
+    </a>`);
+    console.log("mute됨");
+    morning.pause();
+}
+
+function playbgm() {
+    $('#play').html(`<a class="nav-link" href="#" onclick="mutebgm();">
+    <span class="material-icons fs-2">volume_up</span>
+    </a>`);
+    console.log("재생됨");
+    morning.play();
+}
 
 // 전날 오염도 정보 요청
 function ecoRequest() {
@@ -78,6 +107,9 @@ function infoRequest() {
                     case 'day':
                         userInfo['day'] = parseInt(value);
                         $('.title').text(userInfo['day']+' 일차의 하루가 밝았다.');
+                        if(userInfo['day'] > 5){
+                            $('.goBtn').html('<button type="button" class="btn btn-light" onclick="skip();"> 타이핑 스킵 </button>');
+                        }
                         break;
                     case 'health':
                         userInfo['health'] = parseInt(value);
@@ -90,6 +122,28 @@ function infoRequest() {
             getInfo = true;
             if(getEcoLevel && getInfo && !isSend){
                 sendValue();
+            }
+        }
+    };
+}
+
+// 아이템 정보 요청
+function itemRequest() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../getItemInfo.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            let json = JSON.parse(xhr.responseText);
+            for (let key in json) {
+                const value = json[key];
+                switch (key) {
+                    case 'flowerpot':
+                        flowerpot = parseInt(value);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     };
@@ -116,6 +170,8 @@ function findItem(id) {
 }
 
 function sendValue() {
+    
+    console.log(">>> sendValue flower 값: ", flowerpot);
 
     // 자고 일어나면 
     changeRequest(findItem('basic_health'));    // 체력 +5
@@ -158,6 +214,13 @@ function sendValue() {
         findItem('bad_health').filtered = true;      
     }
 
+    /* 화분 정화 작용 */
+    if(flowerpot != 0){
+        console.log("flowerpot 값: ", flowerpot);
+        changeRequest(findItem('flowerpot'));  // 대기-2
+        findItem('flowerpot').filtered = true;      
+    }
+
 
     console.log('state 리스트: ', state);
 
@@ -166,7 +229,7 @@ function sendValue() {
     makeLI();
 }
 
-const typingTxt = document.querySelector(".typing-txt").querySelector("ul");
+const typingtxt = document.querySelector(".typing-txt").querySelector("ul");
 const typing = document.querySelector(".typing").querySelector("ul");
 
 function makeLI() {
@@ -196,15 +259,16 @@ function makeLI() {
 
         const liTag2 = document.createElement('LI');
         const infoTag2 = document.createElement('LI');
+        infoTag2.classList.add('info');
         setText(state[filteredIdx[i]], liTag2, infoTag2);
         
-        typingTxt.appendChild(liTag2);
-        typingTxt.appendChild(infoTag2);
+        typingtxt.appendChild(liTag2);
+        typingtxt.appendChild(infoTag2);
     }
 }
 
 function setText(obj, tag, nexttag) {
-    tag.innerText = obj['text'];
+    tag.innerHTML = obj['text'];
 
     /* 수치 변동 사항 멘트를 지정한다. */
     var text = "";
@@ -233,10 +297,16 @@ function setText(obj, tag, nexttag) {
             total += obj['water'];
         }
     }
+
+    if(obj['id'] == 'flowerpot'){
+        text += "  대기 오염도 2 감소";
+    }
     
     /* 다음 줄에 변동사항을 적는다. */
     nexttag.innerText = text;
 }
+
+var tyInt ;
 
 function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
     var typingBool = false; 
@@ -244,28 +314,31 @@ function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
     var liIndex = 0;
     var liLength = $(".typing-txt>ul>li").length;
 
-    // 타이핑될 텍스트를 가져온다 
-    var typingTxt = $(".typing-txt>ul>li").eq(liIndex).text();
+    // 타이핑될 텍스트를 가져온다
+    // <br>태그까지 가져와야 하므로 text()가 아니라 html()로
+    var typingTxt = $(".typing-txt>ul>li").eq(liIndex).html();
     console.log('typingTxt: ', typingTxt);
     typingTxt=typingTxt.split(""); // 한글자씩 자른다. 
     if(typingBool==false){ // 타이핑이 진행되지 않았다면 
         typingBool=true; 
-        var tyInt = setInterval(typing,100); // 반복동작 
+        tyInt = setInterval(typing,100); // 반복동작 
     } 
         
     function typing(){ 
+        typingSound.play();
         console.log("liIndex: " ,liIndex);
         $(".typing ul li").removeClass("on");
         $(".typing ul li").eq(liIndex).addClass("on");
         if(typingIdx<typingTxt.length){ // 타이핑될 텍스트 길이만큼 반복
             //console.log($(".typing ul li").text());
-            if(typingTxt[typingIdx] === '/'){
-                $(".typing ul li").eq(liIndex).append('</br>');
+            if(typingTxt[typingIdx] === '<'){
+                $(".typing ul li").eq(liIndex).append('<br/>');
+                typingIdx = typingIdx + 4;
             } else {
                 $(".typing ul li").eq(liIndex).append(typingTxt[typingIdx]); // 한글자씩 이어준다. 
+                typingIdx++;
             }
             
-            typingIdx++;
         } else{ 
             if(liIndex<liLength-1){
                 //다음문장으로  가기위해 인덱스를 1증가
@@ -273,10 +346,11 @@ function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
                 //다음문장을 타이핑하기위한 셋팅
                 typingIdx=0;
                 typingBool = false; 
-                typingTxt = $(".typing-txt>ul>li").eq(liIndex).text();
+                typingTxt = $(".typing-txt>ul>li").eq(liIndex).html();
             
                 //다음문장 타이핑전 1초 쉰다
                 clearInterval(tyInt);
+                typingSound.pause();
                 //타이핑종료
             
                 setTimeout(function(){
@@ -288,6 +362,8 @@ function startTyping(){     // 출처: https://gahyun-web-diary.tistory.com/2
                 clearInterval(tyInt);
                 // 커서 깜빡이는거 종료
                 $(".typing ul li").removeClass("on");
+                // 효과음 종료
+                typingSound.pause();
                 // 총 변화를 보여주는 텍스트 띄우기
                 showTotal();
                 $('.goBtn').html('<a href="main.html" role="button" class="btn btn-light"> 방으로 가기 </a>');
@@ -318,9 +394,22 @@ function showTotal() {
     $('.total').css("background-color", "rgba( 255, 255, 255, 0.6 )");
 }
 
+function skip() {
+    console.log("스킵 눌림");
+    typingSound.pause();
+    // 효과 적용된 부분을 감추고, 효과 인터벌 삭제
+    $(".typing").css( "display", "none" );
+    clearInterval(tyInt);
 
+    // 미리 적혀있던 부분 보여주기
+    $(".typing-txt").css( "display", "table" );
+    showTotal();
+
+    $('.goBtn').html('<a href="main.html" role="button" class="btn btn-light"> 방으로 가기 </a>');
+}
 
 /* 비교를 위한 값 요청*/
+itemRequest();
 ecoRequest();
 infoRequest();
 /* 비교 후 해당되는 정보 전송
@@ -330,5 +419,6 @@ sendValue();    // 정보 받아온 뒤 실행해야 해서, ajax 결과에 따�
 // 화면 전환 효과가 끝나고 텍스트의 타이핑 효과가 시작
 setTimeout(() => {
     startTyping();
+    morning.play();
 }, 3000);
 

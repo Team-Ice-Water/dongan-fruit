@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>슬기로운 청지기 생활</title>
     <link href="css/navbar.css" rel="stylesheet">
-    <link href="css/new_schedule.css" rel="stylesheet">
+    <link href="css/schedule.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
     <div class="layout">
@@ -36,12 +36,12 @@
                 <span class="text fs-5"></span>
                 <button type="button" class="remove btn btn-light btn-sm material-icons" onclick="remove('.pm')">clear</button>
             </div>
-            <img class="item" src="img/schedule/cancel.png" alt="취소" onclick="cancel()">
-            <img class="item" src="img/schedule/decide.png" alt="결정" onclick="decide()">
+            <button type="button" class="item btn btn-light fs-4" onclick="cancel()">취소</button>
+            <button type="button" class="item btn btn-dark fs-4" onclick="decide()">결정</button>
         </section>
     
         <!-- Nav tabs -->
-        <section class="schedule">
+        <section class="schedule fs-5">
             <nav>
                 <div class="nav nav-tabs" id="planTab" role="tablist">
                     <button class="nav-link active" id="movement-tab" data-bs-toggle="tab" data-bs-target="#movement" type="button" role="tab" aria-controls="movement" aria-selected="true">생활 속 환경운동</button>
@@ -79,7 +79,7 @@
                     </section>
                 </div>
                 <div class="tab-pane fade" id="vacation" role="tabpanel" aria-labelledby="vacation-tab">
-                    <section id="vol-layout">
+                    <section id="vac-layout">
                         <img class="item" src="img/schedule/vacation.png" alt="바캉스" id="vacation" onclick="selectVacation()">
                         <img class="item" src="img/schedule/earth.png" alt="지구사진" style="width: 5vw;">
     
@@ -138,7 +138,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--bootstrap JS를 사용하기 위한 script 태그-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/checkLogin.js"></script>
     <script type="text/javascript" src="js/navbar.js"></script>
+    <script type="text/javascript" src="js/clicksound.js"></script>
     <script type="text/javascript" src="js/schedule.js"></script>
     <script type="text/javascript" src="js/getRoomInfo.js"></script>
 </body>

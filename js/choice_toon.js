@@ -102,6 +102,7 @@ function makeSlide() {
         
 }
 
+// html에서 결정하기 버튼 누르면 아래 함수 수행
 function saveToon() {
     var character = $('.carousel-item.active .name').text();
     console.log("클릭한 것: ", character);

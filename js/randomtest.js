@@ -18,7 +18,7 @@ var changeEco = {
     value: 0
 };     // 가장 수치가 높은 오염도의 {종류, 변동수치}
 var giveItem ="";
-var getItem ="";
+var getItem;
 var damageItem ="";
 
 function chooseItem(haveItems) {
@@ -229,7 +229,7 @@ function setResultModal(choice) {
         case 'yesBuyBible':
             var haveItems = [];      // 가지고 있는 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if(itemInfo[key] == 1){
+                if((key !='item_count') && (itemInfo[key] == 1)){
                     haveItems.push(key);
                 }
             }
@@ -260,7 +260,7 @@ function setResultModal(choice) {
         case 'pollution_above130':
             var haveItems = [];      // 가지고 있는 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if(key != 'book'){      // 가진 아이템 배열에서 책 제외
+                if((key != 'bible') && (key !='item_count')){      // 가진 아이템 배열에서 성경 제외
                     if(itemInfo[key] == 1){
                         haveItems.push(key);
                     }
@@ -285,7 +285,7 @@ function setResultModal(choice) {
         case 'above_6_item':
             var haveItems = [];
             for (let key in itemInfo) {
-                if(key != 'book'){      // 가진 아이템 배열에서 책 제외
+                if((key != 'book') && (key !='item_count')){      // 가진 아이템 배열에서 책 제외
                     if(itemInfo[key] == 1){
                         haveItems.push(key);
                     }
@@ -293,14 +293,14 @@ function setResultModal(choice) {
             }
             console.log("(above_6_item) 가진 아이템: ", haveItems);          
             giveItem = chooseItem(haveItems);
-            text = "흠 쓰지 않는 물건들이 너무 많네."+matchItemTxt(giveItem)+ "을(를) 버려야겠다.";
+            text = "흠 쓰지 않는 물건들이 너무 많네. "+matchItemTxt(giveItem)+ "을(를) 버려야겠다.";
             result = matchItemTxt(giveItem)+" 소모";
             break;
 
         case 'below_6_item':
             var noItems = [];      // 없는 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if(itemInfo[key] == 0){
+                if((key !='item_count') && (itemInfo[key] == 0)){
                     noItems.push(key);
                 }               
             }
@@ -314,7 +314,7 @@ function setResultModal(choice) {
         case 'evangelist_chance':
             var damages = [];      // 손상된 아이템들의 이름을 저장하는 배열
             for (let key in itemInfo) {
-                if(itemInfo[key] == 2){
+                if((key !='item_count') && (itemInfo[key] == 2)){
                     damages.push(key);
                 }               
             }
@@ -322,7 +322,7 @@ function setResultModal(choice) {
             if(damages.length == 0){
                 var noItems = [];      // 없는 아이템들의 이름을 저장하는 배열
                 for (let key in itemInfo) {
-                    if(itemInfo[key] == 0){
+                    if((key !='item_count') && (itemInfo[key] == 0)){
                         noItems.push(key);
                     }               
                 }
@@ -357,18 +357,18 @@ function setResultModal(choice) {
         case 'eitherBibleBook': // 둘 중 하나만 선택
             var maxEco = findMaxEco();
             var eco = matchEcoTxt(maxEco);
-            changeEco = {eco: maxEco, value: -15};
+            changeEco = {eco: maxEco, value: -5};
 
             text = "찾아보긴 했는데 뭔가 더 알아야할 것 같은데.";
-            result = eco+" 15 감소";
+            result = eco+" 5 감소";
             break;        
         case 'bothBibleBook':   // 둘 다 선택
             var maxEco = findMaxEco();
             var eco = matchEcoTxt(maxEco);
-            changeEco = {eco: maxEco, value: -5};
+            changeEco = {eco: maxEco, value: -15};
 
             text = "성경책이랑 환경지침도서를 보면 잘 나와있어!";
-            result = eco+" 5 감소";
+            result = eco+" 15 감소";
             break;
         case 'neitherBibleBook':    // 둘 다 안선택
             text = "아 조금 더 공부해야겠어. 아무것도 모르겠네...";
@@ -449,11 +449,11 @@ function setResultModal(choice) {
             break;
 
         // event_28 문화 3단계
-        case 'yes_culture_3_tumbler':
+        case 'yes_culture_3_bicycle':
             text = "자전거를 타고 가면 금방 도착할 수 있을거야! 빨리 가자!";
             result = "대기오염 3 감소";
             break;
-        case 'no_culture_3_tumbler':
+        case 'no_culture_3_bicycle':
             text = "아빠, 아빠, 저 학교에 늦었어요! 빨리 차로 데려다주세요!";
             result = "대기오염 2 증가"
             break;
@@ -620,29 +620,44 @@ function doEvent() {
     console.log('전송하는 user_pick: ', userSelect);
     // 1. input hidden의 value를 결과를 토대로 모달창 내용 생성
     setResultModal(userSelect);
+
+    const done = new Audio('../audio/doneEvent.mp3');
+    done.volume = 0.3;
+
+    var resultModal = document.getElementById('result-modal');
+    resultModal.addEventListener('shown.bs.modal', function (event) {
+        done.play();
+    });
+
+    resultModal.addEventListener('hidden.bs.modal', function (event) {
+        console.log("닫힘 이벤트 발생");
+        (location || window.location || document.location).reload();
+    });
+
     // 2. php로 전달
     sendValue({id: userSelect}, 'event.php'); // 기본적인 오염도, 체력 수정
 
     if(changeEco['value'] != 0){    // 최대 오염도를 수정해야 하면
         sendValue(changeEco, 'changeMaxEco.php');
     }
-    if(getItem != ""){  // 얻은 아이템이 있으면
-        const value = {item: getItem, type: 'add'};
-        sendValue(value, 'changeItem.php');
+    if(getItem){  // 얻은 아이템이 있으면 -> "", null, undefined, 0, NaN은 false
+        if(Array.isArray(getItem)){
+            for (let i = 0; i < getItem.length; i++) {
+                const value = {item: getItem[i], type: 'add'};
+                sendValue(value, 'changeItem.php');
+            }
+        } else{     // 배열이 아니면 .length를 사용 못해서 else인 경우로 처리해줌
+            const value = {item: getItem, type: 'add'};
+            sendValue(value, 'changeItem.php');
+        }
+        
     }
-    if(giveItem != ""){
+    if(giveItem){
         const value = {item: giveItem, type: 'remove'};
         sendValue(value, 'changeItem.php');
     }
-    if(damageItem != ""){   // 손상된 아이템이 있으면
+    if(damageItem){   // 손상된 아이템이 있으면
         const value = {item: damageItem, type: 'damage'};
         sendValue(value, 'changeItem.php');
     }
-
-    var resultModal = document.getElementById('result-modal');
-
-    resultModal.addEventListener('hidden.bs.modal', function (event) {
-        console.log("닫힘 이벤트 발생");
-        (location || window.location || document.location).reload();
-    })
 }

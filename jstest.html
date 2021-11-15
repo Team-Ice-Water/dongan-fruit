@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 이 파일을 우클릭해서 Open woth Live Server 로 킨 다음, 콘솔 확인하면 디버깅 쉬움-->
+    <script>
+        
+        var giveItem ="";
+        var getItem;
+        var damageItem ="";
+
+        function doEvent(txt) {
+            console.log(">>>", txt);
+            if(getItem){  // 얻은 아이템이 있으면 -> "", null, undefined, 0, NaN은 false
+                if(Array.isArray(getItem)){
+                    for (let i = 0; i < getItem.length; i++) {
+                        const value = {item: getItem[i], type: 'add'};
+                        console.log("배열: ", value);
+                    }
+                } else{     // 배열이 아니면 .length를 사용 못해서 else인 경우로 처리해줌
+                    const value = {item: getItem, type: 'add'};
+                    console.log("배열 아님: ", value);
+                }
+                
+            }
+            if(giveItem){
+                const value = {item: giveItem, type: 'remove'};
+                console.log(value);
+            }
+            if(damageItem){   // 손상된 아이템이 있으면
+                const value = {item: damageItem, type: 'damage'};
+                console.log(value);
+            }
+        }
+
+        function init() {
+            giveItem ="";
+            getItem;
+            damageItem ="";
+        }
+
+        function test1() {
+            init();
+            getItem = 'bible';
+            doEvent("성경 하나 얻음");
+        }
+
+        function test2() {
+            init();
+            getItem = ['bible', 'book'];
+            doEvent("둘 얻음");
+        }
+
+        function test3() {
+            init();
+            giveItem = "bible";
+            doEvent("성경 하나 준다.");
+        }
+
+        function test4() {
+            init();
+            giveItem = "bicycle";
+            getItem = "bible";
+            doEvent("자전거 주고, 책 얻음.");
+        }
+
+        //test1();
+        //test2();
+        //test3(); 
+        test4();
+
+
+        
+    </script>
+</body>
+</html>

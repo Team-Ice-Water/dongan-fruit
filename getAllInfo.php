@@ -6,8 +6,14 @@
     session_start();
     
     $userId = $_SESSION['current_id'];
-    // 해당 id의 정보 선택
-    $sql = "select * from character_info where m_id='$userId' AND is_end = 0;";
+    // 해당 id의 캐릭터 중, 엔딩이 안된 것 선택
+    $sql = "
+        SELECT * 
+        FROM character_info
+        WHERE cname IN (SELECT cname
+                        FROM character_state
+                        WHERE m_id='$userId' AND is_end = 0);
+    ";
     $result = mysqli_query($con, $sql);
 
     class Character {

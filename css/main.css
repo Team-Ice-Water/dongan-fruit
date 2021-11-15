@@ -13,9 +13,33 @@
 }
 
 body{
-    height: 100vh;  /*Viewport Height*/
+    /*min-height: 100vh;
+    min-height: -webkit-fill-available;*/
     background: url("../img/room.png") no-repeat center/cover;
     overflow: hidden;
+}
+
+@media (orientation: portrait) {
+	/* 세로 모드일 때 적용할 CSS */
+    body {
+        font-size: 3rem;
+    }
+}
+
+@media all and (min-width:480px) and (max-width:767px) {
+	/* 가로 모드일 때 적용할 CSS */
+    body {
+        overflow: scroll;
+    }
+}
+
+html {
+    height: -webkit-fill-available;
+}
+
+body > .container{
+    /* 모달 안에도 container 사용하는 중*/
+    height: 100vh;
 }
 
 .desk {
@@ -34,10 +58,12 @@ body{
     top: 5vh;
 }
 
+
 .schedule{
     position: absolute;
+    top: 87vh;
     left: 80vw;
-    top: 90vh;
+    
     z-index: 5;
 
     font-family: "GmarketSansMedium", sans-serif;

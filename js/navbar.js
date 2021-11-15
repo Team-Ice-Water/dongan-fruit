@@ -1,119 +1,200 @@
 $('head').append('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">');
 
-switch ($('title').text()) {
-    case "만든 사람들":
-        $('body').prepend(`
-        <nav class="nav justify-end navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="메인화면으로" href="start.html">
-                            <span class="material-icons fs-2">home</span>
-                            </a>
-                        </li>
-                        <!--
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="로그인 하기" href="login.html">
-                                <span class="material-icons fs-2">login</span>
-                            </a>
-                        </li>
-                        -->
-                        <li class="nav-item fullscreen">              <!--전체화면-->
-                            <a class="nav-link" href="#" onclick="notFullnow();">
-                                <span class="material-icons fs-2">fullscreen</span>
-                            </a>   
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>`);
-        break;
+var ID;
+function loginChcek() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../checkLogin.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            console.log(xhr.responseText);
+            ID = xhr.responseText;
+            setNavBar();
+        }
+    };
+}
+loginChcek();
 
-    case "회원가입":
-    case "로그인":
-        $('body').prepend(`
-        <nav class="nav justify-end navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="시작화면으로" href="index.html">
-                            <span class="material-icons fs-2">home</span>
-                            </a>
-                        </li>
-                        <li class="nav-item fullscreen">              <!--전체화면-->
-                            <a class="nav-link" href="#" onclick="notFullnow();">
-                                <span class="material-icons fs-2">fullscreen</span>
-                            </a>   
-                        </li>
-                    </ul>
+function setNavBar() {
+    switch ($('title').text()) {
+        case "만든 사람들":
+            $('body').prepend(`
+            <nav class="nav justify-end navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="시작화면으로" href="index.html">
+                                <span class="material-icons fs-2">home</span>
+                                </a>
+                            </li>
+                            <!--
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="로그인 하기" href="login.html">
+                                    <span class="material-icons fs-2">login</span>
+                                </a>
+                            </li>
+                            -->
+                            <li class="nav-item fullscreen">              <!--전체화면-->
+                                <a class="nav-link" href="#" onclick="notFullnow();">
+                                    <span class="material-icons fs-2">fullscreen</span>
+                                </a>   
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>`);
-        break;
-    case "캐릭터 선택":
-        $('body').prepend(`
-        <nav class="nav justify-end navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="메인으로" href="start.html">
-                            <span class="material-icons fs-2">home</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="캐릭터 바꾸기" href="choice_toon.html">
-                                <span class="material-icons fs-2">autorenew</span>
-                            </a>
-                        </li>
-                        <li class="nav-item fullscreen">              <!--전체화면-->
-                            <a class="nav-link" href="#" onclick="notFullnow();">
-                                <span class="material-icons fs-2">fullscreen</span>
-                            </a>   
-                        </li>      
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="로그아웃" onclick="logout()">
-                                <span class="material-icons fs-2">logout</span>
-                            </a>
-                        </li>
-                    </ul>
+            </nav>`);
+            break;
+    
+        case "회원가입":
+        case "로그인":
+            $('body').prepend(`
+            <nav class="navbar justify-end navbar-expand-lg navbar-light px-3" style="background-color: #85d6ff; width: 100%;">
+                <div class="container-fluid">
+                    <a class="navbar-brand d-md-flex justify-content-md-start" href="#">
+                        <img src="/img/슬청생.png" alt="logo" width="30%" class="d-inline-block align-text-top">
+                    </a>
+                    <div class="d-flex">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="시작화면으로" href="index.html">
+                                <span class="material-icons fs-2">home</span>
+                                </a>
+                            </li>
+                            <li class="nav-item fullscreen">              <!--전체화면-->
+                                <a class="nav-link" href="#" onclick="notFullnow();">
+                                    <span class="material-icons fs-2">fullscreen</span>
+                                </a>   
+                            </li>
+                        </ul>
+                    </div>
+                    
                 </div>
-            </div>
-        </nav>`);
-        break;
-    default:
-        $('body').prepend(`
-        <nav class="nav justify-end navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="메인화면으로" href="start.html">
-                            <span class="material-icons fs-2">home</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="다른 캐릭터로 바꾸기" href="choice_toon.html">
-                                <span class="material-icons fs-2">autorenew</span>
-                            </a>
-                        </li>
-                        <li class="nav-item fullscreen">              <!--전체화면-->
-                            <a class="nav-link" href="#" onclick="notFullnow();">
-                                <span class="material-icons fs-2">fullscreen</span>
-                            </a>   
-                        </li>      
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="로그아웃" onclick="logout()">
-                                <span class="material-icons fs-2">logout</span>
-                            </a>
-                        </li>
-                    </ul>
+            </nav>`);
+            break;
+
+        case "캐릭터 선택":
+        case "엔딩 모음":
+            $('body').prepend(`
+            <nav class="nav justify-end navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item fs-5 id-txt">
+                                `+ID+`
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="메인으로" href="start.html">
+                                <span class="material-icons fs-2">home</span>
+                                </a>
+                            </li>
+                            <li class="nav-item fullscreen">              <!--전체화면-->
+                                <a class="nav-link" href="#" onclick="notFullnow();">
+                                    <span class="material-icons fs-2">fullscreen</span>
+                                </a>   
+                            </li>      
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="로그아웃" onclick="logout()">
+                                    <span class="material-icons fs-2">logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>`);
-        break;
+            </nav>`);
+            break;
+
+        case "슬기로운 청지기 생활":
+            $('body').prepend(`
+            <nav class="nav justify-end navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item fs-5 id-txt">
+                                `+ID+`
+                            </li>
+                            <li class="nav-item" id="play">
+                                <a class="nav-link" href="#" onclick="mutebgm();">
+                                    <span class="material-icons fs-2">volume_up</span>
+                                </a> 
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="메인으로" href="start.html">
+                                <span class="material-icons fs-2">home</span>
+                                </a>
+                            </li>
+                            <li class="nav-item fullscreen">              <!--전체화면-->
+                                <a class="nav-link" href="#" onclick="notFullnow();">
+                                    <span class="material-icons fs-2">fullscreen</span>
+                                </a>   
+                            </li>      
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="로그아웃" onclick="logout()">
+                                    <span class="material-icons fs-2">logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>`);
+            break;
+
+        case "브리핑":
+        case "아침 브리핑":
+            $('body').prepend(`
+            <nav class="nav justify-end navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse d-grid gap-4 d-md-flex justify-content-md-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item id-txt">
+                                `+ID+`
+                            </li>
+                            <li class="nav-item" id="play">
+                                <a class="nav-link" href="#" onclick="mutebgm();">
+                                    <span class="material-icons fs-2">volume_up</span>
+                                </a> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>`);
+            break;
+
+        default:
+            $('body').prepend(`
+            <nav class="nav justify-end navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item fs-5 id-txt">
+                                `+ID+`
+                            </li>
+                            <li class="nav-item" id="play">
+                                <a class="nav-link" href="#" onclick="mutebgm();">
+                                    <span class="material-icons fs-2">volume_up</span>
+                                </a> 
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="메인화면으로" href="start.html">
+                                <span class="material-icons fs-2">home</span>
+                                </a>
+                            </li>
+                            <li class="nav-item fullscreen">              <!--전체화면-->
+                                <a class="nav-link" href="#" onclick="notFullnow();">
+                                    <span class="material-icons fs-2">fullscreen</span>
+                                </a>   
+                            </li>      
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="로그아웃" onclick="logout()">
+                                    <span class="material-icons fs-2">logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>`);
+            break;
+    }
 }
 
 function toggleFullScreen() {
@@ -150,12 +231,27 @@ function logout() {
         xhr.onreadystatechange = function(){
             if(xhr.readyState === 4 && xhr.status === 200){
                 console.log(xhr.responseText);
-                location.href = "index.html";
+                location.replace("index.html");
             }
         };
     }
 }
 
+/* 각 페이지별로 js에 있음
+function mutebgm() {
+    $('#play').html(`<a class="nav-link" href="#" onclick="playbgm();">
+    <span class="material-icons fs-2">volume_off</span>
+    </a>`);
+    console.log("mute됨");
+}
+
+function playbgm() {
+    $('#play').html(`<a class="nav-link" href="#" onclick="mutebgm();">
+    <span class="material-icons fs-2">volume_up</span>
+    </a>`);
+    console.log("재생됨");
+}
+*/
 $(document).ready(function(){
     $('[data-bs-toggle="tooltip"]').tooltip();   
 });

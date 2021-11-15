@@ -64,7 +64,10 @@ function makeModal() {
 
     if(userReq && endingReq && ecoReq){ // 정보를 다 받아왔으면 실행함
         if(userInfo.day > userInfo.event_day){ // 아직 이벤트를 하지 않았으면
-            console.log("select 보낸다.");           
+            console.log("select 보낸다."); 
+            
+            console.log("endingInfo: ", endingInfo);
+            console.log("userInfo: ", userInfo);
 
             if(userInfo['health'] <= 50){
                 natural();  // 자연착취엔딩
@@ -73,9 +76,16 @@ function makeModal() {
             school();       // 환경지킴이 학교 엔딩
             home();         // 청지기 가정 엔딩
             
+            console.log("makeModal()의 list: ", eventList);
             select = selectOne(eventList);   // 최종 리스트 중에 하나 선택
             
             console.log(select);
+            if(!select){
+                alert("오류가 발생하여 이벤트를 띄울 수 없습니다. 페이지를 새로고침 해주세요.");
+            }
+        } else{ // 이미 이벤트 했으면 스케쥴 버튼 누를 수 있게
+            $('.schedule.btn').removeClass('disabled');
+            $('.schedule.btn').removeAttr('aria-disabled');
         }
     }    
 }
@@ -223,9 +233,9 @@ function culture() {
             }else if(endingInfo['culStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['culDay']+5)){ // 선택 후 1~4일째
                     // pass
-                }else if(userInfo['day'] == (endingInfo['culDay']+5)){  // 선택 후 5일째
+                }else if(userInfo['day'] >= (endingInfo['culDay']+5)){  // 선택 후 5일째
                     var order = Math.floor(Math.random() * 2);
-
+                    console.log("문화1단계 선택 후 5일째, ", order);
                     if(order == 0){
                         eventList.push({ id: "event_24", ending: "문화", condition: 100});  // event_24 : 문화 2단계 - 전도사님
                     }else if(order == 1){
@@ -236,7 +246,7 @@ function culture() {
             }else if(endingInfo['culStage'] == 2){  // (2단계 선택 O) 상태 and (3단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['culDay']+5)){ // 선택 후 1~4일째
                     // pass
-                }else if(userInfo['day'] == (endingInfo['culDay']+5)){  // 선택 후 5일째
+                }else if(userInfo['day'] >= (endingInfo['culDay']+5)){  // 선택 후 5일째
 
                     var order = Math.floor(Math.random() * 3);
 
@@ -252,7 +262,7 @@ function culture() {
             }else if(endingInfo['culStage'] == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['culDay']+5)){ // 선택 후 1~4일째
                     // pass
-                }else if(userInfo['day'] == (endingInfo['culDay']+5)){  // 선택 후 5일째
+                }else if(userInfo['day'] >= (endingInfo['culDay']+5)){  // 선택 후 5일째
                     eventList.push({ id: "event_29", ending: "문화", condition: 100});  // event_29 : 문화 4단계 - 동네청소
                 }
             }
@@ -264,9 +274,9 @@ function culture() {
 function school() {
     if(userInfo['day']>= 4 && userInfo['day']<=7){  // 4~7일차
         if(endingInfo['envDay'] == 0){  // 환경지킴이 1단계 발생한적 X
-
+            
             var order = Math.floor(Math.random() * 3);
-
+            
             if(order == 0){
                 eventList.push({ id: "event_30", ending: "환경지킴이"});  // event_30 : 환경지킴이 1단계 - 친구들과
             }else if(order == 1){
@@ -280,13 +290,14 @@ function school() {
         }
     }else if(userInfo['day']>=8){  // 8일차 ~
         if(endingInfo['envDay'] == 0){  // 한번도 1단계 발생한적 X
-            // pass  //(환경지킴이 엔딩 소멸)
+            // pass  //(환경지킴이 엔딩 소멸)(4~7일차에 1단계 등장이기 때문)
+            
         }else if(endingInfo['envDay'] != 0){  // 한번이라도 1단계 발생한적 O
 
             if(endingInfo['envStage'] == 0){  // 1단계 선택 X 상태
                 if(userInfo['day'] < (endingInfo['envDay']+7)){ // 선택 후 1~6일째
                     // pass
-                }else if(userInfo['day'] == (endingInfo['envDay']+7)){  // 선택 후 7일째
+                }else if(userInfo['day'] >= (endingInfo['envDay']+7)){  // 선택 후 7일째
 
                     var order = Math.floor(Math.random() * 3);
 
@@ -302,7 +313,7 @@ function school() {
             }else if(endingInfo['envStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
                 if(userInfo['day'] < (endingInfo['envDay']+7)){ // 선택 후 1~6일째
                     // pass
-                }else if(userInfo['day'] == (endingInfo['envDay']+7)){  // 선택 후 7일째
+                }else if(userInfo['day'] >= (endingInfo['envDay']+7)){  // 선택 후 7일째
 
                     var order = Math.floor(Math.random() * 2);
 
@@ -326,101 +337,145 @@ function home() {
         if(endingInfo['homeStage'] == 0){  // (1단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
                 // pass
-            }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] >= (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_35", ending: "청지기", condition: 100});  // event_35 : 청지기 1단계
             }
 
         }else if(endingInfo['homeStage'] == 1){  // (1단계 선택 O) and (2단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
                 // pass
-            }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] >= (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_36", ending: "청지기", condition: 100});  // event_36 : 청지기 2단계 - 변화하는 가정
             }
 
         }else if(endingInfo['homeStage'] == 2){  // (2단계 선택 O) and (3단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
                 // pass
-            }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] >= (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_37", ending: "청지기", condition: 100});  // event_37 : 청지기 3단계 - 주방 세제
             }
 
         }else if(endingInfo['homeStage'] == 3){  // (3단계 선택 O) and (4단계 선택 X) 상태
             if(userInfo['day'] < (endingInfo['homeDay']+5)){ // 선택 후 1~4일째
                 // pass
-            }else if(userInfo['day'] == (endingInfo['homeDay']+5)){  // 선택 후 5일째
+            }else if(userInfo['day'] >= (endingInfo['homeDay']+5)){  // 선택 후 5일째
                 eventList.push({ id: "event_38", ending: "청지기", condition: 100});  // event_38 : 청지기 4단계 - 앞장서는 부모님
             }
         }
     } 
 }
 
-var prob_100_list = []
-var prob_other_list = []
-var probability_list = []
-var prob_no_list = []
+var prob_100_list = [];
+var prob_other_list = [];
+var probability_list = [];
+var prob_no_list = [];
+var selected_id;
 
 function selectOne(list) {
-    for (let i = 0; i < list.length; i++) {    // 배열 원소 순회
-        if ("condition" in list[i]){           // "condition" key가 존재하는 원소인지 판단
-            for (let key in list[i]) {         // 객체 순회 (key)
-                if( key == "condition"){       // 객체가 "condition"이라는 데이터를 가지면,
-                    const probability = list[i][key];   // probability는 그 이벤트가 얼마의 등장 확률을 가지는지를 저장
-                    
-                    /* 확률 처리 */
-                    // push() 메서드는 배열의 끝에 요소를 추가하고, 배열의 새로운 길이를 반환함
-                    // 객체의 id를 list에 저장하면서 list의 원소 개수 update
+
+    // 가중치를 적용한 확률 ->  랜덤수로 확률을 뽑은 후, 누적 확률값을 사용한다.
+    /* 
+            1 event_1 , w: 5                                1 event_1 , w: 5
+            2 event_2, w: 5                                 2 event_2, w: 5
+            ..                  =확률이 작은 것부터 정렬=>
+            11 event_31, w: 30                              12 event_32, w: 30
+            12 event_32, w: 20                              11 event_31, w: 20
+        */
+        // 랜덤수로 72가 나왔다면, 
+        // 1은 5<72 이므로 탈락, 2도 5+5<72이므로 탈락.. 10도 50 <72 이므로 탈락
+        // 12(11번째)도 70<72 이므로 탈락, 마지막의 11이 선택된다.
+    var length = list.length;
     
-                    if(probability == 100){  // probability가 100일때
-                        prob_100_list.push(list[i]["id"])  
-                    }else if(0 < probability < 100){  // 100 아닌 probability
-                        prob_other_list.push(list[i]["id"])
-                        probability_list.push(probability)
-                    }
-                }
+    var prob_length = 0;
+    var no_prob_length = 0;
+
+    var ending_weight = 0;          // 엔딩 이벤트들이 뜰 확률 (각각 나눠가질 것)
+    var random_weight = 0;
+    var prob_100 = false;           // 100% 등장인 이벤트가 있는지?
+
+    for (let i = 0; i < list.length; i++) {
+        if ("ending" in list[i]){
+            if("condition" in list[i]){
+                // 등장 확률 조건을 가진 원소가 있으면,
+                // 엔딩 이벤트 전체 가중치가 달라짐
+                if(list[i]["condition"] == 100){
+                    ending_weight = 0;
+                    random_weight = 0;
+                    prob_100 = true;
+                } else{
+                    ending_weight = 70 - list[i]["condition"];
+                    random_weight = random_weight - list[i]["condition"];
+                }                
+            } else{
+                ending_weight = 70;
             }
-        }else{                                // "condition" key가 존재하지 않는 객체
-            prob_no_list.push(list[i]["id"])
+            prob_length++;
+        }else{
+            no_prob_length++;
         }
     }
 
-    /* 확률 처리 */
-    if(prob_other_list.length == 1){  // 다른 확률 가지는 원소 한개 (20% 또는 60%)
+    console.log("for문 이후 ending_weight/ random_weight: "+ ending_weight + " / "+random_weight);
+    if(!prob_100){     // 조건 중 100%인게 없으면
+        random_weight = 100 - ending_weight + random_weight;    // random_weight는 -조건 값을 가지고 있음.
+        // random_weight = 100 - 엔딩확률 - 조건확률
+    }
+    console.log("random_weight: ", random_weight);
 
-        const rand_0_99 = Math.floor(Math.random() * 100);
-        switch (true) {
-            case rand_0_99 < probability_list[0]:  // (20% 또는 60%)
-                selected_id = prob_other_list[0]
-                break;
-            case rand_0_99 >= probability_list[0]:
-                selected_id = prob_no_list[Math.floor(Math.random() * prob_no_list.length)]
-                break;
-        }
-    }else if(prob_other_list.length == 2){  // 다른 확률 가지는 원소 두개 (20%, 60%)
-
-        const rand_0_99 = Math.floor(Math.random() * 100);
-        switch (true) {
-            case rand_0_99 < probability_list[0]:  // 20%
-                selected_id = prob_other_list[0]
-                break;
-            case rand_0_99 >= probability_list[0] && rand_0_99 < probability_list[1]:  // 20% ~ 60%
-                selected_id = prob_other_list[1]
-                break;
-            case rand_0_99 >= probability_list[1]:  // 60% ~
-                selected_id = prob_no_list[Math.floor(Math.random() * prob_no_list.length)]
-                break;
+    var sorted_list = [];
+    for (let i = 0; i < list.length; i++) {
+        if ("ending" in list[i]){
+            if("condition" in list[i]){
+                sorted_list.push({...list[i], weight: list[i]["condition"]});
+            } else{
+                sorted_list.push({...list[i], weight: ending_weight / prob_length});
+            }
+        }else{
+            sorted_list.push({...list[i], weight: random_weight / no_prob_length});
         }
     }
 
+    sorted_list = sorted_list.sort(function (a, b) {    // 가중치 작은 순으로 정렬
+        return a.weight - b.weight;
+    });
 
-    if (prob_100_list.length > 1){             // 100% 확률 가지는 원소가 여러개
-        return prob_100_list[Math.floor(Math.random() * prob_100_list.length)];    // 100% 확률 가지는 원소 중 랜덤 선택해서 반환
-    }else if(prob_100_list.length == 1){       // 100% 확률 가지는 원소가 한개
-        return prob_100_list[0];
-    }else if((prob_100_list.length == 0) && (prob_other_list.length != 0)){   // 100% 확률 가지는 원소가 없음 & 다른 확률 가지는 원소 존재
-        return selected_id;
-    }else if((prob_100_list.length == 0) && (prob_other_list.length == 0)){   // 100% 확률 가지는 원소가 없음 & 다른 확률 가지는 원소 없음
-        return list[Math.floor(Math.random() * list.length)];    // 초기 list에서 랜덤 선택해서 반환
+    console.log("가중치 추가, 정렬된 새 리스트: ", sorted_list);
+
+    var rand_num = Math.floor(Math.random() * 101) +1;
+    console.log("rand_num: ", rand_num);
+
+    var cumulative = 0;
+
+    for(var i=0; i<length; i++){
+        cumulative += sorted_list[i]["weight"];
+        console.log("누적 확률: ", cumulative);
+        if(rand_num <= cumulative){
+            return sorted_list[i]["id"];
+        }
     }
+
+    /*  테스트용 10000번 반복 코드
+    for (let k = 0; k < 10000; k++) {
+        var rand_num = Math.floor(Math.random() * 100);
+
+        var cumulative = 0;
+
+        for(var i=0; i<length; i++){
+            cumulative += sorted_list[i]["weight"];
+            if(rand_num <= cumulative){
+                sorted_list[i]["num"]++;
+                break;
+            }
+        }
+        
+    }
+
+    for (let k = 0; k < sorted_list.length; k++) {
+        sorted_list[k]["num"] = sorted_list[k]["num"]/10000;
+    }
+
+    console.log(sorted_list);
+     */
 }
 
 /* JS로딩 시 실행시키는 부분 */
@@ -428,4 +483,3 @@ function selectOne(list) {
 userRequest(); 
 endingRequest(); 
 ecoRequest();
-
