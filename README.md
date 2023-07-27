@@ -25,3 +25,7 @@
 </div>
 
 ### 🧑🏻‍💻Team
+|<img src="https://avatars.githubusercontent.com/u/71956482?v=4" width="80">|<img src="https://avatars.githubusercontent.com/u/74816466?v=4" width="80">|<img src="https://avatars.githubusercontent.com/u/88394106?v=4" width="80">|
+|:---:|:---:|:---:|
+|[YenaChoi00](https://github.com/YenaChoi00)|[seungyeon5](https://github.com/seungyeon5)|[stkk29](https://github.com/stkk29)|
+|Project Manager|Devleoper|Web Publisher|
