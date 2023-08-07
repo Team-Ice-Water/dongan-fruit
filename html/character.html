@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="type"
+      value="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>캐릭터 선택</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/character.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>캐릭터 만들기</h1>
+    <br />
+    <form method="post" action="php/addCharacter.php">
+      <div class="container">
+        <label class="item"
+          ><input type="radio" name="type" value="man1" /><img
+            src="img/toon/man1.png"
+        /></label>
+        <label class="item"
+          ><input type="radio" name="type" value="man2" /><img
+            src="img/toon/man2.png"
+        /></label>
+        <label class="item"
+          ><input type="radio" name="type" value="man3" /><img
+            src="img/toon/man3.png"
+        /></label>
+        <label class="item"
+          ><input type="radio" name="type" value="man4" /><img
+            src="img/toon/man4.png"
+        /></label>
+        <label class="item"
+          ><input type="radio" name="type" value="man5" /><img
+            src="img/toon/man5.png"
+        /></label>
+        <label class="item"
+          ><input type="radio" name="type" value="man6" /><img
+            src="img/toon/man6.png"
+        /></label>
+        <label class="item"
+          ><input type="radio" name="type" value="woman1" /><img
+            src="img/toon/woman1.png"
+        /></label>
+        <label class="item"
+          ><input type="radio" name="type" value="woman2" /><img
+            src="img/toon/woman2.png"
+        /></label>
+        <label class="item"
+          ><input type="radio" name="type" value="woman3" /><img
+            src="img/toon/woman3.png"
+        /></label>
+        <label class="item"
+          ><input type="radio" name="type" value="woman4" /><img
+            src="img/toon/woman4.png"
+        /></label>
+        <label class="item"
+          ><input type="radio" name="type" value="woman5" /><img
+            src="img/toon/woman5.png"
+        /></label>
+        <label class="item"
+          ><input type="radio" name="type" value="woman6" /><img
+            src="img/toon/woman6.png"
+        /></label>
+      </div>
+
+      <div class="input-group mb-3 mx-auto">
+        <input
+          type="text"
+          name="cname"
+          class="form-control fs-4"
+          placeholder="캐릭터 이름"
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+        />
+        <input
+          class="fs-4"
+          type="submit"
+          value="만들기"
+          id="button-addon2"
+          onclick="return check()"
+        />
+      </div>
+    </form>
+
+    <script>
+      $(".item").on("click", function (e) {
+        if ($(".clicked")) {
+          // 이미 클릭된게 있으면
+          $(".clicked").removeClass("clicked");
+        }
+        $(this).addClass("clicked");
+      });
+
+      function check() {
+        var num = $('input[name="type"]:checked').length;
+        if (num == 1) {
+          return true;
+        } else {
+          alert("캐릭터가 제대로 선택되지 않았습니다.");
+          return false;
+        }
+      }
+    </script>
+    <script type="text/javascript" src="js/navbar.js"></script>
+    <script type="text/javascript" src="js/clicksound.js"></script>
+  </body>
+</html>
