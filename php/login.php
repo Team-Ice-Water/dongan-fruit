@@ -16,7 +16,7 @@
         if($count == 0){
 ?>      <script>
             alert( '해당 아이디의 회원정보가 없습니다.\n 회원가입해주세요.' );
-            location.href = '/';
+            location.href = '../';
         </script>
 <?php
         } else { //아이디가 있다면
@@ -25,13 +25,13 @@
                 $_SESSION['current_id']=$userID;    //세선 변수 생성
 ?>      <script>
                 alert( '로그인 성공' );
-                location.href = '/start.html';
+                location.href = '../html/start.html';
         </script>
 <?php
             } else{
 ?>      <script>
                 alert( '비밀번호가 일치하지 않습니다.' );
-                location.href = '/login.html';
+                location.href = '../html/login.html';
             </script>
 <?php
             }

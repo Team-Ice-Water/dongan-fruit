@@ -1,57 +1,87 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>카드 뒤집기 게임</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/miniGame.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/miniGame.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div id="game-container" class="container">
-        <header class="title">
-            <h1>아이템 획득 게임</h1>
-        </header>
+      <header class="title">
+        <h1>아이템 획득 게임</h1>
+      </header>
 
-        <section class="score-panel">
-            <p class="fs-5 bg-light">짝이 맞는 두 개의 카드를 찾으면, 카드에 그려진 아이템을 획득하게 됩니다.
-            <br/> 카드를 누르면 게임이 시작됩니다.</p>
-            <div class="timer-container">                
-                <span class="timer fs-4"><i class="fa fa-hourglass-start"></i>제한시간 30초</span>
-            </div>
-
-        </section>
-
-        <!-- 결과 Modal -->
-        <div class="modal fade" id="finishModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <br/>
-                    <h2 class="fs-2"> 게임이 종료되었습니다. </h2>
-                    <br/>
-                    <p class="fs-4"> 제한 시간 30초가 끝나, 아이템 얻기 게임이 종료되었습니다. </p>
-                    <br/>
-                    <br/>
-                    <p class="fs-3">얻은 아이템: </p>
-                    <p class="item fs-4"></p>
-                    <br/>
-                    <section class="Btn">
-                        <a class="btn btn-primary fs-5 disabled" href="main.html" role="button" aria-disabled="true">잠시만 기다려주세요..</a>
-                    </section>
-                    <br/>
-                </div>
-            </div>
+      <section class="score-panel">
+        <p class="fs-5 bg-light">
+          짝이 맞는 두 개의 카드를 찾으면, 카드에 그려진 아이템을 획득하게
+          됩니다. <br />
+          카드를 누르면 게임이 시작됩니다.
+        </p>
+        <div class="timer-container">
+          <span class="timer fs-4"
+            ><i class="fa fa-hourglass-start"></i>제한시간 30초</span
+          >
         </div>
-        </div>
+      </section>
 
-        <ul class="deck"></ul>
-        
+      <!-- 결과 Modal -->
+      <div
+        class="modal fade"
+        id="finishModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="BackdropLabel"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+        >
+          <div class="modal-content">
+            <div class="modal-body">
+              <br />
+              <h2 class="fs-2">게임이 종료되었습니다.</h2>
+              <br />
+              <p class="fs-4">
+                제한 시간 30초가 끝나, 아이템 얻기 게임이 종료되었습니다.
+              </p>
+              <br />
+              <br />
+              <p class="fs-3">얻은 아이템:</p>
+              <p class="item fs-4"></p>
+              <br />
+              <section class="Btn">
+                <a
+                  class="btn btn-primary fs-5 disabled"
+                  href="main.html"
+                  role="button"
+                  aria-disabled="true"
+                  >잠시만 기다려주세요..</a
+                >
+              </section>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="deck"></ul>
     </div>
     <script src="js/miniGame.js"></script>
     <script type="text/javascript" src="js/checkLogin.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
