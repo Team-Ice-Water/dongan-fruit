@@ -1,6 +1,7 @@
 # 슬기로운 청지기 생활
 ### 🎮Description
-아이들을 대상으로 하는 환경 교육 웹 게임.<br/>
+초등학교 아이들을 대상으로 하는 환경 교육 웹 게임.<br/>
+매일 열리는 이벤트와 스케쥴 진행으로 오염도와 체력을 엔딩까지 유지해나가는 것이 목표이다.
 플레이에 따라 다른 시나리오로 진행되어 여러 엔딩을 확인할 수 있다.
 
 ### 🚀Stacks
@@ -24,8 +25,12 @@
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 </div>
 
-### 🧑🏻‍💻Team
+### 💎Sample Screen
+![실행화면](https://github.com/Team-Ice-Water/dongan-fruit/assets/71956482/e4850d61-84db-4ef7-94e5-6aad3f91a875)
+
+### 🧑🏻‍💻Contributor
 |<img src="https://avatars.githubusercontent.com/u/71956482?v=4" width="80">|<img src="https://avatars.githubusercontent.com/u/74816466?v=4" width="80">|<img src="https://avatars.githubusercontent.com/u/88394106?v=4" width="80">|
 |:---:|:---:|:---:|
-|[YenaChoi00](https://github.com/YenaChoi00)|[seungyeon5](https://github.com/seungyeon5)|[stkk29](https://github.com/stkk29)|
-|Project Manager|Devleoper|Web Publisher|
+|Project Manager|Member|Member|
+|[@YenaChoi00](https://github.com/YenaChoi00)|[@seungyeon5](https://github.com/seungyeon5)|[@stkk29](https://github.com/stkk29)|
+|Front-End, Back-end|Front-end|Publisher|
